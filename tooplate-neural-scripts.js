@@ -1,5 +1,3 @@
-// JavaScript Document
-
 // Neural Network Background Animation
         const canvas = document.getElementById('neural-bg');
         const ctx = canvas.getContext('2d');
@@ -145,3 +143,4 @@
             alert('OPEN BY PASS OK)');
 
         });
+
