@@ -138,6 +138,7 @@
         });
 
         // Form submission
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         document.querySelector('.contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
            swal({
@@ -149,4 +150,5 @@
 });
 
 audioElement.play();
+
 
