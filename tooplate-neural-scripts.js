@@ -138,17 +138,15 @@
         });
 
         // Form submission
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
         document.querySelector('.contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
-           swal({
-  title: "Good job!",
-  text: "You clicked the button!",
-  icon: "success",
-  button: "Aww yiss!",
-});');
-});
+            swal({
+                title: "เปิด BYPASS เรียบร้อย",
+                text: "เข้าใชงาน PRO ใด้เลยหัวหน้า",
+                icon: "success",
+                button: "Aww yiss!",
+            });
+        });
+
 
 audioElement.play();
-
-
