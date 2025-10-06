@@ -141,7 +141,12 @@
         document.querySelector('.contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('OPEN BY PASS OK)');
-
-        });
+swal({
+  title: "Good job!",
+  text: "You clicked the button!",
+  icon: "success",
+  button: "Aww yiss!",
+});
 
 audioElement.play();
+
