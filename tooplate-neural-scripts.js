@@ -143,14 +143,15 @@
         document.querySelector('.contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
             swal({
-                title: "BYPASS RUNING",
-                text: "OPEN PRO WING",
+                title: "เปิด BYPASS เรียบร้อยหัวหน้า",
+                text: "OPEN PRO BY WING",
                 icon: "success",
-                button: "Aww yiss!",
+                button: "ไปสิรอ อะไร !",
             });
         });
 
 
 audioElement.play();
+
 
 
