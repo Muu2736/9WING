@@ -143,8 +143,8 @@
         document.querySelector('.contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
             swal({
-                title: "เปิด BYPASS เรียบร้อย",
-                text: "เข้าใชงาน PRO ใด้เลยหัวหน้า",
+                title: "BYPASS RUNING",
+                text: "OPEN PRO WING",
                 icon: "success",
                 button: "Aww yiss!",
             });
@@ -152,4 +152,5 @@
 
 
 audioElement.play();
+
 
