@@ -8,10 +8,40 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=Audiowide&display=swap" rel="stylesheet">
     <link href="tooplate-neural-style.css" rel="stylesheet">
-    
 
+    <style>
+    .popup-overlay {
+      position: fixed;
+      z-index: 9999;
+      left: 0; top: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .popup-content {
+      background: #181828;
+      color: #fff;
+      padding: 36px 28px 28px 28px;
+      border-radius: 16px;
+      box-shadow: 0 6px 36px #0008;
+      text-align: center;
+      max-width: 95vw;
+    }
+    .popup-content h2 { margin-bottom: 16px; }
+    .popup-content p { margin-bottom: 22px; }
+    </style>
 </head>
 <body>
+    <!-- Popup ก่อนเข้าเว็บ -->
+    <div id="entry-popup" class="popup-overlay">
+      <div class="popup-content">
+        <h2>ยินดีต้อนรับสู่ WWW.9WING.SHOP</h2>
+        <p>โปรดอ่านเงื่อนไขและกด "เข้าสู่เว็บไซต์" เพื่อเข้าใช้งาน</p>
+        <button id="popup-ok-btn" class="neural-btn">เข้าสู่เว็บไซต์</button>
+      </div>
+    </div>
+
     <canvas id="neural-bg"></canvas>
 
     <nav id="navbar">
@@ -61,7 +91,7 @@
     <section id="home" class="hero">
         <div class="hero-content">
             <h1 class="glitch" data-text="PRO YG BY-WING">PRO YG BY-WING</h1>
-			<h3 class="subtitle">WWW.9WING.SHOP</h>
+			<h3 class="subtitle">WWW.9WING.SHOP</h3>
             <p class="subtitle">ศูนย์รวมจำหน่ายโปรแกมช่วยเล่นโยกัง & บริการเช่า UG PHONE ราคาถูก</p>
         </div>
         <a href="#about" class="scroll-btn">
@@ -107,9 +137,6 @@
                         <div class="stat-label">WING BAN USERS</div>
                     </div>
                 </div>
-				
-			
-			
            </div>		
         </div>
     </section>
@@ -154,10 +181,8 @@
             <div class="form-group">
                 <input type="password" placeholder="Pass" required>
             </div>
-            </div>
           <button type="submit" class="neural-btn">LOGIN BYPASS</button>   
-	</form>
-	
+	    </form>
     </section>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </audio>
@@ -192,8 +217,6 @@
                 </p>
             <body><video controls="" autoplay="" name="media"><source src="https://muu2736.github.io/9WING/YG.mp3" type="audio/mp3"></video></body>
             </div>
-	
-		
         </div>
         
         <div class="footer-bottom">
@@ -201,25 +224,17 @@
         </div>
     </footer>
 <script src="tooplate-neural-scripts.js"></script>
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var popup = document.getElementById('entry-popup');
+  var okBtn = document.getElementById('popup-ok-btn');
+  okBtn.onclick = function(){
+    popup.style.display = 'none';
+    document.body.style.overflow = '';
+  };
+  // ป้องกัน scroll ขณะ popup ยังเปิด
+  document.body.style.overflow = 'hidden';
+});
+</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
