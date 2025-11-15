@@ -3,647 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>9WING.SHOP</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;900&family=Exo+2:wght@300;400;500;600;700&family=Audiowide&display=swap" rel="stylesheet">
-    <link href="tooplate-neural-style.css" rel="stylesheet">
+    <title>9WING.SHOP - The Future of Team Collaboration</title>
+    <link href="templatemo-nexus-style.css" rel="stylesheet">
+<!--
 
-    <style>
-    .popup-overlay {
-      position: fixed;
-      z-index: 9999;
-      left: 0; top: 0; width: 100vw; height: 100vh;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .popup-content {
-      background: #181828;
-      color: #fff;
-      padding: 36px 28px 28px 28px;
-      border-radius: 16px;
-      box-shadow: 0 6px 36px #0008;
-      text-align: center;
-      max-width: 95vw;
-    }
-    .popup-content h2 { margin-bottom: 16px; }
-    .popup-content p { margin-bottom: 22px; }
-    </style>
+TemplateMo 594 nexus flow
+
+https://templatemo.com/tm-594-nexus-flow
+
+-->
 </head>
-<body>
-
-
-	
-  <div id="entry-popup" class="popup-overlay">
-  <div class="popup-content">
-    <h2>น้อมส่งเสด็จสู่สวรรคาลัย</h2>
-    <iframe width="100%" height="315" src="https://www.youtube.com/embed/ziLNSuG7I2k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-    <button id="popup-ok-btn" class="neural-btn">เข้าสู่เว็บไซต์</button>
-  </div>
-</div>
-
-    <canvas id="neural-bg"></canvas>
-
-    <nav id="navbar">
+<body id="top">
+    <!-- Enhanced Background Elements -->
+    <div class="cyber-bg">
+        <div class="cyber-gradient"></div>
+        <div class="matrix-rain" id="matrixRain"></div>
+    </div>
+    
+    <div class="particles" id="particlesContainer"></div>
+    
+    <div class="data-streams" id="dataStreams"></div>
+    
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+    
+    <div class="grid-overlay">
+        <div class="grid-lines"></div>
+        <div class="grid-glow"></div>
+    </div>
+    
+    <div class="scanlines"></div>
+    <div class="noise-overlay"></div>
+    
+    <!-- Navigation -->
+    <nav>
         <div class="nav-container">
-            <a href="#home" class="logo-container">
-                <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Neural Network Logo -->
-                    <circle cx="50" cy="20" r="8" fill="none" stroke="#00ffff" stroke-width="2"/>
-                    <circle cx="25" cy="50" r="8" fill="none" stroke="#ff00ff" stroke-width="2"/>
-                    <circle cx="75" cy="50" r="8" fill="none" stroke="#ff00ff" stroke-width="2"/>
-                    <circle cx="50" cy="80" r="8" fill="none" stroke="#ffff00" stroke-width="2"/>
-                    
-                    <!-- Connections -->
-                    <line x1="50" y1="28" x2="25" y2="42" stroke="#00ffff" stroke-width="1" opacity="0.6"/>
-                    <line x1="50" y1="28" x2="75" y2="42" stroke="#00ffff" stroke-width="1" opacity="0.6"/>
-                    <line x1="25" y1="58" x2="50" y2="72" stroke="#ff00ff" stroke-width="1" opacity="0.6"/>
-                    <line x1="75" y1="58" x2="50" y2="72" stroke="#ff00ff" stroke-width="1" opacity="0.6"/>
-                    
-                    <!-- Center node -->
-                    <circle cx="50" cy="50" r="5" fill="#00ffff"/>
-                    <line x1="50" y1="28" x2="50" y2="45" stroke="#00ffff" stroke-width="1" opacity="0.6"/>
-                    <line x1="50" y1="55" x2="50" y2="72" stroke="#ffff00" stroke-width="1" opacity="0.6"/>
-                    <line x1="33" y1="50" x2="45" y2="50" stroke="#ff00ff" stroke-width="1" opacity="0.6"/>
-                    <line x1="55" y1="50" x2="67" y2="50" stroke="#ff00ff" stroke-width="1" opacity="0.6"/>
-                </svg>
-                <span class="logo-text">WWW.9WING.SHOP</span>
-            </a>
-            
-            <div class="mobile-menu-toggle" id="mobile-toggle">
-                <span></span>
-                <span></span>
-                <span></span>
+            <a href="#top" class="logo">9WING.SHOP</a>
+            <ul class="nav-links">
+                <li><a href="#PRO YG">PRO YG</a></li>
+                <li><a href="#PARTNER">PARTNER</a></li>
+                <li><a href="#stats">Stats</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="nav-bottom">
+                <a href="#" class="cyber-button">Access Terminal</a>
             </div>
-            
-            <div class="nav-menu" id="nav-menu">
-                <ul>
-                    <li><a href="#home">HOME</a></li>
-                    <li><a href="#about">ABOUT</a></li>
-                    <li><a href="#projects">SHOP</a></li>
-                    <li><a href="https://www.m.me/say.wing.656700">FACEBOOK</a></li>
-                    <li><a href="#contact">LOGIN BYPASS</a></li>
-                </ul>
-            </div>
+            <button class="mobile-menu-button" id="mobileMenuBtn">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
         </div>
     </nav>
-	
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="glitch" data-text="PRO YG BY-WING">PRO YG BY-WING</h1>
-			<h3 class="subtitle">WWW.9WING.SHOP</h3>
-            <p class="subtitle">ศูนย์รวมจำหน่ายโปรแกมช่วยเล่นโยกัง & บริการเช่า UG PHONE ราคาถูก</p>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="#top" class="mobile-menu-logo">9WING.SHOP</a>
+            <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
         </div>
-        <a href="#about" class="scroll-btn">
-            <div class="scroll-btn-inner">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M7 13l5 5 5-5M7 6l5 5 5-5"/>
-                </svg>
+        <div class="mobile-menu-cta">
+            <a href="#" class="cyber-button">Access Terminal</a>
+        </div>
+        <nav class="mobile-menu-nav">
+            <ul>
+                <li><a href="#PRO YG">PRO YG</a></li>
+                <li><a href="#PARTNER">PARTNER</a></li>
+                <li><a href="#stats">PRO YG</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-container">
+            <h1 class="hero-title">
+                <span class="hero-nexus">9WING.</span><span class="hero-flow">SHOP</span>
+            </h1>
+            <p class="hero-subtitle">จำหน่ายโปรแกมช่วยเล่นโยกังจุติยุทธภพเลือดใหม่ 
+			บริการขาย M ราคาถูก แหล่งรวมพ่อค้าชั้นนำแนวหน้า และอื่นๆ อีกมากมาย..</p>
+            <div class="hero-buttons">
+                <a href="#" class="btn-primary">แหล่งรวมพ่อค้าชั้นนำแนวหน้า</a>
+                <a href="#" class="btn-secondary">และอื่นๆ อีกมากมาย..</a>
             </div>
-        </a>
+        </div>
     </section>
 
-    <section id="about" class="fade-in">
-        <h2 class="section-title">ABOUT ME</h2>
-        <div class="about-container">
-            <div class="about-image">
-                <div class="profile-img-wrapper">
-                    <div class="profile-img">
-                        <span>66</span>
-                    </div>
+    <!-- Stats Section -->
+    <section class="stats fade-up" id="stats">
+        <div class="stats-container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="plan-price">67</div>
+                    <span class="stat-label">ALL USERS</span>
+                </div>
+                <div class="stat-item">
+                    <div class="plan-price">1.12.12</div>
+                    <span class="stat-label">APK YG</span>
+                </div>
+                <div class="stat-item">
+                    <div class="plan-price">0</div>
+                    <span class="stat-label">GAME BAN USERS</span>
+                </div>
+                <div class="stat-item">
+                    <div class="plan-price">3</div>
+                    <span class="stat-label">WING BAN USERS</span>
                 </div>
             </div>
-            <div class="about-content">
-                <h3>All USERS</h3>
-                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px;">
-                    จำนวน USERS ทั้งหมดที่อยู่ในการดูแล 9WING
-                </p>
-                <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary);">
-                    WWW.9WING.SHOP
-                </p>
-                <div class="about-stats">
-                    <div class="stat-card">
-						<div class="stat-number">APK</div>
-                        <div class="stat-label">V 10.10</div>
-						
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">0</div>
-                        <div class="stat-label">GAME BAN USERS</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-number">3</div>
-                        <div class="stat-label">WING BAN USERS</div>
-                    </div>
-                </div>
-           </div>		
         </div>
     </section>
 
-    <section id="projects" class="fade-in">
-        <h2 class="section-title">PRO YG & PARTNER</h2>
-        <div class="projects-grid">
-            <div class="glass-card project-card">
-                <h3 style="color: var(--primary);">PRO ตี+ ออโต้</h3>
-                <p style="color: var(--text-secondary);">WWW.9WING.SHOP</p>
-            </div>
-            <div class="glass-card project-card">
-                <h3 style="color: var(--secondary);">PACKET - KVIP</h3>
-                <p style="color: var(--text-secondary);">6 Cores | 5.3G RAM  | 64G ROM</p>
-            </div>
-            <div class="glass-card project-card">
-                <h3 style="color: var(--accent);">PRO YG</h3>
-                <p style="color: var(--text-secondary);">WWW.9WING.SHOP</p>
-            </div>
-            <div class="glass-card project-card">
-                <h3 style="color: var(--primary);">PACKET - MVIP</h3>
-                <p style="color: var(--text-secondary);">8 Cores | 8G RAM  | 128G ROM</p>
-            </div>
-            <div class="glass-card project-card">
-                <h3 style="color: var(--secondary);">PRO YG</h3>
-                <p style="color: var(--text-secondary);">WWW.9WING.SHOP
-				</p>
-            </div>
-            <div class="glass-card project-card">
-                <h3 style="color: var(--accent);">PACKET - SVIP</h3>
-                <p style="color: var(--text-secondary);">8 Cores | 16G RAM  | 200G ROM</p>
-            </div>
-        </div>
-    </section>
-
-
-<html lang="th">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Project Cards with Rich Modal</title>
-  <style>
-    :root{
-      --primary: #4f46e5;
-      --text-primary: #0f172a;
-      --text-secondary: #475569;
-      --glass-bg: rgba(255,255,255,0.04);
-      --card-radius: 12px;
-    }
-    body{
-      font-family: Inter, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(180deg,#0f172a 0%, #071029 100%);
-      color: var(--text-primary);
-      min-height:100vh;
-      margin:0;
-      padding:32px;
-    }
-
-    .container{
-      max-width:1100px;
-      margin:0 auto;
-    }
-
-    h1{ color: #eef2ff; margin:0 0 18px 0; font-size:20px; }
-
-    /* Grid of cards */
-    .cards{
-      display:grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap:16px;
-      margin-top:16px;
-    }
-    .glass-card{
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: var(--card-radius);
-      padding:14px;
-      cursor:pointer;
-      transition: transform .16s ease, box-shadow .16s ease;
-      user-select:none;
-      color: #f8fafc;
-    }
-    .glass-card:focus,
-    .glass-card:hover{
-      transform: translateY(-6px);
-      box-shadow: 0 12px 28px rgba(2,6,23,0.45);
-      outline:none;
-    }
-    .card-head{
-      display:flex;
-      gap:12px;
-      align-items:center;
-    }
-    .card-thumb{
-      width:56px;
-      height:56px;
-      border-radius:8px;
-      object-fit:cover;
-      flex: 0 0 56px;
-      background:#0b1220;
-      border:1px solid rgba(255,255,255,0.04);
-    }
-    .card-title{ font-weight:700; font-size:16px; color:var(--primary); margin:0; }
-    .card-specs{ margin:6px 0 0 0; color:var(--text-secondary); font-size:13px; }
-
-    .card-footer{ margin-top:12px; display:flex; justify-content:space-between; align-items:center; gap:8px; }
-    .btn-sm{
-      background:transparent;
-      color:var(--text-secondary);
-      border:1px solid rgba(255,255,255,0.04);
-      padding:6px 8px;
-      border-radius:8px;
-      font-weight:600;
-      cursor:pointer;
-    }
-
-
-    /* Form */
-    .order-form{ display:flex; flex-direction:column; gap:10px; }
-    .form-row{ display:flex; gap:8px; }
-    .form-row .field{ flex:1; }
-    label{ display:block; font-size:13px; color:#0f172a; margin-bottom:6px; font-weight:600; }
-    input[type="text"], input[type="email"], input[type="number"], textarea, select{
-      width:100%;
-      padding:8px 10px;
-      border-radius:8px;
-      border:1px solid #e6eefc;
-      font-size:14px;
-      box-sizing:border-box;
-    }
-    textarea{ min-height:96px; resize:vertical; }
-    .price{ font-size:18px; font-weight:700; color:var(--primary); }
-    .btn{
-      padding:10px 12px;
-      border-radius:8px;
-      border:0;
-      cursor:pointer;
-      font-weight:700;
-      background:var(--primary);
-      color:white;
-    }
-    .btn.secondary{ background:transparent; color:var(--text-secondary); border:1px solid #e6eefc; }
-
-    /* Accessibility focus */
-    .glass-card:focus-visible, .modal-close:focus-visible, .btn:focus-visible, input:focus, textarea:focus {
-      outline: 3px solid rgba(79,70,229,0.18);
-      outline-offset: 2px;
-    }
-
-    /* Small helpers */
-    .muted{ color:var(--text-secondary); font-size:13px; }
-    .small{ font-size:13px; color:#475569; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>แพ็กเกจเครื่อง — คลิ๊กการ์ดเพื่อดูรายละเอียด / สั่งซื้อ</h1>
-
-    <div class="cards" id="cards">
-      <!-- Each card has data attributes used to populate the modal -->
-      <div class="glass-card project-card" role="button" tabindex="0"
-           data-title="PACKET - MVIP"
-           data-specs="8 Cores | 8G RAM | 128G ROM"
-           data-price="199"
-           data-image="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=1a1a1a"
-           data-desc="แพ็กเกจ MVIP เหมาะสำหรับเว็บไซต์ขนาดกลาง มีประสิทธิภาพต่อผู้ใช้พร้อมรองรับงานทั่วไปและการเก็บข้อมูลเบื้องต้น.">
-        <div class="card-head">
-          <img class="card-thumb" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=1a1a1a" alt="PACKET - MVIP">
-          <div>
-            <p class="card-title">PACKET - MVIP</p>
-            <p class="card-specs">8 Cores | 8G RAM | 128G ROM</p>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span class="muted">฿199 / เดือน</span>
-          <button class="btn-sm" aria-hidden="true">ดูเพิ่มเติม</button>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" role="button" tabindex="0"
-           data-title="PACKET - PRO"
-           data-specs="4 Cores | 4G RAM | 64G ROM"
-           data-price="99"
-           data-image="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=2b2b2b"
-           data-desc="แพ็กเกจ PRO เหมาะสำหรับโปรเจกต์เล็กถึงกลาง มีต้นทุนต่ำแต่ให้ประสิทธิภาพที่ดีสำหรับเริ่มต้น.">
-        <div class="card-head">
-          <img class="card-thumb" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=2b2b2b" alt="PACKET - PRO">
-          <div>
-            <p class="card-title">PACKET - PRO</p>
-            <p class="card-specs">4 Cores | 4G RAM | 64G ROM</p>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span class="muted">฿99 / เดือน</span>
-          <button class="btn-sm" aria-hidden="true">ดูเพิ่มเติม</button>
-        </div>
-      </div>
-
-      <div class="glass-card project-card" role="button" tabindex="0"
-           data-title="PACKET - ENTERPRISE"
-           data-specs="16 Cores | 32G RAM | 1T ROM"
-           data-price="799"
-           data-image="https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?q=80&w=1200&auto=format&fit=crop&ixlib=rb-4.0.3&s=3c3c3c"
-           data-desc="แพ็กเกจ ENTERPRISE สำหรับงานหนัก ตอบโจทย์แอปพลิเคชันความต้องการสูงและงานด้านฐานข้อมูลขนาดใหญ่.">
-        <div class="card-head">
-          <img class="card-thumb" src="https://images.unsplash.com/photo-1526470608268-f674ce90ebd4?q=80&w=800&auto=format&fit=crop&ixlib=rb-4.0.3&s=3c3c3c" alt="PACKET - ENTERPRISE">
-          <div>
-            <p class="card-title">PACKET - ENTERPRISE</p>
-            <p class="card-specs">16 Cores | 32G RAM | 1T ROM</p>
-          </div>
-        </div>
-        <div class="card-footer">
-          <span class="muted">฿799 / เดือน</span>
-          <button class="btn-sm" aria-hidden="true">ดูเพิ่มเติม</button>
-        </div>
-      </div>
-
-      <!-- You can add more cards by duplicating the structure above and changing data-* attributes -->
-    </div>
-  </div>
-
-  <!-- Modal -->
-  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
-    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
-      <div class="modal-header">
-        <h3 class="modal-title" id="modalTitle">Title</h3>
-        <button class="modal-close" id="modalClose" aria-label="ปิด">✕</button>
-      </div>
-
-      <div class="modal-grid" aria-live="polite">
-        <div class="modal-left">
-          <img id="modalImage" class="product-image" src="" alt="">
-          <p class="product-specs" id="modalSpecs"></p>
-          <div class="long-desc" id="modalDesc"></div>
-        </div>
-
-        <aside class="modal-right" aria-labelledby="orderTitle">
-          <h4 id="orderTitle" style="margin:0 0 8px 0;">สั่งซื้อ</h4>
-          <div class="small muted" id="modalPrice"></div>
-
-          <form id="orderForm" class="order-form" novalidate>
-            <input type="hidden" id="productName" name="productName">
-            <div>
-              <label for="customerName">ชื่อ-นามสกุล</label>
-              <input id="customerName" name="customerName" type="text" required placeholder="ชื่อของคุณ">
-            </div>
-
-            <div>
-              <label for="customerEmail">อีเมล</label>
-              <input id="customerEmail" name="customerEmail" type="email" required placeholder="you@example.com">
-            </div>
-
-            <div class="form-row">
-              <div class="field">
-                <label for="quantity">จำนวน</label>
-                <input id="quantity" name="quantity" type="number" min="1" value="1" required>
-              </div>
-              <div class="field">
-                <label for="billingCycle">รอบบิล</label>
-                <select id="billingCycle" name="billingCycle" aria-label="รอบบิล">
-                  <option value="monthly">รายเดือน</option>
-                  <option value="yearly">รายปี (ลด 10%)</option>
-                </select>
-              </div>
-            </div>
-
-            <div>
-              <label for="notes">หมายเหตุ (ไม่บังคับ)</label>
-              <textarea id="notes" name="notes" placeholder="เช่น ต้องการ config เพิ่มเติม..."></textarea>
-            </div>
-
-            <div style="display:flex; gap:8px; margin-top:6px;">
-              <button type="submit" class="btn" id="submitOrder">ยืนยันสั่งซื้อ</button>
-              <button type="button" class="btn secondary" id="cancelOrder">ยกเลิก</button>
-            </div>
-
-            <p class="small muted" style="margin-top:8px;">เราจะส่งอีเมลยืนยันและรายละเอียดการชำระเงินไปยังอีเมลที่ให้ไว้</p>
-          </form>
-        </aside>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    (function(){
-      const cards = document.querySelectorAll('.project-card');
-      const overlay = document.getElementById('modalOverlay');
-      const modal = overlay.querySelector('.modal');
-      const modalTitle = document.getElementById('modalTitle');
-      const modalSpecs = document.getElementById('modalSpecs');
-      const modalDesc = document.getElementById('modalDesc');
-      const modalImage = document.getElementById('modalImage');
-      const modalPrice = document.getElementById('modalPrice');
-      const productNameInput = document.getElementById('productName');
-
-      const btnClose = document.getElementById('modalClose');
-      const cancelOrder = document.getElementById('cancelOrder');
-      const orderForm = document.getElementById('orderForm');
-
-      let lastFocus = null;
-
-      // Populate and open modal from clicked card
-      function openModalFromCard(card){
-        const title = card.dataset.title || 'รายละเอียด';
-        const specs = card.dataset.specs || '';
-        const price = card.dataset.price || '';
-        const image = card.dataset.image || '';
-        const desc = card.dataset.desc || '';
-
-        modalTitle.textContent = title;
-        modalSpecs.textContent = specs;
-        modalDesc.textContent = desc;
-        modalImage.src = image;
-        modalImage.alt = title;
-        modalPrice.textContent = price ? `ราคาเริ่มต้น: ฿${price} / เดือน` : '';
-        productNameInput.value = title;
-
-        overlay.classList.add('show');
-        overlay.setAttribute('aria-hidden','false');
-        document.body.style.overflow = 'hidden';
-
-        lastFocus = document.activeElement;
-        // move focus into modal for keyboard users
-        btnClose.focus();
-        trapFocus(modal);
-      }
-
-      function closeModal(){
-        overlay.classList.remove('show');
-        overlay.setAttribute('aria-hidden','true');
-        document.body.style.overflow = '';
-        releaseFocusTrap();
-        if(lastFocus && lastFocus.focus) lastFocus.focus();
-      }
-
-      // Event listeners for cards (click + keyboard activation)
-      cards.forEach(card=>{
-        card.addEventListener('click', ()=> openModalFromCard(card));
-        card.addEventListener('keydown', (e)=>{
-          if(e.key === 'Enter' || e.key === ' '){
-            e.preventDefault();
-            openModalFromCard(card);
-          }
-        });
-      });
-
-      // Close interactions
-      overlay.addEventListener('click', (e)=>{
-        if(e.target === overlay) closeModal();
-      });
-      btnClose.addEventListener('click', closeModal);
-      cancelOrder.addEventListener('click', closeModal);
-      document.addEventListener('keydown', (e)=>{
-        if(e.key === 'Escape' && overlay.classList.contains('show')) closeModal();
-      });
-
-      // Simple form validation + simulated submit
-      orderForm.addEventListener('submit', function(e){
-        e.preventDefault();
-        if(!orderForm.reportValidity()) return;
-
-        const data = {
-          product: productNameInput.value,
-          name: orderForm.customerName.value,
-          email: orderForm.customerEmail.value,
-          quantity: orderForm.quantity.value,
-          billingCycle: orderForm.billingCycle.value,
-          notes: orderForm.notes.value,
-        };
-
-        // Simulate network request
-        const btn = document.getElementById('submitOrder');
-        btn.disabled = true;
-        btn.textContent = 'กำลังส่ง...';
-
-        setTimeout(()=>{
-          btn.disabled = false;
-          btn.textContent = 'ยืนยันสั่งซื้อ';
-          alert('สั่งซื้อสำเร็จ!\n\n' + JSON.stringify(data, null, 2));
-          closeModal();
-        }, 900);
-      });
-
-      // Focus trap (simple implementation)
-      let focusableElements = [];
-      let firstFocusable = null;
-      let lastFocusable = null;
-      function trapFocus(container){
-        focusableElements = Array.from(container.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])'))
-          .filter(el => el.offsetParent !== null);
-        if(focusableElements.length === 0) return;
-        firstFocusable = focusableElements[0];
-        lastFocusable = focusableElements[focusableElements.length -1];
-        container.addEventListener('keydown', handleKeyDown);
-      }
-      function releaseFocusTrap(){
-        modal.removeEventListener('keydown', handleKeyDown);
-      }
-      function handleKeyDown(e){
-        if(e.key !== 'Tab') return;
-        if(e.shiftKey){
-          if(document.activeElement === firstFocusable){
-            e.preventDefault();
-            lastFocusable.focus();
-          }
-        } else {
-          if(document.activeElement === lastFocusable){
-            e.preventDefault();
-            firstFocusable.focus();
-          }
-        }
-      }
-
-      // Enhance images: if image fails to load, hide it gracefully
-      modalImage.addEventListener('error', ()=> {
-        modalImage.style.display = 'none';
-      });
-    })();
-  </script>
-</body>
-</html>
-    <section id="contact" class="fade-in">
-        <h2 class="section-title">LOGIN - BYPASS</h2>
-        <form class="contact-form glass-card">
-            <div class="form-group">
-             
-	    </form>
-    </section>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-</audio>
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Navigation</h3>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#projects">SHOP</a></li>
-                    <li><a href="https://www.m.me/say.wing.656700">FACEBOOK</a></li>
-                    <li><a href="#contact">LOGIN BYPASS</a></li>
-                </ul>
-            </div>
-			
-              // ป้องกัน scroll ขณะ popup ยังเปิด
-			
-            <div class="footer-section">
-                <h3>SERVER BYPASS</h3>
-                <ul>
-                    <li><a href="#">Dual CPU : 6 Core</a></li>
-                    <li><a href="#">RAM DDR4 : 12 GB</a></li>
-                    <li><a href="#">Network  : 1-2 Gbps</a></li>
-                    <li><a href="#">Data Transfer : Unlimited</a></li>
-					<li><a href="#">Firewall : AntiDDoS</a></li>
-                </ul>
+    <!-- Features Section -->
+    <section class="features fade-up" id="features">
+        <div class="features-container">
+            <div class="section-header">
+                <h2 class="section-title">PARTNER</h2>
+                <p class="section-subtitle">เหล่าพ่อค้าชั้นนำแนวหน้า ของวงการ งานใวไม่ดองงาน เครดิตดีไม่มีเสีย ตรวจสอบใด้</p>
             </div>
             
-            <div class="footer-section">
-                <h3>MUSIC</h3>
-                <p style="color: var(--text-secondary); margin-bottom: 10px;">
-                    Let's build something amazing together
-                </p>
-            <body><video controls="" autoplay="" name="media"><source src="https://muu2736.github.io/9WING/YG.mp3" type="audio/mp3"></video></body>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📌</div>
+                    <div class="footer-bottom">
+                <h3>FB  9WING</h3>
+            </div>
+                    <p>Experience lightning-fast data processing with our quantum-inspired algorithms that handle complex workflows in microseconds.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📌</div>
+                    <h3>FB 9WING</h3>
+                    <p>AI-powered decision making that learns from your team's patterns and optimizes collaboration in real-time.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📌</div>
+                    <h3>FB 9WING</h3>
+                    <p>Immersive 3D workspace that transcends traditional boundaries, bringing remote teams into a shared reality.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Quantum Encryption</h3>
+                    <p>Military-grade security protocols with quantum encryption that makes your data literally impossible to breach.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🚀</div>
+                    <h3>Hyperdrive Sync</h3>
+                    <p>Instantaneous synchronization across all devices and platforms with zero latency, no matter the distance.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Mind Reading Analytics</h3>
+                    <p>Predictive analytics so advanced, it anticipates your team's needs before they even know what they need.</p>
+                </div>
             </div>
         </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; Copyright © 2025 All Rights Reserved Provided by <a href="https://www.9wing.shop" rel="nofollow noopener">9WING</a></p>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing fade-up" id="pricing">
+        <div class="pricing-container">
+            <div class="section-header">
+                <h2 class="section-title">Access Levels</h2>
+                <p class="section-subtitle">Choose your gateway to the future of collaboration</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="plan-name">Initiate</div>
+                    <div class="plan-price">1,000</div>
+                    <div class="plan-period">per neural link</div>
+                    <ul class="plan-features">
+                        <li>Basic quantum processing</li>
+                        <li>5 holographic workspaces</li>
+                        <li>Standard encryption</li>
+                        <li>Community support matrix</li>
+                        <li>Reality sync enabled</li>
+                    </ul>
+                    <a href="#" class="btn-secondary">สั่งซื้อ</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="plan-name">Nexus</div>
+                    <div class="plan-price">1,000</div>
+                    <div class="plan-period">per neural link</div>
+                    <ul class="plan-features">
+                        <li>Advanced quantum algorithms</li>
+                        <li>Unlimited holo-workspaces</li>
+                        <li>Quantum encryption fortress</li>
+                        <li>Priority neural support</li>
+                        <li>Mind-reading analytics</li>
+                        <li>Hyperdrive sync protocol</li>
+                    </ul>
+                    <a href="#" class="btn-primary">สั่งซื้อ</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <div class="plan-name">Transcend</div>
+                    <div class="plan-price">1,000</div>
+                    <div class="plan-period">per neural link</div>
+                    <ul class="plan-features">
+                        <li>Infinite processing power</li>
+                        <li>Custom reality matrices</li>
+                        <li>Temporal encryption layers</li>
+                        <li>Direct neural interface</li>
+                        <li>Predictive consciousness</li>
+                        <li>Quantum entanglement sync</li>
+                    </ul>
+                    <a href="#" class="btn-secondary">สั่งซื้อ</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact fade-up" id="contact">
+        <div class="contact-container">
+            <div class="section-header">
+                <h2 class="section-title">REVIEW PRO YG BY WING</h2>
+                <p class="section-subtitle">โปรดใช้วิจารณญาณในการรับชม</p>
+            </div>
+            <div class="contact-form-wrapper">
+                <div class="contact-form">
+				
+                 <iframe width="100%" height="315" src="https://www.youtube.com/embed/ziLNSuG7I2k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                  
+                    <button type="submit" class="btn-primary btn-submit">Transmit Message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <span class="footer-separator">•</span>
+                <a href="#">Terms of Service</a>
+                <span class="footer-separator">•</span>
+                <a href="#">Documentation</a>
+                <span class="footer-separator">•</span>
+                <a href="#">Contact Support</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 NexusFlow Systems. All realities reserved.</p>
+                <p class="footer-credit">Brought to you by <a href="https://templatemo.com" target="_blank" rel="noopener nofollow">TemplateMo</a></p>
+            </div>
         </div>
     </footer>
-<script src="tooplate-neural-scripts.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  var popup = document.getElementById('entry-popup');
-  var okBtn = document.getElementById('popup-ok-btn');
-  okBtn.onclick = function(){
-    popup.style.display = 'none';
-    document.body.style.overflow = '';
-  };
-  // ป้องกัน scroll ขณะ popup ยังเปิด
-  document.body.style.overflow = 'hidden';
-});
-</script>
+
+    <script src="templatemo-nexus-scripts.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
