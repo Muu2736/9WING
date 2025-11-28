@@ -5,17 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>9WING.SHOP - จำหน่ายโปรแกมช่วยเล่นโยกังจุติยุทธภพเลือดใหม่ บริการขาย M ราคาถูก แหล่งรวมพ่อค้าชั้นนำแนวหน้า</title>
     <link href="templatemo-nexus-style.css" rel="stylesheet">
-<!--
 
-TemplateMo 594 nexus flow
+<!-- POPUP CSS -->
+<style>
+#entryPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.88);
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+}
 
-https://templatemo.com/tm-594-nexus-flow
+.popup-box {
+    background: #0a0f1f;
+    border: 2px solid #00eaff;
+    box-shadow: 0 0 20px #00eaff;
+    padding: 35px;
+    width: 90%;
+    max-width: 420px;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    animation: popupFade 0.4s ease;
+}
 
--->
+.popup-box h2 {
+    font-size: 26px;
+    margin-bottom: 10px;
+    color: #00eaff;
+}
+
+.popup-box p {
+    font-size: 16px;
+    opacity: 0.9;
+}
+
+.popup-btn {
+    margin-top: 25px;
+    padding: 12px 25px;
+    background: #00eaff;
+    border: none;
+    color: #000;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.popup-btn:hover {
+    background: #00bcd4;
+}
+
+@keyframes popupFade {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+</style>
+
 </head>
 <body id="top">
+
+<!-- POPUP BEFORE ENTER WEBSITE -->
+<div id="entryPopup">
+    <div class="popup-box">
+        <h2>⚠️ประกาศจาก 9WING.SHOP</h2>
+      <p>โปรโมชั่นสุดคุ้มเหมือนใด้ฟรี สำหรับลูกค้าคนที่ 80 ในราคา 1,888 บ.</p>
+	  <div align="left">
+       <p>1 ตี+ AUTO</p>
+       <p>2 เปิดกล่อง AUTO</p>
+	   <p>3 รีป้ายดี AUTO</p>
+       <p>4 เสกหินระดับกลาง-สูง</p>
+	   <p>5 ซื้อ-ขายโสม AUTO</p>
+       <p>6 ปั้มเลือดไม่มีดีเล</p>
+	   <p>7 ตีเร็วฟามของใว</p>
+       <p>8 รองรับการทำงานหลายจอพร้อมกัน</p>
+	   </div>
+	   <p><font color=#FF0033 size=3>โปรโมชั่นนี้เฉพาะลูกค้าคนที่ 80 รีบๆเด้อ...</font></p>
+        <button class="popup-btn" onclick="closePopup()">เข้าสู่เว็บไซต์</button>
+    </div>
+</div>
+
+<script>
+function closePopup() {
+    document.getElementById("entryPopup").style.display = "none";
+}
+</script>
+
+
+<!-- BACKGROUND + CONTENT (ของเดิมคุณทั้งหมดด้านล่างนี้) -->
 	
-    <!-- Enhanced Background Elements -->
     <div class="cyber-bg">
         <div class="cyber-gradient"></div>
         <div class="matrix-rain" id="matrixRain"></div>
@@ -274,6 +360,7 @@ https://templatemo.com/tm-594-nexus-flow
             </div>
         </div>
     </section>
+
     <!-- Contact Section -->
     <section class="contact fade-up" id="contact">
         <div class="contact-container">
@@ -314,83 +401,3 @@ https://templatemo.com/tm-594-nexus-flow
     <script src="templatemo-nexus-scripts.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
