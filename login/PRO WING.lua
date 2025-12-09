@@ -28,11 +28,10 @@ gg.toast("📶 ระบบ BYPASS กันแบน💯")
 end
 
 function mainAction2()
-gg.setRanges(gg.REGION_CODE_APP)
-gg.searchNumber("360", gg.TYPE_AUTO, false, gg.SIGN_EQUAL, 0, -1, 0)
-gg.processResume()
+gg.setRanges(gg.REGION_ANONYMOUS | gg.REGION_CODE_APP) 
 gg.refineNumber("360", gg.TYPE_FLOAT, false, gg.SIGN_EQUAL, 0, -1, 0)
-revert = gg.getResults(100, nil, nil, nil, nil, nil, nil, nil, nil)
+ gg.processResume()
+revert = gg.getResults(1000, nil, nil, nil, nil, nil, nil, nil, nil)
 gg.editAll("200", gg.TYPE_FLOAT)
 gg.toast("👑 RUN ออโต้กันแบน BY วิ่ง")
 end
@@ -49,7 +48,7 @@ end
 -- Menu function (ไม่ต้องวนลูป)
 local options = {
    " ตี ไม่มีดีเล ",
---   "ปรับมุมมอง ",
+  "ปรับมุมมอง ",
 --   "ปิด FX ",
  "🚪 ออก"  
 }
@@ -66,5 +65,6 @@ elseif choice == 3 then
 end
 
  
+
 
 
