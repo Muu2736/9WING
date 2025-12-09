@@ -22,7 +22,7 @@ gg.setRanges(gg.REGION_ANONYMOUS | gg.REGION_CODE_APP)
 gg.searchNumber("1041313291", gg.TYPE_DWORD, false, gg.SIGN_EQUAL, 0, -1, 0)
 gg.processResume()
 revert = gg.getResults(10, nil, nil, nil, nil, nil, nil, nil, nil)
-gg.editAll("1042813291", gg.TYPE_DWORD)
+gg.editAll("1043813291", gg.TYPE_DWORD)
 gg.processResume()
 gg.toast("📶 ระบบ BYPASS กันแบน💯")
 end
@@ -66,4 +66,5 @@ elseif choice == 3 then
 end
 
  
+
 
