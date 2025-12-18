@@ -12,10 +12,10 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 811;
-    height: 452;
+    width: 100%;
+    height: 100%;
     background: rgba(0,0,0,0.88);
-    backdrop-filter: blur(3px);
+    backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -25,29 +25,41 @@
 .popup-box {
     background: #0a0f1f;
     border: 2px solid #00eaff;
-    box-shadow: 0 0 20px #00eaff;
-    padding: 35px;
-    width: 90%;
-    max-width: 420px;
+    box-shadow: 0 0 25px rgba(0, 234, 255, 0.4);
+    /* ปรับความกว้างให้พอดีกับเนื้อหา (รูปภาพ) */
+    width: auto; 
+    max-width: 90%; /* กันหลุดจอสำหรับมือถือ */
     text-align: center;
     color: white;
-    border-radius: 10px;
+    border-radius: 12px;
     animation: popupFade 0.4s ease;
+    overflow: hidden; /* ให้รูปที่ขอบมนตัดตามการ์ด */
+}
+
+/* ส่วนหัวข้อและข้อความ */
+.popup-content {
+    padding: 20px 20px 10px 20px;
 }
 
 .popup-box h2 {
-    font-size: 26px;
-    margin-bottom: 10px;
+    font-size: 22px;
+    margin: 0 0 5px 0;
     color: #00eaff;
 }
 
-.popup-box p {
-    font-size: 16px;
-    opacity: 0.9;
+/* ปรับแต่งรูปภาพให้กว้างเต็ม Popup */
+.popup-img {
+    width: 100%;
+    height: auto;
+    display: block; /* ลบช่องว่างใต้รูป */
+}
+
+/* ส่วนปุ่มกด */
+.popup-footer {
+    padding: 15px 20px 20px 20px;
 }
 
 .popup-btn {
-    margin-top: 25px;
     padding: 12px 25px;
     background: #00eaff;
     border: none;
@@ -70,32 +82,27 @@
 }
 </style>
 
-</head>
-<body id="top">
-
-<!-- POPUP BEFORE ENTER WEBSITE -->
 <div id="entryPopup">
     <div class="popup-box">
-        <h2>⚠️ประกาศจาก 9WING.SHOP</h2>
-      <p>📢 ประกาศแจ้ง ปิดปรับปรุงระบบ ชั่วคราว </p>
-	  <p><font color=#FF0033 size=3>.</font></p>
-	  <div align="left">
-	  <iframe width="100%" height="100%" src="https://uppic.cloud/ib/2srt2i1MHkTAnrg_1766093564.png" allowfullscreen></iframe>
-       <p></p>
-       <p></p>
-	   <p></p>
-       <p></p>
-	   <p></p>
-       <p></p>
-	   <p></p>
-       <p></p>
-	   </div>
-	   <p><font color=#FF0033 size=3>.</font></p>
-      <button class="popup-btn" onclick="closePopup()">เข้าสู่เว็บไซต์</button>
+        <div class="popup-content">
+            <h2>⚠️ ประกาศจาก 9WING.SHOP</h2>
+            <p style="margin: 5px 0; font-size: 14px; opacity: 0.8;">แจ้งปิดปรับปรุงระบบชั่วคราว</p>
+        </div>
+
+        <!-- รูปภาพจะกำหนดความกว้างของ Popup -->
+        <img src="https://uppic.cloud/ib/2srt2i1MHkTAnrg_1766093564.png" class="popup-img">
+
+        <div class="popup-footer">
+            <button class="popup-btn" onclick="closePopup()">เข้าสู่เว็บไซต์</button>
+        </div>
     </div>
 </div>
 
 <script>
+function closePopup() {
+    document.getElementById('entryPopup').style.display = 'none';
+}
+</script>
 function closePopup() {
     document.getElementById("entryPopup").style.display = "none";
 }
@@ -461,6 +468,7 @@ function closePopup() {
     <script src="templatemo-nexus-scripts.js"></script>
 </body>
 </html>
+
 
 
 
