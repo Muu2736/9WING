@@ -82,23 +82,59 @@
 }
 </style>
 
-<div id="entryPopup">
-    <div class="popup-box">
-        <div class="popup-content">
-            <h2>📌 ประกาศจาก 9WING.SHOP 📌</h2>
-             <span class="value" style="color: #FF0000;">⚠️เพื่อหลีกเลี่ยงการโดนแบนกรุณาอัปเดตตัวเกมเป็น VERSION 6</span>
- <a href="https://app.mediafire.com/folder/mn27dis1dpcz3" class="cyber-button">ดาวน์โหลด</a>
+<div id="entryPopup" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; padding: 20px;">
+    <div class="popup-box" style="width: 90%; max-width: 400px; background: #fff; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); overflow: hidden; border: 1px solid #eee;">
+        
+        <!-- Header -->
+        <div class="popup-header" style="background: #f8f9fa; padding: 20px; text-align: center; border-bottom: 2px solid #eee;">
+            <h2 style="margin: 0; color: #333; font-size: 22px;">📌 ประกาศจาก 9WING.SHOP</h2>
+			<h5 style="margin: 15px 0 0 0; color: #FF00FF; font-size: 14px;">
+                อัปเดตฟังก์ชันทั้งหมด: 19/01/2026
+            </h5>
+			<span class="version-tag" style="color: #FF4444; font-size: 15px; display: block;">
+                    หากสมาชิกมีฟังชั่นดังกว่าแล้วทำหายหรือกดลบหากจะเราแก้ให้..มีค่าบริการนะครับเก็บให้ดี (เตื่อนแล้วนะครับ)
+                </span>
+
+            
         </div>
 
-        <!-- รูปภาพจะกำหนดความกว้างของ Popup -->
-        <img src="https://uppic.cloud/ib/Pu1V8Wull4O9dgX_1767827013.png" class="popup-img">
+        <!-- Content Section -->
+        <div class="popup-content" style="padding: 20px;">
+            <div class="file-card" style="display: flex; flex-direction: column; gap: 10px;">
+                
+                <div style="background: #fcfcfc; padding: 10px; border-left: 4px solid #007bff; border-radius: 4px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;"><span style="color: #000000;">✔️ ตี+ ออโต้ (+ พร้อมกันหลายจอ)</span><span style="color: #000000;">✔️</span></div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;"><span style="color: #000000;">✔️ เปิดกล่อง ออโต้</span><span style="color: #000000;">✔️</span></div>
+                    <div style="display: flex; justify-content: space-between;"><span style="color: #000000;">✔️ รีป้ายดี ออโต้</span><span style="color: #000000;">✔️</span></div>
+                </div>
 
-        <div class="popup-footer">
-            <button class="popup-btn" onclick="closePopup()">เข้าสู่เว็บไซต์</button>
+                <div style="background: #fcfcfc; padding: 10px; border-left: 4px solid #000000; border-radius: 4px;">
+				    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;"><span style="color: #000000;">✔️ ปีนหอคอย 10วิ</span><span style="color: #000000;">🆕</span></div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;"><span style="color: #000000;">✔️ ปั้มเงินพวง / ปั้มยุธ LV1</span><span style="color: #000000;">✔️</span></div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;"><span style="color: #000000;">✔️ เสกหินหยกเย็น (สูง-ต่ำ)</span><span style="color: #000000;">✔️</span></div>
+                    <div style="display: flex; justify-content: space-between;"><span style="color: #000000;">✔️ เสกหินกลายทอง (สูง-ต่ำ)</span><span style="color: #000000;">✔️</span></div>
+					<div style="display: flex; justify-content: space-between;"><span style="color: #000000;">✔️ ตัดหินได้ทุกวัน</span><span style="color: #000000;">✔️</span></div>
+                </div>
+
+                <div style="background: #fcfcfc; padding: 10px; border-left: 4px solid #dc3545; border-radius: 4px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;"><span style="color: #000000;">✔️ ตีเร็ว/สกิวไม่ดีเลย์ +EXP (ฟาร์ม)</span><span style="color: #000000;">✔️</span></div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;"><span style="color: #000000;">✔️ ตีเร็ว/สกิวไม่ดีเลย์/วาร์ป/อมตะ (PK)</span><span style="color: #000000;">✔️</span></div>
+                    <div style="display: flex; justify-content: space-between;"><span style="color: #000000;">✔️ ปั้มกดยารัวๆ/หมอฮีลรัวๆ</span><span style="color: #000000;">✔️</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="popup-footer" style="padding: 0 20px 20px 20px; text-align: center;">
+            <div style="margin-bottom: 15px;">
+               
+            </div>
+            <button class="popup-btn" onclick="closePopup()" style="width: 100%; padding: 12px; background: #333; color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 16px;">
+                เข้าสู่เว็บไซต์
+            </button>
         </div>
     </div>
 </div>
-
 <script>
 function closePopup() {
     document.getElementById('entryPopup').style.display = 'none';
@@ -377,6 +413,7 @@ function closePopup() {
 
     <script src="templatemo-nexus-scripts.js"></script>
 </body>
+
 
 
 
