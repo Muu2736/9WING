@@ -7,7 +7,7 @@ function login()
   local info = gg.prompt({"🔒 KEY-เปลื่ยนดวง 🔒"}, {""}, {"text"})
   if not info then os.exit() end
   if info[1] ~= "WING123" then
-    gg.alert(" 🖕👣 เด๋วก็หงายท้องหรอก มึงเป็นใคร ?? 👣🖕")
+    gg.alert("👣 เด๋วก็หงายท้องหรอก อยากใช้ก๊เอาตังมา 👣")
     os.exit()
   end
 
