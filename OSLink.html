@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>9WING บริการเช่าจอปล่อยบอทผ่านระบบ OSLink</title>
+  <link href="https://fonts.googleapis.com" rel="stylesheet">
+  <style>
+    :root {
+      --primary-cyan: #00f2ff;
+      --primary-purple: #a855f7;
+      --accent-green: #22c55e;
+      --dark-bg: #030712;
+      --glass: rgba(17, 24, 39, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.1);
+    }
+
+    * { box-sizing: border-box; transition: all 0.3s ease; }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: radial-gradient(circle at top right, #1e1b4b, #030712);
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: #f3f4f6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 450px;
+      padding: 40px 25px;
+      background: var(--glass);
+      backdrop-filter: blur(16px);
+      border-radius: 32px;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
+    }
+
+    .logo-wrapper {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 25px;
+    }
+
+    .logo {
+      width: 100%;
+      height: 100%;
+      border-radius: 30px;
+      border: 2px solid var(--primary-cyan);
+      box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+      object-fit: cover;
+      animation: float 4s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .status-container {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 25px;
+    }
+
+    .status-badge {
+      flex: 1;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 8px;
+      border-radius: 12px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border: 1px solid var(--glass-border);
+    }
+
+    .status-online { color: var(--accent-green); font-weight: bold; }
+    .status-count { color: var(--primary-cyan); font-weight: bold; }
+
+    .main-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.2rem;
+      margin: 0 0 5px 0;
+      background: linear-gradient(to right, #fff, #9ca3af);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .update-tag {
+      font-size: 0.75rem;
+      color: var(--accent-green);
+      background: rgba(34, 197, 94, 0.1);
+      padding: 2px 8px;
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+
+    .notice-box {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #fca5a5;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      margin-bottom: 20px;
+    }
+
+    .section-label {
+      text-align: left;
+      font-size: 0.9rem;
+      color: var(--primary-purple);
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 600;
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 25px;
+    }
+
+    .price-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 15px;
+      border-radius: 16px;
+      border: 1px solid var(--glass-border);
+      text-align: left;
+    }
+
+    .price-item:hover {
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-3px);
+      border-color: var(--primary-cyan);
+    }
+
+    .days { font-size: 0.8rem; color: #9ca3af; margin-bottom: 4px; }
+    .cost { font-size: 1.2rem; color: var(--primary-cyan); font-weight: 700; }
+
+    /* ปุ่มใหม่ที่เพิ่มมา */
+    .cta-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
+      color: white;
+      text-decoration: none;
+      border-radius: 16px;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0 10px 20px -5px rgba(0, 242, 255, 0.4);
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      transform: scale(1.02);
+      filter: brightness(1.1);
+      box-shadow: 0 15px 30px -10px rgba(168, 85, 247, 0.6);
+    }
+
+    .icon-msg {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="logo-wrapper">
+      <img src="https://img5.pic.in.th/file/secure-sv1/1icon.th.jpeg" alt="9WING Logo" class="logo">
+    </div>
+    
+    <div class="status-container">
+      <div class="status-badge">Status: <span class="status-online">● Online</span></div>
+      <div class="status-badge">จำนวนจอว่าง: <span class="status-count">6 จอ</span></div>
+    </div>
+
+    <h1 class="main-title">9WING OSLink</h1>
+    <div class="update-tag">บริการเช่าจอปล่อย BOT ตลอด 24 ชม.</div>
+
+    <div class="notice-box">
+      ✨ หากลูกค้าต้องการใช้งานโปรตีเร็ว+ เพิ่ม 300.- ✨
+    </div>
+
+    <div class="section-label">ราคาเช่าต่อวัน</div>
+    <div class="price-grid">
+      <div class="price-item">
+        <div class="days">3 DAYS</div>
+        <div class="cost">50 ฿</div>
+      </div>
+      <div class="price-item">
+        <div class="days">7 DAYS</div>
+        <div class="cost">100 ฿</div>
+      </div>
+      <div class="price-item">
+        <div class="days">15 DAYS</div>
+        <div class="cost">200 ฿</div>
+      </div>
+      <div class="price-item">
+        <div class="days">30 DAYS</div>
+        <div class="cost">300 ฿</div>
+      </div>
+    </div>
+
+    <!-- ปุ่มติดต่อเช่าจอ -->
+    <a href="https://www.m.me/say.wing.656700" class="cta-button">
+      <svg class="icon-msg" viewBox="0 0 24 24">
+        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+      </svg>
+      RENT NOW / ติดต่อเช่าจอ
+    </a>
+
+  </div>
+
+</body>
+</html>
