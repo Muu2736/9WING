@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>9WING DASHBOARD 2026</title>
+  <link href="https://fonts.googleapis.com" rel="stylesheet">
+  <style>
+    :root {
+      --primary-cyan: #00ffff;
+      --primary-purple: #bc13fe;
+      --bg-dark: #050508;
+      --card-bg: rgba(13, 17, 23, 0.9);
+      --neon-border: rgba(0, 255, 255, 0.3);
+      --warning-red: #ff3e3e;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: radial-gradient(circle at center, #1a1b3a 0%, #050508 100%);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #fff;
+    }
+
+    .container {
+      width: 95%;
+      max-width: 450px;
+      padding: 30px;
+      background: var(--card-bg);
+      border-radius: 20px;
+      border: 2px solid var(--primary-cyan);
+      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
+      backdrop-filter: blur(15px);
+      text-align: center;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6em;
+      margin: 0;
+      background: linear-gradient(90deg, var(--primary-cyan), #fff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+    }
+
+    .status-bar {
+      font-size: 0.75em;
+      color: #00ff00;
+      background: rgba(0, 255, 0, 0.1);
+      padding: 5px 15px;
+      border-radius: 50px;
+      border: 1px solid #00ff00;
+      display: inline-block;
+      margin: 15px 0 25px;
+    }
+
+    .warning-box {
+      background: rgba(255, 62, 62, 0.1);
+      border-left: 4px solid var(--warning-red);
+      padding: 15px;
+      text-align: left;
+      font-size: 0.85em;
+      margin-bottom: 25px;
+    }
+
+    .category-title {
+      text-align: left;
+      font-size: 0.8em;
+      color: var(--primary-purple);
+      text-transform: uppercase;
+      margin: 20px 0 10px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+    }
+
+    .category-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--primary-purple), transparent);
+      margin-left: 10px;
+    }
+
+    .file-card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 5px;
+    }
+
+    .info-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 12px 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .label { color: #e0e0e0; font-size: 0.9em; }
+    .value { color: var(--primary-cyan); font-weight: bold; font-family: 'Orbitron'; }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      font-size: 0.9em;
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .feature-item::before {
+      content: "✓";
+      color: #00ff00;
+      margin-right: 12px;
+      font-weight: bold;
+    }
+
+    .cyber-button {
+      display: block;
+      margin-top: 30px;
+      padding: 16px;
+      background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+      color: #000;
+      text-decoration: none;
+      font-weight: 900;
+      border-radius: 10px;
+      text-transform: uppercase;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+    }
+
+    .cyber-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.5);
+      filter: brightness(1.2);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>โปรฟาร์ม หยวนเป่า</h2>
+    <div class="status-bar">อัปเดตล่าสุด: 10/02/2026</div>
+
+    <div class="warning-box">
+        <strong style="color: var(--warning-red);">⚠️ ข้อกำหนดระบบ</strong><br>
+        1. รองรับเฉพาะ PC / โน๊ตบุ๊ค <br>2. ใช้งานผ่าน <span style="text-decoration: underline;">MuMu Player</span> เท่านั้น<br>
+		3. ใช้งานใด้ 1 เครื่องไม่จำกัดจำนวนจอ
+    </div>
+
+    <div class="category-title">แพ็กเกจหลัก</div>
+    <div class="file-card">
+        <div class="info-row" style="border:none;">
+            <span class="label">⭐ โปรฟาร์มหยวนเป่า</span>
+            <span class="value">1,500.- / 7 วัน</span>
+        </div>
+    </div>
+
+    <div class="category-title">ฟังก์ชัน</div>
+    <div class="file-card">
+        <div class="feature-item">ระบบ BYPASS กันแบนอัตโนมัติ 100%</div>
+        <div class="feature-item">โจมตีเร็ว (คนอื่นเห็นเราปกติ)</div>
+        <div class="feature-item">ลดดีเลย์สกิล (ใช้สกิลต่อเนื่อง)</div>
+        <div class="feature-item">เพิ่มความเร็วการเคลื่อนที่ (วิ่งไว)</div>
+        <div class="feature-item">ค่าประสบการณ์ EXP เพิ่ม 1.5 เท่า</div>
+    </div>
+
+    <a href="https://www.m.me" class="cyber-button">
+        ติดต่อฝ่ายบริการลูกค้า
+    </a>
+  </div>
+
+</body>
+</html>
