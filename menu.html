@@ -4,9 +4,8 @@
   <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>9WING ฟังก์ชั่นทั้งหมด</title>
+  <title>9WING เมนูทั้งหมด</title>
   <style>
-    /* Fixed Font Import */
     @import url('https://fonts.googleapis.com');
     
     :root {
@@ -14,18 +13,17 @@
       --primary-purple: #8b5cf6;
       --primary-blue: #0066ff;
       --dark-bg: #0a0a0f;
-      --card-bg: rgba(15, 15, 25, 0.85);
-      --glass-bg: rgba(255, 255, 255, 0.05);
-      --border-glow: rgba(0, 255, 255, 0.3);
+      --card-bg: rgba(10, 10, 15, 0.9);
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --border-glow: rgba(0, 255, 255, 0.4);
       --text-primary: #ffffff;
-      --text-secondary: #a0a0a0;
     }
 
     * { box-sizing: border-box; }
 
     body {
-      font-family: 'Orbitron', 'Prompt', sans-serif;
-      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+      font-family: 'Prompt', sans-serif;
+      background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 100%);
       min-height: 100vh;
       margin: 0;
       padding: 20px;
@@ -36,92 +34,131 @@
     }
     
     .container {
-      width: 95%;
-      max-width: 500px;
-      padding: 30px;
+      width: 100%;
+      max-width: 480px;
+      padding: 25px;
       background: var(--card-bg);
-      border-radius: 20px;
+      border-radius: 15px;
       border: 1px solid var(--border-glow);
-      box-shadow: 0 0 50px rgba(0, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
       text-align: center;
     }
 
     .logo {
-      width: 100px; height: 100px;
+      width: 90px; height: 90px;
       border-radius: 50%;
-      margin-bottom: 20px;
-      border: 3px solid var(--primary-cyan);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
-      animation: logoFloat 4s ease-in-out infinite;
-      object-fit: cover;
+      margin-bottom: 15px;
+      border: 2px solid var(--primary-cyan);
+      box-shadow: 0 0 15px var(--primary-cyan);
+      animation: logoFloat 3s ease-in-out infinite;
     }
 
     @keyframes logoFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
+      0%, 100% { transform: translateY(0); filter: brightness(1); }
+      50% { transform: translateY(-8px); filter: brightness(1.3); }
     }
 
-    h1 {
-      font-size: 1.8em;
-      margin: 0 0 20px 0;
-      background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.5em;
+      margin: 10px 0;
+      letter-spacing: 2px;
+      background: linear-gradient(to right, #00ffff, #8b5cf6);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
+    .status-bar {
+      font-size: 0.75em;
+      background: rgba(0, 255, 0, 0.1);
+      color: #00ff00;
+      padding: 5px 15px;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 20px;
+      border: 1px solid rgba(0, 255, 0, 0.3);
+    }
+
+    .warning-box {
+      background: linear-gradient(90deg, rgba(255,0,0,0.15) 0%, rgba(255,0,0,0) 100%);
+      border-left: 4px solid #ff4444;
+      padding: 12px;
+      text-align: left;
+      margin-bottom: 20px;
+      font-size: 0.85em;
+    }
+
+    .category-title {
+      text-align: left;
+      font-size: 0.8em;
+      color: var(--primary-purple);
+      text-transform: uppercase;
+      margin: 15px 0 8px 5px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+    }
+    .category-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--primary-purple), transparent);
+      margin-left: 10px;
+    }
+
     .file-card {
       background: var(--glass-bg);
-      padding: 15px;
-      border-radius: 12px;
+      border-radius: 10px;
+      padding: 5px;
       margin-bottom: 20px;
-      border: 1px solid rgba(0, 255, 255, 0.1);
-      text-align: left;
     }
 
     .file-info-row {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 8px;
+      align-items: center;
+      padding: 10px 12px;
+      margin: 2px 0;
       font-size: 0.85em;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      padding-bottom: 4px;
+      transition: 0.3s;
+      border-radius: 6px;
     }
 
-    .label { color: var(--primary-cyan); font-weight: bold; }
-    .value { color: #00ff00; }
+    .file-info-row:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateX(5px);
+    }
 
-    .download-section {
-      margin-top: 25px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+    .label { color: #e0e0e0; }
+    .value { 
+      color: #00ff00; 
+      font-weight: bold; 
+      text-shadow: 0 0 8px rgba(0, 255, 0, 0.4);
+      font-family: 'Orbitron', sans-serif;
     }
 
     .cyber-button {
       display: block;
-      padding: 15px;
+      padding: 14px;
       text-decoration: none;
       background: linear-gradient(45deg, var(--primary-cyan), var(--primary-blue));
       color: #000;
       font-weight: 900;
       border-radius: 8px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.9em;
       transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
+      box-shadow: 0 4px 15px rgba(0, 255, 255, 0.2);
+      margin-bottom: 10px;
     }
 
     .cyber-button:hover {
-      transform: scale(1.02);
-      filter: brightness(1.2);
-      box-shadow: 0 0 25px var(--primary-cyan);
-    }
-
-    .version-tag {
-      font-size: 0.8em;
-      margin-bottom: 5px;
-      display: block;
+      transform: translateY(-2px);
+      box-shadow: 0 0 20px var(--primary-cyan);
+      filter: brightness(1.1);
     }
   </style>
 </head>
@@ -129,39 +166,47 @@
 
   <div class="container">
     <img src="https://img5.pic.in.th/file/secure-sv1/1icon.th.jpeg" alt="9WING Logo" class="logo">
-    <h5 style="margin-top:0">ฟังก์ชั่นทั้งหมด <span style="color: #00ff00;">UPDATE 19/01/2026</span></h5>
-	<h5 style="color: #FF0000;">ลูกค้าใหม่ที่อยากใช้งานฟังชั่นด้านล่างจำเป็นต้องมีโปรหลักก่อน</span></h5>
+    <h2>9WING ฟังก์ชั่นทั้งหมด</h2>
+    <div class="status-bar">UPDATE 10/02/2026</div>
 
+    <div class="warning-box">
+        <strong style="color: #ff4444;">⚠️ ลูกค้าใหม่ที่อยากใช้งานฟังชั่นด้านล่างจำเป็นต้องซื้อ<span style="color: #fff; text-decoration: underline;">โปรหลัก</span>ก่อนจึงสามารถซื้อไปใช้ใด้</strong><br>
+    </div>
+
+    <!-- Group 1: Core -->
+    <div class="category-title">โปรหลัก (รองรับเฉพาะ PC โน๊ตบุ๊ค)</div>
     <div class="file-card">
-        <div class="file-info-row"><span class="label">✔️ โปรหลัก ตี+ ออโต้</span><span class="value">1800 💲</span></div>
-        <div class="file-info-row"><span class="label">✔️ เปิดกล่อง ออโต้</span><span class="value">300 💲</span></div>
-		<div class="file-info-row"><span class="label">✔️ ตี+ พร้อมกันใด้หลายจอ</span><span class="value">500 💲</span></div>
-        <div class="file-info-row"><span class="label">✔️ รีป้ายดี ออโต้</span><span class="value">300 💲</span></div>
-        <div class="file-info-row"><span class="label">✔️ ปั้มยุธ LV1</span><span class="value">300 💲</span></div>
-        <div class="file-info-row"><span class="label">✔️ ตัดหินใด้ทุกวัน</span><span class="value">200 💲</span></div>
-        <div class="file-info-row"><span class="label">✔️ เสกหินหยกเย็น  สูง-ต่ำ</span><span class="value">200 💲</span></div>
-        <div class="file-info-row"><span class="label">✔️ เสกหินกลายทอง สูง-ต่ำ</span><span class="value">200 💲</span></div>
-        <div class="file-info-row"><span class="label">✔️ ปั้มเงินพวง</span><span class="value">200 💲</span></div>
-        <div class="file-info-row"><span class="label">✔️ ตีเร็ว สกิวไม่ดีเล +EXP (ฟาม)</span><span class="value">500 💲</span></div>
-        <div class="file-info-row"><span class="label">✔️ ตีเร็ว สกิวไม่ดีเล วาป อมตะ (PK ล่อคน)</span><span class="value">500 💲</span></div>
-        <div class="file-info-row"><span class="label">✔️ กดยารัวๆ หมอฮิวรัวๆ</span><span class="value">200 💲</span></div>
-		<div class="file-info-row"><span class="label">✔️ เข้าเซียนเหมียว ชั้น5</span><span class="value">300 💲</span></div>
-        <div class="file-info-row"><span class="label">✔️ ปีนหอ200ชั้น7วิ</span><span class="value">300 💲</span></div>
+        <div class="file-info-row">
+            <span class="label">⭐ โปรหลัก ตี+ออโต้ แถมฟรี รีป้ายดีออโต้</span>
+            <span class="value">1,800 💲</span>
+        </div>
+
+    </div>
+
+    <!-- Group 2: Farming -->
+    <div class="category-title">ฟังก์ชั่นทั้งหมด</div>
+    <div class="file-card">
+	    <div class="file-info-row"><span class="label">✔️ ตี+ พร้อมกันใด้หลายจอ</span><span class="value">200 💲</span></div>
+		<div class="file-info-row"><span class="label">✔️ เปิดกล่อง ออโต้</span><span class="value">200 💲</span></div>
+        <div class="file-info-row"><span class="label">✔️ รีป้ายดี ออโต้ </span><span class="value">300 💲</span></div>
+        <div class="file-info-row"><span class="label">✔️ ปั้มเงินพวง </span><span class="value">300 💲</span></div>
+		<div class="file-info-row"><span class="label">✔️ ปั้มยุธ LV1</span><span class="value">300 💲</span></div>
+        <div class="file-info-row"><span class="label">✔️ ตัดหินออโต้ ใด้ทุกวัน</span><span class="value">200 💲</span></div>
+		<div class="file-info-row"><span class="label">✔️ เสกหินหยกเย็น สูง-ต่ำ</span><span class="value">200 💲</span></div>
+		<div class="file-info-row"><span class="label">✔️ เสกหินกลายทอง สูง-ต่ำ</span><span class="value">200 💲</span></div>
+        <div class="file-info-row"><span class="label">✔️ ปีนหอ 200 ชั้น (7 วิ)</span><span class="value">300 💲</span></div>
+        <div class="file-info-row"><span class="label">✔️ เข้าเซียนเหมียว ชั้น 5</span><span class="value">300 💲</span></div>
+        <div class="file-info-row"><span class="label">✔️ กดยารัว / หมอฮีลไว</span><span class="value">200 💲</span></div>
+		<div class="file-info-row"><span class="label">✔️ ตีเร็ว สกิวไม่ดีเล วาป อมตะ (PK)</span><span class="value">500 💲</span></div>
 		
     </div>
-<!-- 
-    <div class="download-section">
-        <div>
-          
-            <a href="https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING.exe" class="cyber-button">DOWNLOAD V.6</a>
-        </div>
 
-        <div style="margin-top: 10px;">
-            
-            <a href="https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING7.exe" class="cyber-button" style="background: linear-gradient(45deg, var(--primary-purple), var(--primary-blue)); color: white;">DOWNLOAD V.7</a>
-        </div>
+    <!-- Group 3: Special -->
+ 
+
+   
     </div>
   </div>
-<!-- Popup หน้าแรก (ต้อนรับ/ประกาศด่วน) -->
+
 </body>
 </html>
