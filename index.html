@@ -1,373 +1,529 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>9WING.SHOP - จำหน่ายโปรแกมช่วยเล่นโยกังจุติยุทธภพเลือดใหม่    
-			บริการเช่าจอปล่อยบอทผ่าน OSLink และอื่นๆ อีกมากมาย</title>
-    <link href="templatemo-nexus-style.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>9WING.SHOP -  จำหน่ายโปรแกมช่วยเล่นโยกังจุติยุทธภพเลือดใหม่ บริการเช่าจอปล่อยบอท 24 ชม. ผ่าน OSLink และอื่นๆ อีกมากมาย </title>
+
+<!-- ✅ Google Fonts (แก้แล้ว) -->
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+<!-- SEO -->
+<meta name="description" content="9WING.SHOP ระบบโปรโยกังจุติยุทธภพเลือดใหม่ พร้อม Cloud OSLink ปล่อยบอท 24 ชม.">
+<meta name="keywords" content="โยกัง, Yulgang, โปรโยกัง, บอทโยกัง, OSLink, Cloud Bot">
+
+<style>
+
+/* ===== MUSIC POPUP ===== */
+.music-popup{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.85);
+    backdrop-filter:blur(10px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:10000;
+}
+
+.popup-box{
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:24px;
+    padding:40px;
+    text-align:center;
+    box-shadow:0 0 50px rgba(0,255,255,.4);
+    animation:popupIn .8s ease;
+}
+
+.popup-box h2{
+    font-family:'Orbitron',sans-serif;
+    margin-bottom:15px;
+}
+
+.popup-box p{
+    color:#aaa;
+    margin-bottom:25px;
+    line-height:1.6;
+}
+
+@keyframes popupIn{
+    from{transform:scale(.8);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+/* ===== FLOATING CONTACT ===== */
+.floating-contact{
+    position:fixed;
+    bottom:30px;
+    right:30px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+    z-index:9999;
+}
+/* ===== AUTO TOOLTIP ===== */
+.float-btn.auto-tip::after{
+    opacity:1;
+    transform:translateX(0);
+}
+
+.float-btn.auto-tip{
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}
+    70%{box-shadow:0 0 0 15px rgba(255,255,255,0)}
+    100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
+}
+
+.float-btn{
+    width:56px;
+    height:56px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    font-size:26px;
+    text-decoration:none;
+    box-shadow:0 0 25px rgba(0,0,0,.6);
+    transition:.4s;
+    position:relative;
+}
+
+.float-btn::after{
+    content:attr(data-text);
+    position:absolute;
+    right:70px;
+    white-space:nowrap;
+    background:#000;
+    padding:6px 14px;
+    border-radius:20px;
+    font-size:12px;
+    opacity:0;
+    transform:translateX(10px);
+    transition:.3s;
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.float-btn:hover::after{
+    opacity:1;
+    transform:translateX(0);
+}
+
+.float-btn:hover{
+    transform:scale(1.15);
+}
+
+/* LINE */
+.float-line{
+    background:#ff0077;
+    box-shadow:0 0 25px rgba(255, 75, 133);
+}
+
+/* DISCORD */
+.float-discord{
+    background:#5865F2;
+    box-shadow:0 0 25px rgba(88,101,242,.8);
+}
+
+/* Mobile */
+@media(max-width:768px){
+    .floating-contact{
+        bottom:20px;
+        right:20px;
+    }
+}
+
+:root{
+--primary:#6600ff;
+--secondary:#00ffff;
+--accent:#ff0066;
+--glass:rgba(255,255,255,.05);
+--glass-border:rgba(255,255,255,.1);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+
+body{
+font-family:'Kanit',sans-serif;
+background:#050505;
+color:#fff;
+overflow-x:hidden;
+}
+
+/* ===== BACKGROUND ===== */
+.cyber-bg{
+position:fixed;
+inset:0;
+background:radial-gradient(circle at 20% 30%,#1a0033 0%,#000 70%);
+z-index:-5;
+}
+.orb{
+position:absolute;
+width:500px;height:500px;
+border-radius:50%;
+filter:blur(100px);
+opacity:.3;
+animation:move 20s infinite alternate;
+z-index:-4;
+}
+.orb1{background:var(--primary);top:-10%;left:-10%}
+.orb2{background:var(--secondary);bottom:-10%;right:-10%;animation-delay:-5s}
+@keyframes move{
+from{transform:translate(0,0) scale(1)}
+to{transform:translate(50px,100px) scale(1.1)}
+}
+
+/* ===== NAV ===== */
+nav{
+position:fixed;
+width:100%;
+backdrop-filter:blur(20px);
+background:rgba(0,0,0,.7);
+padding:20px 5%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:1000;
+border-bottom:1px solid var(--glass-border);
+}
+.logo{
+font-family:'Orbitron',sans-serif;
+font-size:26px;
+font-weight:800;
+background:linear-gradient(45deg,var(--secondary),var(--primary));
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+letter-spacing:2px;
+text-decoration:none;
+}
+.nav-links{list-style:none;display:flex;gap:30px}
+.nav-links a{
+color:#fff;
+text-decoration:none;
+font-size:14px;
+letter-spacing:1px;
+transition:.3s;
+}
+.nav-links a:hover{
+color:var(--secondary);
+text-shadow:0 0 10px var(--secondary);
+}
+
+/* ===== HERO ===== */
+.hero{
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:0 20px;
+}
+.hero-title{
+font-family:'Orbitron',sans-serif;
+font-size:clamp(40px,8vw,90px);
+font-weight:900;
+background:linear-gradient(to bottom,#fff,#666);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:20px;
+animation:glow 3s ease-in-out infinite alternate;
+}
+@keyframes glow{
+0%{text-shadow:0 0 20px rgba(102,0,255,.3)}
+100%{text-shadow:0 0 60px rgba(0,255,255,.8)}
+}
+.hero-subtitle{
+max-width:600px;
+color:#aaa;
+margin-bottom:40px;
+line-height:1.6;
+}
+
+/* ===== BUTTON ===== */
+.btn-group{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+.btn{
+padding:16px 35px;
+border-radius:50px;
+font-weight:bold;
+text-decoration:none;
+letter-spacing:1px;
+transition:.4s;
+position:relative;
+overflow:hidden;
+}
+.btn-primary{
+background:#fff;
+color:#000;
+}
+.btn-primary::after{
+content:'';
+position:absolute;
+inset:0;
+background:linear-gradient(120deg,transparent,rgba(0,255,255,.5),transparent);
+transform:translateX(-100%);
+}
+.btn-primary:hover::after{
+transform:translateX(100%);
+transition:.8s;
+}
+.btn-primary:hover{
+box-shadow:0 0 30px var(--secondary);
+transform:translateY(-5px);
+}
+.btn-secondary{
+border:1px solid var(--glass-border);
+color:#fff;
+}
+
+/* ===== REVEAL ===== */
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:1s ease;
+}
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* ===== STATS ===== */
+.stats{padding:100px 5%;max-width:1200px;margin:auto}
+.section-tag{
+color:var(--secondary);
+text-transform:uppercase;
+letter-spacing:5px;
+font-size:12px;
+text-align:center;
+display:block;
+margin-bottom:10px;
+}
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px;
+margin-top:50px;
+}
+.stat-card{
+background:var(--glass);
+border:1px solid var(--glass-border);
+padding:40px;
+border-radius:24px;
+text-align:center;
+transition:.4s;
+}
+.stat-card:hover{
+border-color:var(--primary);
+transform:translateY(-10px);
+}
+.stat-number{
+font-family:'Orbitron',sans-serif;
+font-size:3rem;
+font-weight:800;
+}
+
+/* ===== VIDEO ===== */
+.video-section{padding:100px 5%;text-align:center}
+.video-container{
+max-width:900px;
+margin:50px auto;
+border-radius:30px;
+overflow:hidden;
+border:1px solid var(--glass-border);
+}
+
+/* ===== FOOTER ===== */
+footer{
+padding:80px 20px;
+text-align:center;
+border-top:1px solid var(--glass-border);
+}
+audio{margin-top:30px;filter:invert(1);opacity:.5}
+
+@media(max-width:768px){
+.nav-links{display:none}
+.hero-title{font-size:45px}
+}
 </style>
-<!-- Popup หน้าแรก (ต้อนรับ/ประกาศด่วน) -->
-<div id="firstPopup" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; display: flex; justify-content: center; align-items: center; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 10000; padding: 20px;">
-    <div class="popup-box" style="width: 90%; max-width: 450px; background: #1a1a1a; border-radius: 20px; overflow: hidden; border: 2px solid #6600FF; box-shadow: 0 0 30px rgba(255, 215, 0, 0.3);">
-        
-        <div style="padding: 30px; text-align: center;">
-            <div style="font-size: 50px; margin-bottom: 10px;">📢</div>
-            <h1 style="color: #FF0000; margin: 0; font-size: 28px; text-shadow: 2px 2px 4px #000;">ประกาศจาก 9WING.SHOP</h1>
-            <p style="margin: 5px 0;">🛡️ BYPASSกันแบน Updat 1/28/2026 🛡️</p>
-            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; color: #ccc; margin-bottom: 25px; text-align: left; font-size: 14px;">
-                <p style="margin: 5px 0; color: #FF0000;"></p>
-                <p class="footer-credit">📌บริการเช่าจอปล่อยบอทผ่าน OSLink <a href="https://www.9wing.shop/OSLink.html" target="_blank" rel="noopener nofollow">👉 เช่าเลย</a></p> </p>
-                <p class="footer-credit">🚀Update ฟังก์ชันทั้งหมด <a href="https://www.9wing.shop/menu.html" target="_blank" rel="noopener nofollow">👉 Updat 1/28/2026</a></p> </p>  </p>
-            </div>
 
-              <button onclick="showNextPopup()" style="width: 100%; padding: 15px; background: linear-gradient(45deg, #66FFFF, #66CCFF); color: #000; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; font-size: 18px; box-shadow: 0 4px 15px rgba(255, 165, 0, 0.4);">
-                เข้าสู่เว็บไซต์
-             </button>
-        </div>
+
+
+
+</head>
+
+<body>
+
+
+
+
+<div id="musicPopup" class="music-popup">
+    <div class="popup-box">
+	    <h2>⚠️</h2>
+		<h2>ประกาศจาก 9WING.SHOP</h2>
+    <p class="popup-text">
+      🛡️ <b>BYPASS กันแบน</b><br>
+      Update 1/28/2026
+    </p>
+    <p class="popup-text">
+      📌 เช่าจอปล่อยบอทผ่าน <b>OSLink</b>👉 <a href="https://www.9wing.shop/OSLink.html" target="_blank">เช่าเลย</a></b><br>
+        <p class="popup-text">🚀Update ฟังก์ชันทั้งหมด 👉 <a href="https://www.9wing.shop/menu.html" target="_blank">Updat 1/28/2026</a>
+		</p>
+        <button id="enterSite" class="btn btn-primary">
+            🔥 เข้าสู่เว็บไซต์
+        </button>
     </div>
 </div>
-    <script>
-     
 
-function showNextPopup() {
-    // ปิดหน้าแรก
-    document.getElementById('firstPopup').style.display = 'none';
-    
-    // เปิดหน้าฟังชั่น (หน้าเดิมของคุณ)
-    const entryPopup = document.getElementById('entryPopup');
-    entryPopup.style.display = 'flex';
-    
-    // ตั้งค่าให้หน้าเดิมอยู่เหนือสุด
-    entryPopup.style.position = 'fixed';
-    entryPopup.style.top = '0';
-    entryPopup.style.left = '0';
-    entryPopup.style.width = '100%';
-    entryPopup.style.height = '100%';
-    entryPopup.style.background = 'rgba(0,0,0,0.7)';
-    entryPopup.style.zIndex = '9999';
-}
-
-// ฟังก์ชันปิดหน้าสุดท้ายเพื่อเข้าเว็บ
-function closePopup() {
-    document.getElementById('entryPopup').style.display = 'none';
-}
-</script>
-
-
-<!-- BACKGROUND + CONTENT (ของเดิมคุณทั้งหมดด้านล่างนี้) -->
-
-    <div class="cyber-bg">
-        <div class="cyber-gradient"></div>
-        <div class="matrix-rain" id="matrixRain"></div>
-    </div>
-
-    <div class="particles" id="particlesContainer"></div>
-
-    <div class="data-streams" id="dataStreams"></div>
-
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
-
-    <div class="grid-overlay">
-        <div class="grid-lines"></div>
-        <div class="grid-glow"></div>
-    </div>
-
-    <div class="scanlines"></div>
-    <div class="noise-overlay"></div>
-
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <a href="#top" class="logo">9WING.SHOP</a>
-            <ul class="nav-links">
-                <li><a href="#pricing">PRO YG</a></li>
-                <li><a href="#PARTNER">PARTNER</a></li>
-                <li><a href="#stats">Stats</a></li>
-                <li><a href="#contact">REVIEW PRO</a></li>
-            </ul>
-            <div class="nav-bottom">
-                <a href="https://www.mediafire.com/file/bf8lmrpfdz1sik5/YG-9WING_sign.apk/file" class="cyber-button">DOWNLOAD APK YG</a>
-            </div>
-            <button class="mobile-menu-button" id="mobileMenuBtn">
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
-            </button>
-        </div>
-    </nav>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-header">
-            <a href="#top" class="mobile-menu-logo">9WING.SHOP</a>
-            <button class="mobile-menu-close" id="mobileMenuClose">✕</button>
-        </div>
-        <div class="mobile-menu-cta">
-            <a href="https://script.google.com/macros/s/AKfycby1fmb6zQ1YyoVaek36p51vl9drxyIdbzlaHVEDxNsHZdEBh7eL5UPv6DwBRaz6zrSh/exec" class="cyber-button">USER LOGIN</a>
-        </div>
-        <nav class="mobile-menu-nav">
-            <ul>
-                <li><a href="#PRO YG">PRO YG</a></li>
-                <li><a href="#PARTNER">PARTNER</a></li>
-                <li><a href="#stats">PRO YG</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-
-      <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-container">
-            <h1 class="hero-title">
-                <span class="hero-nexus">9WING.</span><span class="hero-flow">SHOP</span>
-            </h1>
-            <p class="hero-subtitle">จำหน่ายโปรแกมช่วยเล่นโยกังจุติยุทธภพเลือดใหม่    
-			บริการเช่าจอปล่อยบอท....         24 ชม. ผ่าน OSLink และอื่นๆ อีกมากมาย..</p>
-            <div class="hero-buttons">
-                <a href="#pricing" class="btn-primary">PRO โยกังจุติยุทธภพเลือดใหม่</a>
-                <a href="https://www.9wing.shop/OSLink.html" class="btn-secondary">บริการเช่าจอ OSLink</a>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Stats Section -->
-    <section class="stats fade-up" id="stats">
-        <div class="stats-container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <div class="plan-price">114</div>
-                    <span class="stat-label">ALL USERS</span>
-                </div>
-                <div class="stat-item">
-                    <div class="plan-price">1.13.13</div>
-                    <span class="stat-label">VERSION APK YG</span>
-                </div>
-                <div class="stat-item">
-                    <div class="plan-price">1</div>
-                    <span class="stat-label">GAME BAN USERS</span>
-                </div>
-                <div class="stat-item">
-                    <div class="plan-price">4</div>
-                    <span class="stat-label">WING BAN USERS</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
- <!-- Pricing Section -->
-    <section class="pricing fade-up" id="pricing">
-        <div class="pricing-container">
-            <div class="section-header">
-                <h2 class="section-title">PRO YG จุติยุทธภพเลือดใหม่ Emulator PC</h2>
-                <p class="section-subtitle">สอบถามรายละเอียดเพิ่มเติม หรือต้องการฟังชั่นอิ่นเพิ่มเติม ติดต่อใด้ใน FB </p>
-            </div>
-
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <div class="plan-name">ปั้มยุทธ LV1</div>
-                    <div class="plan-price">500</div>
-                    <div class="plan-period">Unlimited 1 Device</div>
-                    <ul class="plan-features">
-                        <li>รองรับ PC & มือถือ</li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                    <a href="https://www.m.me/say.wing.656700" class="btn-secondary">สั่งซื้อ</a>
-                </div>
-
-                <div class="pricing-card featured">
-                    <div class="plan-name">📌AUTO UPGRADE ตี +</div>
-                    <div class="plan-price">1,800</div>
-                    <div class="plan-period">Unlimited 1 Device</div>
-                    <ul class="plan-features">
-                        <li>ตี + AUTO</li>
-                        <li>เปิดกล่อง AUTO</li>
-                        <li>Bypass Anti Cheat</li>
-                        <li>Emulator Mumu player 12 PRO</li>
-                    </ul>
-                    <a href="https://www.m.me/say.wing.656700" class="btn-primary">สั่งซื้อ</a>
-                </div>
-
-                <div class="pricing-card">
-                    <div class="plan-name">BYPASS CAPTCHA</div>
-                    <div class="plan-price">ปิดปรับปรุง</div>
-                    <div class="plan-period">30/DAY 1 Device</div>
-                    <ul class="plan-features">
-                        <li>เข้าเกมไม่ติด เลื่อนรูป </li>
-                        <li>ปลดล๊อค จำนวนล๊อคอิน</li>
-                        <li>Emulator Multiplayer</li>
-                        <li>Emulator Mumu player 12 PRO</li>
-                        <li></li>
-                        <li></li>
-                    </ul>
-                    <a href="https://www.m.me/say.wing.656700" class="btn-secondary">สั่งซื้อ</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-
-
-    <!-- Features Section -->
-<section class="features fade-up" id="features">
-    <div class="features-container">
-        <div class="section-header">
-            <h2 class="section-title">PRO YG จุติยุทธภพเลือดใหม่ mobile cloud phone</h2>
-            <p class="section-subtitle">สอบถามรายละเอียดเพิ่มเติม หรือต้องการฟังชั่นอิ่นเพิ่มเติม ติดต่อใด้ใน FB</p>
-        </div>
-
-        
-
-<div class="features-grid">
-
-            <!-- Card 4 -->
-            <div class="feature-card">
-                <div class="feature-icon">📢</div>
-                <div class="card-content">
-                    <h3>PRO ตีเร็ว (เฉพาะฟามเท่านั้น)</h3>
-					<p class="discount-info">ถาวร/DAY 500 บาท</p>
-                    <ul class="plan-features">
-                        <li>สกิวไม่คูลดาวน์</li>
-                        <li>รองรับ Cloud Phone & มือถือ</li>
-                        <li>Auto กันแบน Anti Cheat</li>
-                    </ul>
-                    <p class="discount-info"></p>
-                    <a href="https://www.m.me/say.wing.656700" class="cyber-button">สั่งซื้อผ่าน FB</a>
-                </div>
-            </div>
-
-            <!-- Card 5 -->
-            <div class="feature-card">
-                <div class="feature-icon">📌</div>
-                <div class="card-content">
-                    <h3>Coming Soon !</h3>
-                    <ul class="plan-features">
-                        <li>-</li>
-                        <li>-</li>
-                        <li>-</li>
-                    </ul>
-                    <p class="discount-info">Unlimited 1 Device</p>
-                    <a href="https://9WING.SHOP" class="cyber-button">สั่งซื้อผ่าน FB</a>
-                </div>
-            </div>
-
-            <!-- Card 6 -->
-            <div class="feature-card">
-                <div class="feature-icon">📌</div>
-                <div class="card-content">                   
-					<h3>Coming Soon !</h3>
-                    <ul class="plan-features">
-                        <li>-</li>
-                        <li>-</li>
-                        <li>-</li>
-                    </ul>
-                    <p class="discount-info">Unlimited 1 Device</p>
-                    <a href="https://9WING.SHOP" class="cyber-button">สั่งซื้อผ่าน FB</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>	
-
-
-
-    <!-- Contact Section -->
-    <section class="contact fade-up" id="contact">
-        <div class="contact-container">
-            <div class="section-header">
-                <h2 class="section-title">REVIEW PRO YG BY WING</h2>
-                <p class="section-subtitle">โปรดใช้วิจารณญาณในการรับชม</p>
-            </div>
-            <div class="contact-form-wrapper">
-                <div class="contact-form">
-
-                 <iframe width="100%" height="390" src="https://www.youtube.com/embed/dCq3ol5zvFk?list=PLOcSH_6jJxRICye4Hzw2BigQYIc7oV3RA" title="รีป้ายดีออโต้ BY 9WING" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    <button type="submit" class="btn-primary btn-submit">โปรดใช้วิจารณญาณในการรับชม</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <span class="footer-separator">•</span>
-                <a href="#">Terms of Service</a>
-                <span class="footer-separator">•</span>
-                <a href="#">Documentation</a>
-                <span class="footer-separator">•</span>
-                <a href="#">Contact Support</a>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 NexusFlow Systems. All realities reserved.</p>
-                <p class="footer-credit">Brought to you by <a href="https://WWW.9WING.SHOP/DOWNLOAD.html" target="_blank" rel="noopener nofollow">9WING.SHOP</a></p>
-				<a href="http://semenaxcaps.com" style="font-size:8px;">enhancer pills</a><br>
-<a href="http://semenaxcaps.com"><img src="http://semenaxcaps.com/count.php?c_style=125&id=1770523720" border="0" alt="semenaxcaps.com"></a><br>
-
-<audio controls loop preload="auto">
-  <source src="https://www.9wing.shop/YG.mp3" type="audio/mpeg">
+<audio id="bgMusic" loop>
+    <source src="https://www.9wing.shop/YG.mp3" type="audio/mpeg">
 </audio>
 
-            </div>
-        </div>
-    </footer>
+<div class="cyber-bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
 
-    <script src="templatemo-nexus-scripts.js"></script>
+<nav>
+<a href="#" class="logo">9WING.SHOP</a>
+<ul class="nav-links">
+<li><a href="#stats">System</a></li>
+<li><a href="#review">Review</a></li>
+<li><a href="https://www.9wing.shop/OSLink.html">OSLink</a></li>
+</ul>
+</nav>
+
+<section class="hero">
+<span class="section-tag">PRO YULGANG & CLOUD OSLINK</span>
+<h1 class="hero-title">9WING.SHOP</h1>
+<p class="hero-subtitle">
+ ยกระดับการเล่นโยกังของคุณด้วยโปรแกรมช่วยเล่นที่เสถียรที่สุด 
+พร้อมบริการเช่าจอ Cloud ปล่อยบอท 24 ชม. ผ่าน OSLink ความเร็วสูง
+</p>
+<div class="btn-group">
+<a href="https://www.9wing.shop/menu.html" class="btn btn-primary">
+    PRO โยกังจุติยุทธภพเลือดใหม่
+</a>
+<a href="https://www.9wing.shop/OSLink.html" class="btn btn-secondary">เช่าจอ OSLink</a>
+</div>
+</section>
+
+<section class="stats reveal" id="stats">
+<span class="section-tag">System Status</span>
+<div class="stats-grid">
+<div class="stat-card reveal"><span class="stat-number" data-target="115">0</span><div>ALL USERS PC NOTEBOOK</div></div>
+<div class="stat-card reveal"><span class="stat-number" style="color:#ff0066" data-target="5">0</span><div>WING BAN USERS</div></div>
+<div class="stat-card reveal"><span class="stat-number" data-target="41">0</span><div>ALL USERS CLOUD PHONE</div></div>
+</div>
+</section>
+
+<section class="video-section reveal" id="review">
+<span class="section-tag">Video</span>
+<div class="video-container">
+<iframe width="100%" height="500" src="https://www.youtube.com/watch?v=dCq3ol5zvFk&list=PLOcSH_6jJxRICye4Hzw2BigQYIc7oV3RA" allowfullscreen></iframe>
+</div>
+</section>
+
+<footer>
+<p style="color:#555">© 2026 9WING.SHOP All realities reserved.</p>
+
+</footer>
+
+<script>
+// Counter
+const counters=document.querySelectorAll('.stat-number');
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+const el=entry.target;
+const target=+el.dataset.target;
+let count=0;
+const step=target/120;
+const run=()=>{
+count+=step;
+if(count<target){
+el.textContent=Math.ceil(count);
+requestAnimationFrame(run);
+}else el.textContent=target;
+};
+run();
+observer.unobserve(el);
+}
+});
+},{threshold:.5});
+counters.forEach(c=>observer.observe(c));
+
+// Reveal
+const reveals=document.querySelectorAll('.reveal');
+const revObs=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting)e.target.classList.add('active');
+});
+},{threshold:.2});
+reveals.forEach(r=>revObs.observe(r));
+</script>
+<!-- ===== FLOATING LINE / DISCORD ===== -->
+<div class="floating-contact">
+    <a href="https://www.m.me/say.wing.656700" 
+       class="float-btn float-line" 
+       target="_blank"
+       data-text="สอบถาม Messenger">
+        💬
+    </a>
+    <a href="https://discord.gg/PDFq23qA" 
+       class="float-btn float-discord" 
+       target="_blank"
+       data-text="เข้า Discord">
+        🎧
+    </a>
+    <a href="https://www.9wing.shop/DOWNLOAD.html" 
+       class="float-btn float-discord" 
+       target="_blank"
+       data-text="APK Download">
+        📥
+    </a>
+</div>
+<script>
+document.getElementById("playMusic").addEventListener("click", function() {
+    const audio = document.getElementById("bgMusic");
+    audio.play().catch(err=>{
+        console.log("เล่นไม่ได้:", err);
+    });
+});
+</script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+    if(!localStorage.getItem("contactTipShown")){
+        setTimeout(()=>{   // 👈 หน่วงเวลา
+            const btns=document.querySelectorAll(".float-btn");
+            btns.forEach(btn=>btn.classList.add("auto-tip"));
+
+            setTimeout(()=>{
+                btns.forEach(btn=>btn.classList.remove("auto-tip"));
+                localStorage.setItem("contactTipShown","yes");
+            },3000);
+        },2000); // หน่วง 2 วิ
+    }
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+    const popup = document.getElementById("musicPopup");
+    const btn = document.getElementById("enterSite");
+    const music = document.getElementById("bgMusic");
+
+    btn.addEventListener("click",()=>{
+        popup.style.display="none";
+        music.volume = 0.6;
+        music.play().catch(err=>{
+            console.log("Audio blocked:", err);
+        });
+    });
+});
+</script>
 </body>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</html>
