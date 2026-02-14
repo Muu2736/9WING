@@ -1,78 +1,171 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <base target="_top">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>9WING บริการเช่าจอปล่อยบอทผ่านระบบ OSLink</title>
-  <link href="https://fonts.googleapis.com" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>9WING OSLINK | เช่าจอ Cloud ปล่อยบอทเกม 24 ชม. ผ่าน OSLink</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary-cyan: #00f2ff;
-      --primary-purple: #a855f7;
-      --accent-green: #22c55e;
-      --dark-bg: #030712;
-      --glass: rgba(17, 24, 39, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.1);
-    }
+  :root{
+  --glass-border: rgba(255,255,255,0.15);
+  --accent-green: #00ff88;
+  --primary-cyan: #00ffd5;
+}
+  
+*{box-sizing:border-box}
+body{margin:0;font-family:'Kanit',sans-serif;background:radial-gradient(circle at top,#1a1a2e,#0f0f1a);color:#fff}
+header{padding:32px 16px;text-align:center;background:linear-gradient(135deg,#7f5cff,#00ffd5);color:#000}
+header h1{margin:0;font-size:clamp(1.8rem,6vw,2.5rem);font-weight:800}
+header p{margin-top:8px;font-size:clamp(.95rem,4vw,1.1rem)}
+section{max-width:1000px;margin:auto;padding:24px 16px}
+.card{background:#1e1e2f;border-radius:16px;padding:24px 18px;margin-bottom:20px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.card h2{margin-top:0;font-weight:700;color:#00ffd5;font-size:clamp(1.2rem,5vw,1.5rem)}
+p,li{font-size:clamp(.95rem,4vw,1.05rem);line-height:1.7}
+ul{padding-left:18px;margin:12px 0 0}
+.price-table{display:grid;grid-template-columns:1fr;gap:16px}
+.price{background:linear-gradient(135deg,#2b2b44,#1a1a2e);border-radius:16px;padding:22px 16px;text-align:center;border:1px solid rgba(255,255,255,.1)}
+.price h3{margin:0;font-size:1.3rem}
+.price span{display:block;margin-top:8px;font-size:1.8rem;font-weight:800;color:#ffd700}
+.highlight{background:linear-gradient(135deg,#ff512f,#dd2476);color:#fff}
+.btn{display:block;width:100%;margin-top:16px;padding:16px 0;background:linear-gradient(135deg,#00ffd5,#7f5cff);color:#000;text-decoration:none;border-radius:999px;font-weight:700;font-size:1.05rem}
+.btn:active{transform:scale(.97)}
+footer{text-align:center;padding:16px;font-size:.8rem;color:#aaa;border-top:1px solid rgba(255,255,255,.1)}
+.status{display:inline-block;padding:6px 14px;border-radius:999px;background:#00c853;color:#000;font-weight:700;font-size:.85rem}
+@media(min-width:768px){
+  section{padding:40px 20px}
+  .price-table{grid-template-columns:repeat(3,1fr)}
+  .btn{width:auto;padding:14px 28px;display:inline-block}
+}
+.sell-hard-bar{
+  position:fixed;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  width:calc(100% - 20px);
+  max-width:520px;
+  display:flex;
+  gap:10px;
+  z-index:9999;
+}
 
-    * { box-sizing: border-box; transition: all 0.3s ease; }
+.sh-btn{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:14px 6px;
+  border-radius:16px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:800;
+  font-size:0.85rem;
+  line-height:1.2;
+  box-shadow:0 10px 25px rgba(0,0,0,.45);
+  transition:transform .15s;
+}
 
-    body {
-      font-family: 'Prompt', sans-serif;
-      background: radial-gradient(circle at top right, #1e1b4b, #030712);
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
-      color: #f3f4f6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .container {
-      width: 100%;
-      max-width: 450px;
-      padding: 40px 25px;
-      background: var(--glass);
-      backdrop-filter: blur(16px);
-      border-radius: 32px;
-      border: 1px solid var(--glass-border);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+.sh-btn span{
+  margin-top:4px;
+}
 
-    .container::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--primary-cyan), transparent);
-    }
+.sh-btn small{
+  font-weight:600;
+  font-size:0.7rem;
+  opacity:.9;
+}
 
-    .logo-wrapper {
-      position: relative;
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 25px;
-    }
+.sh-btn:active{
+  transform:scale(.94);
+}
 
-    .logo {
-      width: 100%;
-      height: 100%;
-      border-radius: 30px;
-      border: 2px solid var(--primary-cyan);
-      box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
-      object-fit: cover;
-      animation: float 4s ease-in-out infinite;
-    }
+/* สีปุ่ม */
+.sh-btn.call{
+  background:linear-gradient(135deg,#00c853,#009624);
+}
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
+.sh-btn.line{
+  flex:1.2;
+  background:linear-gradient(135deg,#06c755,#00ff88);
+  color:#003b1f;
+}
+
+.sh-btn.msg{
+  background:linear-gradient(135deg,#0084ff,#00c6ff);
+}
+
+/* เอฟเฟกต์ขายโหด */
+.pulse{
+  animation:pulseGlow 1.4s infinite;
+}
+
+@keyframes pulseGlow{
+  0%{box-shadow:0 0 0 0 rgba(0,255,150,.7)}
+  70%{box-shadow:0 0 0 18px rgba(0,255,150,0)}
+  100%{box-shadow:0 0 0 0 rgba(0,255,150,0)}
+}
+
+/* กันบังเนื้อหา */
+body{
+  padding-bottom:110px;
+}
+
+/* ซ่อนบนจอใหญ่ */
+@media(min-width:768px){
+  .sell-hard-bar{display:none}
+}
+.hero{
+  text-align:center;
+  padding:48px 16px 40px;
+  background:radial-gradient(circle at top,#2a2a4f,#0f0f1a);
+}
+
+.hero h1{
+  font-family:'Orbitron','Kanit',sans-serif;
+  font-size:clamp(2rem,8vw,3rem);
+  font-weight:900;
+  margin:0;
+  color:#fff;
+}
+
+.hero h1 span{
+  color:#00ffd5;
+  text-shadow:0 0 20px rgba(0,255,213,.6);
+}
+
+.tagline{
+  margin-top:14px;
+  font-size:clamp(1rem,4.5vw,1.2rem);
+  line-height:1.6;
+  color:#ddd;
+}
+
+.tagline small{
+  display:block;
+  margin-top:6px;
+  color:#aaa;
+  font-size:.9rem;
+}
+
+.hero-cta{
+  display:inline-block;
+  margin-top:26px;
+  padding:16px 36px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#06c755,#00ff88);
+  color:#003b1f;
+  font-weight:800;
+  font-size:1.05rem;
+  text-decoration:none;
+  box-shadow:0 10px 30px rgba(0,255,150,.4);
+  animation:pulseHero 1.4s infinite;
+}
+
+@keyframes pulseHero{
+  0%{box-shadow:0 0 0 0 rgba(0,255,150,.7)}
+  70%{box-shadow:0 0 0 22px rgba(0,255,150,0)}
+  100%{box-shadow:0 0 0 0 rgba(0,255,150,0)}
+}
 
     .status-container {
       display: flex;
@@ -91,155 +184,113 @@
       border: 1px solid var(--glass-border);
     }
 
-    .status-online { color: var(--accent-green); font-weight: bold; }
-    .status-count { color: var(--primary-cyan); font-weight: bold; }
+.status-online { 
+  color: var(--accent-green); 
+  font-weight: bold; 
+}
 
-    .main-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.2rem;
-      margin: 0 0 5px 0;
-      background: linear-gradient(to right, #fff, #9ca3af);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.status-count { 
+  color: var(--primary-cyan); 
+  font-weight: bold; 
+}
 
-    .update-tag {
-      font-size: 0.75rem;
-      color: var(--accent-green);
-      background: rgba(34, 197, 94, 0.1);
-      padding: 2px 8px;
-      border-radius: 6px;
-      display: inline-block;
-      margin-bottom: 15px;
-    }
-
-    .notice-box {
-      background: rgba(239, 68, 68, 0.1);
-      border: 1px solid rgba(239, 68, 68, 0.2);
-      color: #fca5a5;
-      padding: 12px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      margin-bottom: 20px;
-    }
-
-    .section-label {
-      text-align: left;
-      font-size: 0.9rem;
-      color: var(--primary-purple);
-      margin-bottom: 12px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      font-weight: 600;
-    }
-
-    .price-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-bottom: 25px;
-    }
-
-    .price-item {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 15px;
-      border-radius: 16px;
-      border: 1px solid var(--glass-border);
-      text-align: left;
-    }
-
-    .price-item:hover {
-      background: rgba(255, 255, 255, 0.08);
-      transform: translateY(-3px);
-      border-color: var(--primary-cyan);
-    }
-
-    .days { font-size: 0.8rem; color: #9ca3af; margin-bottom: 4px; }
-    .cost { font-size: 1.2rem; color: var(--primary-cyan); font-weight: 700; }
-
-    /* ปุ่มใหม่ที่เพิ่มมา */
-    .cta-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      width: 100%;
-      padding: 16px;
-      background: linear-gradient(135deg, var(--primary-cyan), var(--primary-purple));
-      color: white;
-      text-decoration: none;
-      border-radius: 16px;
-      font-weight: bold;
-      font-size: 1.1rem;
-      box-shadow: 0 10px 20px -5px rgba(0, 242, 255, 0.4);
-      border: none;
-      cursor: pointer;
-    }
-
-    .cta-button:hover {
-      transform: scale(1.02);
-      filter: brightness(1.1);
-      box-shadow: 0 15px 30px -10px rgba(168, 85, 247, 0.6);
-    }
-
-    .icon-msg {
-      width: 22px;
-      height: 22px;
-      fill: white;
-    }
-  </style>
+</style>
 </head>
 <body>
 
-  <div class="container">
-    <div class="logo-wrapper">
-      <img src="https://img5.pic.in.th/file/secure-sv1/1icon.th.jpeg" alt="9WING Logo" class="logo">
-    </div>
-    
+<section class="hero">
+  <h1>9WING <span>OSLINK</span></h1>
+  <p class="tagline">
+    บริการเช่าจอปล่อย BOT ตลอด 24 ชม.<br>
+    <small>ลื่นจริง • ไม่ดับ • ควบคุมได้ทุกที่</small>
+  </p>
+
     <div class="status-container">
-      <div class="status-badge">Status: <span class="status-online">● Online</span></div>
-      <div class="status-badge">จำนวนจอว่าง: <span class="status-count">2 จอ</span></div>
+      <div class="status-badge">Status: <span class="status-online">Online</span></div>
+      <div class="status-badge">จำนวนจอว่าง: <span class="status-count">3</span></div>
     </div>
+</section>
 
-    <h1 class="main-title">9WING OSLINK</h1>
-    <div class="update-tag">บริการเช่าจอปล่อย BOT ตลอด 24 ชม.</div>
-
-    <div class="notice-box">
-       หากลูกค้าต้องการใช้งานโปรตีเร็ว+ เพิ่ม 300.- 
-    </div>
-
-    <div class="section-label">ราคาเช่าต่อวัน</div>
-    <div class="price-grid">
-      <div class="price-item">
-        <div class="days">3 DAYS</div>
-        <div class="cost">50 ฿</div>
-      </div>
-      <div class="price-item">
-        <div class="days">7 DAYS</div>
-        <div class="cost">100 ฿</div>
-      </div>
-      <div class="price-item">
-        <div class="days">15 DAYS</div>
-        <div class="cost">200 ฿</div>
-      </div>
-      <div class="price-item">
-        <div class="days">30 DAYS</div>
-        <div class="cost">300 ฿</div>
-      </div>
-    </div>
-
-    <!-- ปุ่มติดต่อเช่าจอ -->
-    <a href="https://www.m.me/say.wing.656700" class="cta-button">
-      <svg class="icon-msg" viewBox="0 0 24 24">
-        <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
-      </svg>
-      RENT NOW / ติดต่อเช่าจอ
-    </a>
-
+<section>
+  <div class="card">
+    <h2>🔥 รายละเอียดบริการ</h2>
+    <p>
+      9WING OSLINK ให้บริการเช่าจอสำหรับบอทเกมออนไลน์ตลอด 24 ชั่วโมง
+      เหมาะสำหรับสายฟาร์ม AFK ไม่ต้องเปิดมือถือหรือคอมพิวเตอร์เอง
+      ควบคุมได้ผ่าน Android และ iOS ด้วยระบบ <b>OSlink</b>
+    </p>
+    <ul>
+      <li>ลื่นกว่า UG และ Cloud Phone ทั่วไป</li>
+      <li>ซิงค์หลายจอ ทำงานพร้อมกันได้อย่างมีประสิทธิภาพ</li>
+      <li>มีระบบออโต้คลิก ใช้งานฟรี</li>
+      <li>จอมีปัญหา ชดเชยเวลาให้ 100%</li>
+    </ul>
   </div>
 
+  <div class="card">
+    <h2>🏹 โปรตีเร็ว สกิวไม่ดีเลย +EXP 1.5</h2>
+  <p>
+  ทดลองใช้งานได้ฟรี 1 ชม.<br>
+  <b>อัปเกรด โปรตีเร็ว+ เพิ่ม 300.- (ฟาร์ม EXP ขึ้นใวเห็นผลทันที)</b>
+</p>
+  </div>
+
+  <div class="card">
+    <h2>💰 ราคาค่าบริการ</h2>
+    <div class="price-table">
+      <div class="price">
+        <h3>7 วัน</h3>
+        <span>100.-</span>
+      </div>
+      <div class="price">
+        <h3>15 วัน</h3>
+        <span>200.-</span>
+      </div>
+      <div class="price highlight">
+        <h3>30 วัน</h3>
+        <span>300.- 🔥🔥</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="text-align:center;">
+    <h2>📩 ติดต่อสอบถาม</h2>
+ <p style="margin-top:10px; font-size:0.9rem; color: #ff4d4d; font-weight: bold;">
+  ปิดปรับปรุงทุกวันอาทิตย์ 12.00 - 13.00 น.
+</p>
+    <a href="#" class="btn">แชทสอบถาม / เช่าจอ</a>
+
+  </div>
+</section>
+
+<footer>
+ © 2026 9WING.SHOP All realities reserved.
+</footer>
+<div class="sell-hard-bar">
+  <a href="https://m.me/yourpage" class="sh-btn msg">
+    📩<span>แชทสอบถาม / เช่าจอ</span>
+  </a>
+</div>
+<script>
+const sheetCsvUrl = 
+  'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpIg3M8yxcOqUO6VCBr6gEVRxl2dLLpUzkzt3ZIZl-9retsDlBpNavTfZNhLoodlvaDhkXJzYRHTuo/pub?gid=0&single=true&output=csv';
+
+async function updateStatus() {
+  try {
+    const res = await fetch(sheetCsvUrl);
+    const text = await res.text();
+
+    const parts = text.trim().split(',');
+    document.querySelector('.status-online').textContent = parts[0] || 'Offline';
+    document.querySelector('.status-count').textContent = parts[1] || '0';
+
+  } catch (err) {
+    console.error("Fetch error:", err);
+  }
+}
+updateStatus();
+setInterval(updateStatus, 60000);
+
+</script>
 </body>
-
 </html>
-
-
