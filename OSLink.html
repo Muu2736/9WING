@@ -281,7 +281,7 @@ async function updateStatus() {
     const text = await res.text();
 
     const parts = text.trim().split(',');
-    document.querySelector('.status-online').textContent = parts[0] || 'Offline';
+    document.querySelector('.status-online').textContent = parts[0] || 'ONLINE';
     document.querySelector('.status-count').textContent = parts[1] || '0';
 
   } catch (err) {
@@ -294,3 +294,4 @@ setInterval(updateStatus, 60000);
 </script>
 </body>
 </html>
+
