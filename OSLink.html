@@ -272,26 +272,46 @@ body{
   </a>
 </div>
 <script>
-const sheetCsvUrl = 
+const sheetCsvUrl =
   'https://docs.google.com/spreadsheets/d/e/2PACX-1vSpIg3M8yxcOqUO6VCBr6gEVRxl2dLLpUzkzt3ZIZl-9retsDlBpNavTfZNhLoodlvaDhkXJzYRHTuo/pub?gid=0&single=true&output=csv';
 
 async function updateStatus() {
   try {
-    const res = await fetch(sheetCsvUrl);
+    const res = await fetch(sheetCsvUrl + '&t=' + Date.now()); 
+    // ใส่ timestamp กัน cache
     const text = await res.text();
 
-    const parts = text.trim().split(',');
-    document.querySelector('.status-online').textContent = parts[0] || 'ONLINE';
-    document.querySelector('.status-count').textContent = parts[1] || '0';
+    const parts = text
+      .trim()
+      .split(',')
+      .map(v => v.replace(/"/g, '').trim());
+
+    const status = (parts[0] || 'OFFLINE').toUpperCase();
+    const count = parts[1] || '0';
+
+    const statusEl = document.querySelector('.status-online');
+    const countEl = document.querySelector('.status-count');
+
+    statusEl.textContent = status;
+    countEl.textContent = count;
+
+    // เปลี่ยนสีตามสถานะ
+    if (status === 'OFFLINE') {
+      statusEl.style.color = '#ff4d4d';
+    } else {
+      statusEl.style.color = 'var(--accent-green)';
+    }
 
   } catch (err) {
     console.error("Fetch error:", err);
   }
 }
+
 updateStatus();
 setInterval(updateStatus, 60000);
-
+</script>
 </script>
 </body>
 </html>
+
 
