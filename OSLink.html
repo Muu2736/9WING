@@ -286,8 +286,8 @@ async function updateStatus() {
       .split(',')
       .map(v => v.replace(/"/g, '').trim());
 
-    const status = (parts[0] || 'OFFLINE').toUpperCase();
-    const count = parts[1] || '0';
+    const status = parts[0] || '0';
+    const count = parts[0] || '0';
 
     const statusEl = document.querySelector('.status-online');
     const countEl = document.querySelector('.status-count');
@@ -313,5 +313,6 @@ setInterval(updateStatus, 60000);
 </script>
 </body>
 </html>
+
 
 
