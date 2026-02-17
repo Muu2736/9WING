@@ -1,562 +1,567 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>9WING.SHOP -  จำหน่ายโปรแกมช่วยเล่นโยกังจุติยุทธภพเลือดใหม่ บริการเช่าจอปล่อยบอท 24 ชม. ผ่าน OSLink และอื่นๆ อีกมากมาย </title>
-<link rel="icon" type="image/x-icon" href="/1.ico">
-<!-- ✅ Google Fonts (แก้แล้ว) -->
-<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+  <title>9WING.SHOP - จำหน่ายโปรแกมช่วยเล่นโยกังจุติยุทธภพเลือดใหม่ บริการเช่าจอปล่อยบอท 24 ชม. ผ่าน OSLink และอื่นๆ อีกมากมาย</title>
+  <link rel="icon" type="image/x-icon" href="/1.ico">
 
-<!-- SEO -->
-<meta name="description" content="9WING.SHOP ระบบโปรโยกังจุติยุทธภพเลือดใหม่ พร้อม Cloud OSLink ปล่อยบอท 24 ชม.">
-<meta name="keywords" content="โยกัง ,โปรโยกัง, โยกังจุติยุทธภพเลือดใหม่, Yulgang, โปรโยกัง, บอทโยกัง, OSLink, Cloud Bot">
+  <!-- ✅ Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
 
-<style>
+  <!-- SEO -->
+  <meta name="description" content="9WING.SHOP ระบบโปรโยกังจุติยุทธภพเลือดใหม่ พร้อม Cloud OSLink ปล่อยบอท 24 ชม.">
+  <meta name="keywords" content="โยกัง,โปรโยกัง,โยกังจุติยุทธภพเลือดใหม่,Yulgang,บอทโยกัง,OSLink,Cloud Bot">
 
-/* ===== MUSIC POPUP ===== */
-.music-popup{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.85);
-    backdrop-filter:blur(10px);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:10000;
-}
-
-.popup-box{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.15);
-    border-radius:24px;
-    padding:40px;
-    text-align:center;
-    box-shadow:0 0 50px rgba(0,255,255,.4);
-    animation:popupIn .8s ease;
-}
-
-.popup-box h2{
-    font-family:'Orbitron',sans-serif;
-    margin-bottom:15px;
-}
-
-.popup-box p{
-    color:#aaa;
-    margin-bottom:25px;
-    line-height:1.6;
-}
-
-@keyframes popupIn{
-    from{transform:scale(.8);opacity:0}
-    to{transform:scale(1);opacity:1}
-}
-
-/* ===== FLOATING CONTACT ===== */
-.floating-contact{
-    position:fixed;
-    bottom:30px;
-    right:30px;
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-    z-index:9999;
-}
-/* ===== AUTO TOOLTIP ===== */
-.float-btn.auto-tip::after{
-    opacity:1;
-    transform:translateX(0);
-}
-
-.float-btn.auto-tip{
-    animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}
-    70%{box-shadow:0 0 0 15px rgba(255,255,255,0)}
-    100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
-}
-
-.float-btn{
-    width:56px;
-    height:56px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    color:#fff;
-    font-size:26px;
-    text-decoration:none;
-    box-shadow:0 0 25px rgba(0,0,0,.6);
-    transition:.4s;
-    position:relative;
-}
-
-.float-btn::after{
-    content:attr(data-text);
-    position:absolute;
-    right:70px;
-    white-space:nowrap;
-    background:#000;
-    padding:6px 14px;
-    border-radius:20px;
-    font-size:12px;
-    opacity:0;
-    transform:translateX(10px);
-    transition:.3s;
-    border:1px solid rgba(255,255,255,.1);
-}
-
-.float-btn:hover::after{
-    opacity:1;
-    transform:translateX(0);
-}
-
-.float-btn:hover{
-    transform:scale(1.15);
-}
-
-/* LINE */
-.float-line{
-    background:#ff0077;
-    box-shadow:0 0 25px rgba(255, 75, 133);
-}
-
-/* DISCORD */
-.float-discord{
-    background:#5865F2;
-    box-shadow:0 0 25px rgba(88,101,242,.8);
-}
-
-/* Mobile */
-@media(max-width:768px){
-    .floating-contact{
-        bottom:20px;
-        right:20px;
+  <style>
+    /* ===== MUSIC POPUP ===== */
+    .music-popup{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.85);
+      backdrop-filter:blur(10px);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      z-index:10000;
     }
-}
+    .popup-box{
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.15);
+      border-radius:24px;
+      padding:40px;
+      text-align:center;
+      box-shadow:0 0 50px rgba(0,255,255,.4);
+      animation:popupIn .8s ease;
+      max-width: 520px;
+      width: calc(100% - 40px);
+    }
+    .popup-box h2{
+      font-family:'Orbitron',sans-serif;
+      margin-bottom:15px;
+    }
+    .popup-text{
+      color:#aaa;
+      margin-bottom:15px;
+      line-height:1.6;
+    }
+    @keyframes popupIn{
+      from{transform:scale(.8);opacity:0}
+      to{transform:scale(1);opacity:1}
+    }
 
-:root{
---primary:#6600ff;
---secondary:#00ffff;
---accent:#ff0066;
---glass:rgba(255,255,255,.05);
---glass-border:rgba(255,255,255,.1);
-}
+    /* ===== FLOATING CONTACT ===== */
+    .floating-contact{
+      position:fixed;
+      bottom:30px;
+      right:30px;
+      display:flex;
+      flex-direction:column;
+      gap:15px;
+      z-index:9999;
+    }
 
-*{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+    /* ===== AUTO TOOLTIP ===== */
+    .float-btn.auto-tip::after{
+      opacity:1;
+      transform:translateX(0);
+    }
+    .float-btn.auto-tip{
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(255,255,255,.6)}
+      70%{box-shadow:0 0 0 15px rgba(255,255,255,0)}
+      100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
+    }
 
-body{
-font-family:'Kanit',sans-serif;
-background:#050505;
-color:#fff;
-overflow-x:hidden;
-}
+    .float-btn{
+      width:56px;
+      height:56px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:26px;
+      text-decoration:none;
+      box-shadow:0 0 25px rgba(0,0,0,.6);
+      transition:.4s;
+      position:relative;
+    }
+    .float-btn::after{
+      content:attr(data-text);
+      position:absolute;
+      right:70px;
+      white-space:nowrap;
+      background:#000;
+      padding:6px 14px;
+      border-radius:20px;
+      font-size:12px;
+      opacity:0;
+      transform:translateX(10px);
+      transition:.3s;
+      border:1px solid rgba(255,255,255,.1);
+    }
+    .float-btn:hover::after{
+      opacity:1;
+      transform:translateX(0);
+    }
+    .float-btn:hover{
+      transform:scale(1.15);
+    }
 
-/* ===== BACKGROUND ===== */
-.cyber-bg{
-position:fixed;
-inset:0;
-background:radial-gradient(circle at 20% 30%,#1a0033 0%,#000 70%);
-z-index:-5;
-}
-.orb{
-position:absolute;
-width:500px;height:500px;
-border-radius:50%;
-filter:blur(100px);
-opacity:.3;
-animation:move 20s infinite alternate;
-z-index:-4;
-}
-.orb1{background:var(--primary);top:-10%;left:-10%}
-.orb2{background:var(--secondary);bottom:-10%;right:-10%;animation-delay:-5s}
-@keyframes move{
-from{transform:translate(0,0) scale(1)}
-to{transform:translate(50px,100px) scale(1.1)}
-}
+    /* LINE */
+    .float-line{
+      background:#ff0077;
+      box-shadow:0 0 25px rgba(255, 75, 133);
+    }
+    /* DISCORD */
+    .float-discord{
+      background:#5865F2;
+      box-shadow:0 0 25px rgba(88,101,242,.8);
+    }
 
-/* ===== NAV ===== */
-nav{
-position:fixed;
-width:100%;
-backdrop-filter:blur(20px);
-background:rgba(0,0,0,.7);
-padding:20px 5%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-z-index:1000;
-border-bottom:1px solid var(--glass-border);
-}
-.logo{
-font-family:'Orbitron',sans-serif;
-font-size:26px;
-font-weight:800;
-background:linear-gradient(45deg,var(--secondary),var(--primary));
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-letter-spacing:2px;
-text-decoration:none;
-}
-.nav-links{list-style:none;display:flex;gap:30px}
-.nav-links a{
-color:#fff;
-text-decoration:none;
-font-size:14px;
-letter-spacing:1px;
-transition:.3s;
-}
-.nav-links a:hover{
-color:var(--secondary);
-text-shadow:0 0 10px var(--secondary);
-}
+    /* Mobile */
+    @media(max-width:768px){
+      .floating-contact{ bottom:20px; right:20px; }
+    }
 
-/* ===== HERO ===== */
-.hero{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:0 20px;
-}
-.hero-title{
-font-family:'Orbitron',sans-serif;
-font-size:clamp(40px,8vw,90px);
-font-weight:900;
-background:linear-gradient(to bottom,#fff,#666);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-margin-bottom:20px;
-animation:glow 3s ease-in-out infinite alternate;
-}
-@keyframes glow{
-0%{text-shadow:0 0 20px rgba(102,0,255,.3)}
-100%{text-shadow:0 0 60px rgba(0,255,255,.8)}
-}
-.hero-subtitle{
-max-width:600px;
-color:#aaa;
-margin-bottom:40px;
-line-height:1.6;
-}
+    :root{
+      --primary:#6600ff;
+      --secondary:#00ffff;
+      --accent:#ff0066;
+      --glass:rgba(255,255,255,.05);
+      --glass-border:rgba(255,255,255,.1);
+    }
 
-/* ===== BUTTON ===== */
-.btn-group{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
-.btn{
-padding:16px 35px;
-border-radius:50px;
-font-weight:bold;
-text-decoration:none;
-letter-spacing:1px;
-transition:.4s;
-position:relative;
-overflow:hidden;
-}
-.btn-primary{
-background:#fff;
-color:#000;
-}
-.btn-primary::after{
-content:'';
-position:absolute;
-inset:0;
-background:linear-gradient(120deg,transparent,rgba(0,255,255,.5),transparent);
-transform:translateX(-100%);
-}
-.btn-primary:hover::after{
-transform:translateX(100%);
-transition:.8s;
-}
-.btn-primary:hover{
-box-shadow:0 0 30px var(--secondary);
-transform:translateY(-5px);
-}
-.btn-secondary{
-border:1px solid var(--glass-border);
-color:#fff;
-}
+    *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+    body{
+      font-family:'Kanit',sans-serif;
+      background:#050505;
+      color:#fff;
+      overflow-x:hidden;
+    }
 
-/* ===== REVEAL ===== */
-.reveal{
-opacity:0;
-transform:translateY(40px);
-transition:1s ease;
-}
-.reveal.active{
-opacity:1;
-transform:translateY(0);
-}
+    /* ===== BACKGROUND ===== */
+    .cyber-bg{
+      position:fixed;
+      inset:0;
+      background:radial-gradient(circle at 20% 30%,#1a0033 0%,#000 70%);
+      z-index:-5;
+    }
+    .orb{
+      position:absolute;
+      width:500px;height:500px;
+      border-radius:50%;
+      filter:blur(100px);
+      opacity:.3;
+      animation:move 20s infinite alternate;
+      z-index:-4;
+    }
+    .orb1{background:var(--primary);top:-10%;left:-10%}
+    .orb2{background:var(--secondary);bottom:-10%;right:-10%;animation-delay:-5s}
+    @keyframes move{
+      from{transform:translate(0,0) scale(1)}
+      to{transform:translate(50px,100px) scale(1.1)}
+    }
 
-/* ===== STATS ===== */
-.stats{padding:100px 5%;max-width:1200px;margin:auto}
-.section-tag{
-color:var(--secondary);
-text-transform:uppercase;
-letter-spacing:5px;
-font-size:12px;
-text-align:center;
-display:block;
-margin-bottom:10px;
-}
-.stats-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
-margin-top:50px;
-}
-.stat-card{
-background:var(--glass);
-border:1px solid var(--glass-border);
-padding:40px;
-border-radius:24px;
-text-align:center;
-transition:.4s;
-}
-.stat-card:hover{
-border-color:var(--primary);
-transform:translateY(-10px);
-}
-.stat-number{
-font-family:'Orbitron',sans-serif;
-font-size:3rem;
-font-weight:800;
-}
+    /* ===== NAV ===== */
+    nav{
+      position:fixed;
+      width:100%;
+      backdrop-filter:blur(20px);
+      background:rgba(0,0,0,.7);
+      padding:20px 5%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:1000;
+      border-bottom:1px solid var(--glass-border);
+    }
+    .logo{
+      font-family:'Orbitron',sans-serif;
+      font-size:26px;
+      font-weight:800;
+      background:linear-gradient(45deg,var(--secondary),var(--primary));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      letter-spacing:2px;
+      text-decoration:none;
+    }
+    .nav-links{list-style:none;display:flex;gap:30px}
+    .nav-links a{
+      color:#fff;
+      text-decoration:none;
+      font-size:14px;
+      letter-spacing:1px;
+      transition:.3s;
+    }
+    .nav-links a:hover{
+      color:var(--secondary);
+      text-shadow:0 0 10px var(--secondary);
+    }
 
-/* ===== VIDEO ===== */
-.video-section{padding:100px 5%;text-align:center}
-.video-container{
-max-width:900px;
-margin:50px auto;
-border-radius:30px;
-overflow:hidden;
-border:1px solid var(--glass-border);
-}
+    /* ===== HERO ===== */
+    .hero{
+      height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:0 20px;
+    }
+    .hero-title{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(40px,8vw,90px);
+      font-weight:900;
+      background:linear-gradient(to bottom,#fff,#666);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:20px;
+      animation:glow 3s ease-in-out infinite alternate;
+    }
+    @keyframes glow{
+      0%{text-shadow:0 0 20px rgba(102,0,255,.3)}
+      100%{text-shadow:0 0 60px rgba(0,255,255,.8)}
+    }
+    .hero-subtitle{
+      max-width:600px;
+      color:#aaa;
+      margin-bottom:40px;
+      line-height:1.6;
+    }
 
-/* ===== FOOTER ===== */
-footer{
-padding:80px 20px;
-text-align:center;
-border-top:1px solid var(--glass-border);
-}
-audio{margin-top:30px;filter:invert(1);opacity:.5}
+    /* ===== BUTTON ===== */
+    .btn-group{display:flex;gap:20px;flex-wrap:wrap;justify-content:center}
+    .btn{
+      padding:16px 35px;
+      border-radius:50px;
+      font-weight:bold;
+      text-decoration:none;
+      letter-spacing:1px;
+      transition:.4s;
+      position:relative;
+      overflow:hidden;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .btn-primary{
+      background:#fff;
+      color:#000;
+    }
+    .btn-primary::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg,transparent,rgba(0,255,255,.5),transparent);
+      transform:translateX(-100%);
+    }
+    .btn-primary:hover::after{
+      transform:translateX(100%);
+      transition:.8s;
+    }
+    .btn-primary:hover{
+      box-shadow:0 0 30px var(--secondary);
+      transform:translateY(-5px);
+    }
+    .btn-secondary{
+      border:1px solid var(--glass-border);
+      color:#fff;
+    }
 
-@media(max-width:768px){
-.nav-links{display:none}
-.hero-title{font-size:45px}
-}
-</style>
+    /* ===== REVEAL ===== */
+    .reveal{
+      opacity:0;
+      transform:translateY(40px);
+      transition:1s ease;
+    }
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
 
+    /* ===== STATS ===== */
+    .stats{padding:100px 5%;max-width:1200px;margin:auto}
+    .section-tag{
+      color:var(--secondary);
+      text-transform:uppercase;
+      letter-spacing:5px;
+      font-size:12px;
+      text-align:center;
+      display:block;
+      margin-bottom:10px;
+    }
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+      margin-top:50px;
+    }
+    .stat-card{
+      background:var(--glass);
+      border:1px solid var(--glass-border);
+      padding:40px;
+      border-radius:24px;
+      text-align:center;
+      transition:.4s;
+    }
+    .stat-card:hover{
+      border-color:var(--primary);
+      transform:translateY(-10px);
+    }
+    .stat-number{
+      font-family:'Orbitron',sans-serif;
+      font-size:3rem;
+      font-weight:800;
+    }
 
+    /* ===== VIDEO ===== */
+    .video-section{padding:100px 5%;text-align:center}
+    .video-container{
+      max-width:900px;
+      margin:50px auto;
+      border-radius:30px;
+      overflow:hidden;
+      border:1px solid var(--glass-border);
+    }
 
+    /* ===== FOOTER ===== */
+    footer{
+      padding:80px 20px;
+      text-align:center;
+      border-top:1px solid var(--glass-border);
+    }
+    audio{margin-top:30px;filter:invert(1);opacity:.5}
 
+    @media(max-width:768px){
+      .nav-links{display:none}
+      .hero-title{font-size:45px}
+    }
+  </style>
 </head>
 
 <body>
 
-
-
-
-<div id="musicPopup" class="music-popup">
+  <!-- ===== POPUP ===== -->
+  <div id="musicPopup" class="music-popup">
     <div class="popup-box">
-	    <h2>⚠️</h2>
-		<h2>ประกาศจาก 9WING.SHOP</h2>
-    <p class="popup-text">
-      <b>🛡️BYPASS กันแบน🛡️</b><br>
-      Update 1/28/2026
-    </p>
-    <p class="popup-text">
-      📌 เช่าจอปล่อยบอทผ่าน <b>OSLink</b>👉 <a href="https://www.9wing.shop/OSLink.html" target="_blank" rel="noopener noreferrer" 
-   style="color: #FF5733; font-weight: bold; text-decoration: none;">เช่าเลย</a></b><br>
-        <p class="popup-text">🚀Update ฟังก์ชันทั้งหมด 👉 <a href="https://www.9wing.shop/menu.html" target="_blank" rel="noopener noreferrer" 
-   style="color: #FF5733; font-weight: bold; text-decoration: none;">
-   Update 1/28/2026
-</a>
-		</p>
-        <button id="enterSite" class="btn btn-primary">
-            🔥 เข้าสู่เว็บไซต์ 🔥
-        </button>
+      <h2>⚠️</h2>
+      <h2>ประกาศจาก 9WING.SHOP</h2>
+
+      <p class="popup-text">
+        <b>🛡️BYPASS กันแบน🛡️</b><br>
+       <span style="color: #00ff00;">UPDATE 19/01/2026</span>
+      </p>
+
+      <p class="popup-text">
+        📌 เช่าจอปล่อยบอทผ่าน <b>OSLink</b> 👉
+        <a href="https://www.9wing.shop/OSLink.html" target="_blank" rel="noopener noreferrer"
+           style="color:#FF5733;font-weight:bold;text-decoration:none;">เช่าเลย</a>
+      </p>
+
+      <p class="popup-text">
+        🚀 Update ฟังก์ชันทั้งหมด 👉
+        <a href="https://www.9wing.shop/menu.html" target="_blank" rel="noopener noreferrer"
+           style="color:#FF5733;font-weight:bold;text-decoration:none;">Update 1/28/2026</a>
+      </p>
+
+      <button id="enterSite" type="button" class="btn btn-primary">
+        🔥 เข้าสู่เว็บไซต์ 🔥
+      </button>
     </div>
-</div>
+  </div>
 
-<audio id="bgMusic" loop>
+  <!-- ===== AUDIO ===== -->
+  <audio id="bgMusic" loop>
     <source src="https://www.9wing.shop/YG2%20(mp3cut.net).mp3" type="audio/mpeg">
-</audio>
+  </audio>
 
-<div class="cyber-bg"></div>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
+  <!-- ===== BACKGROUND ===== -->
+  <div class="cyber-bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
 
-<nav>
-<a href="#" class="logo">9WING.SHOP 🏃</a>
-<ul class="nav-links">
-<li><a href="#stats">System</a></li>
-<li><a href="#review">Review</a></li>
-<li><a href="https://www.9wing.shop/OSLink.html">OSLink</a></li>
-</ul>
-</nav>
+  <!-- ===== NAV ===== -->
+  <nav>
+    <a href="#" class="logo">9WING.SHOP 🏃</a>
+    <ul class="nav-links">
+      <li><a href="#stats">System</a></li>
+      <li><a href="#review">Review</a></li>
+      <li><a href="https://www.9wing.shop/OSLink.html">OSLink</a></li>
+    </ul>
+  </nav>
 
-<section class="hero">
-<span class="section-tag">PRO YULGANG & CLOUD OSLINK</span>
-<h1 class="hero-title">9WING.SHOP</h1>
-<p class="hero-subtitle">
- ยกระดับการเล่นโยกังของคุณด้วยโปรแกรมช่วยเล่นที่เสถียรที่สุด 
-พร้อมบริการเช่าจอ Cloud ปล่อยบอท 24 ชม. ผ่าน OSLink ความเร็วสูง
-</p>
-<div class="btn-group">
-<a href="https://www.9wing.shop/menu.html" class="btn btn-primary">
-    🎮 PRO โยกังจุติยุทธภพเลือดใหม่ 🎮
-</a>
-<a href="https://www.9wing.shop/OSLink.html" class="btn btn-primary">
-    🤖 เช่าจอปล่อยบอทผ่าน OSLINK 🤖
-</a>
-</section>
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <span class="section-tag">PRO YULGANG & CLOUD OSLINK</span>
+    <h1 class="hero-title">9WING.SHOP</h1>
+    <p class="hero-subtitle">
+      ยกระดับการเล่นโยกังของคุณด้วยโปรแกรมช่วยเล่นที่เสถียรที่สุด
+      พร้อมบริการเช่าจอ Cloud ปล่อยบอท 24 ชม. ผ่าน OSLink ความเร็วสูง
+    </p>
 
-<section class="stats reveal" id="stats">
-<span class="section-tag">System Status</span>
-<div class="stats-grid">
-<div class="stat-card reveal"><span class="stat-number" data-target="118">0</span><div>ALL USERS PC NOTEBOOK<br>
-  <b><p style="color:#555">UPDATE 17/02/2026</p></b></div></div>
-<div class="stat-card reveal"><span class="stat-number" style="color:#ff0066" data-target="5">0</span><div>WING BAN USERS</div></div>
-<div class="stat-card reveal"><span class="stat-number" data-target="43">0</span><div>ALL USERS CLOUD PHONE</div></div>
-</div>
-</section>
+    <div class="btn-group">
+      <a href="https://www.9wing.shop/menu.html" class="btn btn-primary">
+        🎮 PRO โยกังจุติยุทธภพเลือดใหม่ 🎮
+      </a>
+      <a href="https://www.9wing.shop/OSLink.html" class="btn btn-primary">
+        🤖 เช่าจอปล่อยบอทผ่าน OSLINK 🤖
+      </a>
+    </div>
+  </section>
 
-<section class="video-section reveal" id="review">
-<span class="section-tag">Review Video</span>
-<div class="video-container">
-<iframe width="100%" height="390" src="https://www.youtube.com/embed/videoseries?si=ARQPDtew-PSK-7tx&amp;list=PLOcSH_6jJxRICye4Hzw2BigQYIc7oV3RA" title="โปร ตี+ออโต้ เปิดกล่องออโต้ BY 9WING" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-</div>
-</section>
+  <!-- ===== STATS ===== -->
+  <section class="stats reveal" id="stats">
+    <span class="section-tag">System Status</span>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <span class="stat-number" data-target="118">0</span>
+        <div>
+          ALL USERS PC NOTEBOOK<br>
+          <span class="section-tag">17/02/69</span>
+        </div>
+      </div>
 
+      <div class="stat-card reveal">
+        <span class="stat-number" style="color:#ff0066" data-target="5">0</span>
+        <div>WING BAN USERS</div>
+      </div>
 
+      <div class="stat-card reveal">
+        <span class="stat-number" data-target="44">0</span>
+        <div>ALL USERS CLOUD PHONE<br>
+        <span class="section-tag">17/02/69</span>
+      </div>
+    </div>
+  </section>
 
-<footer>
-	<div class="footer-content">
-           
-<p style="color:#555">© 2026 9WING.SHOP All rights reserved.</p>
-<a href="http://semenaxcaps.com"><img src="http://semenaxcaps.com/count.php?c_style=125&id=1770523720" border="0" alt="semenaxcaps.com"></a><br>
+  <!-- ===== VIDEO ===== -->
+  <section class="video-section reveal" id="review">
+    <span class="section-tag">Review Video</span>
+    <div class="video-container">
+      <iframe width="100%" height="390"
+        src="https://www.youtube.com/embed/videoseries?si=ARQPDtew-PSK-7tx&amp;list=PLOcSH_6jJxRICye4Hzw2BigQYIc7oV3RA"
+        title="โปร ตี+ออโต้ เปิดกล่องออโต้ BY 9WING"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen></iframe>
+    </div>
+  </section>
 
-</footer>
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-content">
+      <p style="color:#555">© 2026 9WING.SHOP All rights reserved.</p>
 
-<script>
-// Counter
-const counters=document.querySelectorAll('.stat-number');
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-const el=entry.target;
-const target=+el.dataset.target;
-let count=0;
-const step=target/120;
-const run=()=>{
-count+=step;
-if(count<target){
-el.textContent=Math.ceil(count);
-requestAnimationFrame(run);
-}else el.textContent=target;
-};
-run();
-observer.unobserve(el);
-}
-});
-},{threshold:.5});
-counters.forEach(c=>observer.observe(c));
+      <!-- หมายเหตุ: ถ้าเว็บคุณใช้ https รูป http อาจโดนบล็อก -->
+      <a href="http://semenaxcaps.com">
+        <img src="http://semenaxcaps.com/count.php?c_style=125&id=1770523720" border="0" alt="semenaxcaps.com">
+      </a>
+      <br>
+    </div>
+  </footer>
 
-// Reveal
-const reveals=document.querySelectorAll('.reveal');
-const revObs=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting)e.target.classList.add('active');
-});
-},{threshold:.2});
-reveals.forEach(r=>revObs.observe(r));
-</script>
-<!-- ===== FLOATING LINE / DISCORD ===== -->
-<div class="floating-contact">
-    <a href="https://www.m.me/say.wing.656700" 
-       class="float-btn float-line" 
-       target="_blank"
+  <!-- ===== FLOATING LINE / DISCORD / APK ===== -->
+  <div class="floating-contact">
+    <a href="https://www.m.me/say.wing.656700"
+       class="float-btn float-line"
+       target="_blank" rel="noopener noreferrer"
        data-text="สอบถาม Messenger">
-        💬
+      💬
     </a>
-    <a href="https://discord.gg/PDFq23qA" 
-       class="float-btn float-discord" 
-       target="_blank"
+
+    <a href="https://discord.gg/PDFq23qA"
+       class="float-btn float-discord"
+       target="_blank" rel="noopener noreferrer"
        data-text="เข้า Discord">
-        🎧
+      🎧
     </a>
-    <a href="https://www.9wing.shop/DOWNLOAD.html" 
-       class="float-btn float-discord" 
-       target="_blank"
+
+    <a href="https://www.9wing.shop/DOWNLOAD.html"
+       class="float-btn float-discord"
+       target="_blank" rel="noopener noreferrer"
        data-text="APK Download">
-        📥
+      📥
     </a>
-</div>
-<script>
-document.getElementById("playMusic").addEventListener("click", function() {
-    const audio = document.getElementById("bgMusic");
-    audio.play().catch(err=>{
-        console.log("เล่นไม่ได้:", err);
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Counter
+    const counters = document.querySelectorAll('.stat-number');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = +el.dataset.target;
+          let count = 0;
+          const step = target / 120;
+
+          const run = () => {
+            count += step;
+            if (count < target) {
+              el.textContent = Math.ceil(count);
+              requestAnimationFrame(run);
+            } else {
+              el.textContent = target;
+            }
+          };
+
+          run();
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: .5 });
+
+    counters.forEach(c => observer.observe(c));
+
+    // Reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('active');
+      });
+    }, { threshold: .2 });
+
+    reveals.forEach(r => revObs.observe(r));
+  </script>
+
+  <script>
+    // Auto tooltip ครั้งแรก
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!localStorage.getItem("contactTipShown")) {
+        setTimeout(() => {
+          const btns = document.querySelectorAll(".float-btn");
+          btns.forEach(btn => btn.classList.add("auto-tip"));
+
+          setTimeout(() => {
+            btns.forEach(btn => btn.classList.remove("auto-tip"));
+            localStorage.setItem("contactTipShown", "yes");
+          }, 3000);
+        }, 2000);
+      }
     });
-});
-</script>
-<script>
-document.addEventListener("DOMContentLoaded",()=>{
-    if(!localStorage.getItem("contactTipShown")){
-        setTimeout(()=>{   // 👈 หน่วงเวลา
-            const btns=document.querySelectorAll(".float-btn");
-            btns.forEach(btn=>btn.classList.add("auto-tip"));
+  </script>
 
-            setTimeout(()=>{
-                btns.forEach(btn=>btn.classList.remove("auto-tip"));
-                localStorage.setItem("contactTipShown","yes");
-            },3000);
-        },2000); // หน่วง 2 วิ
-    }
-});
-</script>
+  <script>
+    // Popup + Play music (เริ่มเสียงหลังคลิกเพื่อกัน autoplay block)
+    document.addEventListener("DOMContentLoaded", () => {
+      const popup = document.getElementById("musicPopup");
+      const btn = document.getElementById("enterSite");
+      const music = document.getElementById("bgMusic");
 
-<script>
-document.addEventListener("DOMContentLoaded",()=>{
-    const popup = document.getElementById("musicPopup");
-    const btn = document.getElementById("enterSite");
-    const music = document.getElementById("bgMusic");
-
-    btn.addEventListener("click",()=>{
-        popup.style.display="none";
+      btn.addEventListener("click", () => {
+        popup.style.display = "none";
         music.volume = 0.6;
-        music.play().catch(err=>{
-            console.log("Audio blocked:", err);
-        });
+        music.play().catch(err => console.log("Audio blocked:", err));
+      });
     });
-});
-</script>
+  </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
