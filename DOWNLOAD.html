@@ -4,28 +4,29 @@
   <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>9WING DOWNLOAD CENTER 2026</title>
+  <title>9WING DOWNLOAD</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
   <style>
-    /* Fixed Font Import */
-    @import url('https://fonts.googleapis.com');
-    
     :root {
       --primary-cyan: #00ffff;
       --primary-purple: #8b5cf6;
       --primary-blue: #0066ff;
       --dark-bg: #0a0a0f;
-      --card-bg: rgba(15, 15, 25, 0.85);
-      --glass-bg: rgba(255, 255, 255, 0.05);
-      --border-glow: rgba(0, 255, 255, 0.3);
+      --card-bg: rgba(10, 10, 15, 0.9);
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --border-glow: rgba(0, 255, 255, 0.4);
       --text-primary: #ffffff;
-      --text-secondary: #a0a0a0;
     }
 
     * { box-sizing: border-box; }
 
     body {
-      font-family: 'Orbitron', 'Prompt', sans-serif;
-      background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
+      font-family: 'Prompt', sans-serif;
+      background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 100%);
       min-height: 100vh;
       margin: 0;
       padding: 20px;
@@ -34,72 +35,37 @@
       justify-content: center;
       align-items: center;
     }
-    
+
     .container {
-      width: 95%;
-      max-width: 500px;
-      padding: 30px;
+      width: 100%;
+      max-width: 520px;
+      padding: 26px;
       background: var(--card-bg);
-      border-radius: 20px;
+      border-radius: 16px;
       border: 1px solid var(--border-glow);
-      box-shadow: 0 0 50px rgba(0, 255, 255, 0.15);
-      backdrop-filter: blur(10px);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.12);
+      backdrop-filter: blur(15px);
       text-align: center;
     }
 
     .logo {
-      width: 100px; height: 100px;
+      width: 92px; height: 92px;
       border-radius: 50%;
-      margin-bottom: 20px;
-      border: 3px solid var(--primary-cyan);
-      box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
-      animation: logoFloat 4s ease-in-out infinite;
+      margin-bottom: 14px;
+      border: 2px solid var(--primary-cyan);
+      box-shadow: 0 0 15px rgba(0,255,255,.9);
+      animation: logoFloat 3s ease-in-out infinite;
       object-fit: cover;
     }
 
     @keyframes logoFloat {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-10px); }
-    }
-
-    h1 {
-      font-size: 1.8em;
-      margin: 0 0 20px 0;
-      background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .file-card {
-      background: var(--glass-bg);
-      padding: 15px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      border: 1px solid rgba(0, 255, 255, 0.1);
-      text-align: left;
-    }
-
-    .file-info-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 0.85em;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      padding-bottom: 4px;
-    }
-
-    .label { color: var(--primary-cyan); font-weight: bold; }
-    .value { color: #00ff00; }
-
-    .download-section {
-      margin-top: 25px;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
+      0%, 100% { transform: translateY(0); filter: brightness(1); }
+      50% { transform: translateY(-8px); filter: brightness(1.25); }
     }
 
     .cyber-button {
       display: block;
+      margin-top: 10px;
       padding: 15px;
       text-decoration: none;
       background: linear-gradient(45deg, var(--primary-cyan), var(--primary-blue));
@@ -118,49 +84,68 @@
       box-shadow: 0 0 25px var(--primary-cyan);
     }
 
-    .version-tag {
-      font-size: 0.8em;
-      margin-bottom: 5px;
-      display: block;
+    footer{
+      margin-top: 18px;
+      font-size: 0.85em;
+      color: rgba(255,255,255,0.65);
     }
   </style>
+
+  <!-- ✅ ใส่สคริปต์ถามรหัสผ่าน -->
+  <script>
+    function checkPass(url) {
+      const pass = prompt("กรุณาใส่รหัสผ่านเพื่อดาวน์โหลด:");
+
+      if (pass === "9วิ่ง") {
+        window.location.href = url;
+      } else if (pass === null) {
+        // ผู้ใช้กด Cancel ไม่ต้องทำอะไร
+      } else {
+        alert("รหัสผ่านไม่ถูกต้อง!");
+      }
+      return false; // กันไม่ให้ลิงก์ทำงานเอง
+    }
+  </script>
+
 </head>
 <body>
 
   <div class="container">
-    <img src="https://img5.pic.in.th/file/secure-sv1/1icon.th.jpeg" alt="9WING Logo" class="logo">
-    
-    <h1>DOWNLOAD</h1>
-  
+    <img src="https://e7.pngegg.com/pngimages/809/325/png-clipart-icon-downloading-symbol-8-bit-pixel-pixel-art-thumbnail.png" alt="9WING Logo" class="logo">
 
     <div class="download-section">
-        <div>
-          
-   <div style="margin-top: 10px;">
-            
-            <a href="https://www.mediafire.com/file/bf8lmrpfdz1sik5/YG-9WING_sign.apk/file" class="cyber-button">DOWNLOAD APK YG</a>
-			
-		 <div style="margin-top: 10px;">
-            
-            <a href="https://www.mediafire.com/file/lv75f3kdydvelr2/GG_BY_%25E0%25B8%25A7%25E0%25B8%25B4%25E0%25B9%2588%25E0%25B8%2587%25C2%25A9_99939.98.apk/file" class="cyber-button">DOWNLOAD GG</a>
-			<div style="margin-top: 10px;">
-            
-            <a href="https://www.mediafire.com/file/t686zuuodazto13/9WING_%25282%2529.lua/file" class="cyber-button">DOWNLOAD LUA</a>
-        </div>
-		 <div style="margin-top: 10px;">
-            
-            <a href="https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING.exe" class="cyber-button">DOWNLOAD PC V.6</a>
-			
-		 <div style="margin-top: 10px;">
-            
-            <a href="https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING7.exe" class="cyber-button">DOWNLOAD PC V.7</a>
-        </div>
-		
+
+      <a href="#" class="cyber-button"
+         onclick="return checkPass('https://www.mediafire.com/file/bf8lmrpfdz1sik5/YG-9WING_sign.apk/file')">
+         DOWNLOAD YG APK
+      </a>
+
+      <a href="#" class="cyber-button"
+         onclick="return checkPass('https://www.mediafire.com/file/lv75f3kdydvelr2/GG_BY_%25E0%25B8%25A7%25E0%25B8%25B4%25E0%25B9%2588%25E0%25B8%2587%25C2%25A9_99939.98.apk/file')">
+         DOWNLOAD GG APK
+      </a>
+
+      <a href="#" class="cyber-button"
+         onclick="return checkPass('https://www.mediafire.com/file/j42q9x8erh85o41/9WING.lua/file?dkey=q43y1lxnuhx&r=205')">
+         DOWNLOAD LUA
+      </a>
+
+      <a href="#" class="cyber-button"
+         onclick="return checkPass('https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING.exe')">
+         DOWNLOAD PC V.6
+      </a>
+
+      <a href="#" class="cyber-button"
+         onclick="return checkPass('https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING7.exe')">
+         DOWNLOAD PC V.7
+      </a>
+
     </div>
+
+    <footer>
+      © 2026 9WING.SHOP All rights reserved.
+    </footer>
   </div>
 
 </body>
-
 </html>
-
-
