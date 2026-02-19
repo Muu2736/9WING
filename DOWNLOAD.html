@@ -1,151 +1,567 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <base target="_top">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>9WING DOWNLOAD</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>9WING DOWNLOAD</title>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
 
-  <style>
-    :root {
-      --primary-cyan: #00ffff;
-      --primary-purple: #8b5cf6;
-      --primary-blue: #0066ff;
-      --dark-bg: #0a0a0f;
-      --card-bg: rgba(10, 10, 15, 0.9);
-      --glass-bg: rgba(255, 255, 255, 0.03);
-      --border-glow: rgba(0, 255, 255, 0.4);
-      --text-primary: #ffffff;
+<style>
+  :root{
+    --cyan:#00ffff;
+    --purple:#8b5cf6;
+    --blue:#0066ff;
+    --bg:#0a0a0f;
+    --card:rgba(15,15,25,0.88);
+    --glass:rgba(255,255,255,0.05);
+    --border:rgba(0,255,255,0.28);
+    --ok:#00ff66;
+    --bad:#ff3b3b;
+    --warn:#ffcc00;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Prompt',sans-serif;
+    color:#fff;
+    background:
+      radial-gradient(1200px 600px at 20% 20%, rgba(139,92,246,0.25), transparent 60%),
+      radial-gradient(900px 500px at 80% 30%, rgba(0,255,255,0.18), transparent 60%),
+      radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 70%);
+    overflow-x:hidden;
+    padding:20px;
+  }
+
+  /* animated grid */
+  .grid{
+    position:fixed;
+    inset:-40%;
+    background-image:
+      linear-gradient(rgba(0,255,255,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,255,255,0.08) 1px, transparent 1px);
+    background-size: 52px 52px;
+    transform: perspective(800px) rotateX(65deg);
+    filter: blur(0.2px);
+    opacity:0.35;
+    animation: gridMove 10s linear infinite;
+    pointer-events:none;
+  }
+  @keyframes gridMove{
+    0%{ transform: perspective(800px) rotateX(65deg) translateY(0); }
+    100%{ transform: perspective(800px) rotateX(65deg) translateY(52px); }
+  }
+
+  .container{
+    width:100%;
+    max-width:520px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:26px;
+    box-shadow:
+      0 0 40px rgba(0,255,255,0.12),
+      inset 0 0 0 1px rgba(255,255,255,0.04);
+    backdrop-filter: blur(12px);
+    position:relative;
+    overflow:hidden;
+  }
+
+  .scanline{
+    position:absolute;
+    left:-20%;
+    right:-20%;
+    height:2px;
+    top:0;
+    background: linear-gradient(90deg, transparent, rgba(0,255,255,0.65), transparent);
+    opacity:0.55;
+    animation: scan 3.2s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes scan{
+    0%{ transform: translateY(-10px); opacity:0; }
+    20%{ opacity:0.6; }
+    50%{ transform: translateY(260px); opacity:0.55; }
+    80%{ opacity:0.6; }
+    100%{ transform: translateY(560px); opacity:0; }
+  }
+
+  .header{
+    display:flex;
+    gap:14px;
+    align-items:center;
+    justify-content:center;
+    margin-bottom:14px;
+  }
+
+  .logo{
+    width:78px; height:78px;
+    border-radius:14px;
+    object-fit:cover;
+    border:2px solid rgba(0,255,255,0.7);
+    box-shadow: 0 0 18px rgba(0,255,255,0.35);
+    animation: floaty 3.4s ease-in-out infinite;
+    background:#0f0f18;
+  }
+  @keyframes floaty{
+    0%,100%{ transform: translateY(0); }
+    50%{ transform: translateY(-8px); }
+  }
+
+  h1{
+    margin:0;
+    font-family:'Orbitron',sans-serif;
+    letter-spacing:2px;
+    font-size:1.55rem;
+    background: linear-gradient(45deg, var(--cyan), var(--purple));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+
+  .subtitle{
+    margin:0 0 14px 0;
+    text-align:center;
+    font-size:0.92rem;
+    color: rgba(255,255,255,0.72);
+  }
+
+  .unlockBox{
+    background: var(--glass);
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:14px;
+    padding:14px;
+    margin: 10px 0 18px 0;
+  }
+
+  .row{
+    display:flex;
+    gap:10px;
+    align-items:stretch;
+  }
+
+  .inputWrap{
+    flex:1;
+    position:relative;
+  }
+
+  input[type="password"], input[type="text"]{
+    width:100%;
+    padding:12px 42px 12px 12px;
+    border-radius:10px;
+    border:1px solid rgba(0,255,255,0.35);
+    outline:none;
+    background:#0c0c14;
+    color:#fff;
+    font-size:1rem;
+    transition:0.25s;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
+  }
+  input:focus{
+    border-color: rgba(0,255,255,0.7);
+    box-shadow: 0 0 18px rgba(0,255,255,0.18);
+  }
+
+  .eye{
+    position:absolute;
+    right:10px;
+    top:50%;
+    transform:translateY(-50%);
+    width:30px;
+    height:30px;
+    border-radius:9px;
+    border:1px solid rgba(255,255,255,0.10);
+    background: rgba(255,255,255,0.06);
+    color:#fff;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    user-select:none;
+    transition:0.2s;
+  }
+  .eye:hover{ background: rgba(255,255,255,0.10); }
+
+  .btn{
+    width:140px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:900;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    background: linear-gradient(45deg, var(--cyan), var(--blue));
+    color:#000;
+    box-shadow: 0 8px 18px rgba(0,255,255,0.18);
+    transition:0.25s;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.12); }
+  .btn:disabled{
+    cursor:not-allowed;
+    opacity:0.55;
+    transform:none;
+    filter:none;
+  }
+
+  .status{
+    margin-top:10px;
+    font-size:0.92rem;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:6px 10px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,0.08);
+    background: rgba(0,0,0,0.22);
+    font-family:'Orbitron',sans-serif;
+    font-size:0.78rem;
+    letter-spacing:0.5px;
+  }
+
+  .chip.ok{ border-color: rgba(0,255,102,0.28); }
+  .chip.bad{ border-color: rgba(255,59,59,0.28); }
+  .chip.warn{ border-color: rgba(255,204,0,0.28); }
+
+  .downloads{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+
+  .cyber-button{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:14px 14px;
+    border-radius:12px;
+    text-decoration:none;
+    font-weight:900;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    color:#000;
+    background: linear-gradient(45deg, var(--cyan), var(--blue));
+    box-shadow: 0 10px 20px rgba(0,255,255,0.12);
+    transition:0.25s;
+    position:relative;
+    overflow:hidden;
+  }
+
+  .cyber-button::after{
+    content:"";
+    position:absolute;
+    inset:-40%;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35), transparent 40%);
+    transform: translateX(-40%);
+    transition:0.4s;
+    opacity:0.6;
+    pointer-events:none;
+  }
+  .cyber-button:hover::after{ transform: translateX(0%); }
+
+  .cyber-button:hover{
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 16px 30px rgba(0,255,255,0.18);
+  }
+
+  /* locked state */
+  .cyber-button.locked{
+    opacity:0.35;
+    filter: grayscale(40%);
+    pointer-events:none;
+    box-shadow:none;
+  }
+
+  .tag{
+    font-family:'Orbitron',sans-serif;
+    font-size:0.78rem;
+    color: rgba(0,0,0,0.75);
+    background: rgba(255,255,255,0.55);
+    padding:5px 10px;
+    border-radius:999px;
+    white-space:nowrap;
+  }
+
+  footer{
+    margin-top:16px;
+    text-align:center;
+    color: rgba(255,255,255,0.6);
+    font-size:0.86rem;
+  }
+
+  .tiny{
+    font-size:0.82rem;
+    color: rgba(255,255,255,0.55);
+    margin-top:6px;
+  }
+</style>
+
+<script>
+  // ===== DAILY PASSWORD (User enters: 9WING-XXXX) =====
+  const DAILY_SECRET = "9WING"; // 🔐 ใส่ SECRET ของคุณตรงนี้ (แอดมินเท่านั้นที่รู้)
+  const DAILY_PREFIX = "9WING-";
+
+  const MAX_FAILS = 3;
+  const LOCK_SECONDS = 60;
+
+  const STORAGE_KEY_UNLOCKED = "ninewing_unlocked_daily_v1";
+  const STORAGE_KEY_FAILS = "ninewing_fails_daily_v1";
+  const STORAGE_KEY_LOCKUNTIL = "ninewing_lock_until_daily_v1";
+  const STORAGE_KEY_DAYSTAMP = "ninewing_daystamp_daily_v1";
+
+  let timerId = null;
+
+  function qs(sel){ return document.querySelector(sel); }
+  function qsa(sel){ return document.querySelectorAll(sel); }
+  function nowMs(){ return Date.now(); }
+
+  // Bangkok date => YYYY-MM-DD
+  function getBangkokYMD(){
+    const s = new Date().toLocaleString("en-CA", { timeZone: "Asia/Bangkok" });
+    return s.split(",")[0].trim();
+  }
+
+  function simpleHash(str){
+    let h = 2166136261;
+    for(let i=0;i<str.length;i++){
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
     }
+    return (h >>> 0);
+  }
 
-    * { box-sizing: border-box; }
+  function getDailyPassword(){
+    const ymd = getBangkokYMD();
+    const h = simpleHash(`${ymd}|${DAILY_SECRET}`);
+    const code4 = String(h % 10000).padStart(4, "0");
+    return DAILY_PREFIX + code4; // 9WING-XXXX
+  }
 
-    body {
-      font-family: 'Prompt', sans-serif;
-      background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 100%);
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
-      color: var(--text-primary);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
+  function dayStamp(){ return getBangkokYMD(); }
 
-    .container {
-      width: 100%;
-      max-width: 520px;
-      padding: 26px;
-      background: var(--card-bg);
-      border-radius: 16px;
-      border: 1px solid var(--border-glow);
-      box-shadow: 0 0 30px rgba(0, 255, 255, 0.12);
-      backdrop-filter: blur(15px);
-      text-align: center;
-    }
+  function setUnlocked(v){
+    localStorage.setItem(STORAGE_KEY_UNLOCKED, v ? "1" : "0");
+    localStorage.setItem(STORAGE_KEY_DAYSTAMP, dayStamp());
+  }
+  function isUnlocked(){ return localStorage.getItem(STORAGE_KEY_UNLOCKED) === "1"; }
+  function savedStamp(){ return localStorage.getItem(STORAGE_KEY_DAYSTAMP) || ""; }
 
-    .logo {
-      width: 92px; height: 92px;
-      border-radius: 50%;
-      margin-bottom: 14px;
-      border: 2px solid var(--primary-cyan);
-      box-shadow: 0 0 15px rgba(0,255,255,.9);
-      animation: logoFloat 3s ease-in-out infinite;
-      object-fit: cover;
-    }
+  function getFails(){ return Number(localStorage.getItem(STORAGE_KEY_FAILS) || "0"); }
+  function setFails(n){ localStorage.setItem(STORAGE_KEY_FAILS, String(n)); }
 
-    @keyframes logoFloat {
-      0%, 100% { transform: translateY(0); filter: brightness(1); }
-      50% { transform: translateY(-8px); filter: brightness(1.25); }
-    }
+  function getLockUntil(){ return Number(localStorage.getItem(STORAGE_KEY_LOCKUNTIL) || "0"); }
+  function setLockUntil(ms){ localStorage.setItem(STORAGE_KEY_LOCKUNTIL, String(ms)); }
 
-    .cyber-button {
-      display: block;
-      margin-top: 10px;
-      padding: 15px;
-      text-decoration: none;
-      background: linear-gradient(45deg, var(--primary-cyan), var(--primary-blue));
-      color: #000;
-      font-weight: 900;
-      border-radius: 8px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      transition: 0.3s;
-      box-shadow: 0 4px 15px rgba(0, 255, 255, 0.3);
-    }
+  function remainingLockSeconds(){
+    return Math.max(0, Math.ceil((getLockUntil() - nowMs())/1000));
+  }
 
-    .cyber-button:hover {
-      transform: scale(1.02);
-      filter: brightness(1.2);
-      box-shadow: 0 0 25px var(--primary-cyan);
-    }
+  function lockButtons(locked){
+    qsa(".cyber-button").forEach(a=>a.classList.toggle("locked", locked));
+  }
 
-    footer{
-      margin-top: 18px;
-      font-size: 0.85em;
-      color: rgba(255,255,255,0.65);
-    }
-  </style>
+  function setChip(type, text){
+    const chip = qs("#chipStatus");
+    chip.classList.remove("ok","bad","warn");
+    chip.classList.add(type);
+    chip.textContent = text;
+  }
 
-  <!-- ✅ ใส่สคริปต์ถามรหัสผ่าน -->
-  <script>
-    function checkPass(url) {
-      const pass = prompt("กรุณาใส่รหัสผ่านเพื่อดาวน์โหลด:");
+  function setHelper(text){ qs("#helper").textContent = text || ""; }
+  function setBtnDisabled(disabled){ qs("#unlockBtn").disabled = disabled; }
 
-      if (pass === "9วิ่ง") {
-        window.location.href = url;
-      } else if (pass === null) {
-        // ผู้ใช้กด Cancel ไม่ต้องทำอะไร
-      } else {
-        alert("รหัสผ่านไม่ถูกต้อง!");
+  function stopCountdown(){
+    if(timerId){ clearInterval(timerId); timerId = null; }
+  }
+
+  function startCountdown(){
+    stopCountdown();
+    const tick = ()=>{
+      const rem = remainingLockSeconds();
+      if(rem <= 0){
+        setLockUntil(0);
+        setBtnDisabled(false);
+        setChip("warn", "LOCK: OFF");
+        setHelper(`ลองใหม่ได้แล้ว (เหลือโอกาส ${Math.max(0, MAX_FAILS - getFails())}/${MAX_FAILS})`);
+        stopCountdown();
+        return;
       }
-      return false; // กันไม่ให้ลิงก์ทำงานเอง
-    }
-  </script>
+      setBtnDisabled(true);
+      setChip("bad", `LOCKED ${rem}s`);
+      setHelper(`ใส่ผิดเกินกำหนด — รอ ${rem} วินาที`);
+    };
+    tick();
+    timerId = setInterval(tick, 250);
+  }
 
+  function logout(){
+    localStorage.removeItem(STORAGE_KEY_UNLOCKED);
+    localStorage.removeItem(STORAGE_KEY_DAYSTAMP);
+    setFails(0);
+    setLockUntil(0);
+    lockButtons(true);
+    setChip("warn", "LOCK: ON");
+    setHelper("ออกจากโหมดปลดล็อกแล้ว 🔒");
+    setBtnDisabled(false);
+    stopCountdown();
+  }
+
+  function invalidateIfNewDay(){
+    const today = dayStamp();
+    if(isUnlocked() && savedStamp() !== today){
+      logout();
+      setHelper("🔁 เปลี่ยนวันแล้ว — กรุณาปลดล็อกใหม่ (รหัสรายวัน)");
+    }
+  }
+
+  function unlock(){
+    invalidateIfNewDay();
+
+    const lockUntil = getLockUntil();
+    if(lockUntil && lockUntil > nowMs()){
+      startCountdown();
+      return;
+    }
+
+    const input = qs("#password");
+    const pass = input.value.trim();
+    const expected = getDailyPassword();
+
+    if(pass === expected){
+      setUnlocked(true);
+      setFails(0);
+      setLockUntil(0);
+
+      lockButtons(false);
+      setChip("ok", "ACCESS GRANTED");
+      setHelper("✅ ปลดล็อกสำเร็จ! (รหัสรายวัน) — โหลดได้ทั้งหมด");
+      setBtnDisabled(false);
+
+      input.value = "";
+      input.blur();
+      stopCountdown();
+      return;
+    }
+
+    const fails = getFails() + 1;
+    setFails(fails);
+
+    if(fails >= MAX_FAILS){
+      const until = nowMs() + LOCK_SECONDS * 1000;
+      setLockUntil(until);
+      setChip("bad", `LOCKED ${LOCK_SECONDS}s`);
+      setHelper(`❌ ใส่ผิดครบ ${MAX_FAILS} ครั้ง — ล็อก ${LOCK_SECONDS} วินาที`);
+      startCountdown();
+    }else{
+      setChip("warn", "ACCESS DENIED");
+      setHelper(`❌ รหัสไม่ถูกต้อง (เหลือโอกาส ${MAX_FAILS - fails}/${MAX_FAILS})`);
+    }
+  }
+
+  function toggleEye(){
+    const input = qs("#password");
+    input.type = (input.type === "password") ? "text" : "password";
+    qs("#eyeBtn").textContent = (input.type === "password") ? "👁️" : "🙈";
+    input.focus();
+  }
+
+  function init(){
+    qs("#password").addEventListener("keydown",(e)=>{ if(e.key==="Enter") unlock(); });
+
+    invalidateIfNewDay();
+
+    if(isUnlocked()){
+      lockButtons(false);
+      setChip("ok", "ACCESS GRANTED");
+      setHelper("สถานะถูกบันทึกไว้แล้ว (วันนี้) — โหลดได้เลย ✅");
+    }else{
+      lockButtons(true);
+      setChip("warn", "LOCK: ON");
+      setHelper("โหมดรหัสรายวัน: รูปแบบรหัสคือ 9WING-XXXX");
+    }
+
+    if(remainingLockSeconds() > 0) startCountdown();
+  }
+
+  window.unlock = unlock;
+  window.logout = logout;
+  window.toggleEye = toggleEye;
+  window.addEventListener("DOMContentLoaded", init);
+</script>
 </head>
+
 <body>
+  <div class="grid"></div>
 
   <div class="container">
-    <img src="https://e7.pngegg.com/pngimages/809/325/png-clipart-icon-downloading-symbol-8-bit-pixel-pixel-art-thumbnail.png" alt="9WING Logo" class="logo">
+    <div class="scanline"></div>
 
-    <div class="download-section">
-
-      <a href="#" class="cyber-button"
-         onclick="return checkPass('https://www.mediafire.com/file/bf8lmrpfdz1sik5/YG-9WING_sign.apk/file')">
-         DOWNLOAD YG APK
-      </a>
-
-      <a href="#" class="cyber-button"
-         onclick="return checkPass('https://www.mediafire.com/file/lv75f3kdydvelr2/GG_BY_%25E0%25B8%25A7%25E0%25B8%25B4%25E0%25B9%2588%25E0%25B8%2587%25C2%25A9_99939.98.apk/file')">
-         DOWNLOAD GG APK
-      </a>
-
-      <a href="#" class="cyber-button"
-         onclick="return checkPass('https://www.mediafire.com/file/j42q9x8erh85o41/9WING.lua/file?dkey=q43y1lxnuhx&r=205')">
-         DOWNLOAD LUA
-      </a>
-
-      <a href="#" class="cyber-button"
-         onclick="return checkPass('https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING.exe')">
-         DOWNLOAD PC V.6
-      </a>
-
-      <a href="#" class="cyber-button"
-         onclick="return checkPass('https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING7.exe')">
-         DOWNLOAD PC V.7
-      </a>
-
+    <div class="header">
+      <img class="logo" src="https://img5.pic.in.th/file/secure-sv1/unnamed3ff1df7602e1035b.webp" alt="Download">
+      <div>
+        <h1>9WING DOWNLOAD</h1>
+        <p class="subtitle">กรอกรหัสเพื่อดาวน์โหลดทั้งหมด</p>
+      </div>
     </div>
 
-    <footer>
-      © 2026 9WING.SHOP All rights reserved.
-    </footer>
-  </div>
+    <div class="unlockBox">
+      <div class="row">
+        <div class="inputWrap">
+          <input id="password" type="password" placeholder="กรอกรหัสผ่าน..." autocomplete="off" />
+          <button class="eye" id="eyeBtn" type="button" onclick="toggleEye()" title="แสดง/ซ่อนรหัส">👁️</button>
+        </div>
+        <button class="btn" id="unlockBtn" type="button" onclick="unlock()">UNLOCK</button>
+      </div>
 
+      <div class="status">
+        <span class="chip warn" id="chipStatus">LOCK: ON</span>
+
+        <span class="chip" style="border-color:rgba(255,255,255,0.10); cursor:pointer;" onclick="logout()">
+          LOGOUT
+        </span>
+      </div>
+
+      <div class="tiny" id="helper"></div>
+    </div>
+
+    <div class="downloads">
+      <a class="cyber-button locked" href="https://www.mediafire.com/file/bf8lmrpfdz1sik5/YG-9WING_sign.apk/file">
+        <span>DOWNLOAD YG APK</span><span class="tag">🟢 SERVER</span>
+      </a>
+
+      <a class="cyber-button locked" href="https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/GG%20BY%20%E0%B8%A7%E0%B8%B4%E0%B9%88%E0%B8%87%C2%A9_99939.98.apk">
+        <span>DOWNLOAD GG APK</span><span class="tag">🟢 SERVER</span>
+      </a>
+
+      <a class="cyber-button locked" href="https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/9WING.lua">
+        <span>DOWNLOAD LUA</span><span class="tag">🟢 SERVER</span>
+      </a>
+
+      <a class="cyber-button locked" href="https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING.exe">
+        <span>DOWNLOAD PC V.6</span><span class="tag">🟢 SERVER</span>
+      </a>
+
+      <a class="cyber-button locked" href="https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING7.exe">
+        <span>DOWNLOAD PC V.7</span><span class="tag">🟢 SERVER</span>
+      </a>
+    </div>
+
+    <footer>© 2026 9WING.SHOP All rights reserved.</footer>
+  </div>
 </body>
 </html>
