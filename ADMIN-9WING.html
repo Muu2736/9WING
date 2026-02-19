@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>9WING Admin</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --cyan:#00ffff;
+    --purple:#8b5cf6;
+    --blue:#0066ff;
+    --card:rgba(15,15,25,0.92);
+    --border:rgba(0,255,255,0.28);
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:18px;
+    font-family:'Prompt',sans-serif;
+    color:#fff;
+    background:
+      radial-gradient(900px 500px at 20% 20%, rgba(139,92,246,0.25), transparent 60%),
+      radial-gradient(900px 500px at 80% 30%, rgba(0,255,255,0.18), transparent 60%),
+      radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 70%);
+  }
+  .box{
+    width:100%;
+    max-width:520px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:18px;
+    box-shadow:0 0 30px rgba(0,255,255,0.12);
+  }
+  h1{
+    margin:0 0 6px 0;
+    font-family:'Orbitron',sans-serif;
+    letter-spacing:1px;
+    font-size:1.2rem;
+    background:linear-gradient(45deg,var(--cyan),var(--purple));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .sub{color:rgba(255,255,255,0.7); font-size:0.9rem; margin:0 0 14px 0}
+  label{display:block; font-size:0.9rem; color:rgba(255,255,255,0.8); margin:12px 0 6px}
+  input{
+    width:100%;
+    padding:12px;
+    border-radius:10px;
+    border:1px solid rgba(0,255,255,0.35);
+    background:#0c0c14;
+    color:#fff;
+    outline:none;
+    font-size:1rem;
+  }
+  input:focus{border-color:rgba(0,255,255,0.75); box-shadow:0 0 18px rgba(0,255,255,0.15)}
+  .row{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap}
+  button{
+    flex:1;
+    min-width:140px;
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:900;
+    letter-spacing:1px;
+    background:linear-gradient(45deg,var(--cyan),var(--blue));
+    color:#000;
+    transition:0.25s;
+  }
+  button:hover{transform:translateY(-1px); filter:brightness(1.12)}
+  .result{
+    margin-top:14px;
+    border-radius:12px;
+    padding:14px;
+    border:1px solid rgba(255,255,255,0.08);
+    background:rgba(255,255,255,0.05);
+  }
+  .code{
+    font-family:'Orbitron',sans-serif;
+    font-size:1.25rem;
+    letter-spacing:1px;
+    color:#00ff66;
+    text-shadow:0 0 14px rgba(0,255,102,0.15);
+    word-break:break-all;
+  }
+  .mini{
+    margin-top:8px;
+    font-size:0.85rem;
+    color:rgba(255,255,255,0.65);
+  }
+  .warn{
+    margin-top:10px;
+    font-size:0.85rem;
+    color:rgba(255,255,255,0.55);
+  }
+</style>
+
+<script>
+  const PREFIX = "9WING-";
+
+  function getBangkokTodayYMD(){
+    // en-CA -> YYYY-MM-DD
+    const s = new Date().toLocaleString("en-CA", { timeZone: "Asia/Bangkok" });
+    const [d] = s.split(",").map(x=>x.trim());
+    return d;
+  }
+
+  function simpleHash(str){
+    let h = 2166136261;
+    for(let i=0;i<str.length;i++){
+      h ^= str.charCodeAt(i);
+      h = Math.imul(h, 16777619);
+    }
+    return (h >>> 0);
+  }
+
+  function generate(){
+    const secret = document.getElementById("secret").value;
+    const ymd = document.getElementById("date").value;
+
+    const out = document.getElementById("out");
+    const meta = document.getElementById("meta");
+    const msg = document.getElementById("msg");
+
+    if(!secret || secret.trim().length < 5){
+      msg.textContent = "ใส่ SECRET ให้ยาวหน่อย (อย่างน้อย 6 ตัวอักษร)";
+      out.textContent = "—";
+      meta.textContent = "";
+      return;
+    }
+
+    if(!ymd){
+      msg.textContent = "กรุณาเลือกวันที่";
+      out.textContent = "—";
+      meta.textContent = "";
+      return;
+    }
+
+    msg.textContent = "";
+
+    const h = simpleHash(`${ymd}|${secret}`);
+    const code4 = String(h % 10000).padStart(4, "0");
+    const password = PREFIX + code4;
+
+    out.textContent = password;
+    meta.textContent = `สำหรับวันที่ (เวลาไทย): ${ymd}`;
+  }
+
+  async function copyCode(){
+    const text = document.getElementById("out").textContent.trim();
+    if(!text || text === "—") return;
+    try{
+      await navigator.clipboard.writeText(text);
+      document.getElementById("msg").textContent = "คัดลอกแล้ว ✅";
+      setTimeout(()=> document.getElementById("msg").textContent = "", 1200);
+    }catch(e){
+      document.getElementById("msg").textContent = "คัดลอกไม่สำเร็จ (บางเบราว์เซอร์บล็อก) ❌";
+    }
+  }
+
+  window.addEventListener("DOMContentLoaded", ()=>{
+    document.getElementById("date").value = getBangkokTodayYMD();
+    // ถ้าต้องการให้ใส่ SECRET ค้างไว้ในเครื่องแอดมิน (ไม่แนะนำถ้าเครื่องคนอื่นใช้)
+    // const saved = localStorage.getItem("ninewing_admin_secret") || "";
+    // document.getElementById("secret").value = saved;
+  });
+</script>
+
+</head>
+<body>
+  <div class="box">
+    <h1>9WING ADMIN</h1>
+    <p class="sub">(รูปแบบ: <b>9WING-XXXX</b>)</p>
+
+    <label>9WING.SHOP</label>
+    <input id="secret" type="password" placeholder="KEY - ADMIN" />
+
+    <label>วันที่ (เวลาไทย)</label>
+    <input id="date" type="date" />
+
+    <div class="row">
+      <button type="button" onclick="generate()">GENERATE</button>
+      <button type="button" onclick="copyCode()">COPY</button>
+    </div>
+
+    <div class="result">
+      <div class="code" id="out">—</div>
+      <div class="mini" id="meta"></div>
+      <div class="warn" id="msg"></div>
+    </div>
+
+    <div class="warn" style="margin-top:14px">
+     
+    </div>
+  </div>
+</body>
+</html>
