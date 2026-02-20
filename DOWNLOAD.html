@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#0a0a0f">
 <title>9WING DOWNLOAD</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -41,7 +42,6 @@
     padding:20px;
   }
 
-  /* animated grid */
   .grid{
     position:fixed;
     inset:-40%;
@@ -102,20 +102,6 @@
     margin-bottom:14px;
   }
 
-  .logo{
-    width:78px; height:78px;
-    border-radius:14px;
-    object-fit:cover;
-    border:2px solid rgba(0,255,255,0.7);
-    box-shadow: 0 0 18px rgba(0,255,255,0.35);
-    animation: floaty 3.4s ease-in-out infinite;
-    background:#0f0f18;
-  }
-  @keyframes floaty{
-    0%,100%{ transform: translateY(0); }
-    50%{ transform: translateY(-8px); }
-  }
-
   h1{
     margin:0;
     font-family:'Orbitron',sans-serif;
@@ -160,7 +146,7 @@
     outline:none;
     background:#0c0c14;
     color:#fff;
-    font-size:1rem;
+    font-size:16px; /* กัน iOS ซูม */
     transition:0.25s;
     box-shadow: inset 0 0 0 1px rgba(255,255,255,0.03);
   }
@@ -185,6 +171,7 @@
     place-items:center;
     user-select:none;
     transition:0.2s;
+    touch-action: manipulation;
   }
   .eye:hover{ background: rgba(255,255,255,0.10); }
 
@@ -200,6 +187,7 @@
     color:#000;
     box-shadow: 0 8px 18px rgba(0,255,255,0.18);
     transition:0.25s;
+    touch-action: manipulation;
   }
   .btn:hover{ transform: translateY(-1px); filter: brightness(1.12); }
   .btn:disabled{
@@ -259,6 +247,7 @@
     transition:0.25s;
     position:relative;
     overflow:hidden;
+    touch-action: manipulation;
   }
 
   .cyber-button::after{
@@ -279,7 +268,6 @@
     box-shadow: 0 16px 30px rgba(0,255,255,0.18);
   }
 
-  /* locked state */
   .cyber-button.locked{
     opacity:0.35;
     filter: grayscale(40%);
@@ -309,15 +297,25 @@
     color: rgba(255,255,255,0.55);
     margin-top:6px;
   }
+
+  /* มือถือ */
+  @media (max-width: 420px){
+    body{ padding:12px; }
+    .container{ padding:18px; }
+    h1{ font-size:1.25rem; letter-spacing:1px; }
+    .row{ flex-direction:column; }
+    .btn{ width:100%; height:48px; }
+    input[type="password"], input[type="text"]{ height:48px; }
+  }
 </style>
 
 <script>
   // ===== DAILY PASSWORD (User enters: 9WING-XXXX) =====
-  const DAILY_SECRET = "9WING"; // 🔐 ใส่ SECRET ของคุณตรงนี้ (แอดมินเท่านั้นที่รู้)
+  const DAILY_SECRET = "9WING"; // ✅ SECRET ของคุณ
   const DAILY_PREFIX = "9WING-";
 
-  const MAX_FAILS = 3;
-  const LOCK_SECONDS = 60;
+  const MAX_FAILS = 5;
+  const LOCK_SECONDS = 9;
 
   const STORAGE_KEY_UNLOCKED = "ninewing_unlocked_daily_v1";
   const STORAGE_KEY_FAILS = "ninewing_fails_daily_v1";
@@ -409,12 +407,29 @@
     timerId = setInterval(tick, 250);
   }
 
+  // ===== ซ่อน/ใส่ลิงก์จริง =====
+  function applyLinksWhenUnlocked(){
+    qsa(".cyber-button").forEach(a=>{
+      const url = a.getAttribute("data-url");
+      if(url) a.setAttribute("href", url);
+    });
+  }
+
+  function stripLinksWhenLocked(){
+    qsa(".cyber-button").forEach(a=>{
+      a.setAttribute("href", "#"); // ล็อก = ไม่มีลิงก์จริง
+    });
+  }
+
   function logout(){
     localStorage.removeItem(STORAGE_KEY_UNLOCKED);
     localStorage.removeItem(STORAGE_KEY_DAYSTAMP);
     setFails(0);
     setLockUntil(0);
+
     lockButtons(true);
+    stripLinksWhenLocked();
+
     setChip("warn", "LOCK: ON");
     setHelper("ออกจากโหมดปลดล็อกแล้ว 🔒");
     setBtnDisabled(false);
@@ -448,6 +463,8 @@
       setLockUntil(0);
 
       lockButtons(false);
+      applyLinksWhenUnlocked();
+
       setChip("ok", "ACCESS GRANTED");
       setHelper("✅ ปลดล็อกสำเร็จ! (รหัสรายวัน) — โหลดได้ทั้งหมด");
       setBtnDisabled(false);
@@ -475,24 +492,37 @@
 
   function toggleEye(){
     const input = qs("#password");
+    const eyeBtn = qs("#eyeBtn");
     input.type = (input.type === "password") ? "text" : "password";
-    qs("#eyeBtn").textContent = (input.type === "password") ? "👁️" : "🙈";
+    eyeBtn.textContent = (input.type === "password") ? "😲" : "😑";
     input.focus();
   }
 
   function init(){
+    // กันกดปุ่มดาวน์โหลดตอนล็อก (เด้งข้อความ)
+    document.addEventListener("click", (e)=>{
+      const a = e.target.closest(".cyber-button");
+      if(!a) return;
+      if(a.classList.contains("locked")){
+        e.preventDefault();
+        setHelper("🔒 ยังล็อกอยู่ — ใส่รหัสก่อน");
+      }
+    });
+
     qs("#password").addEventListener("keydown",(e)=>{ if(e.key==="Enter") unlock(); });
 
     invalidateIfNewDay();
 
     if(isUnlocked()){
       lockButtons(false);
+      applyLinksWhenUnlocked();
       setChip("ok", "ACCESS GRANTED");
-      setHelper("สถานะถูกบันทึกไว้แล้ว (วันนี้) — โหลดได้เลย ✅");
+      setHelper("สถานะถูกบันทึกไว้แล้ว โหลดได้เลย ✅");
     }else{
       lockButtons(true);
+      stripLinksWhenLocked();
       setChip("warn", "LOCK: ON");
-      setHelper("โหมดรหัสรายวัน: รูปแบบรหัสคือ 9WING-XXXX");
+      setHelper("กรอกรหัสที่ได้รับมา 9WING-XXXX");
     }
 
     if(remainingLockSeconds() > 0) startCountdown();
@@ -502,6 +532,27 @@
   window.logout = logout;
   window.toggleEye = toggleEye;
   window.addEventListener("DOMContentLoaded", init);
+
+  // ===== ปิดคลิกขวา + กัน DevTools เฉพาะ Desktop (ไม่ทำร้ายมือถือ) =====
+  const isDesktop = window.matchMedia && window.matchMedia("(pointer: fine)").matches;
+  if (isDesktop) {
+    document.addEventListener("contextmenu", (e) => e.preventDefault(), { passive:false });
+
+    document.addEventListener("keydown", (e) => {
+      const k = (e.key || "").toLowerCase();
+      const block =
+        e.key === "F12" ||
+        (e.ctrlKey && e.shiftKey && ["i","j","c"].includes(k)) ||
+        (e.metaKey && e.altKey && ["i","j","c"].includes(k)) ||
+        (e.ctrlKey && ["u","s","p"].includes(k)); // view source/save/print
+
+      if (block) {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }
+    }, true);
+  }
 </script>
 </head>
 
@@ -512,10 +563,9 @@
     <div class="scanline"></div>
 
     <div class="header">
-      <img class="logo" src="https://img5.pic.in.th/file/secure-sv1/unnamed3ff1df7602e1035b.webp" alt="Download">
       <div>
         <h1>9WING DOWNLOAD</h1>
-        <p class="subtitle">กรอกรหัสเพื่อดาวน์โหลดทั้งหมด</p>
+        <p class="subtitle">กรอกรหัสที่ได้รับจาก 9WING</p>
       </div>
     </div>
 
@@ -523,14 +573,13 @@
       <div class="row">
         <div class="inputWrap">
           <input id="password" type="password" placeholder="กรอกรหัสผ่าน..." autocomplete="off" />
-          <button class="eye" id="eyeBtn" type="button" onclick="toggleEye()" title="แสดง/ซ่อนรหัส">👁️</button>
+          <button class="eye" id="eyeBtn" type="button" onclick="toggleEye()" title="แสดง/ซ่อนรหัส">😲</button>
         </div>
         <button class="btn" id="unlockBtn" type="button" onclick="unlock()">UNLOCK</button>
       </div>
 
       <div class="status">
         <span class="chip warn" id="chipStatus">LOCK: ON</span>
-
         <span class="chip" style="border-color:rgba(255,255,255,0.10); cursor:pointer;" onclick="logout()">
           LOGOUT
         </span>
@@ -540,23 +589,28 @@
     </div>
 
     <div class="downloads">
-      <a class="cyber-button locked" href="https://www.mediafire.com/file/bf8lmrpfdz1sik5/YG-9WING_sign.apk/file">
+      <a class="cyber-button locked" href="#"
+         data-url="https://www.mediafire.com/file/bf8lmrpfdz1sik5/YG-9WING_sign.apk/file">
         <span>DOWNLOAD YG APK</span><span class="tag">🟢 SERVER</span>
       </a>
 
-      <a class="cyber-button locked" href="https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/GG%20BY%20%E0%B8%A7%E0%B8%B4%E0%B9%88%E0%B8%87%C2%A9_99939.98.apk">
+      <a class="cyber-button locked" href="#"
+         data-url="https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/GG%20BY%20%E0%B8%A7%E0%B8%B4%E0%B9%88%E0%B8%87%C2%A9_99939.98.apk">
         <span>DOWNLOAD GG APK</span><span class="tag">🟢 SERVER</span>
       </a>
 
-      <a class="cyber-button locked" href="https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/9WING.lua">
+      <a class="cyber-button locked" href="#"
+         data-url="https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/9WING.lua">
         <span>DOWNLOAD LUA</span><span class="tag">🟢 SERVER</span>
       </a>
 
-      <a class="cyber-button locked" href="https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING.exe">
+      <a class="cyber-button locked" href="#"
+         data-url="https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING.exe">
         <span>DOWNLOAD PC V.6</span><span class="tag">🟢 SERVER</span>
       </a>
 
-      <a class="cyber-button locked" href="https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING7.exe">
+      <a class="cyber-button locked" href="#"
+         data-url="https://github.com/Muu2736/9WING/raw/refs/heads/main/9WING7.exe">
         <span>DOWNLOAD PC V.7</span><span class="tag">🟢 SERVER</span>
       </a>
     </div>
