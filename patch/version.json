@@ -1,17 +1,11 @@
 {
-  "build": "2026-02-22-1",
+  "build": "1",
   "files": [
     {
-      "path": "%temp%",
+      "path": "login/1.exe",
       "url": "https://github.com/Muu2736/9WING/raw/refs/heads/main/login/1.exe",
       "size": 0,
-      "sha256": "0"
-    },
-    {
-      "path": "data/pak1.pak",
-      "url": "https://www.9wing.shop/patch/data/pak1.pak",
-      "size": 52428800,
-      "sha256": "ใส่ค่าsha256จริงที่นี่"
+      "sha256": ""
     }
   ]
 }
