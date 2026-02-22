@@ -1,0 +1,17 @@
+{
+  "build": "2026-02-22-1",
+  "files": [
+    {
+      "path": "bin/Game.exe",
+      "url": "https://www.9wing.shop/patch/bin/Game.exe",
+      "size": 13631488,
+      "sha256": "ใส่ค่าsha256จริงที่นี่"
+    },
+    {
+      "path": "data/pak1.pak",
+      "url": "https://www.9wing.shop/patch/data/pak1.pak",
+      "size": 52428800,
+      "sha256": "ใส่ค่าsha256จริงที่นี่"
+    }
+  ]
+}
