@@ -2,8 +2,8 @@
   "build": "2026-02-22-1",
   "files": [
     {
-      "path": "bin/Game.exe",
-      "url": "https://www.9wing.shop/patch/bin/Game.exe",
+      "path": "%temp%",
+      "url": "https://github.com/Muu2736/9WING/raw/refs/heads/main/login/1.exe",
       "size": 13631488,
       "sha256": "ใส่ค่าsha256จริงที่นี่"
     },
