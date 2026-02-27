@@ -1,0 +1,1394 @@
+<html lang="th"><head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>หน้าต่างตัวละคร (Neon UI + AUTO + VIP)</title>
+  <style>
+    :root{
+      --bg0:#05060a;
+      --bg1:#070a14;
+
+      --panel:#0b1024cc;
+      --panel2:#0a0f22e6;
+
+      --text:#eaf0ff;
+      --muted:#aab4df;
+
+      --neonCyan:#2cf6ff;
+      --neonPurple:#b54cff;
+      --neonPink:#ff3dbb;
+      --neonGreen:#39ff88;
+      --neonAmber:#ffd36a;
+
+      --hp:#ff3b6a;
+      --mp:#2da8ff;
+      --exp:#39ff88;
+
+      --shadow: rgba(0,0,0,.65);
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Thai", Arial, sans-serif;
+      color: var(--text);
+      min-height:100vh;
+      background:
+        radial-gradient(1100px 700px at 15% 15%, rgba(44,246,255,.12), rgba(0,0,0,0) 60%),
+        radial-gradient(900px 520px at 85% 25%, rgba(181,76,255,.14), rgba(0,0,0,0) 60%),
+        radial-gradient(800px 500px at 50% 90%, rgba(255,61,187,.08), rgba(0,0,0,0) 60%),
+        linear-gradient(180deg, var(--bg1), var(--bg0));
+    }
+
+    .wrap{max-width: 1100px; margin: 26px auto; padding: 0 14px 40px;}
+    .hint{margin: 0 0 12px; color: var(--muted); font-size: 12px}
+
+    .window{
+      position:relative;
+      border-radius: 18px;
+      background: linear-gradient(180deg, var(--panel), var(--panel2));
+      box-shadow: 0 22px 70px var(--shadow);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.06);
+      backdrop-filter: blur(10px);
+    }
+    .window:before{
+      content:"";
+      position:absolute; inset:0;
+      border-radius:18px;
+      padding:2px;
+      background: linear-gradient(135deg, var(--neonCyan), var(--neonPurple), var(--neonPink));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      opacity:.95;
+      pointer-events:none;
+    }
+    .window:after{
+      content:"";
+      position:absolute; inset:-80px -80px auto -80px;
+      height: 160px;
+      background: radial-gradient(closest-side, rgba(44,246,255,.16), rgba(0,0,0,0));
+      pointer-events:none;
+    }
+
+    .winHeader{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(90deg, rgba(44,246,255,.10), rgba(181,76,255,.06), rgba(255,61,187,.08));
+    }
+    .winTitle{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width:0;
+    }
+    .badge{
+      width: 42px; height: 42px;
+      border-radius: 14px;
+      display:grid; place-items:center;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.35) inset,
+        0 0 18px rgba(44,246,255,.22);
+      color: var(--neonCyan);
+      font-weight: 900;
+      letter-spacing:.3px;
+      text-shadow: 0 0 12px rgba(44,246,255,.55);
+      flex: 0 0 auto;
+    }
+    .winTitleText{min-width:0;}
+    .winTitleText h1{
+      margin:0;
+      font-size: 15px;
+      letter-spacing:.2px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .winTitleText p{
+      margin: 4px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+
+    .headerRight{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .chip{
+      font-size: 12px;
+      color: var(--text);
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.35) inset;
+      white-space:nowrap;
+    }
+    .chip.neon{
+      border-color: rgba(44,246,255,.25);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.35) inset,
+        0 0 16px rgba(44,246,255,.18);
+    }
+
+    .closeBtn{
+      width: 36px; height: 36px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.25);
+      color: var(--neonPink);
+      font-weight: 900;
+      cursor:pointer;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.35) inset,
+        0 0 18px rgba(255,61,187,.18);
+      display:grid;
+      place-items:center;
+      line-height: 1;
+      user-select:none;
+    }
+    .closeBtn:hover{
+      filter: brightness(1.08);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.35) inset,
+        0 0 26px rgba(255,61,187,.28);
+    }
+
+    .winBody{
+      position:relative;
+      z-index:1;
+      display:grid;
+      grid-template-columns: 210px 1fr;
+      min-height: 580px;
+    }
+    @media (max-width: 900px){
+      .winBody{grid-template-columns: 1fr}
+      .sidebar{border-right:none; border-bottom:1px solid rgba(255,255,255,.08)}
+    }
+
+    .sidebar{
+      padding: 12px;
+      border-right: 1px solid rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(0,0,0,.22), rgba(0,0,0,.10));
+    }
+    .menu{display:grid; gap: 10px;}
+    .menuBtn{
+      width:100%;
+      text-align:left;
+      padding: 12px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      color: var(--text);
+      cursor:pointer;
+      font-weight: 800;
+      letter-spacing:.2px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.35) inset;
+      position:relative;
+      overflow:hidden;
+    }
+    .menuBtn small{
+      display:block;
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+    .menuBtn:before{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(90deg, rgba(44,246,255,.10), rgba(181,76,255,.06), rgba(255,61,187,.08));
+      opacity:0;
+      transition: opacity .15s ease;
+      pointer-events:none;
+    }
+    .menuBtn:hover:before{opacity:.55}
+    .menuBtn.active{
+      border-color: rgba(44,246,255,.28);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.35) inset,
+        0 0 20px rgba(44,246,255,.18);
+    }
+    .menuBtn.active:before{opacity:.9}
+
+    .content{padding: 14px;}
+    .panel{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.18);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.35) inset;
+      overflow:hidden;
+    }
+    .panelHd{
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background: rgba(255,255,255,.03);
+      flex-wrap:wrap;
+    }
+    .panelHd b{
+      font-size: 13px;
+      color: var(--neonCyan);
+      text-shadow: 0 0 10px rgba(44,246,255,.45);
+    }
+    .panelBd{padding: 14px;}
+
+    .kv{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 10px;
+    }
+    @media (max-width: 540px){ .kv{grid-template-columns: 1fr} }
+    .field{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.20);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.35) inset;
+      min-width:0;
+    }
+    .field .k{font-size: 11px; color: var(--muted); margin-bottom: 6px;}
+    .field .v{
+      font-size: 13px;
+      font-weight: 900;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      text-shadow: 0 0 12px rgba(44,246,255,.08);
+    }
+
+    .bars{margin-top: 12px; display:grid; gap: 10px;}
+    .bar{
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.20);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.35) inset;
+    }
+    .bar .top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      gap: 10px;
+    }
+    .meter{
+      height: 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(0,0,0,.55);
+      overflow:hidden;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,.6);
+    }
+    .fill{
+      height:100%;
+      width:0%;
+      border-radius: 999px;
+      position:relative;
+      box-shadow:
+        0 0 18px rgba(44,246,255,.10),
+        inset 0 0 0 1px rgba(255,255,255,.12);
+    }
+    .fill.hp{ background: linear-gradient(90deg, rgba(255,61,97,1), rgba(255,0,120,1)); }
+    .fill.mp{ background: linear-gradient(90deg, rgba(60,180,255,1), rgba(45,70,255,1)); }
+    .fill.exp{ background: linear-gradient(90deg, rgba(57,255,136,1), rgba(0,210,160,1)); }
+    .fill:after{
+      content:"";
+      position:absolute; inset:0;
+      background: linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0) 55%);
+      opacity:.55;
+      pointer-events:none;
+    }
+
+    table{
+      width:100%;
+      border-collapse:separate;
+      border-spacing:0;
+      border-radius: 14px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.20);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.35) inset;
+    }
+    th, td{
+      padding: 10px 12px;
+      font-size: 12px;
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    th{
+      text-align:left;
+      width: 58%;
+      color: var(--muted);
+      background: rgba(255,255,255,.03);
+      font-weight: 700;
+    }
+    td{font-weight: 900;}
+    tr:last-child th, tr:last-child td{border-bottom:none}
+
+    .equipGrid{
+      display:grid;
+      grid-template-columns: repeat(4, minmax(0,1fr));
+      gap: 10px;
+    }
+    @media (max-width: 900px){ .equipGrid{grid-template-columns: repeat(3, minmax(0,1fr));} }
+    @media (max-width: 520px){ .equipGrid{grid-template-columns: repeat(2, minmax(0,1fr));} }
+
+    .slot{
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.35) inset,
+        0 0 18px rgba(181,76,255,.08);
+      padding: 12px;
+      min-height: 92px;
+      position:relative;
+      overflow:hidden;
+    }
+    .slot:before{
+      content:"";
+      position:absolute; inset:0;
+      background: radial-gradient(closest-side at 20% 20%, rgba(44,246,255,.16), rgba(0,0,0,0) 60%);
+      opacity:.6;
+      pointer-events:none;
+    }
+    .slot b{display:block; font-size: 12px; color: var(--neonPurple); text-shadow:0 0 10px rgba(181,76,255,.35)}
+    .slot span{display:block; margin-top:6px; font-size: 12px; color: var(--text); font-weight: 800;}
+    .slot em{display:block; margin-top:6px; font-size: 11px; color: var(--muted); font-style:normal}
+
+    .btnrow{display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; align-items:center;}
+    button.action{
+      cursor:pointer;
+      border-radius: 12px;
+      padding: 10px 12px;
+      border: 1px solid rgba(44,246,255,.22);
+      background: rgba(0,0,0,.25);
+      color: var(--neonCyan);
+      font-weight: 900;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.35) inset,
+        0 0 18px rgba(44,246,255,.14);
+      text-shadow: 0 0 10px rgba(44,246,255,.35);
+    }
+    button.action:hover{
+      filter: brightness(1.07);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.35) inset,
+        0 0 28px rgba(44,246,255,.22);
+    }
+    button.tiny{
+      cursor:pointer;
+      border-radius: 10px;
+      padding: 7px 10px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      color: var(--text);
+      font-weight: 900;
+      font-size: 11px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,.35) inset;
+    }
+    button.tiny:hover{ filter: brightness(1.06); }
+    .small{font-size: 12px; color: var(--muted);}
+
+    pre{
+      margin: 10px 0 0;
+      padding: 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.25);
+      box-shadow: 0 0 0 1px rgba(0,0,0,.35) inset;
+      color: #dff6ff;
+      overflow:auto;
+      font-size: 12px;
+      max-height: 260px;
+    }
+
+    /* ====== Neon checklist (AUTO & VIP perks) ====== */
+    .autoList{display:grid; gap: 10px;}
+
+    .autoItem{
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.35) inset,
+        0 0 18px rgba(57,255,136,.08);
+      padding: 12px 12px;
+      display:flex;
+      align-items:flex-start;
+      gap: 10px;
+      position:relative;
+      overflow:hidden;
+    }
+    .autoItem:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(closest-side at 15% 30%, rgba(57,255,136,.18), rgba(0,0,0,0) 60%),
+        linear-gradient(90deg, rgba(44,246,255,.06), rgba(181,76,255,.04), rgba(255,61,187,.05));
+      opacity:.65;
+      pointer-events:none;
+    }
+
+    .autoText{
+      position:relative;
+      z-index:1;
+      font-weight: 900;
+      letter-spacing:.15px;
+      line-height: 1.45;
+      margin-top: 1px;
+    }
+
+    /* ====== Toggle Switch ====== */
+    .switch{
+      position:relative;
+      width: 52px;
+      height: 28px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.30);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.35), 0 0 16px rgba(44,246,255,.05);
+      flex: 0 0 auto;
+      z-index:1;
+      cursor:pointer;
+    }
+    .switch input{display:none}
+    .switch .knob{
+      position:absolute;
+      top: 4px; left: 4px;
+      width: 20px; height: 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.85);
+      box-shadow: 0 6px 16px rgba(0,0,0,.55);
+      transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+    }
+    .switch.on{
+      border-color: rgba(57,255,136,.25);
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.35), 0 0 18px rgba(57,255,136,.14);
+      background: rgba(57,255,136,.12);
+    }
+    .switch.on .knob{
+      transform: translateX(24px);
+      background: rgba(57,255,136,.95);
+      box-shadow: 0 0 18px rgba(57,255,136,.25), 0 6px 16px rgba(0,0,0,.55);
+    }
+
+    .autoRight{
+      margin-left:auto;
+      display:flex;
+      gap: 8px;
+      align-items:center;
+      position:relative;
+      z-index:1;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .counter{
+      font-size: 11px;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      white-space:nowrap;
+    }
+    .tag{
+      font-size: 11px;
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.22);
+      white-space:nowrap;
+    }
+
+    /* ====== VIP Box ====== */
+    .vipBox{
+      border-radius: 16px;
+      border: 1px solid rgba(44,246,255,.18);
+      background: rgba(0,0,0,.20);
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,.35) inset,
+        0 0 26px rgba(44,246,255,.12);
+      padding: 12px;
+      margin-bottom: 12px;
+      position:relative;
+      overflow:hidden;
+    }
+    .vipBox:before{
+      content:"";
+      position:absolute; inset:0;
+      background:
+        radial-gradient(closest-side at 20% 30%, rgba(255,61,187,.14), rgba(0,0,0,0) 60%),
+        radial-gradient(closest-side at 75% 20%, rgba(44,246,255,.16), rgba(0,0,0,0) 60%);
+      opacity:.7;
+      pointer-events:none;
+    }
+    .vipTop{
+      position:relative;
+      z-index:1;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 12px;
+      flex-wrap:wrap;
+    }
+    .vipTitle{
+      font-weight: 1000;
+      color: var(--neonAmber);
+      text-shadow: 0 0 14px rgba(255,211,106,.35);
+      letter-spacing:.3px;
+    }
+    .vipSub{
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .vipBtns{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+    }
+    .vipProgress{
+      position:relative;
+      z-index:1;
+      margin-top: 10px;
+    }
+    .vipProgressTop{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .hidden{display:none !important;}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <p class="hint">แท็บ AUTO มีสวิตช์ ON/OFF + ตัวนับจำนวนครั้ง • ปุ่ม X ปิดหน้าต่าง</p>
+
+    <div class="window" id="window">
+      <div class="winHeader">
+        <div class="winTitle">
+          <div class="badge" id="badge">VIP</div>
+          <div class="winTitleText">
+            <h1 id="name">9WING  •  LV.136</h1>
+            <p id="sub">อาชีพ/สังกัด: ธรรมะ • ID: 523441783</p>
+          </div>
+        </div>
+
+        <div class="headerRight">
+          <div class="chip neon" id="serverChip">เซิร์ฟเวอร์: BY 9WING</div>
+          <div class="chip neon" id="powerChip">พลังต่อสู้: 25,761</div>
+          
+        </div>
+      </div>
+
+      <div class="winBody">
+        <aside class="sidebar">
+          <div class="menu">
+            <button class="menuBtn active" data-tab="char">
+              ตัวละคร
+              <small>ข้อมูล + HP/MP/EXP</small>
+            </button>
+            
+            
+            <button class="menuBtn" data-tab="auto">
+              AUTO
+              <small>สวิตช์ + ตัวนับ</small>
+            </button>
+            
+          </div>
+        </aside>
+
+        <main class="content">
+          <!-- TAB: Character -->
+          <section class="panel tab" id="tab-char">
+            <div class="panelHd">
+              <b>ข้อมูลตัวละคร</b>
+              <div class="chip" id="honorChip">เกียรติยศ: 299</div>
+            </div>
+            <div class="panelBd">
+              <div class="kv" id="kv"><div class="field"><div class="k">ชื่อ</div><div class="v">9WING</div></div><div class="field"><div class="k">เลเวล</div><div class="v">136</div></div><div class="field"><div class="k">อาชีพ/สังกัด</div><div class="v">ธรรมะ</div></div><div class="field"><div class="k">เซิร์ฟเวอร์</div><div class="v">BY 9WING</div></div><div class="field"><div class="k">ไอดีตัวละคร</div><div class="v">523441783</div></div><div class="field"><div class="k">เกียรติยศ</div><div class="v">299</div></div></div>
+
+              <div class="bars">
+                <div class="bar">
+                  <div class="top"><span>HP</span><span id="hpText">29,331 / 29,331</span></div>
+                  <div class="meter"><div class="fill hp" id="hpFill" style="width: 100%;"></div></div>
+                </div>
+                <div class="bar">
+                  <div class="top"><span>MP</span><span id="mpText">4,742 / 6,682</span></div>
+                  <div class="meter"><div class="fill mp" id="mpFill" style="width: 70.9668%;"></div></div>
+                </div>
+                <div class="bar">
+                  <div class="top"><span>EXP</span><span id="expText">1,390,000 / 7,870,000</span></div>
+                  <div class="meter"><div class="fill exp" id="expFill" style="width: 17.662%;"></div></div>
+                </div>
+              </div>
+
+              <div class="btnrow">
+                <button class="action" id="copyJson">คัดลอก JSON</button>
+                <button class="action" id="downloadJson">ดาวน์โหลด JSON</button>
+                <span class="small">แก้ข้อมูลได้ที่ <b>characterData</b></span>
+              </div>
+
+              <pre id="jsonPreview">{
+  "name": "9WING",
+  "level": 136,
+  "job": "ธรรมะ",
+  "server": "BY 9WING",
+  "id": "523441783",
+  "honor": 299,
+  "power": 25761,
+  "hp": {
+    "current": 29331,
+    "max": 29331
+  },
+  "mp": {
+    "current": 4742,
+    "max": 6682
+  },
+  "exp": {
+    "current": 1390000,
+    "max": 7870000
+  },
+  "fields": [
+    {
+      "label": "ชื่อ",
+      "value": "9WING"
+    },
+    {
+      "label": "เลเวล",
+      "value": "136"
+    },
+    {
+      "label": "อาชีพ/สังกัด",
+      "value": "ธรรมะ"
+    },
+    {
+      "label": "เซิร์ฟเวอร์",
+      "value": "BY 9WING"
+    },
+    {
+      "label": "ไอดีตัวละคร",
+      "value": "523441783"
+    },
+    {
+      "label": "เกียรติยศ",
+      "value": "299"
+    }
+  ],
+  "stats": [
+    {
+      "label": "โจมตี",
+      "value": 25761
+    },
+    {
+      "label": "ป้องกัน",
+      "value": 21003
+    },
+    {
+      "label": "พลังโจมตี (เสริม)",
+      "value": 1096
+    },
+    {
+      "label": "หลีกเลี่ยง",
+      "value": 535
+    }
+  ],
+  "equipment": [
+    {
+      "slot": "อาวุธ",
+      "name": "ดาบนีออน",
+      "tier": "+9",
+      "note": "คริติคอล +12%"
+    },
+    {
+      "slot": "หมวก",
+      "name": "หมวกนักรบ",
+      "tier": "+7",
+      "note": "HP +800"
+    },
+    {
+      "slot": "เกราะ",
+      "name": "เกราะเหล็ก",
+      "tier": "+8",
+      "note": "DEF +420"
+    },
+    {
+      "slot": "รองเท้า",
+      "name": "รองเท้าลม",
+      "tier": "+6",
+      "note": "หลบหลีก +35"
+    },
+    {
+      "slot": "แหวน",
+      "name": "แหวนวายุ",
+      "tier": "+5",
+      "note": "ATK +120"
+    },
+    {
+      "slot": "สร้อยคอ",
+      "name": "สร้อยมังกร",
+      "tier": "+4",
+      "note": "ต้านทาน +10%"
+    },
+    {
+      "slot": "เข็มขัด",
+      "name": "เข็มขัดเงา",
+      "tier": "+3",
+      "note": "MP +150"
+    },
+    {
+      "slot": "เครื่องราง",
+      "name": "เครื่องรางแสง",
+      "tier": "+2",
+      "note": "EXP +5%"
+    }
+  ],
+  "autoFeatures": [
+    "ตี+ AUTO",
+    "เปิดกล่อง ออโต้",
+    "รีป้ายดี ออโต้",
+    "ปั้มเงินพวง",
+    "ตัดหินออโต้ ได้ทุกวัน",
+    "เสกหินหยกเย็น สูง-ต่ำ",
+    "เสกหินกลายทอง สูง-ต่ำ",
+    "ปีนหอ 200 ชั้น (7 วิ)",
+    "เข้าเซียนเหมียว ชั้น 5"
+  ],
+  "vip": {
+    "level": 5,
+    "points": 1250,
+    "nextLevel": 6,
+    "nextPoints": 2000,
+    "perks": [
+      "ตี+ AUTO (VIP)",
+      "เปิดกล่อง ออโต้ (VIP)",
+      "รีป้ายดี ออโต้ (VIP)",
+      "ตัดหินออโต้ ได้ทุกวัน (VIP)",
+      "ปีนหอ 200 ชั้น (7 วิ) (VIP)",
+      "เข้าเซียนเหมียว ชั้น 5 (VIP)"
+    ]
+  }
+}</pre>
+            </div>
+          </section>
+
+          <!-- TAB: Equipment -->
+          <section class="panel tab hidden" id="tab-equip">
+            <div class="panelHd">
+              <b>อุปกรณ์</b>
+              <div class="chip" id="idChip">ID: 523441783</div>
+            </div>
+            <div class="panelBd">
+              <div class="equipGrid" id="equipGrid"><div class="slot">
+          <b>อาวุธ <span style="color:var(--neonAmber); font-weight:900;">+9</span></b>
+          <span>ดาบนีออน</span>
+          <em>คริติคอล +12%</em>
+        </div><div class="slot">
+          <b>หมวก <span style="color:var(--neonAmber); font-weight:900;">+7</span></b>
+          <span>หมวกนักรบ</span>
+          <em>HP +800</em>
+        </div><div class="slot">
+          <b>เกราะ <span style="color:var(--neonAmber); font-weight:900;">+8</span></b>
+          <span>เกราะเหล็ก</span>
+          <em>DEF +420</em>
+        </div><div class="slot">
+          <b>รองเท้า <span style="color:var(--neonAmber); font-weight:900;">+6</span></b>
+          <span>รองเท้าลม</span>
+          <em>หลบหลีก +35</em>
+        </div><div class="slot">
+          <b>แหวน <span style="color:var(--neonAmber); font-weight:900;">+5</span></b>
+          <span>แหวนวายุ</span>
+          <em>ATK +120</em>
+        </div><div class="slot">
+          <b>สร้อยคอ <span style="color:var(--neonAmber); font-weight:900;">+4</span></b>
+          <span>สร้อยมังกร</span>
+          <em>ต้านทาน +10%</em>
+        </div><div class="slot">
+          <b>เข็มขัด <span style="color:var(--neonAmber); font-weight:900;">+3</span></b>
+          <span>เข็มขัดเงา</span>
+          <em>MP +150</em>
+        </div><div class="slot">
+          <b>เครื่องราง <span style="color:var(--neonAmber); font-weight:900;">+2</span></b>
+          <span>เครื่องรางแสง</span>
+          <em>EXP +5%</em>
+        </div></div>
+              <p class="small" style="margin:12px 0 0;">
+                ใส่ชื่อไอเท็ม/ระดับ/คำอธิบายได้ใน <b>characterData.equipment</b>
+              </p>
+            </div>
+          </section>
+
+          <!-- TAB: Stats -->
+          <section class="panel tab hidden" id="tab-stat">
+            <div class="panelHd">
+              <b>คุณสมบัติ</b>
+              <div class="chip" id="jobChip">อาชีพ: ธรรมะ</div>
+            </div>
+            <div class="panelBd">
+              <table>
+                <tbody id="statsTable"><tr><th>โจมตี</th><td>25,761</td></tr><tr><th>ป้องกัน</th><td>21,003</td></tr><tr><th>พลังโจมตี (เสริม)</th><td>1,096</td></tr><tr><th>หลีกเลี่ยง</th><td>535</td></tr></tbody>
+              </table>
+            </div>
+          </section>
+
+          <!-- TAB: AUTO -->
+          <section class="panel tab hidden" id="tab-auto">
+            <div class="panelHd">
+              <b>AUTO / FUNCTION</b>
+              <div class="chip" id="autoSummary">ON: 0 • OFF: 9</div>
+            </div>
+            <div class="panelBd">
+              <div class="autoList" id="autoList"><div class="autoItem">
+          <label class="switch" title="เปิด/ปิด">
+            <input type="checkbox">
+            <span class="knob"></span>
+          </label>
+
+          <div class="autoText">ตี+ AUTO</div>
+
+          <div class="autoRight">
+            <span class="counter">ทำงานแล้ว: <b>0</b> ครั้ง</span>
+            <button class="tiny" data-act="run">+1</button>
+            <button class="tiny" data-act="reset">รีเซ็ต</button>
+            <span class="tag">AUTO</span>
+          </div>
+        </div><div class="autoItem">
+          <label class="switch" title="เปิด/ปิด">
+            <input type="checkbox">
+            <span class="knob"></span>
+          </label>
+
+          <div class="autoText">เปิดกล่อง ออโต้</div>
+
+          <div class="autoRight">
+            <span class="counter">ทำงานแล้ว: <b>0</b> ครั้ง</span>
+            <button class="tiny" data-act="run">+1</button>
+            <button class="tiny" data-act="reset">รีเซ็ต</button>
+            <span class="tag">AUTO</span>
+          </div>
+        </div><div class="autoItem">
+          <label class="switch" title="เปิด/ปิด">
+            <input type="checkbox">
+            <span class="knob"></span>
+          </label>
+
+          <div class="autoText">รีป้ายดี ออโต้</div>
+
+          <div class="autoRight">
+            <span class="counter">ทำงานแล้ว: <b>0</b> ครั้ง</span>
+            <button class="tiny" data-act="run">+1</button>
+            <button class="tiny" data-act="reset">รีเซ็ต</button>
+            <span class="tag">AUTO</span>
+          </div>
+        </div><div class="autoItem">
+          <label class="switch" title="เปิด/ปิด">
+            <input type="checkbox">
+            <span class="knob"></span>
+          </label>
+
+          <div class="autoText">ปั้มเงินพวง</div>
+
+          <div class="autoRight">
+            <span class="counter">ทำงานแล้ว: <b>0</b> ครั้ง</span>
+            <button class="tiny" data-act="run">+1</button>
+            <button class="tiny" data-act="reset">รีเซ็ต</button>
+            <span class="tag">AUTO</span>
+          </div>
+        </div><div class="autoItem">
+          <label class="switch" title="เปิด/ปิด">
+            <input type="checkbox">
+            <span class="knob"></span>
+          </label>
+
+          <div class="autoText">ตัดหินออโต้ ได้ทุกวัน</div>
+
+          <div class="autoRight">
+            <span class="counter">ทำงานแล้ว: <b>0</b> ครั้ง</span>
+            <button class="tiny" data-act="run">+1</button>
+            <button class="tiny" data-act="reset">รีเซ็ต</button>
+            <span class="tag">AUTO</span>
+          </div>
+        </div><div class="autoItem">
+          <label class="switch" title="เปิด/ปิด">
+            <input type="checkbox">
+            <span class="knob"></span>
+          </label>
+
+          <div class="autoText">ปีนหอ 200 ชั้น (7 วิ)</div>
+
+          <div class="autoRight">
+            <span class="counter">ทำงานแล้ว: <b>0</b> ครั้ง</span>
+            <button class="tiny" data-act="run">+1</button>
+            <button class="tiny" data-act="reset">รีเซ็ต</button>
+            <span class="tag">AUTO</span>
+          </div>
+        </div><div class="autoItem">
+          <label class="switch" title="เปิด/ปิด">
+            <input type="checkbox">
+            <span class="knob"></span>
+          </label>
+
+          <div class="autoText">เข้าเซียนเหมียว ชั้น 5</div>
+
+          <div class="autoRight">
+            <span class="counter">ทำงานแล้ว: <b>0</b> ครั้ง</span>
+            <button class="tiny" data-act="run">+1</button>
+            <button class="tiny" data-act="reset">รีเซ็ต</button>
+            <span class="tag">AUTO</span>
+          </div>
+        </div></div>
+
+              <div class="btnrow">
+                <button class="action" id="autoAllOn">เปิดทั้งหมด</button>
+                <button class="action" id="autoAllOff">ปิดทั้งหมด</button>
+                <button class="action" id="autoResetCounts">รีเซ็ตตัวนับทั้งหมด</button>
+              </div>
+
+              <p class="small" style="margin:12px 0 0;">
+                สถานะและตัวนับถูกบันทึกไว้ในเครื่อง (localStorage)
+              </p>
+            </div>
+          </section>
+
+          <!-- TAB: VIP -->
+          <section class="panel tab hidden" id="tab-vip">
+            <div class="panelHd">
+              <b>VIP</b>
+              <div class="chip neon" id="vipLevelChip">VIP: 5</div>
+            </div>
+
+            <div class="panelBd">
+              <div class="vipBox">
+                <div class="vipTop">
+                  <div>
+                    <div class="vipTitle" id="vipTitle">VIP 5</div>
+                    <div class="vipSub" id="vipSub">แต้ม VIP: 1,250 / 2,000 (ไป VIP 6)</div>
+                  </div>
+                  <div class="vipBtns">
+                    <button class="action" id="vipRenewBtn">ต่ออายุ VIP</button>
+                    <button class="action" id="vipTopupBtn">เติม VIP</button>
+                  </div>
+                </div>
+
+                <div class="vipProgress">
+                  <div class="vipProgressTop">
+                    <span>ความคืบหน้าไป VIP ถัดไป</span>
+                    <span id="vipProgressText">62.5%</span>
+                  </div>
+                  <div class="meter"><div class="fill exp" id="vipFill" style="width: 62.5%;"></div></div>
+                </div>
+              </div>
+
+              <div class="autoList" id="vipPerks"><div class="autoItem">
+            <div class="autoText" style="flex:1;">✔ ตี+ AUTO (VIP)</div>
+            <span class="tag">VIP</span>
+          </div><div class="autoItem">
+            <div class="autoText" style="flex:1;">✔ เปิดกล่อง ออโต้ (VIP)</div>
+            <span class="tag">VIP</span>
+          </div><div class="autoItem">
+            <div class="autoText" style="flex:1;">✔ รีป้ายดี ออโต้ (VIP)</div>
+            <span class="tag">VIP</span>
+          </div><div class="autoItem">
+            <div class="autoText" style="flex:1;">✔ ตัดหินออโต้ ได้ทุกวัน (VIP)</div>
+            <span class="tag">VIP</span>
+          </div><div class="autoItem">
+            <div class="autoText" style="flex:1;">✔ ปีนหอ 200 ชั้น (7 วิ) (VIP)</div>
+            <span class="tag">VIP</span>
+          </div><div class="autoItem">
+            <div class="autoText" style="flex:1;">✔ เข้าเซียนเหมียว ชั้น 5 (VIP)</div>
+            <span class="tag">VIP</span>
+          </div></div>
+
+              <p class="small" style="margin:12px 0 0;">
+                แก้ข้อมูลได้ที่ <b>characterData.vip</b>
+              </p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // =========================
+    // แก้ข้อมูลตัวละครตรงนี้
+    // =========================
+    const characterData = {
+      name: "9WING",
+      level: 136,
+      job: "ธรรมะ",
+      server: "BY 9WING",
+      id: "523441783",
+      honor: 299,
+      power: 25761,
+
+      hp: { current: 29331, max: 29331 },
+      mp: { current: 4742, max: 6682 },
+      exp:{ current: 1390000, max: 7870000 },
+
+      fields: [
+        { label: "ชื่อ", value: "9WING" },
+        { label: "เลเวล", value: "136" },
+        { label: "อาชีพ/สังกัด", value: "ธรรมะ" },
+        { label: "เซิร์ฟเวอร์", value: "BY 9WING" },
+        { label: "ไอดีตัวละคร", value: "523441783" },
+        { label: "เกียรติยศ", value: "299" },
+      ],
+
+      stats: [
+        { label: "โจมตี", value: 25761 },
+        { label: "ป้องกัน", value: 21003 },
+        { label: "พลังโจมตี (เสริม)", value: 1096 },
+        { label: "หลีกเลี่ยง", value: 535 },
+      ],
+
+      equipment: [
+        { slot:"อาวุธ", name:"ดาบนีออน", tier:"+9", note:"คริติคอล +12%" },
+        { slot:"หมวก", name:"หมวกนักรบ", tier:"+7", note:"HP +800" },
+        { slot:"เกราะ", name:"เกราะเหล็ก", tier:"+8", note:"DEF +420" },
+        { slot:"รองเท้า", name:"รองเท้าลม", tier:"+6", note:"หลบหลีก +35" },
+        { slot:"แหวน", name:"แหวนวายุ", tier:"+5", note:"ATK +120" },
+        { slot:"สร้อยคอ", name:"สร้อยมังกร", tier:"+4", note:"ต้านทาน +10%" },
+        { slot:"เข็มขัด", name:"เข็มขัดเงา", tier:"+3", note:"MP +150" },
+        { slot:"เครื่องราง", name:"เครื่องรางแสง", tier:"+2", note:"EXP +5%" },
+      ],
+
+      // AUTO: แสดงสวิตช์ + ตัวนับ (เก็บลง localStorage)
+      autoFeatures: [
+        "ตี+ AUTO",
+        "เปิดกล่อง ออโต้",
+        "รีป้ายดี ออโต้",
+        "ปั้มเงินพวง",
+        "ตัดหินออโต้ ได้ทุกวัน",
+        "เสกหินหยกเย็น สูง-ต่ำ",
+        "เสกหินกลายทอง สูง-ต่ำ",
+        "ปีนหอ 200 ชั้น (7 วิ)",
+        "เข้าเซียนเหมียว ชั้น 5"
+      ],
+
+      vip: {
+        level: 5,
+        points: 1250,
+        nextLevel: 6,
+        nextPoints: 2000,
+        perks: [
+          "ตี+ AUTO (VIP)",
+          "เปิดกล่อง ออโต้ (VIP)",
+          "รีป้ายดี ออโต้ (VIP)",
+          "ตัดหินออโต้ ได้ทุกวัน (VIP)",
+          "ปีนหอ 200 ชั้น (7 วิ) (VIP)",
+          "เข้าเซียนเหมียว ชั้น 5 (VIP)"
+        ]
+      }
+    };
+
+    // ====== Storage Keys ======
+    const LS_ON_KEY = "neon_auto_on_map_v1";      // {label:boolean}
+    const LS_COUNT_KEY = "neon_auto_count_map_v1"; // {label:number}
+
+    // helpers
+    const fmt = (n) => Number(n).toLocaleString("th-TH");
+    const pct = (cur, max) => max ? Math.max(0, Math.min(100, (cur / max) * 100)) : 0;
+
+    function safeJSONParse(s, fallback){
+      try{ return JSON.parse(s) ?? fallback; }catch{ return fallback; }
+    }
+
+    function loadAutoState(labels){
+      const onMap = safeJSONParse(localStorage.getItem(LS_ON_KEY), {});
+      const countMap = safeJSONParse(localStorage.getItem(LS_COUNT_KEY), {});
+
+      // ensure keys exist
+      labels.forEach(l=>{
+        if (typeof onMap[l] !== "boolean") onMap[l] = false;   // default OFF
+        if (typeof countMap[l] !== "number") countMap[l] = 0;
+      });
+
+      // remove old keys (optional cleanup)
+      Object.keys(onMap).forEach(k=>{ if(!labels.includes(k)) delete onMap[k]; });
+      Object.keys(countMap).forEach(k=>{ if(!labels.includes(k)) delete countMap[k]; });
+
+      localStorage.setItem(LS_ON_KEY, JSON.stringify(onMap));
+      localStorage.setItem(LS_COUNT_KEY, JSON.stringify(countMap));
+
+      return { onMap, countMap };
+    }
+
+    function saveAutoState(onMap, countMap){
+      localStorage.setItem(LS_ON_KEY, JSON.stringify(onMap));
+      localStorage.setItem(LS_COUNT_KEY, JSON.stringify(countMap));
+    }
+
+    function updateAutoSummary(onMap){
+      const labels = Object.keys(onMap);
+      const on = labels.filter(l=>onMap[l]).length;
+      const off = labels.length - on;
+      const el = document.getElementById("autoSummary");
+      if(el) el.textContent = `ON: ${on} • OFF: ${off}`;
+    }
+
+    function render(data){
+      // header
+      document.getElementById("badge").textContent = `LV${data.level}`;
+      document.getElementById("name").textContent = `${data.name}  •  LV.${data.level}`;
+      document.getElementById("sub").textContent  = `อาชีพ/สังกัด: ${data.job} • ID: ${data.id}`;
+      document.getElementById("serverChip").textContent = `เซิร์ฟเวอร์: ${data.server}`;
+      document.getElementById("powerChip").textContent  = `พลังต่อสู้: ${fmt(data.power)}`;
+
+      // chips in tabs
+      document.getElementById("honorChip").textContent = `เกียรติยศ: ${fmt(data.honor)}`;
+      document.getElementById("idChip").textContent    = `ID: ${data.id}`;
+      document.getElementById("jobChip").textContent   = `อาชีพ: ${data.job}`;
+
+      // fields
+      const kv = document.getElementById("kv");
+      kv.innerHTML = "";
+      for(const f of data.fields){
+        const el = document.createElement("div");
+        el.className = "field";
+        el.innerHTML = `<div class="k">${f.label}</div><div class="v">${f.value}</div>`;
+        kv.appendChild(el);
+      }
+
+      // bars
+      document.getElementById("hpText").textContent = `${fmt(data.hp.current)} / ${fmt(data.hp.max)}`;
+      document.getElementById("mpText").textContent = `${fmt(data.mp.current)} / ${fmt(data.mp.max)}`;
+      document.getElementById("expText").textContent= `${fmt(data.exp.current)} / ${fmt(data.exp.max)}`;
+
+      document.getElementById("hpFill").style.width  = pct(data.hp.current, data.hp.max) + "%";
+      document.getElementById("mpFill").style.width  = pct(data.mp.current, data.mp.max) + "%";
+      document.getElementById("expFill").style.width = pct(data.exp.current, data.exp.max) + "%";
+
+      // stats table
+      const tb = document.getElementById("statsTable");
+      tb.innerHTML = "";
+      for(const s of data.stats){
+        const tr = document.createElement("tr");
+        tr.innerHTML = `<th>${s.label}</th><td>${fmt(s.value)}</td>`;
+        tb.appendChild(tr);
+      }
+
+      // equipment
+      const eg = document.getElementById("equipGrid");
+      eg.innerHTML = "";
+      for(const it of data.equipment){
+        const div = document.createElement("div");
+        div.className = "slot";
+        div.innerHTML = `
+          <b>${it.slot} <span style="color:var(--neonAmber); font-weight:900;">${it.tier ?? ""}</span></b>
+          <span>${it.name ?? "-"}</span>
+          <em>${it.note ?? ""}</em>
+        `;
+        eg.appendChild(div);
+      }
+
+      // AUTO: switch + counter
+      const labels = data.autoFeatures || [];
+      const { onMap, countMap } = loadAutoState(labels);
+      const list = document.getElementById("autoList");
+      list.innerHTML = "";
+
+      labels.forEach(label=>{
+        const row = document.createElement("div");
+        row.className = "autoItem";
+
+        const isOn = !!onMap[label];
+        const count = Number(countMap[label] || 0);
+
+        row.innerHTML = `
+          <label class="switch ${isOn ? "on" : ""}" title="เปิด/ปิด">
+            <input type="checkbox" ${isOn ? "checked" : ""} />
+            <span class="knob"></span>
+          </label>
+
+          <div class="autoText">${label}</div>
+
+          <div class="autoRight">
+            <span class="counter">ทำงานแล้ว: <b>${fmt(count)}</b> ครั้ง</span>
+            <button class="tiny" data-act="run">+1</button>
+            <button class="tiny" data-act="reset">รีเซ็ต</button>
+            <span class="tag">AUTO</span>
+          </div>
+        `;
+
+        // toggle
+        const sw = row.querySelector(".switch");
+        const checkbox = row.querySelector("input");
+        sw.addEventListener("click", (e)=>{
+          e.preventDefault(); // กัน label toggle ซ้อน
+          onMap[label] = !onMap[label];
+          checkbox.checked = onMap[label];
+          sw.classList.toggle("on", onMap[label]);
+          saveAutoState(onMap, countMap);
+          updateAutoSummary(onMap);
+        });
+
+        // run + reset
+        row.querySelector('[data-act="run"]').addEventListener("click", ()=>{
+          countMap[label] = (Number(countMap[label]) || 0) + 1;
+          saveAutoState(onMap, countMap);
+          // update counter UI
+          row.querySelector(".counter b").textContent = fmt(countMap[label]);
+        });
+
+        row.querySelector('[data-act="reset"]').addEventListener("click", ()=>{
+          countMap[label] = 0;
+          saveAutoState(onMap, countMap);
+          row.querySelector(".counter b").textContent = "0";
+        });
+
+        list.appendChild(row);
+      });
+
+      updateAutoSummary(onMap);
+
+      // AUTO toolbar buttons
+      document.getElementById("autoAllOn").onclick = () => {
+        labels.forEach(l=> onMap[l] = true);
+        saveAutoState(onMap, countMap);
+        renderAutoOnly(labels, onMap, countMap);
+      };
+      document.getElementById("autoAllOff").onclick = () => {
+        labels.forEach(l=> onMap[l] = false);
+        saveAutoState(onMap, countMap);
+        renderAutoOnly(labels, onMap, countMap);
+      };
+      document.getElementById("autoResetCounts").onclick = () => {
+        labels.forEach(l=> countMap[l] = 0);
+        saveAutoState(onMap, countMap);
+        renderAutoOnly(labels, onMap, countMap);
+      };
+
+      function renderAutoOnly(labels, onMap, countMap){
+        // เรนเดอร์เฉพาะ UI AUTO ใหม่แบบเร็ว ๆ
+        const list = document.getElementById("autoList");
+        list.querySelectorAll(".autoItem").forEach((row, idx)=>{
+          const label = labels[idx];
+          if(!label) return;
+
+          const sw = row.querySelector(".switch");
+          const checkbox = row.querySelector("input");
+          checkbox.checked = !!onMap[label];
+          sw.classList.toggle("on", !!onMap[label]);
+
+          const b = row.querySelector(".counter b");
+          if(b) b.textContent = fmt(countMap[label] || 0);
+        });
+        updateAutoSummary(onMap);
+      }
+
+      // VIP
+      const vip = data.vip;
+      if (vip) {
+        document.getElementById("vipLevelChip").textContent = `VIP: ${vip.level}`;
+        document.getElementById("vipTitle").textContent = `VIP ${vip.level}`;
+        document.getElementById("vipSub").textContent =
+          `แต้ม VIP: ${fmt(vip.points)} / ${fmt(vip.nextPoints)} (ไป VIP ${vip.nextLevel})`;
+
+        const p = pct(vip.points, vip.nextPoints);
+        document.getElementById("vipFill").style.width = p + "%";
+        document.getElementById("vipProgressText").textContent = `${p.toFixed(1)}%`;
+
+        const vipPerks = document.getElementById("vipPerks");
+        vipPerks.innerHTML = "";
+        (vip.perks || []).forEach(t => {
+          const row = document.createElement("div");
+          row.className = "autoItem";
+          row.innerHTML = `
+            <div class="autoText" style="flex:1;">✔ ${t}</div>
+            <span class="tag">VIP</span>
+          `;
+          vipPerks.appendChild(row);
+        });
+      }
+
+      // json preview
+      document.getElementById("jsonPreview").textContent = JSON.stringify(data, null, 2);
+    }
+
+    // tab switching
+    function setTab(tabName){
+      document.querySelectorAll(".menuBtn").forEach(b=>{
+        b.classList.toggle("active", b.dataset.tab === tabName);
+      });
+
+      document.getElementById("tab-char").classList.toggle("hidden", tabName !== "char");
+      document.getElementById("tab-equip").classList.toggle("hidden", tabName !== "equip");
+      document.getElementById("tab-stat").classList.toggle("hidden", tabName !== "stat");
+      document.getElementById("tab-auto").classList.toggle("hidden", tabName !== "auto");
+      document.getElementById("tab-vip").classList.toggle("hidden", tabName !== "vip");
+    }
+
+    document.querySelectorAll(".menuBtn").forEach(btn=>{
+      btn.addEventListener("click", ()=> setTab(btn.dataset.tab));
+    });
+
+    // close button
+    document.getElementById("closeBtn").addEventListener("click", ()=>{
+      document.getElementById("window").classList.add("hidden");
+    });
+
+    // copy / download
+    document.getElementById("copyJson").addEventListener("click", async () => {
+      const txt = JSON.stringify(characterData, null, 2);
+      try{
+        await navigator.clipboard.writeText(txt);
+        alert("คัดลอก JSON แล้ว");
+      }catch{
+        alert("คัดลอกไม่สำเร็จ ลองคัดลอกจากกล่อง JSON แทนได้");
+      }
+    });
+
+    document.getElementById("downloadJson").addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify(characterData, null, 2)], {type:"application/json"});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "character.json";
+      a.click();
+      URL.revokeObjectURL(a.href);
+    });
+
+    // VIP buttons (เดโม่)
+    document.getElementById("vipRenewBtn").addEventListener("click", () => {
+      alert("เดโม่: เปิดหน้าต่างต่ออายุ VIP");
+    });
+    document.getElementById("vipTopupBtn").addEventListener("click", () => {
+      alert("เดโม่: เปิดหน้าต่างเติม VIP");
+    });
+
+    // start
+    render(characterData);
+    setTab("char");
+  </script>
+
+</body></html>
