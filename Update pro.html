@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <base target="_top">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>9WING VERSION </title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary-cyan: #00ffff;
+      --primary-purple: #8b5cf6;
+      --dark-bg: #0a0a0f;
+      --card-bg: rgba(10, 10, 15, 0.9);
+      --glass-bg: rgba(255, 255, 255, 0.03);
+      --border-glow: rgba(0, 255, 255, 0.4);
+      --text-primary: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      font-family: 'Prompt', sans-serif;
+      background: radial-gradient(circle at center, #1a1a2e 0%, #0a0a0f 100%);
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      color: var(--text-primary);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      padding: 26px;
+      background: var(--card-bg);
+      border-radius: 16px;
+      border: 1px solid var(--border-glow);
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.12);
+      backdrop-filter: blur(15px);
+      text-align: center;
+    }
+
+    h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.55em;
+      margin: 8px 0 6px;
+      letter-spacing: 2px;
+      background: linear-gradient(to right, #00ffff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .status-bar {
+      font-size: 0.78em;
+      background: rgba(0, 255, 0, 0.1);
+      color: #00ff00;
+      padding: 6px 10px;
+      border-radius: 999px;
+      display: inline-block;
+      margin: 10px 0 18px;
+      border: 1px solid rgba(0, 255, 0, 0.3);
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    .warning-box {
+      background: linear-gradient(90deg, rgba(255,0,0,0.16) 0%, rgba(255,0,0,0) 100%);
+      border-left: 4px solid #ff4444;
+      padding: 12px 14px;
+      margin-bottom: 18px;
+      font-size: 0.88em;
+      border-radius: 10px;
+      display: flex;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .category-title {
+      text-align: left;
+      font-size: 0.82em;
+      color: var(--primary-purple);
+      text-transform: uppercase;
+      margin: 16px 0 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .category-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--primary-purple), transparent);
+    }
+
+    .file-card {
+      background: var(--glass-bg);
+      border-radius: 12px;
+      padding: 6px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* ✅ แถวกดได้ทั้งแถว */
+    .file-link-row{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 12px;
+      margin: 4px 0;
+      font-size: 0.9em;
+      border-radius: 10px;
+      transition: 0.25s;
+      text-decoration: none;
+      color: var(--text-primary);
+    }
+
+    .file-link-row:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateX(4px);
+    }
+
+    .value {
+      color: #00ff00;
+      font-weight: 800;
+      text-shadow: 0 0 8px rgba(0, 255, 0, 0.35);
+      font-family: 'Orbitron', sans-serif;
+      white-space: nowrap;
+    }
+
+    /* ✅ ปุ่ม download เล็ก ๆ */
+    .download-pill{
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.78em;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: linear-gradient(45deg, #00ffff, #8b5cf6);
+      color: #000;
+      font-weight: 900;
+      white-space: nowrap;
+      box-shadow: 0 4px 12px rgba(0,255,255,.18);
+    }
+
+    .cyber-button {
+      display: block;
+      margin-top: 22px;
+      padding: 16px;
+      background: linear-gradient(45deg, #00ffff, #8b5cf6);
+      color: #000;
+      text-decoration: none;
+      font-weight: 900;
+      border-radius: 10px;
+      text-transform: uppercase;
+      transition: 0.3s;
+      box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
+    }
+
+    .cyber-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.5);
+      filter: brightness(1.2);
+    }
+
+    footer {
+      margin-top: 18px;
+      font-size: 0.85em;
+      color: rgba(255,255,255,0.65);
+    }
+
+    @media (max-width: 420px) {
+      .container { padding: 20px; }
+      .file-link-row { flex-direction: column; align-items: flex-start; }
+      .value, .download-pill { align-self: flex-end; }
+    }
+
+    .blink {
+      animation: blink 0.8s infinite;
+      color: yellow;
+      background: black;
+      padding: 2px 6px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-family: 'Orbitron', sans-serif;
+    }
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+  </style>
+</head>
+
+<body>
+<script>
+function downloadWithPassword(url) {
+
+    const validPasswords = [];
+    for (let i = 1; i <= 150; i++) {
+        let number = i.toString().padStart(2, '0');
+        validPasswords.push("SS" + number);
+    }
+
+    const userPassword = prompt("💬 กรอก USER ของท่านก่อนดาวน์โหลด");
+
+    if (userPassword === null) return;
+
+    if (validPasswords.includes(userPassword)) {
+        window.location.href = url;
+    } else {
+        alert("❌ รหัสผ่านไม่ถูกต้อง");
+    }
+}
+</script>
+
+  <div class="container">
+    <h2>UPDATE <span>VERSION 6&7</span></h2>
+    <div class="status-bar">UPDATE 02/03/2026</div>
+
+    <div class="warning-box">
+      <strong style="color:#ff4444;">
+        ⚠️ เลือก DOWNLOAD ให้ตรงกับที่เคยใช้นะครับ <br>
+      </strong>
+    </div>
+
+    <div class="category-title">NEW VERSION</div>
+
+    <!-- VERSION 6 -->
+  <div class="file-card">
+  <a href="#"
+     onclick="downloadWithPassword('https://github.com/Muu2736/9WING11/raw/refs/heads/main/WING%20V.6.exe')"
+     class="file-link-row">
+    <span class="blink">VERSION 6</span>
+    <span>DOWNLOAD PC V.6.1</span>
+    <span class="download-pill">DOWNLOAD</span>
+  </a>
+</div>
+    <!-- VERSION 7 -->
+<div class="file-card">
+  <a href="#"
+     onclick="downloadWithPassword('https://github.com/Muu2736/9WING11/raw/refs/heads/main/WING%20V.7.exe')"
+     class="file-link-row">
+    <span class="blink">VERSION 7</span>
+    <span>DOWNLOAD PC V.7.1</span>
+    <span class="download-pill">DOWNLOAD</span>
+  </a>
+</div>
+
+    <a href="https://www.m.me/say.wing.656700" class="cyber-button">
+      ติดต่อฝ่ายบริการลูกค้า
+    </a>
+
+    <footer>
+      © 2026 9WING.SHOP All rights reserved.
+    </footer>
+  </div>
+</body>
+</html>
