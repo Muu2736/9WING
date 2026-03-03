@@ -289,7 +289,7 @@ function downloadWithPassword(url) {
         validPasswords.push("SS" + number);
     }
 
-    const userPassword = prompt("💬 กรอก USER ของท่านก่อนดาวน์โหลด");
+    const userPassword = prompt("💬 กรอก USER ของท่านที่ขึ้นต้นด้วย SS พิมใหญ่ ก่อนดาวน์โหลด");
     if (userPassword === null) return;
 
     if (validPasswords.includes(userPassword)) {
@@ -382,3 +382,4 @@ document.addEventListener('keydown', (e)=>{
 
 </body>
 </html>
+
