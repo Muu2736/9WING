@@ -4,7 +4,7 @@
   <base target="_top">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>9WING VERSION </title>
+  <title>9WING VERSION</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -195,13 +195,94 @@
       0%, 50% { opacity: 1; }
       51%, 100% { opacity: 0; }
     }
+
+    /* ===== ✅ เมนูตรวจสอบเวอร์ชัน + Modal ===== */
+    .top-menu{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      margin: 10px 0 16px;
+    }
+    .menu-btn{
+      font-family:'Orbitron', sans-serif;
+      font-size:0.82em;
+      padding:10px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.04);
+      color: var(--text-primary);
+      cursor:pointer;
+      transition: .25s;
+    }
+    .menu-btn:hover{
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.07);
+      box-shadow: 0 8px 18px rgba(0,255,255,.10);
+    }
+
+    .modal-overlay{
+      position:fixed;
+      inset:0;
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(6px);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:9999;
+      padding: 18px;
+    }
+
+    .modal{
+      width: min(920px, 96vw);
+      background: rgba(10,10,15,0.96);
+      border: 1px solid var(--border-glow);
+      border-radius: 16px;
+      box-shadow: 0 0 40px rgba(0,255,255,0.18);
+      overflow:hidden;
+    }
+
+    .modal-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px 14px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .modal-title{
+      font-family:'Orbitron', sans-serif;
+      letter-spacing:1px;
+      font-size:0.95em;
+      color: var(--primary-cyan);
+    }
+
+    .modal-close{
+      border:none;
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      border-radius: 10px;
+      padding: 8px 10px;
+      cursor:pointer;
+      transition:.2s;
+    }
+    .modal-close:hover{ background: rgba(255,255,255,0.10); }
+
+    .modal-body{
+      padding: 12px;
+    }
+    .modal-body img{
+      width:100%;
+      height:auto;
+      display:block;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
   </style>
 </head>
 
 <body>
 <script>
 function downloadWithPassword(url) {
-
     const validPasswords = [];
     for (let i = 1; i <= 150; i++) {
         let number = i.toString().padStart(2, '0');
@@ -209,7 +290,6 @@ function downloadWithPassword(url) {
     }
 
     const userPassword = prompt("💬 กรอก USER ของท่านก่อนดาวน์โหลด");
-
     if (userPassword === null) return;
 
     if (validPasswords.includes(userPassword)) {
@@ -218,6 +298,24 @@ function downloadWithPassword(url) {
         alert("❌ รหัสผ่านไม่ถูกต้อง");
     }
 }
+
+/* ===== ✅ Version Check Modal Control ===== */
+function openVersionCheck(){
+  document.getElementById('versionModal').style.display = 'flex';
+}
+function closeVersionCheck(ev){
+  // ถ้าคลิกพื้นหลัง (overlay) ให้ปิด
+  if(!ev || ev.target.id === 'versionModal'){
+    document.getElementById('versionModal').style.display = 'none';
+  }
+}
+// ปิดด้วยปุ่ม ESC
+document.addEventListener('keydown', (e)=>{
+  if(e.key === 'Escape'){
+    const m = document.getElementById('versionModal');
+    if(m) m.style.display = 'none';
+  }
+});
 </script>
 
   <div class="container">
@@ -226,32 +324,52 @@ function downloadWithPassword(url) {
 
     <div class="warning-box">
       <strong style="color:#ff4444;">
-        ⚠️ เลือก DOWNLOAD ให้ตรงกับที่เคยใช้นะครับ <br>
+        ⚠️ เลือก DOWNLOAD ให้ตรงกับที่เคยใช้นะครับ<br>
       </strong>
+    </div>
+
+    <!-- ✅ เมนูตรวจสอบเวอร์ชัน -->
+    <div class="top-menu">
+      <button class="menu-btn" onclick="openVersionCheck()">ตรวจสอบเวอร์ชัน</button>
+    </div>
+
+    <!-- ✅ Modal แสดงรูปตรวจสอบเวอร์ชัน -->
+    <div id="versionModal" class="modal-overlay" onclick="closeVersionCheck(event)">
+      <div class="modal" onclick="event.stopPropagation()">
+        <div class="modal-head">
+          <div class="modal-title">CHECK VERSION V6 / V7</div>
+          <button class="modal-close" onclick="closeVersionCheck()">ปิด</button>
+        </div>
+        <div class="modal-body">
+          <!-- ✅ เปลี่ยนลิงก์รูปตรงนี้ให้เป็นของคุณ -->
+          <img src="https://s.imgz.io/2026/03/04/Capturef4090768e145db58.png" alt="Version Check Image">
+        </div>
+      </div>
     </div>
 
     <div class="category-title">NEW VERSION</div>
 
     <!-- VERSION 6 -->
-  <div class="file-card">
-  <a href="#"
-     onclick="downloadWithPassword('https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/9WING_6.rar')"
-     class="file-link-row">
-    <span class="blink">VERSION 6</span>
-    <span>DOWNLOAD PC V.6.1</span>
-    <span class="download-pill">DOWNLOAD</span>
-  </a>
-</div>
+    <div class="file-card">
+      <a href="#"
+        onclick="downloadWithPassword('https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/9WING_6.rar')"
+        class="file-link-row">
+        <span class="blink">VERSION 6</span>
+        <span>DOWNLOAD PC V.6.1</span>
+        <span class="download-pill">DOWNLOAD</span>
+      </a>
+    </div>
+
     <!-- VERSION 7 -->
-<div class="file-card">
-  <a href="#"
-     onclick="downloadWithPassword('https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/9WING_7.rar')"
-     class="file-link-row">
-    <span class="blink">VERSION 7</span>
-    <span>DOWNLOAD PC V.7.1</span>
-    <span class="download-pill">DOWNLOAD</span>
-  </a>
-</div>
+    <div class="file-card">
+      <a href="#"
+        onclick="downloadWithPassword('https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/9WING_7.rar')"
+        class="file-link-row">
+        <span class="blink">VERSION 7</span>
+        <span>DOWNLOAD PC V.7.1</span>
+        <span class="download-pill">DOWNLOAD</span>
+      </a>
+    </div>
 
     <a href="https://www.m.me/say.wing.656700" class="cyber-button">
       ติดต่อฝ่ายบริการลูกค้า
@@ -261,9 +379,6 @@ function downloadWithPassword(url) {
       © 2026 9WING.SHOP All rights reserved.
     </footer>
   </div>
+
 </body>
-
 </html>
-
-
-
