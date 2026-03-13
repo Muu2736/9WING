@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+  <title>9WING.SHOP - จำหน่ายโปรแกรมช่วยเล่นโยกังจุติยุทธภพเลือดใหม่ บริการเช่าจอปล่อยบอท 24 ชม. ผ่าน OSLink และอื่นๆ อีกมากมาย</title>
+  <link rel="icon" type="image/x-icon" href="/1.ico">
+
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <meta name="description" content="9WING.SHOP ระบบโปรโยกังจุติยุทธภพเลือดใหม่ พร้อม Cloud OSLink ปล่อยบอท 24 ชม.">
+  <meta name="keywords" content="โยกัง,โปรโยกัง,โยกังจุติยุทธภพเลือดใหม่,Yulgang,บอทโยกัง,OSLink,Cloud Bot">
+
+  <style>
+    :root{
+      --primary:#6600ff;
+      --secondary:#00ffff;
+      --accent:#ff0066;
+      --glass:rgba(255,255,255,.05);
+      --glass-strong:rgba(255,255,255,.08);
+      --glass-border:rgba(255,255,255,.12);
+      --dark:#050505;
+      --safe-bottom:max(16px, env(safe-area-inset-bottom));
+      --safe-top:max(16px, env(safe-area-inset-top));
+    }
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      scroll-behavior:smooth;
+      -webkit-tap-highlight-color:transparent;
+    }
+
+    html, body{
+      max-width:100%;
+      overflow-x:hidden;
+    }
+
+    body{
+      font-family:'Kanit',sans-serif;
+      background:#050505;
+      color:#fff;
+      overflow-x:hidden;
+      line-height:1.5;
+    }
+
+    img, iframe, video{
+      max-width:100%;
+      height:auto;
+      display:block;
+    }
+
+    button, a{
+      touch-action:manipulation;
+    }
+
+    section{
+      scroll-margin-top:90px;
+    }
+
+    .blink{
+      animation:blink .8s infinite;
+      color:yellow;
+      background:black;
+      padding:2px 6px;
+      border-radius:6px;
+      font-weight:bold;
+      display:inline-block;
+    }
+
+    @keyframes blink{
+      0%,50%{opacity:1}
+      51%,100%{opacity:0}
+    }
+
+    /* ===== MUSIC POPUP ===== */
+    .music-popup{
+      position:fixed;
+      inset:0;
+      background:
+        radial-gradient(circle at top, rgba(0,255,255,.08), transparent 35%),
+        radial-gradient(circle at bottom, rgba(102,0,255,.12), transparent 40%),
+        rgba(0,0,0,.88);
+      backdrop-filter:blur(12px);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      z-index:10000;
+      padding:20px;
+      transition:.35s ease;
+    }
+
+    .music-popup.hide{
+      opacity:0;
+      visibility:hidden;
+      pointer-events:none;
+    }
+
+    .popup-box{
+      position:relative;
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:28px;
+      padding:28px 22px 22px;
+      text-align:center;
+      box-shadow:
+        0 25px 70px rgba(0,0,0,.55),
+        0 0 40px rgba(0,255,255,.15);
+      animation:popupIn .8s ease;
+      max-width:560px;
+      width:100%;
+      overflow:hidden;
+    }
+
+    .popup-box::before{
+      content:"";
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:3px;
+      background:linear-gradient(90deg, var(--secondary), var(--primary), var(--accent));
+    }
+
+    .popup-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:8px 14px;
+      border-radius:999px;
+      font-size:13px;
+      margin-bottom:14px;
+      background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      color:#d9ffff;
+    }
+
+    .popup-box h2{
+      font-family:'Orbitron',sans-serif;
+      margin-bottom:12px;
+      font-size:clamp(22px, 5vw, 32px);
+      line-height:1.2;
+    }
+
+    .popup-text{
+      color:#c8c8c8;
+      margin-bottom:14px;
+      line-height:1.7;
+      font-size:15px;
+    }
+
+    .popup-actions{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+      margin-top:8px;
+    }
+
+    @keyframes popupIn{
+      from{transform:translateY(18px) scale(.96);opacity:0}
+      to{transform:translateY(0) scale(1);opacity:1}
+    }
+
+    /* ===== BACKGROUND ===== */
+    .cyber-bg{
+      position:fixed;
+      inset:0;
+      background:radial-gradient(circle at 20% 30%,#1a0033 0%,#000 70%);
+      z-index:-5;
+    }
+
+    .orb{
+      position:absolute;
+      width:500px;
+      height:500px;
+      border-radius:50%;
+      filter:blur(100px);
+      opacity:.3;
+      animation:move 20s infinite alternate;
+      z-index:-4;
+      pointer-events:none;
+    }
+
+    .orb1{
+      background:var(--primary);
+      top:-10%;
+      left:-10%;
+    }
+
+    .orb2{
+      background:var(--secondary);
+      bottom:-10%;
+      right:-10%;
+      animation-delay:-5s;
+    }
+
+    @keyframes move{
+      from{transform:translate(0,0) scale(1)}
+      to{transform:translate(50px,100px) scale(1.1)}
+    }
+
+    /* ===== NAV ===== */
+    nav{
+      position:fixed;
+      width:100%;
+      top:0;
+      left:0;
+      backdrop-filter:blur(18px);
+      background:rgba(0,0,0,.62);
+      padding:calc(var(--safe-top) - 4px) 5% 14px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:1000;
+      border-bottom:1px solid var(--glass-border);
+    }
+
+    .logo{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(18px, 4vw, 26px);
+      font-weight:800;
+      background:linear-gradient(45deg,var(--secondary),var(--primary));
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      letter-spacing:2px;
+      text-decoration:none;
+      z-index:1002;
+    }
+
+    .nav-links{
+      list-style:none;
+      display:flex;
+      gap:30px;
+      align-items:center;
+    }
+
+    .nav-links a{
+      color:#fff;
+      text-decoration:none;
+      font-size:14px;
+      letter-spacing:1px;
+      transition:.3s;
+    }
+
+    .nav-links a:hover{
+      color:var(--secondary);
+      text-shadow:0 0 10px var(--secondary);
+    }
+
+    /* ===== HAMBURGER ===== */
+    .menu-toggle{
+      display:none;
+      width:50px;
+      height:50px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      position:relative;
+      z-index:1002;
+      transition:.3s ease;
+      backdrop-filter:blur(10px);
+    }
+
+    .menu-toggle:hover{
+      background:rgba(255,255,255,.08);
+      box-shadow:0 0 20px rgba(0,255,255,.12);
+    }
+
+    .menu-toggle span{
+      position:absolute;
+      width:22px;
+      height:2px;
+      background:#fff;
+      border-radius:10px;
+      transition:.28s ease;
+    }
+
+    .menu-toggle span:nth-child(1){ transform:translateY(-7px); }
+    .menu-toggle span:nth-child(2){ transform:translateY(0); }
+    .menu-toggle span:nth-child(3){ transform:translateY(7px); }
+
+    .menu-toggle.active span:nth-child(1){
+      transform:translateY(0) rotate(45deg);
+    }
+    .menu-toggle.active span:nth-child(2){
+      opacity:0;
+      transform:scaleX(.2);
+    }
+    .menu-toggle.active span:nth-child(3){
+      transform:translateY(0) rotate(-45deg);
+    }
+
+    .nav-overlay{
+      position:fixed;
+      inset:0;
+      background:rgba(0,0,0,.45);
+      backdrop-filter:blur(3px);
+      opacity:0;
+      visibility:hidden;
+      transition:.25s ease;
+      z-index:998;
+    }
+
+    .nav-overlay.show{
+      opacity:1;
+      visibility:visible;
+    }
+
+    /* ===== HERO ===== */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:132px 20px 70px;
+    }
+
+    .hero-title{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(40px,8vw,90px);
+      font-weight:900;
+      background:linear-gradient(to bottom,#fff,#666);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      margin-bottom:20px;
+      animation:glow 3s ease-in-out infinite alternate;
+      line-height:1.05;
+    }
+
+    @keyframes glow{
+      0%{text-shadow:0 0 20px rgba(102,0,255,.3)}
+      100%{text-shadow:0 0 60px rgba(0,255,255,.8)}
+    }
+
+    .hero-subtitle{
+      max-width:640px;
+      color:#b2b2b2;
+      margin-bottom:40px;
+      line-height:1.7;
+      font-size:clamp(14px, 3.7vw, 18px);
+    }
+
+    /* ===== VISITOR COUNTER ===== */
+    .visit-box{
+      margin-top:24px;
+      padding:18px 22px;
+      border-radius:20px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+      display:inline-flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      min-width:220px;
+      backdrop-filter:blur(10px);
+      box-shadow:0 10px 30px rgba(0,0,0,.2);
+    }
+
+    .visit-label{
+      font-size:14px;
+      color:#aaa;
+      margin-bottom:6px;
+      letter-spacing:1px;
+    }
+
+    .visit-number{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(28px,6vw,42px);
+      font-weight:800;
+      color:#00ffff;
+      text-shadow:0 0 15px rgba(0,255,255,.35);
+    }
+
+    /* ===== BUTTON ===== */
+    .btn-group{
+      display:flex;
+      gap:16px;
+      flex-wrap:wrap;
+      justify-content:center;
+      width:100%;
+      max-width:920px;
+    }
+
+    .btn{
+      padding:16px 28px;
+      border-radius:20px;
+      font-weight:700;
+      text-decoration:none;
+      letter-spacing:.3px;
+      transition:.35s;
+      position:relative;
+      overflow:hidden;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      min-height:56px;
+      border:none;
+      cursor:pointer;
+    }
+
+    .btn-primary{
+      background:#fff;
+      color:#000;
+    }
+
+    .btn-primary::after{
+      content:'';
+      position:absolute;
+      inset:0;
+      background:linear-gradient(120deg,transparent,rgba(0,255,255,.45),transparent);
+      transform:translateX(-100%);
+    }
+
+    .btn-primary:hover::after{
+      transform:translateX(100%);
+      transition:.8s;
+    }
+
+    .btn-primary:hover{
+      box-shadow:0 0 30px rgba(0,255,255,.35);
+      transform:translateY(-4px);
+    }
+
+    .btn-ghost{
+      color:#fff;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.12);
+    }
+
+    .btn-ghost:hover{
+      background:rgba(255,255,255,.1);
+      transform:translateY(-3px);
+    }
+
+    /* ===== REVEAL ===== */
+    .reveal{
+      opacity:0;
+      transform:translateY(40px);
+      transition:1s ease;
+    }
+
+    .reveal.active{
+      opacity:1;
+      transform:translateY(0);
+    }
+
+    /* ===== STATS ===== */
+    .stats{
+      padding:80px 5%;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    .section-tag{
+      color:var(--secondary);
+      text-transform:uppercase;
+      letter-spacing:5px;
+      font-size:12px;
+      text-align:center;
+      display:block;
+      margin-bottom:10px;
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:24px;
+      margin-top:42px;
+    }
+
+    .stat-card{
+      background:var(--glass);
+      border:1px solid var(--glass-border);
+      padding:32px 24px;
+      border-radius:24px;
+      text-align:center;
+      transition:.35s;
+      backdrop-filter:blur(12px);
+    }
+
+    .stat-card:hover{
+      border-color:rgba(0,255,255,.25);
+      transform:translateY(-8px);
+      box-shadow:0 20px 40px rgba(0,0,0,.18);
+    }
+
+    .stat-number{
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(2rem, 8vw, 3rem);
+      font-weight:800;
+      word-break:break-word;
+      margin-bottom:8px;
+    }
+
+    /* ===== VIDEO ===== */
+    .video-section{
+      padding:80px 5%;
+      text-align:center;
+    }
+
+    .video-container{
+      max-width:900px;
+      margin:42px auto 0;
+      border-radius:28px;
+      overflow:hidden;
+      border:1px solid var(--glass-border);
+      position:relative;
+      width:100%;
+      aspect-ratio:16 / 9;
+      background:#000;
+      box-shadow:0 16px 40px rgba(0,0,0,.24);
+    }
+
+    .video-container iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
+    /* ===== FOOTER ===== */
+    footer{
+      padding:70px 20px 110px;
+      text-align:center;
+      border-top:1px solid var(--glass-border);
+    }
+
+    /* ===== FLOATING CONTACT ===== */
+    .floating-contact{
+      position:fixed;
+      right:16px;
+      bottom:var(--safe-bottom);
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      z-index:999;
+    }
+
+    .float-btn{
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#fff;
+      font-size:22px;
+      text-decoration:none;
+      box-shadow:0 12px 30px rgba(0,0,0,.35);
+      transition:.3s;
+      position:relative;
+      border:1px solid rgba(255,255,255,.12);
+      backdrop-filter:blur(10px);
+    }
+
+    .float-btn::after{
+      content:attr(data-text);
+      position:absolute;
+      right:62px;
+      white-space:nowrap;
+      background:#000;
+      padding:6px 12px;
+      border-radius:20px;
+      font-size:12px;
+      opacity:0;
+      transform:translateX(10px);
+      transition:.3s;
+      border:1px solid rgba(255,255,255,.1);
+      pointer-events:none;
+    }
+
+    .float-btn:hover::after{
+      opacity:1;
+      transform:translateX(0);
+    }
+
+    .float-btn:hover{
+      transform:translateY(-2px) scale(1.06);
+    }
+
+    .float-btn.auto-tip::after{
+      opacity:1;
+      transform:translateX(0);
+    }
+
+    .float-btn.auto-tip{
+      animation:pulse 1.5s infinite;
+    }
+
+    @keyframes pulse{
+      0%{box-shadow:0 0 0 0 rgba(255,255,255,.35)}
+      70%{box-shadow:0 0 0 13px rgba(255,255,255,0)}
+      100%{box-shadow:0 0 0 0 rgba(255,255,255,0)}
+    }
+
+    .float-line{
+      background:#ff0077;
+      box-shadow:0 12px 30px rgba(255, 75, 133,.32);
+    }
+
+    .float-discord{
+      background:#5865F2;
+      box-shadow:0 12px 30px rgba(88,101,242,.32);
+    }
+
+    /* ===== MOBILE ===== */
+    @media (max-width: 768px){
+      nav{
+        padding:calc(var(--safe-top) - 2px) 16px 12px;
+      }
+
+      .menu-toggle{
+        display:flex;
+      }
+
+      .nav-links{
+        position:fixed;
+        top:calc(var(--safe-top) + 66px);
+        left:16px;
+        right:16px;
+        background:rgba(10,10,10,.96);
+        backdrop-filter:blur(18px);
+        border:1px solid rgba(255,255,255,.12);
+        border-radius:22px;
+        flex-direction:column;
+        gap:2px;
+        display:flex;
+        padding:10px;
+        transform:translateY(-14px) scale(.96);
+        opacity:0;
+        visibility:hidden;
+        pointer-events:none;
+        transition:.28s ease;
+        box-shadow:0 18px 50px rgba(0,0,0,.35);
+        z-index:1001;
+      }
+
+      .nav-links.show{
+        transform:translateY(0) scale(1);
+        opacity:1;
+        visibility:visible;
+        pointer-events:auto;
+      }
+
+      .nav-links li{
+        width:100%;
+      }
+
+      .nav-links a{
+        display:block;
+        width:100%;
+        padding:14px 16px;
+        text-align:center;
+        font-size:15px;
+        border-radius:14px;
+      }
+
+      .nav-links a:hover{
+        background:rgba(255,255,255,.06);
+      }
+
+      .hero{
+        padding:118px 16px 50px;
+        min-height:auto;
+      }
+
+      .hero-title{
+        font-size:40px;
+        margin-bottom:14px;
+      }
+
+      .hero-subtitle{
+        font-size:15px;
+        margin-bottom:28px;
+      }
+
+      .visit-box{
+        width:100%;
+        max-width:320px;
+        margin-top:20px;
+      }
+
+      .btn-group{
+        flex-direction:column;
+        gap:12px;
+        align-items:stretch;
+        max-width:420px;
+      }
+
+      .btn{
+        width:100%;
+        padding:15px 18px;
+        min-height:54px;
+        border-radius:18px;
+        font-size:14px;
+      }
+
+      .music-popup{
+        padding:16px;
+      }
+
+      .popup-box{
+        padding:22px 16px 16px;
+        border-radius:24px;
+      }
+
+      .popup-badge{
+        font-size:12px;
+        padding:7px 12px;
+        margin-bottom:12px;
+      }
+
+      .popup-text{
+        font-size:14px;
+        line-height:1.65;
+      }
+
+      .popup-actions{
+        flex-direction:column;
+      }
+
+      .stats{
+        padding:60px 16px;
+      }
+
+      .stats-grid{
+        grid-template-columns:1fr;
+        gap:16px;
+        margin-top:28px;
+      }
+
+      .stat-card{
+        padding:24px 18px;
+      }
+
+      .video-section{
+        padding:60px 16px;
+      }
+
+      .video-container{
+        margin-top:28px;
+        border-radius:20px;
+      }
+
+      footer{
+        padding:50px 16px 110px;
+      }
+
+      .floating-contact{
+        right:50%;
+        transform:translateX(50%);
+        bottom:max(10px, env(safe-area-inset-bottom));
+        flex-direction:row;
+        gap:10px;
+        padding:8px 10px;
+        background:rgba(0,0,0,.5);
+        border:1px solid rgba(255,255,255,.1);
+        backdrop-filter:blur(14px);
+        border-radius:999px;
+      }
+
+      .float-btn{
+        width:46px;
+        height:46px;
+        font-size:20px;
+        box-shadow:none;
+      }
+
+      .float-btn::after{
+        display:none;
+      }
+
+      .section-tag{
+        letter-spacing:2px;
+        font-size:11px;
+      }
+    }
+
+    @media (max-width: 480px){
+      .hero-title{
+        font-size:34px;
+      }
+
+      .hero-subtitle{
+        font-size:14px;
+      }
+
+      .popup-box h2{
+        font-size:20px;
+      }
+
+      .stat-number{
+        font-size:1.8rem;
+      }
+
+      .popup-box{
+        max-width:100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <!-- ===== POPUP ===== -->
+  <div id="musicPopup" class="music-popup">
+    <div class="popup-box">
+      <div class="popup-badge">⚡ UPDATE ล่าสุดจาก 9WING.SHOP</div>
+
+      <h2><span class="blink">UPDATE PRO</span></h2>
+      <h2>ประกาศจาก 9WING.SHOP</h2>
+
+      <p class="popup-text">
+        <b>🛡️ BYPASS AUTO BAN 🛡️</b><br>
+        <span style="color:#00ff99;">หากไม่ UPDATE จะไม่สามารถใช้งานได้</span>
+      </p>
+
+      <p class="popup-text">
+        <span class="blink">NEW</span> UPDATE PRO PC 6 & 7 👉
+        <a href="https://www.9wing.shop/Update%20pro.html#" target="_blank" rel="noopener noreferrer" style="color:#FF7B42;font-weight:bold;text-decoration:none;">UPDATE</a>
+      </p>
+
+      <p class="popup-text">
+        🤖 เช่าจอปล่อยบอทผ่าน <b>OSLink</b> 👉
+        <a href="https://www.9wing.shop/OSLink.html" target="_blank" rel="noopener noreferrer" style="color:#FF7B42;font-weight:bold;text-decoration:none;">เช่าเลย</a>
+      </p>
+
+      <div class="popup-actions">
+        <button id="enterSite" type="button" class="btn btn-primary">
+          🌟 เข้าสู่เว็บไซต์
+        </button>
+        <a href="https://www.9wing.shop/OSLink.html" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+          ดูบริการ OSLink
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== AUDIO ===== -->
+  <audio id="bgMusic" loop>
+    <source src="https://www.9wing.shop/โยยัง (2).mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ===== BACKGROUND ===== -->
+  <div class="cyber-bg"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+
+  <!-- ===== NAV ===== -->
+  <nav>
+    <a href="#" class="logo">9WING.SHOP</a>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="navLinks">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#stats">System</a></li>
+      <li><a href="#review">Review</a></li>
+      <li><a href="https://www.9wing.shop/OSLink.html" target="_blank" rel="noopener noreferrer">OSLink</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <span class="section-tag">PRO YULGANG & CLOUD OSLINK</span>
+    <h1 class="hero-title">9WING.SHOP</h1>
+    <p class="hero-subtitle">
+      ยกระดับการเล่นโยกังของคุณด้วยโปรแกรมช่วยเล่นที่เสถียรที่สุด
+      พร้อมบริการเช่าจอ Cloud ปล่อยบอท 24 ชม. ผ่าน OSLink ความเร็วสูง
+    </p>
+
+    <div class="btn-group">
+      <a href="https://www.9wing.shop/menu.html" class="btn btn-primary">
+        🎮 PRO โยกังจุติยุทธภพเลือดใหม่
+      </a>
+      <a href="https://www.9wing.shop/menu2.html" class="btn btn-primary">
+        🎮 PRO โยกังยุทธภพสนุก
+      </a>
+      <a href="https://www.9wing.shop/OSLink.html" class="btn btn-primary">
+        🤖 เช่าจอปล่อยบอทผ่าน OSLINK
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats reveal" id="stats">
+    <span class="section-tag">System Status</span>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <span class="stat-number" data-target="132">0</span>
+        <div>
+          ALL USERS PC NOTEBOOK<br>
+          <span class="section-tag">08/03/2026</span>
+        </div>
+      </div>
+
+      <div class="stat-card reveal">
+        <span class="stat-number" style="color:#ff0066" data-target="5">0</span>
+        <div>WING BAN USERS</div>
+      </div>
+
+      <div class="stat-card reveal">
+        <span class="stat-number" data-target="61">0</span>
+        <div>
+          ALL USERS CLOUD PHONE<br>
+          <span class="section-tag">02/03/2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VIDEO ===== -->
+  <section class="video-section reveal" id="review">
+    <span class="section-tag">Review Video</span>
+    <div class="video-container">
+      <iframe
+        src="https://www.youtube.com/embed/videoseries?si=ARQPDtew-PSK-7tx&amp;list=PLOcSH_6jJxRICye4Hzw2BigQYIc7oV3RA"
+        title="โปร ตี+ออโต้ เปิดกล่องออโต้ BY 9WING"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="visit-box">
+      <div class="visit-label">ผู้เข้าชมเว็บไซต์</div>
+      <div class="visit-number" id="visitCount">...</div>
+    </div>
+
+    <p style="color:#666; margin-top:18px;">© 2026 9WING.SHOP All rights reserved.</p>
+  </footer>
+
+  <!-- ===== FLOATING CONTACT ===== -->
+  <div class="floating-contact">
+    <a href="https://www.m.me/say.wing.656700"
+       class="float-btn float-line"
+       target="_blank" rel="noopener noreferrer"
+       data-text="สอบถาม Messenger"
+       aria-label="สอบถาม Messenger">
+      💬
+    </a>
+
+    <a href="https://discord.gg/PDFq23qA"
+       class="float-btn float-discord"
+       target="_blank" rel="noopener noreferrer"
+       data-text="เข้า Discord"
+       aria-label="เข้า Discord">
+      🎧
+    </a>
+
+    <a href="https://www.9wing.shop/DOWNLOAD.html"
+       class="float-btn float-discord"
+       target="_blank" rel="noopener noreferrer"
+       data-text="APK Download"
+       aria-label="ดาวน์โหลด APK">
+      📥
+    </a>
+  </div>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Counter animation
+    const counters = document.querySelectorAll('.stat-number');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el = entry.target;
+          const target = +el.dataset.target;
+          let count = 0;
+          const step = target / 120;
+
+          const run = () => {
+            count += step;
+            if (count < target) {
+              el.textContent = Math.ceil(count);
+              requestAnimationFrame(run);
+            } else {
+              el.textContent = target;
+            }
+          };
+
+          run();
+          observer.unobserve(el);
+        }
+      });
+    }, { threshold: .5 });
+
+    counters.forEach(c => observer.observe(c));
+
+    // Reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revObs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('active');
+      });
+    }, { threshold: .2 });
+
+    reveals.forEach(r => revObs.observe(r));
+  </script>
+
+  <script>
+    // Visitor counter (count once per device/browser)
+    document.addEventListener("DOMContentLoaded", async () => {
+      const counterEl = document.getElementById("visitCount");
+      const namespace = "9wing-shop";
+      const key = "homepage-visits";
+      const storageKey = "counted_9wing_homepage";
+
+      try {
+        let apiUrl = `https://api.countapi.xyz/get/${namespace}/${key}`;
+
+        if (!localStorage.getItem(storageKey)) {
+          apiUrl = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+          localStorage.setItem(storageKey, "yes");
+        }
+
+        const res = await fetch(apiUrl);
+        const data = await res.json();
+
+        if (counterEl) {
+          counterEl.textContent = (data.value || 0).toLocaleString("th-TH");
+        }
+      } catch (err) {
+        console.error("Counter error:", err);
+        if (counterEl) counterEl.textContent = "N/A";
+      }
+    });
+  </script>
+
+  <script>
+    // Auto tooltip ครั้งแรก
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!localStorage.getItem("contactTipShown")) {
+        setTimeout(() => {
+          const btns = document.querySelectorAll(".float-btn");
+          btns.forEach(btn => btn.classList.add("auto-tip"));
+
+          setTimeout(() => {
+            btns.forEach(btn => btn.classList.remove("auto-tip"));
+            localStorage.setItem("contactTipShown", "yes");
+          }, 2500);
+        }, 1600);
+      }
+    });
+  </script>
+
+  <script>
+    // Popup + Play music
+    document.addEventListener("DOMContentLoaded", () => {
+      const popup = document.getElementById("musicPopup");
+      const btn = document.getElementById("enterSite");
+      const music = document.getElementById("bgMusic");
+
+      btn.addEventListener("click", () => {
+        popup.classList.add("hide");
+        music.volume = 0.6;
+        music.play().catch(err => console.log("Audio blocked:", err));
+      });
+    });
+  </script>
+
+  <script>
+    // Mobile menu with animation
+    document.addEventListener("DOMContentLoaded", () => {
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+      const navOverlay = document.getElementById("navOverlay");
+      const navAnchors = document.querySelectorAll("#navLinks a");
+
+      const openMenu = () => {
+        navLinks.classList.add("show");
+        navOverlay.classList.add("show");
+        menuToggle.classList.add("active");
+        menuToggle.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+      };
+
+      const closeMenu = () => {
+        navLinks.classList.remove("show");
+        navOverlay.classList.remove("show");
+        menuToggle.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+      };
+
+      menuToggle.addEventListener("click", () => {
+        const isOpen = navLinks.classList.contains("show");
+        isOpen ? closeMenu() : openMenu();
+      });
+
+      navOverlay.addEventListener("click", closeMenu);
+
+      navAnchors.forEach(link => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 768) {
+          closeMenu();
+        }
+      });
+    });
+  </script>
+
+</body>
+</html>
