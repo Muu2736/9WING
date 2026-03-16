@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>9WING Device</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--cyan:#00ffff;
+--purple:#8b5cf6;
+--bg:#0a0a0f;
+--text:#ffffff;
+}
+
+*{
+box-sizing:border-box;
+margin:0;
+padding:0;
+}
+
+body{
+font-family:'Prompt',sans-serif;
+background:radial-gradient(circle at center,#1b1b2f,#0a0a0f);
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+color:var(--text);
+}
+
+/* container */
+
+.container{
+width:95%;
+max-width:520px;
+background:rgba(15,15,25,0.95);
+border-radius:16px;
+padding:26px;
+border:1px solid rgba(0,255,255,0.4);
+backdrop-filter:blur(10px);
+text-align:center;
+
+animation:neonGlow 4s infinite alternate;
+}
+
+@keyframes neonGlow{
+from{box-shadow:0 0 20px rgba(0,255,255,.2);}
+to{box-shadow:0 0 40px rgba(0,255,255,.6);}
+}
+
+h1{
+font-family:'Orbitron';
+font-size:1.7em;
+letter-spacing:2px;
+background:linear-gradient(to right,#00ffff,#8b5cf6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+margin-bottom:10px;
+}
+
+/* status */
+
+.status{
+font-size:.8em;
+background:rgba(0,255,0,0.1);
+border:1px solid rgba(0,255,0,0.3);
+display:inline-block;
+padding:6px 10px;
+border-radius:999px;
+color:#00ff00;
+margin-bottom:20px;
+}
+
+/* warning */
+
+.warning{
+background:rgba(255,0,0,0.1);
+border-left:4px solid red;
+padding:10px;
+border-radius:8px;
+font-size:.9em;
+margin-bottom:18px;
+}
+
+/* section */
+
+.section{
+margin-top:10px;
+margin-bottom:10px;
+font-size:.85em;
+color:var(--purple);
+text-transform:uppercase;
+font-weight:700;
+letter-spacing:1px;
+text-align:center;
+}
+
+/* device grid */
+
+.device-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:12px;
+margin-top:10px;
+}
+
+/* device card */
+
+.device-card{
+background:rgba(255,255,255,0.04);
+border-radius:12px;
+border:1px solid rgba(255,255,255,0.1);
+padding:18px;
+text-align:center;
+transition:.3s;
+}
+
+.device-card:hover{
+transform:translateY(-4px);
+box-shadow:
+0 0 10px #00ffff,
+0 0 20px #00ffff,
+0 0 40px #8b5cf6;
+}
+
+.device-card a{
+text-decoration:none;
+color:white;
+font-weight:700;
+font-size:.95em;
+display:block;
+}
+
+/* blink */
+
+.blink{
+display:inline-block;
+background:black;
+color:yellow;
+padding:4px 10px;
+border-radius:6px;
+font-family:'Orbitron';
+animation:blink 1s infinite;
+}
+
+@keyframes blink{
+0%{opacity:1}
+50%{opacity:0}
+100%{opacity:1}
+}
+
+/* main button */
+
+.main-btn{
+margin-top:22px;
+display:block;
+padding:15px;
+border-radius:10px;
+background:linear-gradient(45deg,#00ffff,#8b5cf6);
+color:black;
+font-weight:900;
+text-decoration:none;
+transition:.3s;
+
+box-shadow:
+0 0 10px #00ffff,
+0 0 20px #00ffff;
+}
+
+.main-btn:hover{
+transform:translateY(-3px);
+
+box-shadow:
+0 0 15px #00ffff,
+0 0 30px #00ffff,
+0 0 60px #8b5cf6;
+}
+
+.device{
+margin-top:15px;
+font-size:.8em;
+opacity:.7;
+}
+
+footer{
+margin-top:15px;
+font-size:.75em;
+opacity:.6;
+}
+
+/* modal */
+
+.modal-bg{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.7);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+}
+
+.modal{
+background:#111;
+padding:25px;
+border-radius:12px;
+border:1px solid cyan;
+text-align:center;
+max-width:300px;
+
+box-shadow:
+0 0 10px #00ffff,
+0 0 30px #00ffff;
+}
+
+.modal button{
+margin-top:15px;
+padding:8px 15px;
+border:none;
+border-radius:8px;
+background:cyan;
+cursor:pointer;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>VERSION DEVICE</h1>
+
+<div class="status">
+UPDATE 15/03/2026
+</div>
+
+<div class="warning">
+⚠️ เลือกอุปกรณ์ที่จะใช้งานโปรแต่ละอุปกรณ์จะมีฟังชั่นไม่เหมือนกัน
+</div>
+
+<div class="section">VERSION PRO</div>
+
+<div class="device-grid">
+
+<div class="device-card">
+<a href="https://www.9wing.shop/menu.html" target="_blank">
+<span class="blink">พีซี / โน๊ตบุ๊ค</span>
+</a>
+</div>
+
+<div class="device-card">
+<a href="https://www.9wing.shop" target="_blank">
+<span class="blink">มือถือ / Cloud</span>
+</a>
+</div>
+
+</div>
+
+<a href="https://www.m.me/say.wing.656700" target="_blank" class="main-btn">
+ติดต่อฝ่ายบริการลูกค้า
+</a>
+
+<div class="device" id="device"></div>
+
+<footer>
+© 2026 9WING.SHOP All rights reserved.
+</footer>
+
+</div>
+
+<div class="modal-bg" id="modal">
+<div class="modal">
+<p>ตรวจพบเวอร์ชันใหม่</p>
+<button onclick="closeModal()">ปิด</button>
+</div>
+</div>
+
+<script>
+
+function detectDevice(){
+
+let device="Desktop";
+
+const isMobile=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+if(isMobile){
+device="Mobile Device";
+}
+
+document.getElementById("device").innerText="DEVICE : "+device;
+
+}
+
+function showModal(){
+document.getElementById("modal").style.display="flex";
+}
+
+function closeModal(){
+document.getElementById("modal").style.display="none";
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+
+detectDevice();
+
+setTimeout(showModal,4000);
+
+});
+
+document.getElementById("modal").addEventListener("click",function(e){
+
+if(e.target.id==="modal"){
+closeModal();
+}
+
+});
+
+</script>
+
+</body>
+</html>

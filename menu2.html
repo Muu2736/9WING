@@ -1,180 +1,290 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>9WING DASHBOARD 2026</title>
-  <link href="https://fonts.googleapis.com" rel="stylesheet">
-  <style>
-    :root {
-      --primary-cyan: #00ffff;
-      --primary-purple: #bc13fe;
-      --bg-dark: #050508;
-      --card-bg: rgba(13, 17, 23, 0.9);
-      --neon-border: rgba(0, 255, 255, 0.3);
-      --warning-red: #ff3e3e;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>9WING FUNCTION เมนูทั้งหมด</title>
 
-    * { box-sizing: border-box; }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    body {
-      font-family: 'Prompt', sans-serif;
-      background: radial-gradient(circle at center, #1a1b3a 0%, #050508 100%);
-      min-height: 100vh;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: #fff;
-    }
+<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
 
-    .container {
-      width: 95%;
-      max-width: 450px;
-      padding: 30px;
-      background: var(--card-bg);
-      border-radius: 20px;
-      border: 2px solid var(--primary-cyan);
-      box-shadow: 0 0 25px rgba(0, 255, 255, 0.2);
-      backdrop-filter: blur(15px);
-      text-align: center;
-    }
+<style>
 
-    h2 {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 1.6em;
-      margin: 0;
-      background: linear-gradient(90deg, var(--primary-cyan), #fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      letter-spacing: 2px;
-    }
+:root{
+--primary-cyan:#00ffff;
+--primary-purple:#8b5cf6;
+--primary-blue:#0066ff;
+--dark-bg:#0a0a0f;
+--card-bg:rgba(10,10,15,0.9);
+--glass-bg:rgba(255,255,255,0.03);
+--border-glow:rgba(0,255,255,0.4);
+--text-primary:#ffffff;
+--warning-red:#ff4444;
+}
 
-    .status-bar {
-      font-size: 0.75em;
-      color: #00ff00;
-      background: rgba(0, 255, 0, 0.1);
-      padding: 5px 15px;
-      border-radius: 50px;
-      border: 1px solid #00ff00;
-      display: inline-block;
-      margin: 15px 0 25px;
-    }
+*{box-sizing:border-box;}
 
-    .warning-box {
-      background: rgba(255, 62, 62, 0.1);
-      border-left: 4px solid var(--warning-red);
-      padding: 15px;
-      text-align: left;
-      font-size: 0.85em;
-      margin-bottom: 25px;
-    }
+body{
+font-family:'Prompt',sans-serif;
+background:radial-gradient(circle at center,#1a1a2e 0%,#0a0a0f 100%);
+min-height:100vh;
+margin:0;
+padding:20px;
+color:var(--text-primary);
+display:flex;
+justify-content:center;
+align-items:center;
+}
 
-    .category-title {
-      text-align: left;
-      font-size: 0.8em;
-      color: var(--primary-purple);
-      text-transform: uppercase;
-      margin: 20px 0 10px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-    }
+.container{
+width:100%;
+max-width:520px;
+padding:26px;
+background:var(--card-bg);
+border-radius:16px;
+border:1px solid var(--border-glow);
+box-shadow:0 0 30px rgba(0,255,255,0.12);
+backdrop-filter:blur(15px);
+text-align:center;
+}
 
-    .category-title::after {
-      content: "";
-      flex: 1;
-      height: 1px;
-      background: linear-gradient(90deg, var(--primary-purple), transparent);
-      margin-left: 10px;
-    }
+.logo{
+width:92px;
+height:92px;
+border-radius:50%;
+margin-bottom:14px;
+border:2px solid var(--primary-cyan);
+box-shadow:0 0 15px rgba(0,255,255,.9);
+animation:logoFloat 3s ease-in-out infinite;
+object-fit:cover;
+}
 
-    .file-card {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 5px;
-    }
+@keyframes logoFloat{
+0%,100%{transform:translateY(0);filter:brightness(1);}
+50%{transform:translateY(-8px);filter:brightness(1.25);}
+}
 
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 15px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
+h2{
+font-family:'Orbitron',sans-serif;
+font-size:1.55em;
+margin:8px 0 6px;
+letter-spacing:2px;
+background:linear-gradient(to right,#00ffff,#8b5cf6);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
 
-    .label { color: #e0e0e0; font-size: 0.9em; }
-    .value { color: var(--primary-cyan); font-weight: bold; font-family: 'Orbitron'; }
+.status-bar{
+font-size:0.78em;
+background:rgba(0,255,0,0.1);
+color:#00ff00;
+padding:6px 14px;
+border-radius:999px;
+display:inline-block;
+margin:10px 0 18px;
+border:1px solid rgba(0,255,0,0.3);
+font-family:'Orbitron',sans-serif;
+letter-spacing:1px;
+}
 
-    .feature-item {
-      display: flex;
-      align-items: center;
-      padding: 10px 15px;
-      font-size: 0.9em;
-      color: #fff;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.03);
-    }
+.warning-box{
+background:linear-gradient(90deg,rgba(255,0,0,0.16) 0%,rgba(255,0,0,0) 100%);
+border-left:4px solid #ff4444;
+padding:14px;
+margin-bottom:18px;
+font-size:0.88em;
+border-radius:10px;
+line-height:1.6;
+text-align:left;
+}
 
-    .feature-item::before {
-      content: "✓";
-      color: #00ff00;
-      margin-right: 12px;
-      font-weight: bold;
-    }
+.category-title{
+text-align:left;
+font-size:0.82em;
+color:var(--primary-purple);
+text-transform:uppercase;
+margin:16px 0 10px;
+font-weight:700;
+letter-spacing:1px;
+display:flex;
+align-items:center;
+gap:10px;
+}
 
-    .cyber-button {
-      display: block;
-      margin-top: 30px;
-      padding: 16px;
-      background: linear-gradient(45deg, var(--primary-cyan), var(--primary-purple));
-      color: #000;
-      text-decoration: none;
-      font-weight: 900;
-      border-radius: 10px;
-      text-transform: uppercase;
-      transition: 0.3s;
-      box-shadow: 0 5px 15px rgba(0, 255, 255, 0.3);
-    }
+.category-title::after{
+content:"";
+flex:1;
+height:1px;
+background:linear-gradient(90deg,var(--primary-purple),transparent);
+}
 
-    .cyber-button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 255, 255, 0.5);
-      filter: brightness(1.2);
-    }
-  </style>
+.file-card{
+background:var(--glass-bg);
+border-radius:12px;
+padding:6px;
+margin-bottom:18px;
+border:1px solid rgba(255,255,255,0.06);
+}
+
+.file-info-row{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:12px;
+padding:11px 12px;
+margin:4px 0;
+font-size:0.9em;
+transition:0.25s;
+border-radius:10px;
+}
+
+.file-info-row:hover{
+background:rgba(255,255,255,0.05);
+transform:translateX(4px);
+}
+
+.label{
+color:#e6e6e6;
+text-align:left;
+line-height:1.35;
+flex:1;
+}
+
+.value{
+color:#00ff00;
+font-weight:800;
+text-shadow:0 0 8px rgba(0,255,0,0.35);
+font-family:'Orbitron',sans-serif;
+white-space:nowrap;
+}
+
+@media(max-width:420px){
+.container{padding:20px;}
+.file-info-row{flex-direction:column;align-items:flex-start;}
+.value{align-self:flex-end;}
+}
+
+.cyber-button{
+display:block;
+margin-top:30px;
+padding:16px;
+background:linear-gradient(45deg,var(--primary-cyan),var(--primary-purple));
+color:#000;
+text-decoration:none;
+font-weight:900;
+border-radius:10px;
+text-transform:uppercase;
+transition:0.3s;
+box-shadow:0 5px 15px rgba(0,255,255,0.3);
+}
+
+.cyber-button:hover{
+transform:translateY(-3px);
+box-shadow:0 8px 25px rgba(0,255,255,0.5);
+filter:brightness(1.2);
+}
+
+footer{
+margin-top:18px;
+font-size:0.85em;
+color:rgba(255,255,255,0.65);
+}
+
+</style>
 </head>
+
 <body>
 
-  <div class="container">
-    <h2>Coming Soon</h2>
-    <div class="status-bar">อัปเดตล่าสุด: 00/00/2026</div>
+<div class="container">
 
-    <div class="warning-box">
-        <strong style="color: var(--warning-red);">⚠️ ข้อกำหนดระบบ</strong><br>
-        1. --- <br>2. - <span style="text-decoration: underline;">-</span> -<br>
-		3. ---
-    </div>
+<h2>9WING FUNCTION</h2>
 
-    <div class="category-title">แพ็กเกจหลัก</div>
-    <div class="file-card">
-        <div class="info-row" style="border:none;">
-            <span class="label">⭐ Coming Soon</span>
-            <span class="value">-</span>
-        </div>
-    </div>
+<div class="status-bar">
+UPDATE 16/03/2026
+</div>
 
-    <div class="category-title">ฟังก์ชัน</div>
-    <div class="file-card">
-        <div class="feature-item">ระบบ BYPASS กันแบนอัตโนมัติ 100%</div>
-        <div class="feature-item">โจมตีเร็ว (คนอื่นเห็นเราปกติ)</div>
-        <div class="feature-item">ลดดีเลย์สกิล (ใช้สกิลต่อเนื่อง)</div>
-        <div class="feature-item">เพิ่มความเร็วการเคลื่อนที่ (วิ่งไว)</div>
-        <div class="feature-item">ค่าประสบการณ์ EXP เพิ่ม 1.5 เท่า</div>
-    </div>
+<div class="warning-box">
 
-    <a href="https://www.m.me" class="cyber-button">
-        ติดต่อฝ่ายบริการลูกค้า
-    </a>
-  </div>
+⚠️ ข้อกำหนดระบบ<br><br>
+ 
+• รองรับเฉพาะ Cloud Phone เท่านั้น<br>
+• ลูกค้าที่มี Cloud Phone อยู่แล้วและต้องการซื้อโปรไปลงเราดำเนินการติดตั้งให้ ฟรี<br><br>
+
+ข้อควรระวังเรื่องวันใช้งาน<br>
+ลูกค้าต้องตรวจสอบวันใช้งานของ "จอเช่าตัวเอง" อย่าปล่อยให้หมดอายุ<br><br>
+หากหมดอายุแล้วต้องการใช้โปรอีกครั้ง<br>
+ต้องซื้อใหม่ราคา 500 บาท<br>
+แต่สามารถนำยูสเดิมมาแลกส่วนลดได้ 40%
+
+</div>
+
+<div class="category-title">
+โปรหลัก (รองรับเฉพาะ Cloud Phone)
+</div>
+
+<div class="file-card">
+
+<div class="file-info-row">
+<span class="label">⭐ โปรหลักสายฟาร์ม</span>
+<span class="value">500 💲</span>
+</div>
+
+</div>
+
+<div class="category-title">
+ฟังก์ชันทั้งหมด
+</div>
+
+<div class="file-card">
+
+<div class="file-info-row">
+<span class="label">✔️ ระบบ BYPASS กันแบนอัตโนมัติ 100%</span>
+</div>
+
+<div class="file-info-row">
+<span class="label">✔️ โจมตีเร็ว สกิลไม่ดีเลย์</span>
+</div>
+
+<div class="file-info-row">
+<span class="label">✔️ เพิ่มความเร็วการเคลื่อนที่ (วิ่งไว)</span>
+</div>
+
+<div class="file-info-row">
+<span class="label">✔️ + EXP เพิ่ม 1.0 เท่า</span>
+</div>
+
+<div class="file-info-row">
+<span class="label">✔️ ปรับมุมมองกว้างขึ้น</span>
+</div>
+
+<div class="file-info-row">
+<span class="label">✔️ เปลี่ยนดวงรายวัน</span>
+</div>
+
+<div class="file-info-row">
+<span class="label">✔️ ปิดเอฟเฟค Boot FPS</span>
+</div>
+
+<div class="file-info-row">
+<span class="label">❌ ฟาร์มยุทไม่ล็อก</span>
+</div>
+
+</div>
+
+<a href="https://www.m.me/say.wing.656700" class="cyber-button">
+ติดต่อฝ่ายบริการลูกค้า
+</a>
+
+<footer>
+© 2026 9WING.SHOP All rights reserved.
+</footer>
+
+</div>
 
 </body>
 </html>
+
+
+ปิดเอฟเฟค Boot FPS
