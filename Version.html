@@ -9,224 +9,285 @@
 <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Orbitron:wght@600;800&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
---cyan:#00ffff;
---purple:#8b5cf6;
---bg:#0a0a0f;
---text:#ffffff;
+  --cyan:#00f7ff;
+  --blue:#00bfff;
+  --purple:#9b5cff;
+  --pink:#ff4df0;
+  --bg:#070b14;
+  --panel:#0d1322;
+  --panel-2:#111a2e;
+  --text:#f5fbff;
+  --muted:#9ec8d8;
+  --line:rgba(0,247,255,.35);
 }
 
 *{
-box-sizing:border-box;
-margin:0;
-padding:0;
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
 }
 
 body{
-font-family:'Prompt',sans-serif;
-background:radial-gradient(circle at center,#1b1b2f,#0a0a0f);
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-color:var(--text);
+  font-family:'Prompt',sans-serif;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  color:var(--text);
+  background:
+    radial-gradient(circle at top, rgba(155,92,255,.18), transparent 30%),
+    radial-gradient(circle at bottom, rgba(0,247,255,.12), transparent 35%),
+    linear-gradient(135deg, #05070d 0%, #08111f 45%, #05070d 100%);
 }
-
-/* container */
 
 .container{
-width:95%;
-max-width:520px;
-background:rgba(15,15,25,0.95);
-border-radius:16px;
-padding:26px;
-border:1px solid rgba(0,255,255,0.4);
-backdrop-filter:blur(10px);
-text-align:center;
-
-animation:neonGlow 4s infinite alternate;
+  width:95%;
+  max-width:520px;
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(180deg, rgba(13,19,34,.95), rgba(8,12,22,.96));
+  border-radius:20px;
+  padding:28px 24px 24px;
+  border:1px solid rgba(0,247,255,.35);
+  backdrop-filter:blur(12px);
+  text-align:center;
+  box-shadow:
+    0 0 12px rgba(0,247,255,.22),
+    0 0 30px rgba(0,247,255,.14),
+    0 0 60px rgba(155,92,255,.12),
+    inset 0 0 18px rgba(255,255,255,.02);
 }
 
-@keyframes neonGlow{
-from{box-shadow:0 0 20px rgba(0,255,255,.2);}
-to{box-shadow:0 0 40px rgba(0,255,255,.6);}
+.container::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(135deg, rgba(0,247,255,.08), transparent 22%, transparent 80%, rgba(155,92,255,.08)),
+    repeating-linear-gradient(
+      90deg,
+      transparent 0,
+      transparent 28px,
+      rgba(255,255,255,.02) 29px
+    );
 }
 
 h1{
-font-family:'Orbitron';
-font-size:1.7em;
-letter-spacing:2px;
-background:linear-gradient(to right,#00ffff,#8b5cf6);
--webkit-background-clip:text;
--webkit-text-fill-color:transparent;
-margin-bottom:10px;
+  font-family:'Orbitron',sans-serif;
+  font-size:1.9em;
+  letter-spacing:2px;
+  margin-bottom:10px;
+  background:linear-gradient(90deg, var(--cyan), var(--purple), var(--pink));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 18px rgba(0,247,255,.25);
 }
 
 /* status */
 
 .status{
-font-size:.8em;
-background:rgba(0,255,0,0.1);
-border:1px solid rgba(0,255,0,0.3);
-display:inline-block;
-padding:6px 10px;
-border-radius:999px;
-color:#00ff00;
-margin-bottom:20px;
+  font-size:.82em;
+  display:inline-block;
+  padding:7px 12px;
+  border-radius:999px;
+  color:#9dffb3;
+  background:rgba(0,255,120,.08);
+  border:1px solid rgba(0,255,120,.28);
+  margin-bottom:20px;
+  box-shadow:0 0 12px rgba(0,255,120,.15);
 }
 
 /* warning */
 
 .warning{
-background:rgba(255,0,0,0.1);
-border-left:4px solid red;
-padding:10px;
-border-radius:8px;
-font-size:.9em;
-margin-bottom:18px;
+  background:rgba(255,77,240,.08);
+  border:1px solid rgba(255,77,240,.25);
+  box-shadow:0 0 12px rgba(255,77,240,.08);
+  padding:12px;
+  border-radius:12px;
+  font-size:.92em;
+  margin-bottom:18px;
+  color:#ffd6fb;
 }
 
 /* section */
 
 .section{
-margin-top:10px;
-margin-bottom:10px;
-font-size:.85em;
-color:var(--purple);
-text-transform:uppercase;
-font-weight:700;
-letter-spacing:1px;
-text-align:center;
+  margin-top:10px;
+  margin-bottom:14px;
+  font-size:.85em;
+  color:var(--cyan);
+  text-transform:uppercase;
+  font-weight:700;
+  letter-spacing:2px;
+  text-align:center;
+  text-shadow:0 0 10px rgba(0,247,255,.45);
 }
 
 /* device grid */
 
 .device-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:12px;
-margin-top:10px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:10px;
 }
 
 /* device card */
 
 .device-card{
-background:rgba(255,255,255,0.04);
-border-radius:12px;
-border:1px solid rgba(255,255,255,0.1);
-padding:18px;
-text-align:center;
-transition:.3s;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border-radius:14px;
+  border:1px solid rgba(0,247,255,.15);
+  padding:18px;
+  text-align:center;
+  transition:.3s;
+  box-shadow:
+    inset 0 0 12px rgba(255,255,255,.02),
+    0 0 12px rgba(0,191,255,.06);
 }
 
 .device-card:hover{
-transform:translateY(-4px);
-box-shadow:
-0 0 10px #00ffff,
-0 0 20px #00ffff,
-0 0 40px #8b5cf6;
+  transform:translateY(-4px) scale(1.01);
+  border-color:rgba(0,247,255,.45);
+  box-shadow:
+    0 0 10px rgba(0,247,255,.45),
+    0 0 24px rgba(0,247,255,.22),
+    0 0 40px rgba(155,92,255,.20);
 }
 
 .device-card a{
-text-decoration:none;
-color:white;
-font-weight:700;
-font-size:.95em;
-display:block;
+  text-decoration:none;
+  color:white;
+  font-weight:700;
+  font-size:.95em;
+  display:block;
 }
 
 /* blink */
 
 .blink{
-display:inline-block;
-background:black;
-color:yellow;
-padding:4px 10px;
-border-radius:6px;
-font-family:'Orbitron';
-animation:blink 1s infinite;
+  display:inline-block;
+  background:rgba(0,0,0,.55);
+  color:var(--cyan);
+  padding:8px 12px;
+  border-radius:8px;
+  font-family:'Orbitron',sans-serif;
+  border:1px solid rgba(0,247,255,.25);
+  box-shadow:
+    0 0 10px rgba(0,247,255,.15),
+    inset 0 0 10px rgba(0,247,255,.08);
+  animation:blink 1s infinite, pulseGlow 1.8s infinite alternate;
 }
 
 @keyframes blink{
-0%{opacity:1}
-50%{opacity:0}
-100%{opacity:1}
+  0%{opacity:1}
+  50%{opacity:.55}
+  100%{opacity:1}
+}
+
+@keyframes pulseGlow{
+  from{
+    box-shadow:
+      0 0 8px rgba(0,247,255,.12),
+      inset 0 0 8px rgba(0,247,255,.06);
+  }
+  to{
+    box-shadow:
+      0 0 16px rgba(0,247,255,.35),
+      0 0 28px rgba(155,92,255,.18),
+      inset 0 0 12px rgba(0,247,255,.12);
+  }
 }
 
 /* main button */
 
 .main-btn{
-margin-top:22px;
-display:block;
-padding:15px;
-border-radius:10px;
-background:linear-gradient(45deg,#00ffff,#8b5cf6);
-color:black;
-font-weight:900;
-text-decoration:none;
-transition:.3s;
-
-box-shadow:
-0 0 10px #00ffff,
-0 0 20px #00ffff;
+  margin-top:22px;
+  display:block;
+  padding:15px;
+  border-radius:12px;
+  background:linear-gradient(90deg, var(--cyan), var(--blue), var(--purple));
+  color:#061018;
+  font-weight:900;
+  text-decoration:none;
+  transition:.3s;
+  box-shadow:
+    0 0 12px rgba(0,247,255,.30),
+    0 0 28px rgba(0,247,255,.18);
 }
 
 .main-btn:hover{
-transform:translateY(-3px);
-
-box-shadow:
-0 0 15px #00ffff,
-0 0 30px #00ffff,
-0 0 60px #8b5cf6;
+  transform:translateY(-3px);
+  box-shadow:
+    0 0 16px rgba(0,247,255,.50),
+    0 0 32px rgba(0,247,255,.28),
+    0 0 55px rgba(155,92,255,.25);
 }
 
 .device{
-margin-top:15px;
-font-size:.8em;
-opacity:.7;
+  margin-top:15px;
+  font-size:.8em;
+  color:var(--muted);
+  opacity:.85;
 }
 
 footer{
-margin-top:15px;
-font-size:.75em;
-opacity:.6;
+  margin-top:15px;
+  font-size:.75em;
+  color:#7ea3b4;
+  opacity:.7;
 }
 
 /* modal */
 
 .modal-bg{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,0.7);
-display:none;
-justify-content:center;
-align-items:center;
-z-index:9999;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.75);
+  display:none;
+  justify-content:center;
+  align-items:center;
+  z-index:9999;
 }
 
 .modal{
-background:#111;
-padding:25px;
-border-radius:12px;
-border:1px solid cyan;
-text-align:center;
-max-width:300px;
-
-box-shadow:
-0 0 10px #00ffff,
-0 0 30px #00ffff;
+  background:linear-gradient(180deg, #0d1322, #0a0f1a);
+  padding:25px;
+  border-radius:14px;
+  border:1px solid rgba(0,247,255,.35);
+  text-align:center;
+  max-width:300px;
+  color:white;
+  box-shadow:
+    0 0 12px rgba(0,247,255,.25),
+    0 0 30px rgba(155,92,255,.15);
 }
 
 .modal button{
-margin-top:15px;
-padding:8px 15px;
-border:none;
-border-radius:8px;
-background:cyan;
-cursor:pointer;
+  margin-top:15px;
+  padding:9px 16px;
+  border:none;
+  border-radius:8px;
+  background:linear-gradient(90deg, var(--cyan), var(--purple));
+  color:#041018;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 0 12px rgba(0,247,255,.18);
 }
 
+@media (max-width:560px){
+  .device-grid{
+    grid-template-columns:1fr;
+  }
+
+  h1{
+    font-size:1.6em;
+  }
+}
 </style>
 </head>
 
@@ -234,93 +295,84 @@ cursor:pointer;
 
 <div class="container">
 
-<h1>VERSION DEVICE</h1>
+  <h1>VERSION DEVICE</h1>
 
-<div class="status">
-UPDATE 15/03/2026
-</div>
+  <div class="status">
+    UPDATE 15/03/2026
+  </div>
 
-<div class="warning">
-⚠️ เลือกอุปกรณ์ที่จะใช้งานโปรแต่ละอุปกรณ์จะมีฟังชั่นไม่เหมือนกัน
-</div>
+  <div class="warning">
+    ⚠️ เลือกอุปกรณ์ที่จะใช้งานโปรแต่ละอุปกรณ์จะมีฟังชั่นไม่เหมือนกัน
+  </div>
 
-<div class="section">VERSION PRO</div>
+  <div class="section">VERSION PRO</div>
 
-<div class="device-grid">
+  <div class="device-grid">
 
-<div class="device-card">
-<a href="https://www.9wing.shop/menu.html" target="_blank">
-<span class="blink">พีซี / โน๊ตบุ๊ค</span>
-</a>
-</div>
+    <div class="device-card">
+      <a href="https://www.9wing.shop/menu.html" target="_blank">
+        <span>💻 PC NOTBOOK</span>
+      </a>
+    </div>
 
-<div class="device-card">
-<a href="https://www.9wing.shop/menu2.html" target="_blank">
-<span class="blink">มือถือ / Cloud</span>
-</a>
-</div>
+    <div class="device-card">
+      <a href="https://www.9wing.shop/menu2.html" target="_blank">
+        <span>📱 CLOUD PHONE</span>
+      </a>
+    </div>
 
-</div>
+  </div>
 
-<a href="https://www.m.me/say.wing.656700" target="_blank" class="main-btn">
-ติดต่อฝ่ายบริการลูกค้า
-</a>
+  <a href="https://www.m.me/say.wing.656700" target="_blank" class="main-btn">
+    ติดต่อฝ่ายบริการลูกค้า
+  </a>
 
-<div class="device" id="device"></div>
+  <div class="device" id="device"></div>
 
-<footer>
-© 2026 9WING.SHOP All rights reserved.
-</footer>
+  <footer>
+    © 2026 9WING.SHOP All rights reserved.
+  </footer>
 
 </div>
 
 <div class="modal-bg" id="modal">
-<div class="modal">
-<p>ตรวจพบเวอร์ชันใหม่</p>
-<button onclick="closeModal()">ปิด</button>
-</div>
+  <div class="modal">
+    <p>ตรวจพบเวอร์ชันใหม่</p>
+    <button onclick="closeModal()">ปิด</button>
+  </div>
 </div>
 
 <script>
-
 function detectDevice(){
+  let device="Desktop";
 
-let device="Desktop";
+  const isMobile=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
-const isMobile=/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if(isMobile){
+    device="Mobile Device";
+  }
 
-if(isMobile){
-device="Mobile Device";
-}
-
-document.getElementById("device").innerText="DEVICE : "+device;
-
+  document.getElementById("device").innerText="DEVICE : "+device;
 }
 
 function showModal(){
-document.getElementById("modal").style.display="flex";
+  document.getElementById("modal").style.display="flex";
 }
 
 function closeModal(){
-document.getElementById("modal").style.display="none";
+  document.getElementById("modal").style.display="none";
 }
 
 document.addEventListener("DOMContentLoaded",function(){
-
-detectDevice();
-
-setTimeout(showModal,4000);
-
+  detectDevice();
+  setTimeout(showModal,4000);
 });
 
 document.getElementById("modal").addEventListener("click",function(e){
-
-if(e.target.id==="modal"){
-closeModal();
-}
-
+  if(e.target.id==="modal"){
+    closeModal();
+  }
 });
-
 </script>
 
 </body>
