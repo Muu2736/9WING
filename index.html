@@ -160,6 +160,23 @@
       margin-top:8px;
     }
 
+    .popup-box-image{
+      max-width:500px;
+      padding:24px 18px 18px;
+    }
+
+    .popup-image{
+      display:block;
+      width:100%;
+      max-width:360px;
+      height:auto;
+      margin:16px auto 18px;
+      border-radius:18px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 12px 30px rgba(0,0,0,.28);
+      object-fit:contain;
+    }
+
     @keyframes popupIn{
       from{transform:translateY(18px) scale(.96);opacity:0}
       to{transform:translateY(0) scale(1);opacity:1}
@@ -678,6 +695,11 @@
         border-radius:24px;
       }
 
+      .popup-box-image{
+        max-width:100%;
+        padding:20px 14px 16px;
+      }
+
       .popup-badge{
         font-size:12px;
         padding:7px 12px;
@@ -691,6 +713,12 @@
 
       .popup-actions{
         flex-direction:column;
+      }
+
+      .popup-image{
+        max-width:260px;
+        margin:14px auto 16px;
+        border-radius:14px;
       }
 
       .stats{
@@ -720,7 +748,6 @@
         padding:50px 16px 110px;
       }
 
-      /* ปุ่มลอยขยับไปแนวนอนด้านล่าง ไม่บังเนื้อหา */
       .floating-contact{
         right:50%;
         transform:translateX(50%);
@@ -771,6 +798,10 @@
       .popup-box{
         max-width:100%;
       }
+
+      .popup-image{
+        max-width:220px;
+      }
     }
   </style>
 </head>
@@ -779,8 +810,27 @@
 
   <div class="nav-overlay" id="navOverlay"></div>
 
-  <!-- ===== POPUP ===== -->
-  <div id="musicPopup" class="music-popup">
+  <!-- ===== POPUP STEP 1 : รูป ===== -->
+  <div id="imagePopup" class="music-popup">
+    <div class="popup-box popup-box-image">
+      <a href="https://www.9wing.shop/#" target="_blank" rel="noopener noreferrer">
+        <img
+          src="https://img2.pic.in.th/ChatGPT-Image-22-..-2569-15_09_46.md.png"
+          alt="ประกาศอัปเดตจาก 9WING.SHOP"
+          class="popup-image"
+        />
+      </a>
+
+      <div class="popup-actions">
+        <button id="nextPopup" type="button" class="btn btn-primary">
+          ⚠️ รับทราบ ⚠️
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== POPUP STEP 2 : ปกติ ===== -->
+  <div id="musicPopup" class="music-popup hide">
     <div class="popup-box">
       <div class="popup-badge">⚡ UPDATE ล่าสุดจาก 9WING.SHOP</div>
 
@@ -804,16 +854,15 @@
 
       <div class="popup-actions">
         <button id="enterSite" type="button" class="btn btn-primary">
-          🌟 เข้าสู่เว็บไซต์
+          🌟 เข้าสู่เว็บไซต์ 🌟
         </button>
-       
       </div>
     </div>
   </div>
 
   <!-- ===== AUDIO ===== -->
   <audio id="bgMusic" loop>
-    <source src="https://www.9wing.shop/YULGANG.mp3 (Remix).mp3" type="audio/mpeg">
+    <source src="https://www.9wing.shop/YULGANG.mp3%20%28Remix%29.mp3" type="audio/mpeg">
   </audio>
 
   <!-- ===== BACKGROUND ===== -->
@@ -994,14 +1043,24 @@
   </script>
 
   <script>
-    // Popup + Play music
+    // Popup 2 ขั้น + เล่นเพลง
     document.addEventListener("DOMContentLoaded", () => {
-      const popup = document.getElementById("musicPopup");
-      const btn = document.getElementById("enterSite");
+      const imagePopup = document.getElementById("imagePopup");
+      const musicPopup = document.getElementById("musicPopup");
+      const nextPopupBtn = document.getElementById("nextPopup");
+      const enterSiteBtn = document.getElementById("enterSite");
       const music = document.getElementById("bgMusic");
 
-      btn.addEventListener("click", () => {
-        popup.classList.add("hide");
+      nextPopupBtn.addEventListener("click", () => {
+        imagePopup.classList.add("hide");
+
+        setTimeout(() => {
+          musicPopup.classList.remove("hide");
+        }, 250);
+      });
+
+      enterSiteBtn.addEventListener("click", () => {
+        musicPopup.classList.add("hide");
         music.volume = 0.6;
         music.play().catch(err => console.log("Audio blocked:", err));
       });
@@ -1053,6 +1112,3 @@
 
 </body>
 </html>
-
-
-
