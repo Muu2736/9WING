@@ -812,23 +812,26 @@
 
   <!-- ===== POPUP STEP 1 : รูป ===== --> 
 
-  <div id="imagePopup" class="music-popup">
-    <div class="popup-box popup-box-image">
-      <a href="https://www.9wing.shop/#" target="_blank" rel="noopener noreferrer">
-        <img
-          src="https://i.postimg.cc/cJdNsXxy/file-00000000c254720bb6d772651ebe2c3b.png"
-          alt="ประกาศอัปเดตจาก 9WING.SHOP"
-          class="popup-image"
-        />
-      </a> 
+ใช้แบบนี้แทนส่วนเดิมใน #imagePopup:
 
-      <div class="popup-actions">
-        <button id="nextPopup" type="button" class="btn btn-primary">
-          ⚠️ รับทราบ ⚠️
-        </button>
-      </div>   
+<div id="imagePopup" class="popup-overlay hide">
+  <div class="popup-box popup-box-image">
+    <div class="popup-video-wrap">
+      <iframe
+        src="https://www.youtube.com/embed/72IDw6u5cqM?autoplay=1&mute=1&rel=0"
+        title="ประกาศอัปเดตจาก 9WING.SHOP"
+        class="popup-video"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <div class="popup-actions">
+      <button id="nextPopup" type="button" class="btn btn-primary">⚠️ รับทราบ ⚠️</button>
     </div>
   </div>
+</div>
 
   <!-- ===== POPUP STEP 2 : ปกติ ===== -->
   <div id="musicPopup" class="music-popup hide">
