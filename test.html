@@ -1168,7 +1168,7 @@
       <div class="popup-video-wrap">
         <iframe
           id="popupVideo"
-          src="https://www.youtube.com/embed/72IDw6u5cqM?autoplay=1&mute=1&rel=0&playsinline=1"
+          src=""
           title="ประกาศอัปเดตจาก 9WING.SHOP"
           class="popup-video"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -1178,6 +1178,7 @@
       </div>
 
       <div class="popup-actions">
+        <button id="playPopupVideo" type="button" class="btn btn-primary">▶ เปิดวิดีโอพร้อมเสียง</button>
         <button id="nextPopup" type="button" class="btn btn-primary">⚠️ รับทราบ ⚠️</button>
       </div>
     </div>
@@ -1331,11 +1332,12 @@
         menuToggle: $("menuToggle"),
         navLinks: $("navLinks"),
         navOverlay: $("navOverlay"),
-        popupVideo: $("popupVideo")
+        popupVideo: $("popupVideo"),
+        playPopupVideo: $("playPopupVideo")
       };
 
       const navAnchors = document.querySelectorAll("#navLinks a");
-      const popupVideoSrc = "https://www.youtube.com/embed/72IDw6u5cqM?autoplay=1&mute=1&rel=0&playsinline=1";
+      const popupVideoSrc = "https://www.youtube.com/embed/72IDw6u5cqM?autoplay=1&mute=0&rel=0&playsinline=1";
 
       function runLoading() {
         let progress = 0;
@@ -1352,7 +1354,6 @@
             setTimeout(() => {
               el.loadingScreen.classList.add("hide");
               setTimeout(() => {
-                if (el.popupVideo) el.popupVideo.src = popupVideoSrc;
                 el.imagePopup.classList.remove("hide");
               }, 250);
             }, 450);
@@ -1380,6 +1381,12 @@
       }
 
       function initPopups() {
+        el.playPopupVideo?.addEventListener("click", () => {
+          if (!el.popupVideo.src) {
+            el.popupVideo.src = popupVideoSrc;
+          }
+        });
+
         el.nextPopup?.addEventListener("click", () => {
           stopPopupVideo();
           el.imagePopup.classList.add("hide");
