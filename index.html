@@ -75,7 +75,8 @@
       51%,100%{opacity:0}
     }
 
-    /* ===== MUSIC POPUP ===== */
+    /* ===== POPUP OVERLAY ===== */
+    .popup-overlay,
     .music-popup{
       position:fixed;
       inset:0;
@@ -92,6 +93,7 @@
       transition:.35s ease;
     }
 
+    .popup-overlay.hide,
     .music-popup.hide{
       opacity:0;
       visibility:hidden;
@@ -600,6 +602,24 @@
       box-shadow:0 12px 30px rgba(88,101,242,.32);
     }
 
+    .popup-video-wrap{
+      width:100%;
+      max-width:360px;
+      margin:46px auto 18px;
+      aspect-ratio:9/16;
+      overflow:hidden;
+      border-radius:12px;
+      border:1px solid rgba(255,230,0,.25);
+      box-shadow:0 0 24px rgba(255,230,0,.12);
+      background:#000;
+    }
+
+    .popup-video{
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
     /* ===== MOBILE ===== */
     @media (max-width: 768px){
       nav{
@@ -686,7 +706,8 @@
         font-size:14px;
       }
 
-      .music-popup{
+      .music-popup,
+      .popup-overlay{
         padding:16px;
       }
 
@@ -803,25 +824,6 @@
         max-width:220px;
       }
     }
- 
-      .popup-video-wrap{
-  width:100%;
-  max-width:360px;
-  margin:46px auto 18px;
-  aspect-ratio:9/16;
-  overflow:hidden;
-  border-radius:12px;
-  border:1px solid rgba(255,230,0,.25);
-  box-shadow:0 0 24px rgba(255,230,0,.12);
-  background:#000;
-}
-
-.popup-video{
-  width:100%;
-  height:100%;
-  border:0;
-}  
-  
   </style>
 </head>
 
@@ -829,30 +831,27 @@
 
   <div class="nav-overlay" id="navOverlay"></div>
 
-  <!-- ===== POPUP STEP 1 : รูป ===== --> 
+  <!-- POPUP STEP 1 -->
+  <div id="imagePopup" class="popup-overlay">
+    <div class="popup-box popup-box-image">
+      <div class="popup-video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/72IDw6u5cqM?autoplay=1&mute=1&rel=0"
+          title="ประกาศอัปเดตจาก 9WING.SHOP"
+          class="popup-video"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
 
-ใช้แบบนี้แทนส่วนเดิมใน #imagePopup:
-
-<div id="imagePopup" class="popup-overlay hide">
-  <div class="popup-box popup-box-image">
-    <div class="popup-video-wrap">
-      <iframe
-        src="https://www.youtube.com/embed/72IDw6u5cqM?autoplay=1&mute=1&rel=0"
-        title="ประกาศอัปเดตจาก 9WING.SHOP"
-        class="popup-video"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen>
-      </iframe>
-    </div>
-
-    <div class="popup-actions">
-      <button id="nextPopup" type="button" class="btn btn-primary">⚠️ รับทราบ ⚠️</button>
+      <div class="popup-actions">
+        <button id="nextPopup" type="button" class="btn btn-primary">⚠️ รับทราบ ⚠️</button>
+      </div>
     </div>
   </div>
-</div>
 
-  <!-- ===== POPUP STEP 2 : ปกติ ===== -->
+  <!-- POPUP STEP 2 -->
   <div id="musicPopup" class="music-popup hide">
     <div class="popup-box">
       <div class="popup-badge">⚡ UPDATE ล่าสุดจาก 9WING.SHOP</div>
@@ -883,17 +882,14 @@
     </div>
   </div>
 
-  <!-- ===== AUDIO ===== -->
   <audio id="bgMusic" loop>
     <source src="https://www.9wing.shop/YULGANG.mp3%20%28Remix%29.mp3" type="audio/mpeg">
   </audio>
 
-  <!-- ===== BACKGROUND ===== -->
   <div class="cyber-bg"></div>
   <div class="orb orb1"></div>
   <div class="orb orb2"></div>
 
-  <!-- ===== NAV ===== -->
   <nav>
     <a href="#" class="logo">9WING.SHOP </a>
 
@@ -910,7 +906,6 @@
     </ul>
   </nav>
 
-  <!-- ===== HERO ===== -->
   <section class="hero">
     <span class="section-tag">PRO YULGANG & CLOUD OSLINK</span>
     <h1 class="hero-title">9WING.SHOP</h1>
@@ -932,7 +927,6 @@
     </div>
   </section>
 
-  <!-- ===== STATS ===== -->
   <section class="stats reveal" id="stats">
     <span class="section-tag">System Status</span>
     <div class="stats-grid">
@@ -959,7 +953,6 @@
     </div>
   </section>
 
-  <!-- ===== VIDEO ===== -->
   <section class="video-section reveal" id="review">
     <span class="section-tag">Review Video</span>
     <div class="video-container">
@@ -973,14 +966,12 @@
     </div>
   </section>
 
-  <!-- ===== FOOTER ===== -->
   <footer>
     <div class="footer-content">
       <p style="color:#666">© 2026 9WING.SHOP All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- ===== FLOATING CONTACT ===== -->
   <div class="floating-contact">
     <a href="https://www.facebook.com/share/1TpSQyCcdE/"
        class="float-btn float-line"
@@ -1007,9 +998,7 @@
     </a>
   </div>
 
-  <!-- ===== SCRIPTS ===== -->
   <script>
-    // Counter
     const counters = document.querySelectorAll('.stat-number');
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
@@ -1037,7 +1026,6 @@
 
     counters.forEach(c => observer.observe(c));
 
-    // Reveal
     const reveals = document.querySelectorAll('.reveal');
     const revObs = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -1049,7 +1037,6 @@
   </script>
 
   <script>
-    // Auto tooltip ครั้งแรก
     document.addEventListener("DOMContentLoaded", () => {
       if (!localStorage.getItem("contactTipShown")) {
         setTimeout(() => {
@@ -1066,7 +1053,6 @@
   </script>
 
   <script>
-    // Popup 2 ขั้น + เล่นเพลง
     document.addEventListener("DOMContentLoaded", () => {
       const imagePopup = document.getElementById("imagePopup");
       const musicPopup = document.getElementById("musicPopup");
@@ -1091,7 +1077,6 @@
   </script>
 
   <script>
-    // Mobile menu with animation
     document.addEventListener("DOMContentLoaded", () => {
       const menuToggle = document.getElementById("menuToggle");
       const navLinks = document.getElementById("navLinks");
