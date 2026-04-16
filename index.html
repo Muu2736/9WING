@@ -19,7 +19,7 @@
       --accent:#ff2a6d;
       --bg:#05070a;
       --text:#f5f5f5;
-      --muted:#9ba3ad;
+      --muted:#b8c0c9;
       --border:rgba(255,230,0,.18);
       --safe-bottom:max(16px, env(safe-area-inset-bottom));
       --safe-top:max(16px, env(safe-area-inset-top));
@@ -47,14 +47,27 @@
     body{
       font-family:'Kanit',sans-serif;
       line-height:1.5;
-      background:
-        linear-gradient(rgba(255,255,255,.02) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.02) 1px, transparent 1px),
-        radial-gradient(circle at top left, rgba(255,230,0,.08), transparent 25%),
-        radial-gradient(circle at bottom right, rgba(255,0,60,.08), transparent 30%),
-        linear-gradient(180deg, #040506 0%, #090d12 100%);
-      background-size:32px 32px, 32px 32px, auto, auto, auto;
+      background:transparent;
       position:relative;
+      z-index:0;
+    }
+
+    .site-bg{
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      background:url('9WING(1).png') no-repeat center center / cover;
+      transform:scale(1.03);
+    }
+
+    .site-bg::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(rgba(0,0,0,.38), rgba(0,0,0,.52)),
+        radial-gradient(circle at center, rgba(0,180,255,.08), transparent 45%),
+        linear-gradient(90deg, rgba(255,0,80,.03), transparent 20%, transparent 80%, rgba(0,255,180,.03));
     }
 
     body::before{
@@ -71,7 +84,7 @@
           transparent 4px
         );
       mix-blend-mode:soft-light;
-      opacity:.25;
+      opacity:.22;
       z-index:9999;
     }
 
@@ -80,7 +93,11 @@
       position:fixed;
       inset:0;
       pointer-events:none;
-      background:linear-gradient(90deg, rgba(255,0,80,.03), transparent 20%, transparent 80%, rgba(0,255,180,.03));
+      background:
+        linear-gradient(rgba(255,255,255,.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.018) 1px, transparent 1px);
+      background-size:32px 32px, 32px 32px;
+      opacity:.16;
       z-index:9998;
     }
 
@@ -170,13 +187,15 @@
     }
 
     .panel{
-      background:linear-gradient(180deg, rgba(255,230,0,.06), rgba(255,255,255,.02));
+      background:linear-gradient(180deg, rgba(255,230,0,.05), rgba(255,255,255,.02));
       border:1px solid rgba(255,230,0,.16);
       border-radius:var(--radius);
       box-shadow:
-        0 0 0 1px rgba(255,230,0,.05),
-        var(--shadow-soft),
-        var(--shadow-deep);
+        0 0 0 1px rgba(255,230,0,.04),
+        0 0 24px rgba(255,230,0,.08),
+        0 18px 40px rgba(0,0,0,.20);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
     }
 
     @keyframes blink{
@@ -265,11 +284,8 @@
       align-items:center;
       justify-content:center;
       background:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px),
-        radial-gradient(circle at center, rgba(255,230,0,.08), transparent 35%),
-        #05070a;
-      background-size:30px 30px, 30px 30px, auto, auto;
+        linear-gradient(rgba(0,0,0,.60), rgba(0,0,0,.76)),
+        url('9WING(1).png') no-repeat center center / cover;
       overflow:hidden;
       transition:opacity .5s ease, visibility .5s ease;
     }
@@ -292,7 +308,7 @@
           transparent 2px,
           transparent 4px
         );
-      opacity:.25;
+      opacity:.20;
     }
 
     .loading-box{
@@ -302,8 +318,9 @@
       position:relative;
       border-radius:16px;
       border:1px solid rgba(255,230,0,.18);
-      background:rgba(0,0,0,.65);
+      background:rgba(0,0,0,.52);
       backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
       box-shadow:
         0 0 0 1px rgba(255,230,0,.06),
         0 0 30px rgba(255,230,0,.12),
@@ -362,7 +379,7 @@
 
     .loading-sub{
       margin-top:14px;
-      color:#9aa3ad;
+      color:#c4cbd2;
       font-size:14px;
       letter-spacing:1px;
       font-family:'Share Tech Mono', monospace;
@@ -414,10 +431,11 @@
       justify-content:center;
       padding:20px;
       background:
-        radial-gradient(circle at top, rgba(255,230,0,.08), transparent 35%),
-        radial-gradient(circle at bottom, rgba(255,0,80,.10), transparent 35%),
-        rgba(0,0,0,.88);
+        radial-gradient(circle at top, rgba(255,230,0,.06), transparent 35%),
+        radial-gradient(circle at bottom, rgba(255,0,80,.08), transparent 35%),
+        rgba(0,0,0,.78);
       backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
       transition:.35s ease;
     }
 
@@ -435,12 +453,14 @@
       position:relative;
       overflow:hidden;
       border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,230,0,.06), rgba(255,255,255,.02));
+      background:linear-gradient(180deg, rgba(255,230,0,.05), rgba(255,255,255,.02));
       border:1px solid var(--border);
       box-shadow:
         0 0 0 1px rgba(255,230,0,.08),
         0 0 24px rgba(255,230,0,.12),
         0 20px 60px rgba(0,0,0,.45);
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
     }
 
     .popup-box::before{
@@ -511,7 +531,7 @@
 
     .popup-text{
       margin-bottom:14px;
-      color:#d3d8de;
+      color:#dce2e8;
       font-size:15px;
       line-height:1.7;
     }
@@ -534,10 +554,11 @@
       align-items:center;
       justify-content:space-between;
       padding:calc(var(--safe-top) - 4px) 5% 14px;
-      background:rgba(5,7,10,.78);
-      backdrop-filter:blur(14px);
-      border-bottom:1px solid rgba(255,230,0,.12);
-      box-shadow:0 8px 30px rgba(0,0,0,.25);
+      background:rgba(5,7,10,.50);
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,230,0,.10);
+      box-shadow:0 8px 30px rgba(0,0,0,.20);
     }
 
     .logo{
@@ -599,6 +620,7 @@
       border:1px solid rgba(255,230,0,.16);
       background:rgba(255,230,0,.04);
       backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
       cursor:pointer;
       transition:.3s ease;
     }
@@ -645,15 +667,6 @@
       text-align:center;
       padding:132px 20px 70px;
       position:relative;
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:auto 0 10%;
-      height:1px;
-      background:linear-gradient(90deg, transparent, rgba(255,230,0,.3), transparent);
-      box-shadow:0 0 20px rgba(255,230,0,.15);
     }
 
     .hero-title{
@@ -704,9 +717,10 @@
     .hero-subtitle{
       max-width:700px;
       margin-bottom:40px;
-      color:var(--muted);
+      color:#eef2f6;
       font-size:clamp(14px,3.7vw,18px);
       line-height:1.8;
+      text-shadow:0 2px 10px rgba(0,0,0,.35);
     }
 
     .btn-group{
@@ -721,6 +735,7 @@
     .status-section{
       padding:80px 5%;
       text-align:center;
+      background:transparent;
     }
 
     .status-wrapper-horizontal{
@@ -728,20 +743,6 @@
       margin:42px auto 0;
       padding:18px;
       position:relative;
-    }
-
-    .status-wrapper-horizontal::before{
-      position:absolute;
-      top:12px;
-      right:12px;
-      padding:5px 8px;
-      border-radius:999px;
-      background:rgba(0,0,0,.55);
-      color:var(--primary);
-      font-size:11px;
-      letter-spacing:1px;
-      font-family:'Share Tech Mono', monospace;
-      border:1px solid rgba(255,230,0,.14);
     }
 
     .status-row{
@@ -754,10 +755,12 @@
     .status-strip{
       padding:16px 16px 14px;
       border-radius:14px;
-      background:rgba(255,255,255,.03);
+      background:rgba(0,0,0,.18);
       border:1px solid rgba(255,230,0,.12);
       box-shadow:inset 0 0 0 1px rgba(255,230,0,.03);
       text-align:left;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
     }
 
     .status-strip-head{
@@ -813,7 +816,7 @@
     }
 
     .status-strip-meta{
-      color:var(--muted);
+      color:#d8e0e8;
       font-size:12px;
       line-height:1.4;
       margin-bottom:3px;
@@ -840,16 +843,18 @@
     .status-note{
       max-width:1100px;
       margin:18px auto 0;
-      color:#8f98a3;
+      color:#eef2f6;
       font-size:13px;
       letter-spacing:.5px;
       text-align:center;
       font-family:'Share Tech Mono', monospace;
+      text-shadow:0 2px 8px rgba(0,0,0,.35);
     }
 
     .video-section{
       padding:80px 5%;
       text-align:center;
+      background:transparent;
     }
 
     .video-container{
@@ -895,7 +900,10 @@
     footer{
       padding:70px 20px 110px;
       text-align:center;
-      border-top:1px solid rgba(255,230,0,.12);
+      border-top:1px solid rgba(255,230,0,.10);
+      background:rgba(0,0,0,.08);
+      backdrop-filter:blur(4px);
+      -webkit-backdrop-filter:blur(4px);
     }
 
     .floating-contact{
@@ -922,6 +930,7 @@
       border:1px solid rgba(255,255,255,.1);
       background:rgba(255,255,255,.05);
       backdrop-filter:blur(10px);
+      -webkit-backdrop-filter:blur(10px);
       box-shadow:0 12px 30px rgba(0,0,0,.35);
       transition:.3s;
     }
@@ -992,7 +1001,7 @@
         flex-direction:column;
         gap:2px;
         padding:10px;
-        background:rgba(8,10,12,.96);
+        background:rgba(8,10,12,.94);
         border:1px solid rgba(255,230,0,.14);
         border-radius:18px;
         box-shadow:0 18px 50px rgba(0,0,0,.35);
@@ -1115,9 +1124,10 @@
         flex-direction:row;
         gap:10px;
         padding:8px 10px;
-        background:rgba(0,0,0,.45);
+        background:rgba(0,0,0,.35);
         border:1px solid rgba(255,230,0,.08);
         backdrop-filter:blur(14px);
+        -webkit-backdrop-filter:blur(14px);
         border-radius:999px;
       }
 
@@ -1152,9 +1162,10 @@
 </head>
 <body>
 
+  <div class="site-bg"></div>
+
   <div id="loadingScreen" class="loading-screen">
     <div class="loading-box">
-      <div class="loading-label">SYSTEM AUTH</div>
       <div class="loading-title" data-text="9WING.SHOP">9WING.SHOP</div>
       <div class="loading-sub">PRO YULGUNG - OSLINK CLOUD PHONE</div>
 
@@ -1236,7 +1247,7 @@
   </nav>
 
   <section class="hero">
-    <span class="section-tag">PRO YULGANG & CLOUD OSLINK</span>
+    <span class="section-tag">PRO YULGANG | CLOUD OSLINK</span>
     <h1 class="hero-title" data-text="9WING.SHOP">9WING.SHOP</h1>
     <p class="hero-subtitle">
       ยกระดับการเล่นโยกังของคุณด้วยโปรแกรมช่วยเล่นที่เสถียรที่สุด พร้อมบริการเช่าจอ Cloud ปล่อยบอท 24 ชม. ผ่าน OSLink ความเร็วสูง
@@ -1248,7 +1259,7 @@
   </section>
 
   <section class="status-section" id="stats">
-    <span class="section-tag">USER STATUS / LIVE MONITOR</span>
+    <span class="section-tag">USER STATUS | LIVE MONITOR</span>
 
     <div class="status-wrapper-horizontal panel">
       <div class="status-row">
@@ -1306,7 +1317,7 @@
   </section>
 
   <footer>
-    <p style="color:#8a9199;font-family:'Share Tech Mono', monospace;">© 2026 9WING.SHOP All rights reserved.</p>
+    <p style="color:#e3e8ee;font-family:'Share Tech Mono', monospace;">© 2026 9WING.SHOP All rights reserved.</p>
   </footer>
 
   <div class="floating-contact">
@@ -1315,7 +1326,12 @@
     <a href="https://www.9wing.shop/DOWNLOAD.html" class="float-btn float-discord" target="_blank" rel="noopener noreferrer" data-text="APK DOWNLOAD" aria-label="ดาวน์โหลด APK">📥</a>
   </div>
 
-  <script src="status.js"></script>
+  <script>
+    window.APP_STATUS = {
+      pcUsers: 128,
+      cloudUsers: 72
+    };
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
