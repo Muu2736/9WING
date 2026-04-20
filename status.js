@@ -1,4 +1,4 @@
 window.APP_STATUS = {
-  pcUsers: 809,
-  cloudUsers: 40
+  pcUsers: 157,
+  cloudUsers: 116
 };
