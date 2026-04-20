@@ -1129,7 +1129,7 @@
         });
       }
 
-      function getFixedStatus() {
+           function getFixedStatus() {
         const fallback = { pcUsers: 80, cloudUsers: 40 };
         const config = window.APP_STATUS || fallback;
 
@@ -1146,14 +1146,16 @@
 
         el.pcUsers.textContent = pc;
         el.cloudUsers.textContent = cloud;
-        el.pcBar.style.width = Math.min(pc, 155) / 2 + "%";
-        el.cloudBar.style.width = Math.min(cloud, 100) / 2 + "%";
+        el.pcBar.style.width = Math.min(pc, 200) / 2 + "%";
+        el.cloudBar.style.width = Math.min(cloud, 200) / 2 + "%";
         el.lastUpdate.textContent = new Date().toLocaleTimeString("th-TH");
       }
 
       function initStatus() {
         updateStatus();
+        setInterval(updateStatus, 100);
       }
+
 
       function openMenu() {
         el.navLinks.classList.add("show");
