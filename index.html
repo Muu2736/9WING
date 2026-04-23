@@ -60,7 +60,7 @@
       position:fixed;
       inset:0;
       z-index:-3;
-      background:url('9WING(1).webp') no-repeat center center / cover;
+      background:url('9WING(1).png') no-repeat center center / cover;
     }
 
     .site-bg::after{
@@ -899,40 +899,8 @@
 </head>
 <body>
 
-<div id="musicPopup" class="popup-overlay hide">
-<div class="popup-box">
-<h2>9WING.SHOP</h2>
-<p>ระบบพร้อมใช้งาน</p>
-<button onclick="enterSite()">เข้าสู่เว็บไซต์</button>
-</div>
-</div>
+  <div class="site-bg"></div>
 
-  <div id="musicPopup" class="popup-overlay hide">
-    <div class="popup-box">
-      <div class="popup-badge">SYSTEM UPDATE</div>
-
-      <h2><span class="blink">9WING.SHOP</span></h2>
-
-      <p class="popup-text">
-        <b style="color:var(--primary);">[ SECURITY PATCH ]</b><br />
-        <span style="color:var(--secondary);"></span>
-      </p>
-
-      <p class="popup-text">
-        <span class="blink">NEW</span> UPDATE PRO PC 6 &amp; 7 👉
-        <a href="https://www.9wing.shop/Update%20pro" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:bold;text-decoration:none;">UPDATE</a>
-      </p>
-
-      <p class="popup-text">
-        🤖 เช่าจอปล่อยบอทผ่าน <b style="color:var(--primary);">OSLink</b> 👉
-        <a href="https://www.9wing.shop/OSLink" target="_blank" rel="noopener noreferrer" style="color:var(--secondary);font-weight:bold;text-decoration:none;">เช่าเลย</a>
-      </p>
-
-      <div class="popup-actions">
-        <button id="enterSite" type="button" class="btn btn-primary">เข้าสู่เว็บไซต์</button>
-      </div>
-    </div>
-  </div>
 
   <!-- ไม่โหลดเพลงตั้งแต่เริ่ม -->
   <audio id="bgMusic" loop preload="none"></audio>
