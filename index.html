@@ -7,7 +7,6 @@
   <title>9WING.SHOP - จำหน่ายโปรแกรมช่วยเล่นโยกังจุติยุทธภพเลือดใหม่ บริการเช่าจอปล่อยบอท 24 ชม. ผ่าน OSLink และอื่นๆ อีกมากมาย</title>
   <link rel="icon" type="image/x-icon" href="/1.ico">
 
-  <!-- ลดจำนวนฟอนต์ให้เหลือเท่าที่จำเป็น -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
@@ -26,8 +25,6 @@
       --border:rgba(255,230,0,.18);
       --safe-bottom:max(16px, env(safe-area-inset-bottom));
       --safe-top:max(16px, env(safe-area-inset-top));
-      --shadow-soft:0 0 24px rgba(255,230,0,.08);
-      --shadow-deep:0 18px 40px rgba(0,0,0,.28);
       --radius:18px;
     }
 
@@ -55,7 +52,6 @@
       z-index:0;
     }
 
-    /* แนะนำให้เปลี่ยนเป็นไฟล์ .webp ภายหลังถ้ามี */
     .site-bg{
       position:fixed;
       inset:0;
@@ -97,19 +93,6 @@
       text-align:center;
       font-family:'Orbitron',sans-serif;
       text-shadow:0 0 10px rgba(0,255,159,.18);
-    }
-
-    .blink{
-      display:inline-block;
-      padding:2px 8px;
-      border-radius:4px;
-      background:var(--primary);
-      color:#000;
-      font-weight:800;
-      text-transform:uppercase;
-      border:1px solid rgba(255,230,0,.7);
-      box-shadow:0 0 10px rgba(255,230,0,.45);
-      animation:blink .8s infinite;
     }
 
     .btn{
@@ -169,137 +152,10 @@
       -webkit-backdrop-filter:blur(6px);
     }
 
-    @keyframes blink{
-      0%,50%{opacity:1}
-      51%,100%{opacity:.15}
-    }
-
     @keyframes pulse{
       0%{box-shadow:0 0 0 0 rgba(255,230,0,.25)}
       70%{box-shadow:0 0 0 13px rgba(255,230,0,0)}
       100%{box-shadow:0 0 0 0 rgba(255,230,0,0)}
-    }
-
-    .popup-overlay{
-      position:fixed;
-      inset:0;
-      z-index:10000;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:20px;
-      background:
-        radial-gradient(circle at top, rgba(255,230,0,.05), transparent 35%),
-        radial-gradient(circle at bottom, rgba(255,0,80,.06), transparent 35%),
-        rgba(0,0,0,.76);
-      backdrop-filter:blur(6px);
-      -webkit-backdrop-filter:blur(6px);
-      transition:.3s ease;
-    }
-
-    .popup-overlay.hide{
-      opacity:0;
-      visibility:hidden;
-      pointer-events:none;
-    }
-
-    .popup-box{
-      width:100%;
-      max-width:560px;
-      padding:28px 22px 22px;
-      text-align:center;
-      position:relative;
-      overflow:hidden;
-      border-radius:18px;
-      background:linear-gradient(180deg, rgba(255,230,0,.05), rgba(255,255,255,.02));
-      border:1px solid var(--border);
-      box-shadow:
-        0 0 0 1px rgba(255,230,0,.08),
-        0 0 20px rgba(255,230,0,.08),
-        0 20px 50px rgba(0,0,0,.40);
-      backdrop-filter:blur(6px);
-      -webkit-backdrop-filter:blur(6px);
-    }
-
-    .popup-box::before{
-      content:"SYSTEM ACCESS";
-      position:absolute;
-      top:0;
-      left:0;
-      right:0;
-      padding:8px 12px;
-      background:linear-gradient(90deg, var(--primary), #ffae00);
-      color:#000;
-      text-align:left;
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:2px;
-      font-family:'Orbitron',sans-serif;
-    }
-
-    .popup-box-image{
-      max-width:100%;
-      padding:46px 18px 18px;
-    }
-
-    .popup-video-wrap{
-      width:100%;
-      max-width:360px;
-      margin:16px auto 18px;
-      aspect-ratio:9/16;
-      overflow:hidden;
-      border-radius:12px;
-      border:1px solid rgba(255,230,0,.25);
-      box-shadow:0 0 18px rgba(255,230,0,.10);
-      background:#000;
-    }
-
-    .popup-video{
-      width:100%;
-      height:100%;
-      border:0;
-      display:block;
-    }
-
-    .popup-badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      margin:16px 0 14px;
-      padding:8px 14px;
-      border-radius:999px;
-      color:var(--primary);
-      font-size:12px;
-      letter-spacing:1.5px;
-      text-transform:uppercase;
-      font-family:'Orbitron',sans-serif;
-      background:rgba(255,230,0,.1);
-      border:1px solid rgba(255,230,0,.25);
-    }
-
-    .popup-box h2{
-      margin-bottom:12px;
-      font-family:'Orbitron',sans-serif;
-      font-size:clamp(22px, 5vw, 32px);
-      line-height:1.2;
-      text-transform:uppercase;
-      text-shadow:0 0 8px rgba(255,230,0,.14);
-    }
-
-    .popup-text{
-      margin-bottom:14px;
-      color:#dce2e8;
-      font-size:15px;
-      line-height:1.7;
-    }
-
-    .popup-actions{
-      display:flex;
-      flex-wrap:wrap;
-      justify-content:center;
-      gap:12px;
-      margin-top:8px;
     }
 
     nav{
@@ -377,10 +233,7 @@
       border-radius:12px;
       border:1px solid rgba(255,230,0,.16);
       background:rgba(255,230,0,.04);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
       cursor:pointer;
-      transition:.25s ease;
     }
 
     .menu-toggle span{
@@ -521,11 +374,11 @@
       background:rgba(255,255,255,.04);
     }
 
-    .status-pill.online{
-      color:#ff0000;
-      background:linear-gradient(135deg, #00c853, #00ff9f);
-      border-color:rgba(0,255,159,.3);
-      box-shadow:0 0 16px rgba(0,255,159,.16);
+    .status-pill.offline{
+      color:#fff;
+      background:linear-gradient(135deg, #7a0000, #ff1f1f);
+      border-color:rgba(255,0,0,.45);
+      box-shadow:0 0 16px rgba(255,0,0,.28);
     }
 
     .status-strip-main{
@@ -562,9 +415,10 @@
 
     .status-fill{
       height:100%;
+      width:0%;
       border-radius:999px;
-      background:linear-gradient(90deg, #00ffcc, #ffe600, #ff8a00);
-      box-shadow:0 0 14px rgba(255,230,0,.18);
+      background:linear-gradient(90deg, #7a0000, #ff1f1f);
+      box-shadow:0 0 14px rgba(255,0,0,.22);
       transition:width .35s ease;
     }
 
@@ -719,8 +573,6 @@
 
       .menu-toggle{
         display:flex;
-        backdrop-filter:none;
-        -webkit-backdrop-filter:none;
       }
 
       .nav-links{
@@ -798,31 +650,6 @@
         font-size:14px;
       }
 
-      .popup-overlay{
-        padding:16px;
-        backdrop-filter:none;
-        -webkit-backdrop-filter:none;
-      }
-
-      .popup-box{
-        padding:22px 16px 16px;
-        border-radius:16px;
-        backdrop-filter:none;
-        -webkit-backdrop-filter:none;
-      }
-
-      .popup-box-image{
-        padding:42px 14px 16px;
-      }
-
-      .popup-actions{
-        flex-direction:column;
-      }
-
-      .popup-video-wrap{
-        max-width:260px;
-      }
-
       .status-section,
       .video-section{
         padding:60px 16px;
@@ -892,17 +719,14 @@
     @media (max-width:480px){
       .hero-title{font-size:34px}
       .hero-subtitle{font-size:14px}
-      .popup-box h2{font-size:20px}
-      .popup-video-wrap{max-width:220px}
     }
   </style>
 </head>
 <body>
 
   <div class="site-bg"></div>
+  <div class="nav-overlay" id="navOverlay"></div>
 
-
-  <!-- ไม่โหลดเพลงตั้งแต่เริ่ม -->
   <audio id="bgMusic" loop preload="none"></audio>
 
   <nav>
@@ -935,46 +759,46 @@
   </section>
 
   <section class="status-section" id="stats">
-    <span class="section-tag">USER STATUS | LIVE MONITOR</span>
+    <span class="section-tag">USER STATUS | SERVER OFFLINE</span>
 
     <div class="status-wrapper-horizontal panel">
       <div class="status-row">
         <div class="status-strip">
           <div class="status-strip-head">
             <div class="status-strip-title">PC USERS</div>
-            <span class="status-pill online">● OFFLINE</span>
+            <span class="status-pill offline">● OFFLINE</span>
           </div>
 
           <div class="status-strip-main">
-            <div class="status-number" id="pcUsers">128</div>
+            <div class="status-number" id="pcUsers">--</div>
             <div class="status-strip-meta">ผู้ใช้งาน PC ปัจจุบัน</div>
           </div>
 
           <div class="status-bar">
-            <div class="status-fill" id="pcBar" style="width:64%"></div>
+            <div class="status-fill" id="pcBar" style="width:0%"></div>
           </div>
         </div>
 
         <div class="status-strip">
           <div class="status-strip-head">
             <div class="status-strip-title">CLOUD USERS</div>
-            <span class="status-pill online">● OFFLINE</span>
+            <span class="status-pill offline">● OFFLINE</span>
           </div>
 
           <div class="status-strip-main">
-            <div class="status-number" id="cloudUsers">72</div>
+            <div class="status-number" id="cloudUsers">--</div>
             <div class="status-strip-meta">ผู้ใช้งาน CLOUD OSLINK ปัจจุบัน</div>
           </div>
 
           <div class="status-bar">
-            <div class="status-fill" id="cloudBar" style="width:36%"></div>
+            <div class="status-fill" id="cloudBar" style="width:0%"></div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="status-note">
-      LAST UPDATE : <span id="lastUpdate">--:--:--</span>
+      LAST UPDATE : <span id="lastUpdate">OFFLINE</span>
     </div>
   </section>
 
@@ -1003,18 +827,11 @@
     <a href="https://www.9wing.shop/DOWNLOAD.html" class="float-btn float-discord" target="_blank" rel="noopener noreferrer" data-text="APK DOWNLOAD" aria-label="ดาวน์โหลด APK">📥</a>
   </div>
 
-
-
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const $ = (id) => document.getElementById(id);
 
       const el = {
-        imagePopup: $("imagePopup"),
-        musicPopup: $("musicPopup"),
-        nextPopup: $("nextPopup"),
-        enterSite: $("enterSite"),
-        bgMusic: $("bgMusic"),
         pcUsers: $("pcUsers"),
         cloudUsers: $("cloudUsers"),
         pcBar: $("pcBar"),
@@ -1022,8 +839,7 @@
         lastUpdate: $("lastUpdate"),
         menuToggle: $("menuToggle"),
         navLinks: $("navLinks"),
-        navOverlay: $("navOverlay"),
-        popupVideo: $("popupVideo")
+        navOverlay: $("navOverlay")
       };
 
       const navAnchors = document.querySelectorAll("#navLinks a");
@@ -1042,72 +858,13 @@
         }, 1200);
       }
 
-      function showPopupVideo() {
-        if (!el.popupVideo) return;
-        if (!el.popupVideo.src) {
-          el.popupVideo.src = el.popupVideo.dataset.src;
-        }
+      function updateStatusOffline() {
+        el.pcUsers.textContent = "--";
+        el.cloudUsers.textContent = "--";
+        el.pcBar.style.width = "0%";
+        el.cloudBar.style.width = "0%";
+        el.lastUpdate.textContent = "OFFLINE";
       }
-
-      function stopPopupVideo() {
-        if (!el.popupVideo) return;
-        el.popupVideo.src = "";
-      }
-
-      function initPopups() {
-        /* เปิด popup แรกหลังหน้าเว็บพร้อมแล้วเล็กน้อย */
-        setTimeout(() => {
-          showPopupVideo();
-          el.imagePopup?.classList.remove("hide");
-        }, 350);
-
-        el.nextPopup?.addEventListener("click", () => {
-          stopPopupVideo();
-          el.imagePopup?.classList.add("hide");
-          setTimeout(() => el.musicPopup?.classList.remove("hide"), 200);
-        });
-
-        el.enterSite?.addEventListener("click", () => {
-          el.musicPopup?.classList.add("hide");
-
-          if (el.bgMusic && !el.bgMusic.src) {
-            el.bgMusic.src = "https://www.9wing.shop/YULGANG.mp3%20%28Remix%29.mp3";
-          }
-
-          if (el.bgMusic) {
-            el.bgMusic.volume = 0.6;
-            el.bgMusic.play().catch(() => {});
-          }
-        });
-      }
-
-           function getFixedStatus() {
-        const fallback = { pcUsers: 159, cloudUsers: 116 };
-        const config = window.APP_STATUS || fallback;
-
-        return {
-          pcUsers: Number.isFinite(Number(config.pcUsers)) ? Number(config.pcUsers) : fallback.pcUsers,
-          cloudUsers: Number.isFinite(Number(config.cloudUsers)) ? Number(config.cloudUsers) : fallback.cloudUsers
-        };
-      }
-
-      function updateStatus() {
-        const status = getFixedStatus();
-        const pc = status.pcUsers;
-        const cloud = status.cloudUsers;
-
-        el.pcUsers.textContent = pc;
-        el.cloudUsers.textContent = cloud;
-        el.pcBar.style.width = Math.min(pc, 200) / 2 + "%";
-        el.cloudBar.style.width = Math.min(cloud, 200) / 2 + "%";
-        el.lastUpdate.textContent = new Date().toLocaleTimeString("th-TH");
-      }
-
-      function initStatus() {
-        updateStatus();
-        setInterval(updateStatus, 100);
-      }
-
 
       function openMenu() {
         el.navLinks.classList.add("show");
@@ -1140,10 +897,10 @@
       }
 
       initContactTooltip();
-      initPopups();
-      initStatus();
+      updateStatusOffline();
       initMenu();
     });
   </script>
 </body>
 </html>
+```
