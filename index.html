@@ -18,39 +18,16 @@
     :root{
       --primary:#ffe600;
       --secondary:#00ff9f;
-      --accent:#ff2a6d;
       --bg:#05070a;
       --text:#f5f5f5;
-      --muted:#b8c0c9;
-      --border:rgba(255,230,0,.18);
       --safe-bottom:max(16px, env(safe-area-inset-bottom));
       --safe-top:max(16px, env(safe-area-inset-top));
       --radius:18px;
     }
 
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      -webkit-tap-highlight-color:transparent;
-      scroll-behavior:smooth;
-    }
-
-    html,body{
-      width:100%;
-      max-width:100%;
-      overflow-x:hidden;
-      background:var(--bg);
-      color:var(--text);
-    }
-
-    body{
-      font-family:'Kanit',sans-serif;
-      line-height:1.5;
-      background:transparent;
-      position:relative;
-      z-index:0;
-    }
+    *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
+    html,body{width:100%;overflow-x:hidden;background:var(--bg);color:var(--text)}
+    body{font-family:'Kanit',sans-serif;line-height:1.5;position:relative}
 
     .site-bg{
       position:fixed;
@@ -63,99 +40,7 @@
       content:"";
       position:absolute;
       inset:0;
-      background:
-        linear-gradient(rgba(0,0,0,.40), rgba(0,0,0,.55)),
-        radial-gradient(circle at center, rgba(0,180,255,.05), transparent 45%);
-    }
-
-    img, iframe, video{
-      display:block;
-      max-width:100%;
-      height:auto;
-    }
-
-    a, button{
-      touch-action:manipulation;
-    }
-
-    section{
-      position:relative;
-      scroll-margin-top:90px;
-    }
-
-    .section-tag{
-      display:block;
-      margin-bottom:10px;
-      color:var(--secondary);
-      font-size:12px;
-      letter-spacing:4px;
-      text-transform:uppercase;
-      text-align:center;
-      font-family:'Orbitron',sans-serif;
-      text-shadow:0 0 10px rgba(0,255,159,.18);
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:56px;
-      padding:16px 28px;
-      border:none;
-      border-radius:12px;
-      text-decoration:none;
-      text-transform:uppercase;
-      font-weight:800;
-      letter-spacing:.6px;
-      cursor:pointer;
-      position:relative;
-      overflow:hidden;
-      transition:.25s ease;
-    }
-
-    .btn-primary{
-      background:var(--primary);
-      color:#000;
-      border:1px solid rgba(255,230,0,.6);
-      box-shadow:
-        0 0 14px rgba(255,230,0,.22),
-        inset 0 0 0 1px rgba(255,255,255,.15);
-    }
-
-    .btn-primary::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(120deg, transparent 0%, rgba(255,255,255,.28) 50%, transparent 100%);
-      transform:translateX(-120%);
-    }
-
-    .btn-primary:hover::before{
-      transform:translateX(120%);
-      transition:.7s;
-    }
-
-    .btn-primary:hover{
-      transform:translateY(-2px);
-      box-shadow:0 0 18px rgba(255,230,0,.30);
-    }
-
-    .panel{
-      background:linear-gradient(180deg, rgba(255,230,0,.05), rgba(255,255,255,.02));
-      border:1px solid rgba(255,230,0,.16);
-      border-radius:var(--radius);
-      box-shadow:
-        0 0 0 1px rgba(255,230,0,.04),
-        0 0 18px rgba(255,230,0,.06),
-        0 16px 32px rgba(0,0,0,.18);
-      backdrop-filter:blur(6px);
-      -webkit-backdrop-filter:blur(6px);
-    }
-
-    @keyframes pulse{
-      0%{box-shadow:0 0 0 0 rgba(255,230,0,.25)}
-      70%{box-shadow:0 0 0 13px rgba(255,230,0,0)}
-      100%{box-shadow:0 0 0 0 rgba(255,230,0,0)}
+      background:linear-gradient(rgba(0,0,0,.40), rgba(0,0,0,.55));
     }
 
     nav{
@@ -170,57 +55,32 @@
       padding:calc(var(--safe-top) - 4px) 5% 14px;
       background:rgba(5,7,10,.56);
       backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
       border-bottom:1px solid rgba(255,230,0,.10);
-      box-shadow:0 8px 24px rgba(0,0,0,.18);
     }
 
     .logo{
-      z-index:1002;
       color:var(--primary);
       text-decoration:none;
       font-family:'Orbitron',sans-serif;
       font-size:clamp(18px,4vw,26px);
       font-weight:900;
       letter-spacing:2px;
-      text-shadow:0 0 10px rgba(255,230,0,.26);
     }
 
     .nav-links{
       display:flex;
-      align-items:center;
       gap:30px;
       list-style:none;
     }
 
     .nav-links a{
-      position:relative;
       color:#fff;
       text-decoration:none;
       font-size:14px;
       letter-spacing:1px;
-      transition:.25s;
     }
 
-    .nav-links a::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:-4px;
-      width:0;
-      height:2px;
-      background:var(--primary);
-      box-shadow:0 0 8px rgba(255,230,0,.40);
-      transition:.25s ease;
-    }
-
-    .nav-links a:hover{
-      color:var(--primary);
-    }
-
-    .nav-links a:hover::after{
-      width:100%;
-    }
+    .nav-links a:hover{color:var(--primary)}
 
     .menu-toggle{
       display:none;
@@ -242,14 +102,12 @@
       height:2px;
       border-radius:10px;
       background:var(--primary);
-      box-shadow:0 0 8px rgba(255,230,0,.45);
       transition:.28s ease;
     }
 
     .menu-toggle span:nth-child(1){transform:translateY(-7px)}
     .menu-toggle span:nth-child(2){transform:translateY(0)}
     .menu-toggle span:nth-child(3){transform:translateY(7px)}
-
     .menu-toggle.active span:nth-child(1){transform:translateY(0) rotate(45deg)}
     .menu-toggle.active span:nth-child(2){opacity:0}
     .menu-toggle.active span:nth-child(3){transform:translateY(0) rotate(-45deg)}
@@ -261,7 +119,6 @@
       background:rgba(0,0,0,.55);
       opacity:0;
       visibility:hidden;
-      transition:.25s ease;
     }
 
     .nav-overlay.show{
@@ -277,22 +134,27 @@
       align-items:center;
       text-align:center;
       padding:132px 20px 70px;
-      position:relative;
+    }
+
+    .section-tag{
+      display:block;
+      margin-bottom:10px;
+      color:var(--secondary);
+      font-size:12px;
+      letter-spacing:4px;
+      text-transform:uppercase;
+      text-align:center;
+      font-family:'Orbitron',sans-serif;
     }
 
     .hero-title{
-      display:inline-block;
-      margin-bottom:20px;
       color:var(--primary);
       font-family:'Orbitron',sans-serif;
       font-size:clamp(42px,8vw,94px);
       font-weight:900;
       line-height:1.02;
       letter-spacing:2px;
-      text-transform:uppercase;
-      text-shadow:
-        0 0 8px rgba(255,230,0,.28),
-        0 0 18px rgba(255,230,0,.16);
+      margin-bottom:20px;
     }
 
     .hero-subtitle{
@@ -301,7 +163,6 @@
       color:#eef2f6;
       font-size:clamp(14px,3.7vw,18px);
       line-height:1.8;
-      text-shadow:0 2px 10px rgba(0,0,0,.30);
     }
 
     .btn-group{
@@ -313,35 +174,56 @@
       gap:16px;
     }
 
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:56px;
+      padding:16px 28px;
+      border-radius:12px;
+      text-decoration:none;
+      text-transform:uppercase;
+      font-weight:800;
+    }
+
+    .btn-primary{
+      background:var(--primary);
+      color:#000;
+      border:1px solid rgba(255,230,0,.6);
+      box-shadow:0 0 14px rgba(255,230,0,.22);
+    }
+
     .status-section{
       padding:80px 5%;
       text-align:center;
-      background:transparent;
+    }
+
+    .panel{
+      background:linear-gradient(180deg, rgba(255,230,0,.05), rgba(255,255,255,.02));
+      border:1px solid rgba(255,230,0,.16);
+      border-radius:var(--radius);
+      box-shadow:0 16px 32px rgba(0,0,0,.18);
+      backdrop-filter:blur(6px);
     }
 
     .status-wrapper-horizontal{
       max-width:1100px;
       margin:42px auto 0;
       padding:18px;
-      position:relative;
     }
 
     .status-row{
       display:grid;
       grid-template-columns:repeat(2, minmax(0, 1fr));
       gap:14px;
-      margin-top:8px;
     }
 
     .status-strip{
-      padding:16px 16px 14px;
+      padding:16px;
       border-radius:14px;
       background:rgba(0,0,0,.18);
       border:1px solid rgba(255,230,0,.12);
-      box-shadow:inset 0 0 0 1px rgba(255,230,0,.03);
       text-align:left;
-      backdrop-filter:blur(6px);
-      -webkit-backdrop-filter:blur(6px);
     }
 
     .status-strip-head{
@@ -357,7 +239,6 @@
       font-family:'Orbitron',sans-serif;
       font-size:14px;
       letter-spacing:1px;
-      text-transform:uppercase;
     }
 
     .status-pill{
@@ -367,18 +248,16 @@
       padding:7px 12px;
       border-radius:999px;
       font-size:11px;
-      text-transform:uppercase;
       letter-spacing:1px;
       font-family:'Orbitron',sans-serif;
       border:1px solid rgba(255,255,255,.12);
-      background:rgba(255,255,255,.04);
     }
 
-    .status-pill.offline{
-      color:#fff;
-      background:linear-gradient(135deg, #7a0000, #ff1f1f);
-      border-color:rgba(255,0,0,.45);
-      box-shadow:0 0 16px rgba(255,0,0,.28);
+    .status-pill.online{
+      color:#001b10;
+      background:linear-gradient(135deg, #00c853, #00ff9f);
+      border-color:rgba(0,255,159,.45);
+      box-shadow:0 0 16px rgba(0,255,159,.28);
     }
 
     .status-strip-main{
@@ -389,7 +268,6 @@
     }
 
     .status-number{
-      margin:0;
       color:#fff;
       font-size:30px;
       font-weight:800;
@@ -399,14 +277,11 @@
     .status-strip-meta{
       color:#d8e0e8;
       font-size:12px;
-      line-height:1.4;
-      margin-bottom:3px;
     }
 
     .status-bar{
       width:100%;
       height:10px;
-      margin-bottom:0;
       overflow:hidden;
       border-radius:999px;
       background:rgba(255,255,255,.06);
@@ -415,28 +290,23 @@
 
     .status-fill{
       height:100%;
-      width:0%;
       border-radius:999px;
-      background:linear-gradient(90deg, #7a0000, #ff1f1f);
-      box-shadow:0 0 14px rgba(255,0,0,.22);
-      transition:width .35s ease;
+      background:linear-gradient(90deg, #00ffcc, #ffe600, #ff8a00);
+      box-shadow:0 0 14px rgba(255,230,0,.18);
     }
 
     .status-note{
-      max-width:1100px;
       margin:18px auto 0;
       color:#eef2f6;
       font-size:13px;
       letter-spacing:.5px;
       text-align:center;
       font-family:'Orbitron',sans-serif;
-      text-shadow:0 2px 8px rgba(0,0,0,.30);
     }
 
     .video-section{
       padding:80px 5%;
       text-align:center;
-      background:transparent;
     }
 
     .video-container{
@@ -449,26 +319,6 @@
       border-radius:18px;
       background:#000;
       border:1px solid rgba(255,230,0,.18);
-      box-shadow:
-        0 0 0 1px rgba(255,230,0,.06),
-        0 0 20px rgba(255,230,0,.06),
-        0 16px 34px rgba(0,0,0,.24);
-    }
-
-    .video-container::before{
-      content:"LIVE FEED";
-      position:absolute;
-      top:10px;
-      left:12px;
-      z-index:2;
-      padding:5px 8px;
-      border-radius:999px;
-      color:var(--primary);
-      background:rgba(0,0,0,.72);
-      border:1px solid rgba(255,230,0,.18);
-      font-size:11px;
-      letter-spacing:1px;
-      font-family:'Orbitron',sans-serif;
     }
 
     .video-container iframe{
@@ -483,9 +333,6 @@
       padding:70px 20px 110px;
       text-align:center;
       border-top:1px solid rgba(255,230,0,.10);
-      background:rgba(0,0,0,.08);
-      backdrop-filter:blur(4px);
-      -webkit-backdrop-filter:blur(4px);
     }
 
     .floating-contact{
@@ -504,76 +351,23 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      position:relative;
       border-radius:14px;
       color:#fff;
       font-size:22px;
       text-decoration:none;
-      border:1px solid rgba(255,255,255,.1);
-      background:rgba(255,255,255,.05);
-      backdrop-filter:blur(10px);
-      -webkit-backdrop-filter:blur(10px);
-      box-shadow:0 12px 30px rgba(0,0,0,.35);
-      transition:.25s;
-    }
-
-    .float-btn::after{
-      content:attr(data-text);
-      position:absolute;
-      right:66px;
-      white-space:nowrap;
-      opacity:0;
-      transform:translateX(10px);
-      transition:.25s;
-      pointer-events:none;
-      padding:6px 12px;
-      border-radius:999px;
-      color:var(--primary);
-      background:#05070a;
-      border:1px solid rgba(255,230,0,.14);
-      font-size:12px;
-      font-family:'Orbitron',sans-serif;
-    }
-
-    .float-btn:hover{
-      transform:translateY(-2px) scale(1.05);
-    }
-
-    .float-btn:hover::after{
-      opacity:1;
-      transform:translateX(0);
-    }
-
-    .float-btn.auto-tip{
-      animation:pulse 1.5s infinite;
-    }
-
-    .float-btn.auto-tip::after{
-      opacity:1;
-      transform:translateX(0);
     }
 
     .float-line{
       background:linear-gradient(135deg, #ff0062, #ff4d8a);
-      box-shadow:0 0 16px rgba(255,0,98,.22);
     }
 
     .float-discord{
       color:#001b10;
       background:linear-gradient(135deg, #00c853, #00ff9f);
-      box-shadow:0 0 16px rgba(0,255,159,.20);
     }
 
     @media (max-width:768px){
-      nav{
-        padding:calc(var(--safe-top) - 2px) 16px 12px;
-        backdrop-filter:none;
-        -webkit-backdrop-filter:none;
-      }
-
-      .menu-toggle{
-        display:flex;
-      }
+      .menu-toggle{display:flex}
 
       .nav-links{
         position:fixed;
@@ -581,43 +375,27 @@
         left:16px;
         right:16px;
         z-index:1001;
-        display:flex;
         flex-direction:column;
         gap:2px;
         padding:10px;
         background:rgba(8,10,12,.96);
         border:1px solid rgba(255,230,0,.14);
         border-radius:18px;
-        box-shadow:0 18px 50px rgba(0,0,0,.35);
-        transform:translateY(-14px) scale(.96);
         opacity:0;
         visibility:hidden;
         pointer-events:none;
-        transition:.28s ease;
       }
 
       .nav-links.show{
-        transform:translateY(0) scale(1);
         opacity:1;
         visibility:visible;
         pointer-events:auto;
       }
 
-      .nav-links li{
-        width:100%;
-      }
-
       .nav-links a{
         display:block;
-        width:100%;
         padding:14px 16px;
         text-align:center;
-        font-size:15px;
-        border-radius:12px;
-      }
-
-      .nav-links a:hover{
-        background:rgba(255,230,0,.05);
       }
 
       .hero{
@@ -625,100 +403,25 @@
         padding:118px 16px 50px;
       }
 
-      .hero-title{
-        font-size:40px;
-        margin-bottom:14px;
-        text-shadow:0 0 6px rgba(255,230,0,.18);
-      }
-
-      .hero-subtitle{
-        margin-bottom:28px;
-        font-size:15px;
-      }
+      .hero-title{font-size:40px}
 
       .btn-group{
         flex-direction:column;
-        align-items:stretch;
-        gap:12px;
-        max-width:420px;
       }
 
       .btn{
         width:100%;
-        min-height:54px;
-        padding:15px 18px;
-        font-size:14px;
-      }
-
-      .status-section,
-      .video-section{
-        padding:60px 16px;
       }
 
       .status-row{
         grid-template-columns:1fr;
       }
 
-      .status-wrapper-horizontal{
-        padding:16px;
-      }
-
-      .status-strip{
-        padding:14px;
-        backdrop-filter:none;
-        -webkit-backdrop-filter:none;
-      }
-
-      .status-strip-main{
-        flex-direction:column;
-        align-items:flex-start;
-        gap:6px;
-      }
-
-      .status-number{
-        font-size:26px;
-      }
-
-      footer{
-        padding:50px 16px 110px;
-      }
-
       .floating-contact{
         right:50%;
         transform:translateX(50%);
-        bottom:max(10px, env(safe-area-inset-bottom));
         flex-direction:row;
-        gap:10px;
-        padding:8px 10px;
-        background:rgba(0,0,0,.35);
-        border:1px solid rgba(255,230,0,.08);
-        border-radius:999px;
-        backdrop-filter:none;
-        -webkit-backdrop-filter:none;
       }
-
-      .float-btn{
-        width:46px;
-        height:46px;
-        font-size:20px;
-        box-shadow:none;
-        backdrop-filter:none;
-        -webkit-backdrop-filter:none;
-      }
-
-      .float-btn::after{
-        display:none;
-      }
-
-      .section-tag{
-        font-size:11px;
-        letter-spacing:2px;
-      }
-    }
-
-    @media (max-width:480px){
-      .hero-title{font-size:34px}
-      .hero-subtitle{font-size:14px}
     }
   </style>
 </head>
@@ -727,12 +430,10 @@
   <div class="site-bg"></div>
   <div class="nav-overlay" id="navOverlay"></div>
 
-  <audio id="bgMusic" loop preload="none"></audio>
-
   <nav>
     <a href="#" class="logo">9WING.SHOP</a>
 
-    <button class="menu-toggle" id="menuToggle" aria-label="เปิดเมนู" aria-expanded="false" aria-controls="navLinks">
+    <button class="menu-toggle" id="menuToggle" aria-label="เปิดเมนู" aria-expanded="false">
       <span></span>
       <span></span>
       <span></span>
@@ -741,7 +442,7 @@
     <ul class="nav-links" id="navLinks">
       <li><a href="#stats">STATUS</a></li>
       <li><a href="#review">REVIEW</a></li>
-      <li><a href="https://www.9wing.shop/OSLink.html" target="_blank" rel="noopener noreferrer">เช่า OSLINK</a></li>
+      <li><a href="https://www.9wing.shop/OSLink.html" target="_blank">เช่า OSLINK</a></li>
     </ul>
   </nav>
 
@@ -759,46 +460,48 @@
   </section>
 
   <section class="status-section" id="stats">
-    <span class="section-tag">USER STATUS | SERVER OFFLINE</span>
+    <span class="section-tag">USER STATUS | SERVER ONLINE</span>
 
     <div class="status-wrapper-horizontal panel">
       <div class="status-row">
+
         <div class="status-strip">
           <div class="status-strip-head">
             <div class="status-strip-title">PC USERS</div>
-            <span class="status-pill offline">● OFFLINE</span>
+            <span class="status-pill online">● ONLINE</span>
           </div>
 
           <div class="status-strip-main">
-            <div class="status-number" id="pcUsers">--</div>
+            <div class="status-number" id="pcUsers">159</div>
             <div class="status-strip-meta">ผู้ใช้งาน PC ปัจจุบัน</div>
           </div>
 
           <div class="status-bar">
-            <div class="status-fill" id="pcBar" style="width:0%"></div>
+            <div class="status-fill" id="pcBar" style="width:79.5%"></div>
           </div>
         </div>
 
         <div class="status-strip">
           <div class="status-strip-head">
             <div class="status-strip-title">CLOUD USERS</div>
-            <span class="status-pill offline">● OFFLINE</span>
+            <span class="status-pill online">● ONLINE</span>
           </div>
 
           <div class="status-strip-main">
-            <div class="status-number" id="cloudUsers">--</div>
+            <div class="status-number" id="cloudUsers">116</div>
             <div class="status-strip-meta">ผู้ใช้งาน CLOUD OSLINK ปัจจุบัน</div>
           </div>
 
           <div class="status-bar">
-            <div class="status-fill" id="cloudBar" style="width:0%"></div>
+            <div class="status-fill" id="cloudBar" style="width:58%"></div>
           </div>
         </div>
+
       </div>
     </div>
 
     <div class="status-note">
-      LAST UPDATE : <span id="lastUpdate">OFFLINE</span>
+      LAST UPDATE : <span id="lastUpdate">--:--:--</span>
     </div>
   </section>
 
@@ -810,8 +513,6 @@
         loading="lazy"
         src="https://www.youtube.com/embed/videoseries?si=ARQPDtew-PSK-7tx&list=PLOcSH_6jJxRICye4Hzw2BigQYIc7oV3RA"
         title="โปร ตี+ออโต้ เปิดกล่องออโต้ BY 9WING"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen>
       </iframe>
     </div>
@@ -822,85 +523,59 @@
   </footer>
 
   <div class="floating-contact">
-    <a href="https://www.facebook.com/share/1TpSQyCcdE/" class="float-btn float-line" target="_blank" rel="noopener noreferrer" data-text="MESSENGER LINK" aria-label="สอบถาม Messenger">💬</a>
-    <a href="https://discord.gg/PDFq23qA" class="float-btn float-discord" target="_blank" rel="noopener noreferrer" data-text="DISCORD ACCESS" aria-label="เข้า Discord">🎧</a>
-    <a href="https://www.9wing.shop/DOWNLOAD.html" class="float-btn float-discord" target="_blank" rel="noopener noreferrer" data-text="APK DOWNLOAD" aria-label="ดาวน์โหลด APK">📥</a>
+    <a href="https://www.facebook.com/share/1TpSQyCcdE/" class="float-btn float-line" target="_blank">💬</a>
+    <a href="https://discord.gg/PDFq23qA" class="float-btn float-discord" target="_blank">🎧</a>
+    <a href="https://www.9wing.shop/DOWNLOAD.html" class="float-btn float-discord" target="_blank">📥</a>
   </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const $ = (id) => document.getElementById(id);
+      const pcUsers = document.getElementById("pcUsers");
+      const cloudUsers = document.getElementById("cloudUsers");
+      const pcBar = document.getElementById("pcBar");
+      const cloudBar = document.getElementById("cloudBar");
+      const lastUpdate = document.getElementById("lastUpdate");
 
-      const el = {
-        pcUsers: $("pcUsers"),
-        cloudUsers: $("cloudUsers"),
-        pcBar: $("pcBar"),
-        cloudBar: $("cloudBar"),
-        lastUpdate: $("lastUpdate"),
-        menuToggle: $("menuToggle"),
-        navLinks: $("navLinks"),
-        navOverlay: $("navOverlay")
-      };
+      const menuToggle = document.getElementById("menuToggle");
+      const navLinks = document.getElementById("navLinks");
+      const navOverlay = document.getElementById("navOverlay");
 
-      const navAnchors = document.querySelectorAll("#navLinks a");
-
-      function initContactTooltip() {
-        if (localStorage.getItem("contactTipShown")) return;
-
-        setTimeout(() => {
-          const btns = document.querySelectorAll(".float-btn");
-          btns.forEach(btn => btn.classList.add("auto-tip"));
-
-          setTimeout(() => {
-            btns.forEach(btn => btn.classList.remove("auto-tip"));
-            localStorage.setItem("contactTipShown", "yes");
-          }, 2200);
-        }, 1200);
-      }
-
-      function updateStatusOffline() {
-        el.pcUsers.textContent = "--";
-        el.cloudUsers.textContent = "--";
-        el.pcBar.style.width = "0%";
-        el.cloudBar.style.width = "0%";
-        el.lastUpdate.textContent = "OFFLINE";
+      function updateStatusOnline() {
+        pcUsers.textContent = "159";
+        cloudUsers.textContent = "116";
+        pcBar.style.width = "79.5%";
+        cloudBar.style.width = "58%";
+        lastUpdate.textContent = new Date().toLocaleTimeString("th-TH");
       }
 
       function openMenu() {
-        el.navLinks.classList.add("show");
-        el.navOverlay.classList.add("show");
-        el.menuToggle.classList.add("active");
-        el.menuToggle.setAttribute("aria-expanded", "true");
+        navLinks.classList.add("show");
+        navOverlay.classList.add("show");
+        menuToggle.classList.add("active");
+        menuToggle.setAttribute("aria-expanded", "true");
         document.body.style.overflow = "hidden";
       }
 
       function closeMenu() {
-        el.navLinks.classList.remove("show");
-        el.navOverlay.classList.remove("show");
-        el.menuToggle.classList.remove("active");
-        el.menuToggle.setAttribute("aria-expanded", "false");
+        navLinks.classList.remove("show");
+        navOverlay.classList.remove("show");
+        menuToggle.classList.remove("active");
+        menuToggle.setAttribute("aria-expanded", "false");
         document.body.style.overflow = "";
       }
 
-      function initMenu() {
-        el.menuToggle?.addEventListener("click", () => {
-          const isOpen = el.navLinks.classList.contains("show");
-          isOpen ? closeMenu() : openMenu();
-        });
+      menuToggle.addEventListener("click", () => {
+        navLinks.classList.contains("show") ? closeMenu() : openMenu();
+      });
 
-        el.navOverlay?.addEventListener("click", closeMenu);
-        navAnchors.forEach(link => link.addEventListener("click", closeMenu));
+      navOverlay.addEventListener("click", closeMenu);
+      document.querySelectorAll("#navLinks a").forEach(link => {
+        link.addEventListener("click", closeMenu);
+      });
 
-        window.addEventListener("resize", () => {
-          if (window.innerWidth > 768) closeMenu();
-        });
-      }
-
-      initContactTooltip();
-      updateStatusOffline();
-      initMenu();
+      updateStatusOnline();
+      setInterval(updateStatusOnline, 1000);
     });
   </script>
 </body>
 </html>
-```
