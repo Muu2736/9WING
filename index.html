@@ -23,6 +23,9 @@
       --safe-bottom:max(16px, env(safe-area-inset-bottom));
       --safe-top:max(16px, env(safe-area-inset-top));
       --radius:18px;
+      --parallax-x:0px;
+      --parallax-y:0px;
+      --scroll-y:0px;
     }
 
     *{margin:0;padding:0;box-sizing:border-box;scroll-behavior:smooth}
@@ -31,16 +34,36 @@
 
     .site-bg{
       position:fixed;
-      inset:0;
+      inset:-40px;
       z-index:-3;
       background:url('9WING(1).webp') no-repeat center center / cover;
+      transform:translate3d(var(--parallax-x), calc(var(--parallax-y) + var(--scroll-y)), 0) scale(1.08);
+      transition:transform .12s linear;
+      will-change:transform;
+      animation:bgFloat 12s ease-in-out infinite alternate;
+    }
+
+    .site-bg::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(circle at 18% 22%, rgba(255,230,0,.16), transparent 28%),
+        radial-gradient(circle at 82% 70%, rgba(0,255,159,.12), transparent 30%);
+      mix-blend-mode:screen;
+      pointer-events:none;
     }
 
     .site-bg::after{
       content:"";
       position:absolute;
       inset:0;
-      background:linear-gradient(rgba(0,0,0,.40), rgba(0,0,0,.55));
+      background:linear-gradient(rgba(0,0,0,.30), rgba(0,0,0,.52));
+    }
+
+    @keyframes bgFloat{
+      from{background-position:48% 48%}
+      to{background-position:52% 52%}
     }
 
     nav{
@@ -155,6 +178,7 @@
       line-height:1.02;
       letter-spacing:2px;
       margin-bottom:20px;
+      text-shadow:0 0 18px rgba(255,230,0,.22);
     }
 
     .hero-subtitle{
@@ -367,6 +391,7 @@
     }
 
     @media (max-width:768px){
+      .site-bg{inset:-26px;transform:translate3d(var(--parallax-x), calc(var(--parallax-y) + var(--scroll-y)), 0) scale(1.12)}
       .menu-toggle{display:flex}
 
       .nav-links{
@@ -539,6 +564,13 @@
       const menuToggle = document.getElementById("menuToggle");
       const navLinks = document.getElementById("navLinks");
       const navOverlay = document.getElementById("navOverlay");
+      const root = document.documentElement;
+
+      let targetX = 0;
+      let targetY = 0;
+      let currentX = 0;
+      let currentY = 0;
+      let scrollMove = 0;
 
       function updateStatusOnline() {
         pcUsers.textContent = "159";
@@ -564,6 +596,40 @@
         document.body.style.overflow = "";
       }
 
+      function setParallaxByPoint(x, y) {
+        const centerX = window.innerWidth / 2;
+        const centerY = window.innerHeight / 2;
+        targetX = ((x - centerX) / centerX) * -18;
+        targetY = ((y - centerY) / centerY) * -14;
+      }
+
+      function animateParallax() {
+        currentX += (targetX - currentX) * 0.08;
+        currentY += (targetY - currentY) * 0.08;
+        scrollMove = window.scrollY * -0.035;
+
+        root.style.setProperty("--parallax-x", currentX.toFixed(2) + "px");
+        root.style.setProperty("--parallax-y", currentY.toFixed(2) + "px");
+        root.style.setProperty("--scroll-y", scrollMove.toFixed(2) + "px");
+
+        requestAnimationFrame(animateParallax);
+      }
+
+      window.addEventListener("mousemove", (e) => {
+        setParallaxByPoint(e.clientX, e.clientY);
+      }, { passive:true });
+
+      window.addEventListener("touchmove", (e) => {
+        if (!e.touches.length) return;
+        setParallaxByPoint(e.touches[0].clientX, e.touches[0].clientY);
+      }, { passive:true });
+
+      window.addEventListener("deviceorientation", (e) => {
+        if (e.gamma === null || e.beta === null) return;
+        targetX = Math.max(-18, Math.min(18, e.gamma * -1.2));
+        targetY = Math.max(-14, Math.min(14, e.beta * -0.55));
+      }, { passive:true });
+
       menuToggle.addEventListener("click", () => {
         navLinks.classList.contains("show") ? closeMenu() : openMenu();
       });
@@ -575,6 +641,7 @@
 
       updateStatusOnline();
       setInterval(updateStatusOnline, 1000);
+      animateParallax();
     });
   </script>
 </body>
