@@ -45,7 +45,6 @@
       background-size:cover;
       background-position:center;
     }
-	
 
     .site-bg::before{
       content:"";
@@ -269,6 +268,9 @@
       font-weight:800;
       letter-spacing:.4px;
       transition:.25s ease;
+      border:0;
+      font-family:'Kanit',sans-serif;
+      cursor:pointer;
     }
     .btn::before{
       content:"";
@@ -341,32 +343,6 @@
     .float-facebook{background:linear-gradient(135deg,#ff0062,#ff4d8a)}
     .float-download{color:#05070a;background:linear-gradient(135deg,#ffe600,#ff9d00)}
 
-    .music-control{
-      position:fixed;
-      left:16px;
-      bottom:var(--safe-bottom);
-      z-index:1000;
-      min-width:54px;
-      height:54px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:0 15px;
-      border-radius:17px;
-      border:1px solid rgba(255,230,0,.24);
-      color:#05070a;
-      background:linear-gradient(135deg,#ffe600,#ff9d00);
-      box-shadow:0 14px 34px rgba(0,0,0,.28),0 0 20px rgba(255,230,0,.16);
-      font-family:'Kanit',sans-serif;
-      font-weight:800;
-      cursor:pointer;
-      transition:.22s ease;
-    }
-    .music-control:hover{transform:translateY(-4px) scale(1.04)}
-    .music-control .music-text{font-size:13px;letter-spacing:.4px;white-space:nowrap}
-
-
     .music-popup{
       position:fixed;
       inset:0;
@@ -391,24 +367,20 @@
       border:1px solid rgba(255,230,0,.25);
       box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 34px rgba(255,230,0,.12);
     }
-    .music-popup-icon{font-size:46px;margin-bottom:10px;filter:drop-shadow(0 0 18px rgba(255,230,0,.35))}
-    .music-popup-card h2,.popup-box h2{color:var(--primary);font-size:24px;margin-bottom:8px;font-family:'Orbitron',sans-serif;letter-spacing:1px}
-    .music-popup-card p{color:#e7edf3;font-size:15px;line-height:1.75;margin-bottom:18px}
-    .popup-text{color:#e7edf3;font-size:15px;line-height:1.75;margin-bottom:14px}
-    .music-popup-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    .music-popup-btn{
-      min-height:52px;
-      border:0;
-      border-radius:15px;
-      font-family:'Kanit',sans-serif;
-      font-weight:800;
-      cursor:pointer;
-      transition:.22s ease;
+    .video-popup-card{width:min(780px,100%)}
+    .popup-video-box{
+      width:100%;
+      aspect-ratio:16/9;
+      margin:16px 0 18px;
+      border-radius:18px;
+      overflow:hidden;
+      background:#000;
+      border:1px solid rgba(255,230,0,.25);
+      box-shadow:0 18px 40px rgba(0,0,0,.34);
     }
-    .music-popup-btn:hover{transform:translateY(-2px)}
-    .music-popup-play{color:#05070a;background:linear-gradient(135deg,var(--primary),var(--primary-2));box-shadow:0 12px 28px rgba(255,157,0,.18)}
-    .music-popup-skip{color:#fff;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14)}
-
+    .popup-video-box iframe{width:100%;height:100%;border:0;display:block}
+    .music-popup-card h2,.popup-box h2{color:var(--primary);font-size:24px;margin-bottom:8px;font-family:'Orbitron','Kanit',sans-serif;letter-spacing:1px}
+    .popup-text{color:#e7edf3;font-size:15px;line-height:1.75;margin-bottom:14px}
 
     .login-btn{
       display:inline-flex;
@@ -468,11 +440,7 @@
       pointer-events:none;
       transition:.22s ease;
     }
-    .auth-modal.show{
-      opacity:1;
-      visibility:visible;
-      pointer-events:auto;
-    }
+    .auth-modal.show{opacity:1;visibility:visible;pointer-events:auto}
     .auth-card{
       width:min(430px,100%);
       padding:26px 22px;
@@ -481,101 +449,22 @@
       border:1px solid rgba(255,230,0,.25);
       box-shadow:0 30px 80px rgba(0,0,0,.55),0 0 34px rgba(255,230,0,.12);
     }
-    .auth-head{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:16px;
-    }
-    .auth-head h2{
-      color:var(--primary);
-      font-size:24px;
-      font-family:'Orbitron','Kanit',sans-serif;
-      letter-spacing:1px;
-    }
-    .auth-close{
-      width:38px;
-      height:38px;
-      border-radius:12px;
-      border:1px solid rgba(255,255,255,.14);
-      color:#fff;
-      background:rgba(255,255,255,.08);
-      cursor:pointer;
-      font-size:20px;
-    }
-    .auth-tabs{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:8px;
-      margin-bottom:14px;
-    }
-    .auth-tab{
-      min-height:44px;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:14px;
-      color:#fff;
-      background:rgba(255,255,255,.07);
-      font-family:'Kanit',sans-serif;
-      font-weight:800;
-      cursor:pointer;
-    }
-    .auth-tab.active{
-      color:#05070a;
-      background:linear-gradient(135deg,var(--primary),var(--primary-2));
-      border-color:rgba(255,230,0,.5);
-    }
+    .auth-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px}
+    .auth-head h2{color:var(--primary);font-size:24px;font-family:'Orbitron','Kanit',sans-serif;letter-spacing:1px}
+    .auth-close{width:38px;height:38px;border-radius:12px;border:1px solid rgba(255,255,255,.14);color:#fff;background:rgba(255,255,255,.08);cursor:pointer;font-size:20px}
+    .auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:14px}
+    .auth-tab{min-height:44px;border:1px solid rgba(255,255,255,.12);border-radius:14px;color:#fff;background:rgba(255,255,255,.07);font-family:'Kanit',sans-serif;font-weight:800;cursor:pointer}
+    .auth-tab.active{color:#05070a;background:linear-gradient(135deg,var(--primary),var(--primary-2));border-color:rgba(255,230,0,.5)}
     .auth-form{display:none}
     .auth-form.active{display:block}
     .form-group{margin-bottom:12px;text-align:left}
-    .form-group label{
-      display:block;
-      color:#e7edf3;
-      font-size:13px;
-      margin-bottom:6px;
-    }
-    .form-group input{
-      width:100%;
-      min-height:48px;
-      padding:0 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,230,0,.18);
-      color:#fff;
-      background:rgba(0,0,0,.28);
-      outline:none;
-      font-family:'Kanit',sans-serif;
-      font-size:15px;
-    }
-    .form-group input:focus{
-      border-color:rgba(255,230,0,.55);
-      box-shadow:0 0 0 3px rgba(255,230,0,.10);
-    }
-    .auth-submit{
-      width:100%;
-      min-height:52px;
-      border:0;
-      border-radius:15px;
-      color:#05070a;
-      background:linear-gradient(135deg,var(--primary),var(--primary-2));
-      font-family:'Kanit',sans-serif;
-      font-weight:900;
-      cursor:pointer;
-      margin-top:4px;
-    }
-    .auth-message{
-      margin-top:12px;
-      min-height:22px;
-      font-size:13px;
-      text-align:center;
-      color:#e7edf3;
-    }
+    .form-group label{display:block;color:#e7edf3;font-size:13px;margin-bottom:6px}
+    .form-group input{width:100%;min-height:48px;padding:0 14px;border-radius:14px;border:1px solid rgba(255,230,0,.18);color:#fff;background:rgba(0,0,0,.28);outline:none;font-family:'Kanit',sans-serif;font-size:15px}
+    .form-group input:focus{border-color:rgba(255,230,0,.55);box-shadow:0 0 0 3px rgba(255,230,0,.10)}
+    .auth-submit{width:100%;min-height:52px;border:0;border-radius:15px;color:#05070a;background:linear-gradient(135deg,var(--primary),var(--primary-2));font-family:'Kanit',sans-serif;font-weight:900;cursor:pointer;margin-top:4px}
+    .auth-message{margin-top:12px;min-height:22px;font-size:13px;text-align:center;color:#e7edf3}
     .auth-message.error{color:#ff7aa8}
     .auth-message.success{color:#00ff9f}
-
-    @media (max-width:768px){
-      .login-btn,.user-chip{width:100%;justify-content:center;border-radius:14px}
-      .user-chip{flex-direction:column}
-    }
 
     @media (max-width:900px){
       .feature-grid{grid-template-columns:1fr}
@@ -588,6 +477,8 @@
       .nav-links{position:fixed;top:calc(var(--safe-top) + 76px);left:16px;right:16px;z-index:1001;flex-direction:column;gap:4px;padding:12px;background:rgba(8,10,12,.97);border:1px solid rgba(255,230,0,.16);border-radius:20px;opacity:0;visibility:hidden;pointer-events:none;transform:translateY(-8px);transition:.22s ease;box-shadow:0 22px 50px rgba(0,0,0,.34)}
       .nav-links.show{opacity:1;visibility:visible;pointer-events:auto;transform:translateY(0)}
       .nav-links a{display:flex;width:100%;padding:14px 16px;text-align:center;border-radius:14px;background:rgba(255,255,255,.035)}
+      .login-btn,.user-chip{width:100%;justify-content:center;border-radius:14px}
+      .user-chip{flex-direction:column}
       .hero{min-height:auto;padding:150px 16px 54px}
       .hero-title{font-size:42px;letter-spacing:1px}
       .hero-subtitle{font-size:15px;margin-bottom:24px}
@@ -597,10 +488,7 @@
       .status-wrapper-horizontal{padding:14px;margin-top:30px}.status-row{grid-template-columns:1fr}
       .status-number{font-size:34px}.status-strip-main{align-items:flex-start;flex-direction:column;gap:8px}
       .floating-contact{right:50%;transform:translateX(50%);flex-direction:row}.float-btn{width:52px;height:52px}
-      .music-control{left:12px;bottom:calc(var(--safe-bottom) + 66px);height:48px;min-width:48px;padding:0 12px}
-      .music-control .music-text{display:none}
       .music-popup-card,.popup-box{padding:24px 18px}
-      .music-popup-actions{grid-template-columns:1fr}
       footer{padding-bottom:138px}
     }
   </style>
@@ -610,15 +498,35 @@
   <div class="site-bg"></div>
   <div class="nav-overlay" id="navOverlay"></div>
 
-  <div id="musicPopup" class="music-popup" role="dialog" aria-modal="true" aria-labelledby="musicPopupTitle">
-    <div class="music-popup-card popup-box">
-      <h2>ประกาศจาก 9WING.SHOP</h2>
-      <h2 id="musicPopupTitle">ยินดีต้อนรับ ทกท่าน</h2>
+  <!-- POPUP 1: วิดีโอก่อนเข้าเว็บ -->
+  <div id="videoPopup" class="music-popup" role="dialog" aria-modal="true" aria-labelledby="videoPopupTitle">
+    <div class="music-popup-card popup-box video-popup-card">
+      <h2>9WING.SHOP</h2>
+      <h2 id="videoPopupTitle">ชมคลิปก่อนเข้าเว็บไซต์</h2>
 
-      <p class="popup-text">
-        <b> </b><br>
-      
-      </p>
+      <div class="popup-video-box">
+        <iframe
+          id="introVideo"
+          width="1027"
+          height="578"
+          src="https://www.youtube.com/embed/videoseries?si=ARQPDtew-PSK-7tx&list=PLOcSH_6jJxRICye4Hzw2BigQYIc7oV3RA"
+          title="CN - Highlight (High life)  prod. BANKROLL BABY [official MV]"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen>
+        </iframe>
+      </div>
+
+      <button id="nextPopup" type="button" class="btn btn-primary">ถัดไป</button>
+    </div>
+  </div>
+
+  <!-- POPUP 2: ข้อความต้อนรับ / โปรโมชั่น -->
+  <div id="musicPopup" class="music-popup hide" role="dialog" aria-modal="true" aria-labelledby="musicPopupTitle">
+    <div class="music-popup-card popup-box">
+      <h2>9WING.SHOP</h2>
+      <h2 id="musicPopupTitle">ยินดีต้อนรับ ทุกท่าน</h2>
 
       <p class="popup-text">
         📌 เช่าจอปล่อยบอทผ่าน <b>OSLink</b> 👉
@@ -639,7 +547,6 @@
   <audio id="bgMusic" preload="auto" loop playsinline>
     <source src="https://www.9wing.shop/เพลง123.mp3" type="audio/mpeg">
   </audio>
-
 
   <div class="auth-modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
     <div class="auth-card">
@@ -686,7 +593,6 @@
     </div>
   </div>
 
-
   <nav>
     <a href="#" class="logo">9WING.SHOP</a>
 
@@ -717,7 +623,7 @@
     </p>
 
     <div class="hero-badges">
-      <span class="badge">🟢 <strong>SERVER</strong>ONLINE</span>
+      <span class="badge">🟢 <strong>SERVER</strong> ONLINE</span>
     </div>
 
     <div class="btn-group">
@@ -766,7 +672,7 @@
       <article class="feature-card">
         <div class="feature-icon">📆</div>
         <h3>9WING</h3>
-        <p>9WING บริการจำหน่ายโปร โยกังยาวนานมากกว่า 1 ปี </p>
+        <p>9WING บริการจำหน่ายโปร โยกังยาวนานมากกว่า 1 ปี</p>
       </article>
       <article class="feature-card">
         <div class="feature-icon">☁️</div>
@@ -776,7 +682,7 @@
       <article class="feature-card">
         <div class="feature-icon">🛡️</div>
         <h3>BYPASS ANTI-CHEAT</h3>
-        <p>ระบบป้องกัน ฺBAN เสถียร หมดห่วงไร้กังวล  </p>
+        <p>ระบบป้องกัน BAN เสถียร หมดห่วงไร้กังวล</p>
       </article>
     </div>
   </section>
@@ -802,7 +708,7 @@
     <a href="https://www.facebook.com/share/1TpSQyCcdE/" class="float-btn float-facebook" target="_blank" rel="noopener" aria-label="Facebook">💬</a>
     <a href="https://www.9wing.shop/DOWNLOAD" class="float-btn float-download" target="_blank" rel="noopener" aria-label="Download">📥</a>
   </div>
-
+  <script type='text/javascript' src='https://www.siamecohost.com/member/gcounter/graphcount.php?page=9wing_wJmTf&style=31&maxdigits=10'></script>
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const pcUsers = document.getElementById("pcUsers");
@@ -815,31 +721,38 @@
       const navOverlay = document.getElementById("navOverlay");
       const root = document.documentElement;
       const bgMusic = document.getElementById("bgMusic");
+
+      const videoPopup = document.getElementById("videoPopup");
       const musicPopup = document.getElementById("musicPopup");
+      const introVideo = document.getElementById("introVideo");
+      const nextPopup = document.getElementById("nextPopup");
       const enterBtn = document.getElementById("enterSite");
 
       let targetX = 0, targetY = 0, currentX = 0, currentY = 0, scrollMove = 0;
       bgMusic.volume = 0.6;
 
-      function updateMusicButton(){
-        return;
+      function stopIntroVideo(){
+        if(introVideo) introVideo.src = "";
       }
 
-      function closeMusicPopup(){
+      function showSecondPopup(){
+        stopIntroVideo();
+        videoPopup.classList.add("hide");
+        musicPopup.classList.remove("hide");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeAllPopups(){
+        stopIntroVideo();
+        videoPopup.classList.add("hide");
         musicPopup.classList.add("hide");
         document.body.style.overflow = "";
       }
 
-      function playMusic(){
+      function enterWebsite(){
         bgMusic.muted = false;
-        bgMusic.play().then(() => {
-          closeMusicPopup();
-          updateMusicButton();
-        }).catch((err) => {
-          console.log("Audio blocked:", err);
-          closeMusicPopup();
-          updateMusicButton();
-        });
+        bgMusic.play().catch((err) => console.log("Audio blocked:", err));
+        closeAllPopups();
       }
 
       function updateStatusOnline(){
@@ -883,7 +796,8 @@
         requestAnimationFrame(animateParallax);
       }
 
-      enterBtn.addEventListener("click", playMusic);
+      nextPopup.addEventListener("click", showSecondPopup);
+      enterBtn.addEventListener("click", enterWebsite);
 
       window.addEventListener("mousemove", e => setParallaxByPoint(e.clientX, e.clientY), {passive:true});
       window.addEventListener("touchmove", e => {
@@ -902,25 +816,13 @@
 
       document.body.style.overflow = "hidden";
 
-
       updateStatusOnline();
-      updateMusicButton();
       setInterval(updateStatusOnline, 1000);
       animateParallax();
     });
   </script>
 
   <script type="module">
-    /*
-      ตั้งค่า Firebase ก่อนใช้งานจริง:
-      1) Firebase Console > Authentication > Sign-in method > เปิด Email/Password
-      2) Firebase Console > Firestore Database > Create database
-      3) Project settings > Your apps > Web app > copy firebaseConfig มาใส่ด้านล่าง
-
-      ผู้ใช้สมัครด้วยยูสเซอร์ เช่น 9wing
-      ระบบจะแปลงหลังบ้านเป็น 9wing@9wing.local เพื่อให้ Firebase Auth ใช้งานได้
-    */
-
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
     import {
       getAuth,
