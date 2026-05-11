@@ -470,6 +470,13 @@
       .feature-grid{grid-template-columns:1fr}
     }
 
+   .popup-video-box{
+     display:flex;
+     justify-content:center;
+     align-items:center;
+      overflow:hidden;
+   }
+    
     @media (max-width:768px){
       .site-bg{inset:-30px;transform:translate3d(var(--parallax-x), calc(var(--parallax-y) + var(--scroll-y)), 0) scale(1.14)}
       nav{flex-wrap:wrap}
@@ -504,13 +511,20 @@
     <h2>9WING.SHOP</h2>
     <h2 id="videoPopupTitle">ชมภาพก่อนเข้าเว็บไซต์</h2>
 
-    <div class="popup-video-box">
-      <img
-        src="https://img2.pic.in.th/Capture_2026_05_11_01_10_13_599.png"
-        alt="9WING Preview"
-        style="width:100%; height:auto; border-radius:12px;"
-      >
-    </div>
+<div class="popup-video-box">
+  <img
+    src="https://img2.pic.in.th/Capture_2026_05_11_01_10_13_599.png"
+    alt="9WING Preview"
+    style="
+      width:100%;
+      max-height:70vh;
+      object-fit:contain;
+      border-radius:12px;
+      display:block;
+      margin:auto;
+    "
+  >
+</div>
 
   </div>
 </div>
