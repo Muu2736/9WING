@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>9WING.SHOP | Pro Yulgang + Cloud OSLink 24 ชม.</title>
+  <meta name="description" content="9WING.SHOP โปรโยกังจุติยุทธภพเลือดใหม่/สนุก พร้อม Cloud OSLink ปล่อยบอท 24 ชม.">
+  <meta name="keywords" content="9WING, 9WING.SHOP, โปรโยกัง, โยกังจุติยุทธภพ, OSLink, Cloud Bot">
+  <meta name="theme-color" content="#030508">
+  <meta property="og:title" content="9WING.SHOP">
+  <meta property="og:description" content="โปรโยกัง + Cloud OSLink 24 ชม.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/1.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+  <div class="site-bg" aria-hidden="true"></div>
+  <div class="nav-overlay" id="navOverlay"></div>
+
+  <div id="previewPopup" class="modal show" role="dialog" aria-modal="true">
+    <div class="modal-card modal-wide">
+      <h2>9WING.SHOP</h2>
+      <p class="modal-lead">ชมภาพก่อนเข้าเว็บไซต์</p>
+      <div class="preview-frame">
+        <img src="https://img2.pic.in.th/Capture_2026_05_11_01_10_13_599.png" alt="9WING Preview" loading="eager">
+      </div>
+      <button id="nextPopup" class="btn btn-primary" type="button">ถัดไป</button>
+    </div>
+  </div>
+
+  <div id="welcomePopup" class="modal" role="dialog" aria-modal="true">
+    <div class="modal-card">
+      <h2>9WING.SHOP</h2>
+      <p class="modal-lead">ยินดีต้อนรับ ทุกท่าน</p>
+      <p>📌 เช่าจอปล่อยบอทผ่าน <b>OSLink</b> 👉 <a href="https://www.9wing.shop/OSLink.html" target="_blank" rel="noopener">เช่าเลย</a></p>
+      <p>🚀 Update ฟังก์ชันทั้งหมด 👉 <a href="https://www.9wing.shop/menu.html" target="_blank" rel="noopener">Update</a></p>
+      <button id="enterSite" class="btn btn-primary" type="button">เข้าสู่เว็บไซต์</button>
+    </div>
+  </div>
+
+  <audio id="bgMusic" preload="none" loop playsinline>
+    <source src="https://www.9wing.shop/เพลง123.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="auth-modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+    <div class="auth-card">
+      <div class="auth-head">
+        <h2 id="authTitle">9WING LOGIN</h2>
+        <button class="icon-btn" id="authClose" type="button" aria-label="ปิด">×</button>
+      </div>
+      <div class="auth-tabs">
+        <button class="auth-tab active" id="loginTab" type="button">เข้าสู่ระบบ</button>
+        <button class="auth-tab" id="registerTab" type="button">สมัครสมาชิก</button>
+      </div>
+      <form class="auth-form active" id="loginForm">
+        <label>ยูสเซอร์<input id="loginUser" type="text" autocomplete="username" required></label>
+        <label>รหัสผ่าน<input id="loginPass" type="password" autocomplete="current-password" required></label>
+        <button class="auth-submit" type="submit">เข้าสู่ระบบ</button>
+      </form>
+      <form class="auth-form" id="registerForm">
+        <label>ชื่อที่แสดง<input id="regName" type="text" autocomplete="name" required></label>
+        <label>ยูสเซอร์<input id="regUser" type="text" autocomplete="username" required></label>
+        <label>รหัสผ่าน<input id="regPass" type="password" minlength="6" autocomplete="new-password" required></label>
+        <button class="auth-submit" type="submit">สมัครสมาชิก</button>
+      </form>
+      <div class="auth-separator">หรือ</div>
+      <button id="googleLogin" class="social-btn" type="button">เข้าสู่ระบบด้วย Google</button>
+      <button id="discordLogin" class="social-btn" type="button">เข้าสู่ระบบด้วย Discord</button>
+      <div class="auth-message" id="authMessage"></div>
+    </div>
+  </div>
+
+  <nav class="nav">
+    <a href="#" class="logo">9WING.SHOP</a>
+    <button class="menu-toggle" id="menuToggle" aria-label="เปิดเมนู" aria-expanded="false"><span></span><span></span><span></span></button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#stats">STATUS</a></li>
+      <li><a href="#features">FEATURES</a></li>
+      <li><a href="#news">NEWS</a></li>
+      <li><a href="#topup">TOPUP</a></li>
+      <li><a href="#review">REVIEW</a></li>
+      <li><a href="https://www.9wing.shop/OSLink" target="_blank" rel="noopener">เช่า OSLINK</a></li>
+      <li><button class="login-btn" id="openAuth" type="button">🔐 LOGIN</button><span class="user-chip" id="userChip">🔐 <b id="currentUserName">USER</b><button class="logout-btn" id="logoutBtn" type="button">ออก</button></span></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section class="hero reveal">
+      <span class="section-tag">PRO YULGANG | CLOUD OSLINK</span>
+      <h1>9WING.SHOP</h1>
+      <p>บริการจำหน่ายโปรแกรมช่วยเล่นโยกังที่เสถียร พร้อมบริการเช่าจอ Cloud ปล่อยบอท 24 ชม. ผ่าน OSLink ความเร็วสูง</p>
+      <div class="hero-badges"><span>🟢 SERVER ONLINE</span><span>⚡ FAST CLOUD</span><span>🛡️ MEMBER SYSTEM</span></div>
+      <div class="btn-group"><a href="https://www.9wing.shop/Version" class="btn btn-primary">🎮 PRO เลือดใหม่</a><a href="https://www.9wing.shop/โยกังสนุก" class="btn btn-primary">🎮 PRO สนุก</a></div>
+    </section>
+
+    <section class="section reveal" id="stats">
+      <span class="section-tag">USER STATUS | SERVER ONLINE</span>
+      <div class="status-grid panel">
+        <article><h3>PC USERS</h3><strong id="pcUsers">--</strong><span>ผู้ใช้งาน PC</span><div><i id="pcBar"></i></div></article>
+        <article><h3>CLOUD USERS</h3><strong id="cloudUsers">--</strong><span>ผู้ใช้งาน CLOUD PHONE</span><div><i id="cloudBar"></i></div></article>
+        <article><h3>SERVER</h3><strong id="serverStatus">ONLINE</strong><span id="lastUpdate">--:--:--</span><div><i class="full"></i></div></article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="features">
+      <span class="section-tag">WHY 9WING</span>
+      <div class="feature-grid">
+        <article><b>📆</b><h3>เปิดให้บริการยาวนาน</h3><p>ดีไซน์ใหม่ รองรับข้อมูลจาก Firestore และระบบสมาชิก</p></article>
+        <article><b>☁️</b><h3>Cloud OSLink 24 ชม.</h3><p>พร้อมแสดงสถานะเซิร์ฟเวอร์แบบ realtime เมื่อเชื่อมฐานข้อมูล</p></article>
+        <article><b>🛡️</b><h3>Security First</h3><p>ย้ายข้อมูลสำคัญไปหลังบ้าน ลดการเปิดเผย key/logic ฝั่ง client</p></article>
+      </div>
+    </section>
+
+    <section class="section reveal" id="news">
+      <span class="section-tag">ANNOUNCEMENT</span>
+      <div class="news-list panel" id="newsList"><p>กำลังโหลดประกาศ...</p></div>
+    </section>
+
+    <section class="section reveal" id="topup">
+      <span class="section-tag">TOPUP</span>
+      <div class="topup panel">
+        <h2>ระบบเติมเงิน</h2>
+        <p>ตัวอย่างหน้า UI สำหรับสร้างคำสั่งเติมเงิน ต้องใช้ Cloud Functions/Payment API จริงในฝั่ง server</p>
+        <form id="topupForm">
+          <input id="topupAmount" type="number" min="10" step="1" placeholder="จำนวนเงิน เช่น 100" required>
+          <button class="btn btn-primary" type="submit">สร้างรายการเติมเงิน</button>
+        </form>
+        <div id="topupMessage"></div>
+      </div>
+    </section>
+
+    <section class="section reveal" id="review">
+      <span class="section-tag">REVIEW | FEED STREAM</span>
+      <div class="video-container"><iframe loading="lazy" src="https://www.youtube.com/embed/videoseries?si=ARQPDtew-PSK-7tx&list=PLOcSH_6jJxRICye4Hzw2BigQYIc7oV3RA" title="9WING Review" allowfullscreen></iframe></div>
+    </section>
+  </main>
+
+  <footer><p>© 2026 9WING.SHOP All rights reserved.</p></footer>
+  <div class="floating-contact"><a href="https://www.facebook.com/share/1TpSQyCcdE/" target="_blank" rel="noopener">💬</a><a href="https://www.9wing.shop/DOWNLOAD" target="_blank" rel="noopener">📥</a></div>
+
+  <script type="module" src="assets/js/firebase.js"></script>
+  <script type="module" src="assets/js/app.js"></script>
+</body>
+</html>
