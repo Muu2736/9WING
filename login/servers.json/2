@@ -1,0 +1,27 @@
+{
+  "version": 1,
+  "updated_at": "2026-05-14",
+  "servers": [
+    {
+      "id": "s99",
+      "name": "S99",
+      "host": "123.123.123.123",
+      "port": 8001,
+      "enabled": true
+    },
+    {
+      "id": "s161",
+      "name": "S161",
+      "host": "111.222.333.444",
+      "port": 8001,
+      "enabled": true
+    },
+    {
+      "id": "s334",
+      "name": "S334",
+      "host": "55.66.77.88",
+      "port": 8001,
+      "enabled": false
+    }
+  ]
+}
