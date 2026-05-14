@@ -1113,7 +1113,7 @@ footer{
 
         <div class="live-key-box">
           <input id="liveKeyInput" class="input key-input" type="text" placeholder="ใส่ KEY เช่น APP0008E77BA24F">
-          <button class="btn status" onclick="unlockLiveByKey()">🔑 แสดงจอ</button>
+          <button class="btn status" onclick="unlockLiveByKey()">🔑 KEY LOGIN</button>
         </div>
 
         <div id="liveKeyResult" class="live-key-result">
@@ -1158,7 +1158,7 @@ footer{
       </div>
     </section>
   </main>
-  <footer>© 2026 9WING ULTRA PRO • COMPACT DASHBOARD</footer>
+  <footer>© 2026 9WING.SHOP All rights reserved.</footer>
 </div>
 
 <script>
@@ -1291,7 +1291,7 @@ async function loadDevicesJson(showMessage = false){
 
     const total = Object.keys(devicesMap).length;
     if(total){
-      showLiveKeyMessage("ok", "โหลด devices.json สำเร็จ พบ KEY ทั้งหมด " + total + " รายการ");
+      showLiveKeyMessage("ok", "🟢 SYSTEM ONLINE KEY ทั้งหมด " + total + " รายการ");
     }else{
       showLiveKeyMessage("err", "โหลด devices.json ได้แล้ว แต่ยังไม่มี KEY หรือรูปแบบ JSON ไม่ตรง");
     }
@@ -1350,12 +1350,12 @@ async function unlockLiveByKey(){
         <div class="device">
           <span class="pill stop-pill">KEY ERROR</span>
           <h3>${escapeHtml(key)}</h3>
-          <p>ไม่พบ KEY นี้ใน devices.json กรุณาตรวจสอบ KEY หรืออัปโหลด devices.json ใหม่</p>
+          <p>ไม่พบ KEY นี้ใน ระบบ กรุณาตรวจสอบ KEY ใหม่</p>
         </div>
       `;
     }
 
-    showLiveKeyMessage("err", "ไม่พบ KEY นี้ใน devices.json: " + key);
+    showLiveKeyMessage("err", "ไม่พบ KEY นี้ใน ระบบ: " + key);
     return;
   }
 
