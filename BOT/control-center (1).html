@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>9WING BOT ULTRA PRO</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --yellow:#ffe600;
+  --orange:#ff9d00;
+  --green:#00ff9f;
+  --blue:#00d9ff;
+  --red:#ff3b3b;
+  --pink:#ff2f7a;
+  --dark:#030508;
+  --glass:rgba(0,0,0,.58);
+  --glass2:rgba(10,14,20,.72);
+  --line:rgba(255,230,0,.18);
+  --text:#f7fafc;
+  --muted:#b8c2cc;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#030508;color:var(--text);font-family:'Kanit',sans-serif;overflow-x:hidden}
+body{
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,.88)),
+    url('https://s.imgz.io/2026/05/02/9winga08f61f8c67fbfd9.webp') center/cover fixed no-repeat;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 12%,rgba(255,230,0,.22),transparent 28%),
+    radial-gradient(circle at 85% 72%,rgba(0,255,159,.15),transparent 32%),
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:auto,auto,42px 42px,42px 42px;
+  z-index:0;
+}
+body:after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(120deg,transparent 0 45%,rgba(255,230,0,.06) 46%,transparent 47% 100%);
+  animation:shine 8s linear infinite;
+  z-index:0;
+}
+
+@keyframes shine{from{transform:translateX(-90%)}to{transform:translateX(90%)}}
+@keyframes pulse{0%,100%{box-shadow:0 0 14px rgba(0,255,159,.25)}50%{box-shadow:0 0 34px rgba(0,255,159,.55)}}
+@keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+.app{position:relative;z-index:1;min-height:100vh;padding:22px}
+.topbar{
+  max-width:1240px;
+  margin:0 auto 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:14px 16px;
+  border:1px solid rgba(255,230,0,.16);
+  border-radius:22px;
+  background:rgba(0,0,0,.46);
+  backdrop-filter:blur(16px);
+  box-shadow:0 18px 45px rgba(0,0,0,.35);
+}
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  color:var(--yellow);
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(20px,4vw,30px);
+  font-weight:900;
+  letter-spacing:2px;
+  text-shadow:0 0 22px rgba(255,230,0,.34);
+}
+.logo span{color:var(--green)}
+.nav{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.nav button{
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.055);
+  color:#fff;
+  padding:10px 13px;
+  border-radius:999px;
+  cursor:pointer;
+  font-weight:700;
+  transition:.2s;
+}
+.nav button:hover,.nav button.active{
+  background:linear-gradient(135deg,var(--yellow),var(--orange));
+  color:#05070a;
+  border-color:rgba(255,230,0,.6);
+  transform:translateY(-1px);
+}
+
+.hero{
+  max-width:1240px;
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 280px;
+  gap:16px;
+  align-items:stretch;
+}
+.hero-card,.panel{
+  border:1px solid var(--line);
+  border-radius:26px;
+  background:linear-gradient(180deg,rgba(255,230,0,.075),rgba(0,0,0,.48));
+  backdrop-filter:blur(16px);
+  box-shadow:0 24px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.08);
+}
+.hero-card{
+  padding:26px 30px;
+  min-height:290px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  animation:up .55s ease both;
+}
+.tag{
+  color:var(--green);
+  font-family:'Orbitron',sans-serif;
+  letter-spacing:3px;
+  font-size:12px;
+  margin-bottom:14px;
+}
+.title{
+  font-family:'Orbitron',sans-serif;
+  color:var(--yellow);
+  font-size:clamp(44px,8vw,86px);
+  line-height:.96;
+  letter-spacing:2px;
+  text-shadow:0 0 18px rgba(255,230,0,.25),0 0 60px rgba(255,157,0,.20);
+}
+.sub{
+  max-width:760px;
+  color:#eef2f6;
+  font-size:15px;
+  margin-top:14px;
+  line-height:1.75;
+}
+.badges{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:18px;
+}
+.badge{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+  padding:9px 13px;
+  border-radius:999px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.12);
+}
+.badge b{color:var(--yellow)}
+
+.quick-panel{
+  padding:14px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  gap:10px;
+  animation:up .65s ease both;
+  max-width:280px;
+  width:100%;
+  margin-left:auto;
+}
+.stat-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+}
+.stat{
+  background:rgba(0,0,0,.38);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:15px;
+  padding:10px;
+  min-height:72px;
+}
+.stat b{
+  display:block;
+  color:var(--yellow);
+  font-family:'Orbitron',sans-serif;
+  font-size:20px;
+  line-height:1.1;
+}
+.stat span{color:var(--muted);font-size:11px;font-weight:700}
+.live-pill{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:var(--green);
+  font-family:'Orbitron',sans-serif;
+  font-size:11px;
+  padding:9px 12px;
+  border-radius:999px;
+  background:rgba(0,255,159,.10);
+  border:1px solid rgba(0,255,159,.28);
+}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 16px var(--green);animation:pulse 1.8s infinite}
+
+.main{
+  max-width:1240px;
+  margin:16px auto 0;
+  display:grid;
+  grid-template-columns:240px 1fr;
+  gap:16px;
+}
+.sidebar{
+  padding:16px;
+  height:max-content;
+  position:sticky;
+  top:18px;
+}
+.side-title{
+  color:var(--yellow);
+  font-family:'Orbitron',sans-serif;
+  font-size:15px;
+  margin-bottom:12px;
+}
+.menu-list{display:grid;gap:10px}
+.menu-item{
+  width:100%;
+  text-align:left;
+  border:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.30);
+  color:#fff;
+  border-radius:16px;
+  padding:13px;
+  cursor:pointer;
+  transition:.2s;
+}
+.menu-item:hover,.menu-item.active{
+  border-color:rgba(255,230,0,.35);
+  background:rgba(255,230,0,.09);
+  transform:translateY(-1px);
+}
+.menu-item b{display:block;color:var(--yellow);font-size:15px}
+.menu-item span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+
+.content{display:grid;gap:18px}
+.screen{display:none}
+.screen.active{display:block}
+.screen.panel{padding:22px}
+
+.section-head{
+  display:flex;
+  gap:12px;
+  justify-content:space-between;
+  align-items:flex-start;
+  flex-wrap:wrap;
+  margin-bottom:16px;
+}
+.section-head h2{
+  color:var(--yellow);
+  font-family:'Orbitron',sans-serif;
+  font-size:clamp(24px,5vw,38px);
+}
+.section-head p{color:var(--muted);margin-top:4px}
+.input{
+  width:100%;
+  min-height:120px;
+  border:1px solid rgba(255,230,0,.22);
+  background:rgba(0,0,0,.50);
+  color:#fff;
+  border-radius:18px;
+  padding:15px;
+  outline:none;
+  resize:vertical;
+  font-family:Consolas,monospace;
+  font-size:15px;
+  box-shadow:inset 0 0 30px rgba(0,0,0,.25);
+}
+.actions{
+  display:grid;
+  grid-template-columns:repeat(6,minmax(0,1fr));
+  gap:10px;
+  margin-top:14px;
+}
+.btn{
+  min-height:54px;
+  border:0;
+  border-radius:16px;
+  cursor:pointer;
+  font-weight:900;
+  letter-spacing:.3px;
+  transition:.2s;
+  color:#06100c;
+}
+.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.start{background:linear-gradient(135deg,#00c853,#00ff9f)}
+.stop{background:linear-gradient(135deg,#ff1744,#ff6a88);color:#fff}
+.status{background:linear-gradient(135deg,#00d9ff,#00ffcc)}
+.warn{background:linear-gradient(135deg,var(--yellow),var(--orange))}
+.dark{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.13)}
+
+.device-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:14px;
+  margin-top:18px;
+}
+.device{
+  background:rgba(0,0,0,.36);
+  border:1px solid rgba(255,255,255,.11);
+  border-radius:20px;
+  padding:16px;
+  position:relative;
+  overflow:hidden;
+}
+.device:after{
+  content:"";
+  position:absolute;
+  top:-50px;
+  right:-50px;
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  background:rgba(0,255,159,.10);
+  filter:blur(5px);
+}
+.device h3{position:relative;color:var(--yellow);font-size:16px;word-break:break-all;margin-bottom:8px}
+.device p{position:relative;color:var(--muted);font-size:14px;margin:4px 0}
+.pill{
+  position:relative;
+  display:inline-flex;
+  padding:7px 11px;
+  border-radius:999px;
+  font-family:'Orbitron',sans-serif;
+  font-size:11px;
+  margin-bottom:10px;
+}
+.run{background:linear-gradient(135deg,#00c853,#00ff9f);color:#001b10}
+.stop-pill{background:linear-gradient(135deg,#ff1744,#ff6a88);color:#fff}
+
+.log{
+  margin-top:18px;
+  max-height:360px;
+  overflow:auto;
+  white-space:pre-wrap;
+  color:#00ff9f;
+  background:rgba(0,0,0,.78);
+  border:1px solid rgba(0,255,159,.18);
+  border-radius:18px;
+  padding:14px;
+  font-family:Consolas,monospace;
+  font-size:13px;
+}
+
+.future-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:14px;
+}
+.future-card{
+  min-height:170px;
+  background:rgba(0,0,0,.36);
+  border:1px solid rgba(255,255,255,.10);
+  border-radius:22px;
+  padding:18px;
+  transition:.2s;
+}
+.future-card:hover{transform:translateY(-3px);border-color:rgba(255,230,0,.32);background:rgba(255,230,0,.07)}
+.future-card .icon{font-size:34px;margin-bottom:9px}
+.future-card h3{color:var(--yellow);font-family:'Orbitron',sans-serif;font-size:18px}
+.future-card p{color:var(--muted);font-size:14px;margin-top:8px}
+.future-card small{
+  display:inline-flex;
+  margin-top:12px;
+  padding:7px 10px;
+  border-radius:999px;
+  color:var(--yellow);
+  border:1px solid rgba(255,230,0,.22);
+  background:rgba(255,230,0,.08);
+  font-family:'Orbitron',sans-serif;
+}
+
+footer{
+  position:relative;
+  z-index:1;
+  max-width:1240px;
+  margin:24px auto 0;
+  padding:18px 0 40px;
+  color:var(--muted);
+  text-align:center;
+}
+
+@media(max-width:980px){
+  .hero{grid-template-columns:1fr}
+  .quick-panel{max-width:none;margin-left:0}
+  .main{grid-template-columns:1fr}
+  .sidebar{position:static}
+  .actions{grid-template-columns:1fr 1fr}
+}
+@media(max-width:620px){
+  .app{padding:12px}
+  .topbar{border-radius:18px}
+  .nav{display:none}
+  .hero-card{padding:22px}
+  .title{font-size:42px}
+  .stat-grid,.actions{grid-template-columns:1fr}
+  .screen.panel{padding:16px}
+}
+
+.screen-shot{
+  width:100%;
+  aspect-ratio:9/16;
+  max-height:420px;
+  object-fit:contain;
+  background:rgba(0,0,0,.65);
+  border:1px solid rgba(0,255,159,.20);
+  border-radius:16px;
+  margin:12px 0;
+  display:block;
+}
+.screen-shot-empty{
+  width:100%;
+  min-height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px dashed rgba(255,255,255,.18);
+  border-radius:16px;
+  color:var(--muted);
+  background:rgba(0,0,0,.36);
+  margin:12px 0;
+}
+
+
+.live-panel{
+  display:none;
+  margin-top:18px;
+  border:1px solid rgba(0,255,159,.22);
+  border-radius:22px;
+  background:rgba(0,0,0,.52);
+  overflow:hidden;
+  box-shadow:0 18px 50px rgba(0,0,0,.32);
+}
+.live-panel.show{display:block}
+.live-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 14px;
+  border-bottom:1px solid rgba(255,255,255,.10);
+  background:rgba(0,0,0,.38);
+}
+.live-head b{
+  color:var(--yellow);
+  font-family:'Orbitron',sans-serif;
+}
+.live-tools{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.live-mini-btn{
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  border-radius:999px;
+  padding:8px 12px;
+  cursor:pointer;
+  font-weight:800;
+}
+.live-mini-btn:hover{
+  background:rgba(255,230,0,.14);
+}
+.live-frame-wrap{
+  position:relative;
+  width:100%;
+  height:min(78vh,720px);
+  background:#000;
+}
+.live-frame{
+  width:100%;
+  height:100%;
+  border:0;
+  display:block;
+  background:#000;
+}
+.live-note{
+  color:var(--muted);
+  font-size:13px;
+  padding:10px 14px 14px;
+}
+
+
+.live-map-box{
+  margin-top:18px;
+  padding:16px;
+  border-radius:20px;
+  border:1px solid rgba(0,217,255,.22);
+  background:rgba(0,0,0,.32);
+}
+.live-map-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  margin-bottom:12px;
+}
+.live-map-head h3{
+  color:var(--yellow);
+  font-family:'Orbitron',sans-serif;
+  font-size:18px;
+}
+.live-map-head p{
+  color:var(--muted);
+  font-size:14px;
+  margin-top:4px;
+}
+.live-map-head span{
+  color:#031015;
+  background:linear-gradient(135deg,#00d9ff,#00ffcc);
+  border-radius:999px;
+  padding:7px 10px;
+  font-family:'Orbitron',sans-serif;
+  font-size:11px;
+}
+.live-map-input{
+  min-height:150px;
+}
+.live-map-actions{
+  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
+  max-width:460px;
+}
+
+.live-key-box{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 180px;
+  gap:10px;
+  align-items:stretch;
+}
+.key-input{
+  min-height:54px !important;
+  resize:none !important;
+}
+.live-key-result{
+  margin-top:12px;
+  padding:13px 15px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(0,0,0,.34);
+  color:var(--muted);
+  font-size:14px;
+}
+.live-key-result.ok{
+  color:var(--green);
+  border-color:rgba(0,255,159,.25);
+  background:rgba(0,255,159,.08);
+}
+.live-key-result.err{
+  color:#fff;
+  border-color:rgba(255,59,59,.30);
+  background:rgba(255,59,59,.10);
+}
+.live-map-summary{
+  cursor:pointer;
+  color:var(--yellow);
+  font-weight:800;
+  margin-bottom:12px;
+}
+@media(max-width:620px){
+  .live-key-box{grid-template-columns:1fr}
+}
+
+
+/* ===============================
+   9WING GAMING DASHBOARD STYLE
+   =============================== */
+:root{--neon-yellow:#ffe600;--neon-green:#00ff9f;--neon-blue:#00d9ff;}
+body{background:linear-gradient(180deg,rgba(0,0,0,.35),rgba(0,0,0,.90)),radial-gradient(circle at 20% 18%,rgba(255,230,0,.16),transparent 28%),radial-gradient(circle at 82% 70%,rgba(0,255,159,.12),transparent 32%),url('https://s.imgz.io/2026/05/02/9winga08f61f8c67fbfd9.webp') center/cover fixed no-repeat!important;}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),radial-gradient(circle at 18% 22%,rgba(0,255,200,.10),transparent 28%),radial-gradient(circle at 80% 68%,rgba(255,230,0,.08),transparent 32%);background-size:42px 42px,42px 42px,auto,auto;animation:bgmove 18s ease-in-out infinite;z-index:0;}
+@keyframes bgmove{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+.logo{text-shadow:0 0 12px rgba(255,230,0,.35),0 0 40px rgba(255,230,0,.18);animation:logoGlow 2.8s ease infinite;}
+@keyframes logoGlow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.28)}}
+.hero{grid-template-columns:minmax(0,1fr) 300px!important;gap:18px!important;}
+.hero-card{position:relative;overflow:hidden;padding:30px 36px!important;min-height:320px!important;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.58)),radial-gradient(circle at top right,rgba(0,255,159,.13),transparent 38%)!important;border:1px solid rgba(255,230,0,.16)!important;}
+.hero-card::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,230,0,.07),transparent 42%),radial-gradient(circle at 90% 12%,rgba(0,217,255,.12),transparent 30%);pointer-events:none;}
+.hero-card::after{content:"";position:absolute;inset:-2px;border-radius:26px;padding:1px;background:linear-gradient(135deg,#ffe600,#00ff9f,#00d9ff);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.35;pointer-events:none;}
+.tag,.title,.sub,.badges{position:relative;z-index:1;}
+.title{font-family:'Orbitron',sans-serif!important;font-size:clamp(52px,8vw,92px)!important;line-height:.92!important;text-transform:uppercase;color:var(--neon-yellow)!important;text-shadow:0 0 10px rgba(255,230,0,.38),0 0 34px rgba(255,230,0,.20),0 0 60px rgba(0,255,159,.12)!important;}
+.title-green{display:block;color:var(--neon-green);text-shadow:0 0 12px rgba(0,255,159,.45),0 0 38px rgba(0,255,159,.18);}
+.sub{max-width:820px!important;font-size:16px!important;color:#e9f4f7!important;}
+.panel{border:1px solid rgba(255,255,255,.08)!important;background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.56))!important;backdrop-filter:blur(18px)!important;}
+.quick-panel{padding:16px!important;max-width:300px!important;border:1px solid rgba(0,255,159,.18)!important;background:linear-gradient(180deg,rgba(0,255,159,.055),rgba(0,0,0,.48))!important;}
+.stat{position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.10)!important;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(0,0,0,.50))!important;}
+.stat::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent,rgba(255,255,255,.045));pointer-events:none;}
+.stat b{font-size:24px!important;text-shadow:0 0 14px rgba(255,230,0,.30);}
+.sidebar{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.50))!important;}
+.menu-item{position:relative;overflow:hidden;}
+.menu-item::before{content:"";position:absolute;top:0;left:-110%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.10),transparent);transition:.55s;}
+.menu-item:hover::before{left:110%;}
+.menu-item.active{border-color:rgba(0,255,159,.35)!important;background:linear-gradient(135deg,rgba(0,255,159,.14),rgba(255,230,0,.10))!important;box-shadow:0 0 18px rgba(0,255,159,.13);}
+.btn{position:relative;overflow:hidden;letter-spacing:.4px;transition:.25s;}
+.btn::before{content:"";position:absolute;top:0;left:-120%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.34),transparent);transition:.5s;}
+.btn:hover::before{left:120%;}.btn:hover{transform:translateY(-2px) scale(1.02)!important;box-shadow:0 0 24px rgba(255,230,0,.25);}
+.device{background:linear-gradient(180deg,rgba(255,255,255,.035),rgba(0,0,0,.50))!important;border:1px solid rgba(0,255,159,.12)!important;backdrop-filter:blur(14px);transition:.25s;}
+.device:hover{transform:translateY(-4px);border-color:rgba(0,255,159,.35)!important;box-shadow:0 0 24px rgba(0,255,159,.11),0 0 52px rgba(255,230,0,.055);}
+.log{background:#020405!important;border:1px solid rgba(0,255,159,.16)!important;box-shadow:inset 0 0 34px rgba(0,255,159,.045);}
+footer{border-top:1px solid rgba(255,255,255,.06);padding-top:24px!important;}
+@media(max-width:980px){.hero{grid-template-columns:1fr!important}.quick-panel{max-width:none!important}}
+@media(max-width:620px){.title{font-size:42px!important}.hero-card{padding:22px!important;min-height:260px!important}}
+
+
+/* ===============================
+   COMPACT SMALL SCREEN MODE
+   =============================== */
+.app{
+  padding:12px !important;
+}
+
+.topbar{
+  max-width:980px !important;
+  padding:9px 12px !important;
+  border-radius:16px !important;
+  margin-bottom:10px !important;
+}
+
+.logo{
+  font-size:20px !important;
+}
+
+.nav button{
+  padding:7px 10px !important;
+  font-size:12px !important;
+}
+
+.hero{
+  max-width:980px !important;
+  grid-template-columns:minmax(0,1fr) 220px !important;
+  gap:10px !important;
+}
+
+.hero-card{
+  min-height:170px !important;
+  padding:18px 20px !important;
+  border-radius:18px !important;
+}
+
+.tag{
+  font-size:10px !important;
+  margin-bottom:8px !important;
+  letter-spacing:2px !important;
+}
+
+.title{
+  font-size:clamp(30px,5vw,52px) !important;
+  line-height:.95 !important;
+}
+
+.sub{
+  font-size:12px !important;
+  line-height:1.45 !important;
+  margin-top:8px !important;
+  max-width:620px !important;
+}
+
+.badges{
+  gap:6px !important;
+  margin-top:10px !important;
+}
+
+.badge{
+  padding:5px 8px !important;
+  font-size:11px !important;
+}
+
+.quick-panel{
+  max-width:220px !important;
+  padding:10px !important;
+  gap:7px !important;
+  border-radius:18px !important;
+}
+
+.live-pill{
+  padding:6px 8px !important;
+  font-size:9px !important;
+}
+
+.dot{
+  width:7px !important;
+  height:7px !important;
+}
+
+.stat-grid{
+  gap:6px !important;
+}
+
+.stat{
+  min-height:52px !important;
+  padding:7px !important;
+  border-radius:12px !important;
+}
+
+.stat b{
+  font-size:17px !important;
+}
+
+.stat span{
+  font-size:9px !important;
+}
+
+.main{
+  max-width:980px !important;
+  grid-template-columns:190px 1fr !important;
+  gap:10px !important;
+  margin-top:10px !important;
+}
+
+.sidebar{
+  padding:10px !important;
+  border-radius:18px !important;
+  top:10px !important;
+}
+
+.side-title{
+  font-size:12px !important;
+  margin-bottom:8px !important;
+}
+
+.menu-list{
+  gap:7px !important;
+}
+
+.menu-item{
+  border-radius:12px !important;
+  padding:9px !important;
+}
+
+.menu-item b{
+  font-size:12px !important;
+}
+
+.menu-item span{
+  font-size:10px !important;
+}
+
+.content{
+  gap:10px !important;
+}
+
+.screen.panel{
+  padding:14px !important;
+  border-radius:18px !important;
+}
+
+.section-head{
+  margin-bottom:10px !important;
+}
+
+.section-head h2{
+  font-size:22px !important;
+}
+
+.section-head p{
+  font-size:12px !important;
+}
+
+.input{
+  min-height:86px !important;
+  border-radius:14px !important;
+  padding:10px !important;
+  font-size:12px !important;
+}
+
+.actions{
+  gap:7px !important;
+  margin-top:9px !important;
+}
+
+.btn{
+  min-height:38px !important;
+  border-radius:12px !important;
+  font-size:12px !important;
+}
+
+.device-grid{
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr)) !important;
+  gap:9px !important;
+  margin-top:10px !important;
+}
+
+.device{
+  border-radius:15px !important;
+  padding:10px !important;
+}
+
+.device h3{
+  font-size:12px !important;
+  margin-bottom:5px !important;
+}
+
+.device p{
+  font-size:11px !important;
+  margin:3px 0 !important;
+}
+
+.pill{
+  font-size:9px !important;
+  padding:5px 8px !important;
+  margin-bottom:6px !important;
+}
+
+.log{
+  margin-top:10px !important;
+  max-height:180px !important;
+  border-radius:14px !important;
+  padding:10px !important;
+  font-size:11px !important;
+}
+
+.future-grid{
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr)) !important;
+  gap:9px !important;
+}
+
+.future-card{
+  min-height:120px !important;
+  border-radius:16px !important;
+  padding:12px !important;
+}
+
+.future-card .icon{
+  font-size:24px !important;
+  margin-bottom:5px !important;
+}
+
+.future-card h3{
+  font-size:14px !important;
+}
+
+.future-card p{
+  font-size:11px !important;
+  margin-top:5px !important;
+}
+
+.future-card small{
+  font-size:9px !important;
+  padding:5px 8px !important;
+  margin-top:8px !important;
+}
+
+.live-panel{
+  margin-top:10px !important;
+  border-radius:16px !important;
+}
+
+.live-head{
+  padding:8px 10px !important;
+}
+
+.live-head b{
+  font-size:12px !important;
+}
+
+.live-mini-btn{
+  padding:6px 9px !important;
+  font-size:11px !important;
+}
+
+.live-frame-wrap{
+  height:min(58vh,430px) !important;
+}
+
+.live-note{
+  font-size:11px !important;
+  padding:7px 10px 10px !important;
+}
+
+.live-map-input{
+  min-height:110px !important;
+}
+
+footer{
+  max-width:980px !important;
+  margin-top:12px !important;
+  padding:12px 0 24px !important;
+  font-size:11px !important;
+}
+
+@media(max-width:980px){
+  .hero{
+    grid-template-columns:1fr !important;
+  }
+  .quick-panel{
+    max-width:none !important;
+  }
+  .main{
+    grid-template-columns:1fr !important;
+  }
+}
+
+@media(max-width:620px){
+  .app{
+    padding:8px !important;
+  }
+  .hero-card{
+    min-height:150px !important;
+    padding:14px !important;
+  }
+  .title{
+    font-size:30px !important;
+  }
+  .badges{
+    display:none !important;
+  }
+  .actions{
+    grid-template-columns:1fr 1fr !important;
+  }
+}
+
+
+
+/* ===============================
+   PACKAGE PRICE CARDS
+   =============================== */
+.price-grid{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:14px;
+  margin-top:16px;
+}
+.price-card{
+  position:relative;
+  overflow:hidden;
+  min-height:230px;
+  padding:22px 18px;
+  border-radius:22px;
+  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(0,0,0,.52));
+  box-shadow:0 18px 50px rgba(0,0,0,.26);
+  text-align:center;
+  transition:.25s;
+}
+.price-card:hover{
+  transform:translateY(-4px);
+  border-color:rgba(255,230,0,.38);
+  box-shadow:0 0 28px rgba(255,230,0,.12),0 18px 50px rgba(0,0,0,.32);
+}
+.price-card.featured{
+  border-color:rgba(0,255,159,.42);
+  background:linear-gradient(180deg,rgba(0,255,159,.12),rgba(0,0,0,.55));
+}
+.price-ribbon{
+  position:absolute;
+  top:14px;
+  right:-38px;
+  width:140px;
+  padding:6px 0;
+  transform:rotate(35deg);
+  background:linear-gradient(135deg,#ffe600,#ff9d00);
+  color:#05070a;
+  font-family:'Orbitron',sans-serif;
+  font-size:10px;
+  font-weight:900;
+}
+.price-icon{
+  font-size:36px;
+  margin-bottom:8px;
+}
+.price-card h3{
+  color:var(--yellow);
+  font-family:'Orbitron',sans-serif;
+  font-size:24px;
+  margin-bottom:10px;
+}
+.price-value{
+  color:#fff;
+  font-family:'Orbitron',sans-serif;
+  font-size:36px;
+  font-weight:900;
+  text-shadow:0 0 18px rgba(255,230,0,.18);
+}
+.price-value span{
+  color:var(--muted);
+  font-family:'Kanit',sans-serif;
+  font-size:15px;
+  font-weight:700;
+}
+.price-card p{
+  color:var(--muted);
+  font-size:14px;
+  margin:10px 0 16px;
+}
+.price-btn{
+  width:100%;
+  min-height:44px!important;
+}
+@media(max-width:820px){
+  .price-grid{grid-template-columns:1fr!important;}
+}
+
+</style>
+</head>
+
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="logo"><span>✦</span>9WING.SHOP</div>
+    <div class="nav">
+      <button class="active" onclick="showScreen('dashboard', this)">แพคเกจ</button>
+      <button onclick="showScreen('future', this)">Future</button>
+      <button onclick="window.open('https://www.9wing.shop/DOWNLOAD','_blank')">Download</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card">
+      <div class="tag">9WING CYBER CONTROL SYSTEM</div>
+      <h1 class="title">9WING<span class="title-green">PACKAGE</span></h1>
+      <p class="sub">เลือกแพคเกจใช้งาน 9WING พร้อมระบบ Live Device สำหรับเปิดจอผ่าน KEY</p>
+      <div class="badges">
+        <span class="badge">🟢 <b>SYSTEM</b> ONLINE</span>
+        <span class="badge">⚡ <b>PING</b> 12MS</span>
+        <span class="badge">📱 <b>DEVICES</b> ACTIVE</span>
+        <span class="badge">🔥 <b>MODE</b> ULTRA PRO</span>
+      </div>
+    </div>
+    <div class="quick-panel panel">
+      <span class="live-pill"><span class="dot"></span> LIVE SYS</span>
+      <div class="stat-grid">
+        <div class="stat"><b id="statTotal">0</b><span>KEYS</span></div>
+        <div class="stat"><b id="statRunning">0</b><span>READY</span></div>
+        <div class="stat"><b id="statStopped">0</b><span>ERROR</span></div>
+        <div class="stat"><b id="statRound">JSON</b><span>SOURCE</span></div>
+      </div>
+    </div>
+  </section>
+
+  <main class="main">
+    <aside class="sidebar panel">
+      <div class="side-title">BOT MENU</div>
+      <div class="menu-list">
+        <button class="menu-item active" onclick="showScreen('dashboard', this)">
+          <b>💰 แพคเกจและราคา</b><span>เลือกแพคเกจใช้งาน</span>
+        </button>
+        <button class="menu-item" onclick="showScreen('liveDevice', this)">
+          <b>📱 Live Device</b><span>ดูจอแยกตามเครื่อง</span>
+        </button>
+        <button class="menu-item" onclick="showScreen('farm', this)">
+          <b>⚔️ Farm Bot</b><span>เมนูเตรียมไว้ในอนาคต</span>
+        </button>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div id="dashboard" class="screen panel active">
+        <div class="section-head">
+          <div>
+            <h2>💰 แพคเกจและราคา</h2>
+            <p>เลือกแพคเกจที่ต้องการใช้งาน แล้วกดชำระเงินได้เลย</p>
+          </div>
+          <button class="btn warn" onclick="window.open('https://www.9wing.shop/ชำระเงิน','_blank')">ชำระเงิน</button>
+        </div>
+
+        <div class="price-grid">
+          <div class="price-card">
+            <div class="price-icon">⚡</div>
+            <h3>1 วัน</h3>
+            <div class="price-value">250 <span>บาท</span></div>
+            <p>เหมาะสำหรับทดลองใช้งานระยะสั้น</p>
+            <button class="btn status price-btn" onclick="window.open('https://www.9wing.shop/ชำระเงิน','_blank')">เลือกแพคเกจ</button>
+          </div>
+
+          <div class="price-card featured">
+            <div class="price-ribbon">POPULAR</div>
+            <div class="price-icon">🔥</div>
+            <h3>2 วัน</h3>
+            <div class="price-value">300 <span>บาท</span></div>
+            <p>คุ้มกว่าสำหรับใช้งานต่อเนื่อง</p>
+            <button class="btn start price-btn" onclick="window.open('https://www.9wing.shop/ชำระเงิน','_blank')">เลือกแพคเกจ</button>
+          </div>
+
+          <div class="price-card">
+            <div class="price-icon">👑</div>
+            <h3>ถาวร</h3>
+            <div class="price-value">4,000 <span>บาท</span></div>
+            <p>ใช้งานยาว ไม่ต้องต่ออายุบ่อย</p>
+            <button class="btn warn price-btn" onclick="window.open('https://www.9wing.shop/ชำระเงิน','_blank')">เลือกแพคเกจ</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="liveDevice" class="screen panel">
+        <div class="section-head">
+          <div>
+            <h2>📱 Live Device</h2>
+            <p>กรอก KEY ก่อน ระบบจะเช็กจากไฟล์ devices.json แล้วค่อยแสดง Live Screen</p>
+          </div>
+          <button class="btn dark" onclick="loadDevicesJson(true)">RELOAD JSON</button>
+        </div>
+
+        <div class="live-key-box">
+          <input id="liveKeyInput" class="input key-input" type="text" placeholder="ใส่ KEY เช่น APP0008E77BA24F">
+          <button class="btn status" onclick="unlockLiveByKey()">🔑 แสดงจอ</button>
+        </div>
+
+        <div id="liveKeyResult" class="live-key-result">
+          ระบบจะโหลด KEY จาก devices.json อัตโนมัติ แล้วใส่ KEY เพื่อเปิด Live Device
+        </div>
+
+        <div id="liveDeviceCards" class="device-grid"></div>
+
+        <div id="livePanelDevice" class="live-panel">
+          <div class="live-head">
+            <b>📱 LIVE DEVICE SCREEN</b>
+            <div class="live-tools">
+              <button class="live-mini-btn" onclick="reloadLiveDevice()">Reload</button>
+              <button class="live-mini-btn" onclick="openLiveDeviceNewTab()">Open Tab</button>
+              <button class="live-mini-btn" onclick="closeLiveDevicePanel()">Close</button>
+            </div>
+          </div>
+          <div class="live-frame-wrap">
+            <iframe id="liveDeviceFrame" class="live-frame" src="about:blank" allow="fullscreen; autoplay; clipboard-read; clipboard-write"></iframe>
+          </div>
+          <div class="live-note">ถ้า iframe ไม่แสดง ให้กด Open Tab เพราะบางเว็บอาจบล็อก iframe</div>
+        </div>
+      </div>
+
+
+      <div id="farm" class="screen panel">
+        <div class="section-head"><div><h2>⚔️ Farm Bot</h2><p>เมนูฟาร์มอัตโนมัติ เตรียมไว้ต่อ API ภายหลัง</p></div></div>
+        <div class="future-grid">
+          <div class="future-card"><div class="icon">🎯</div><h3>Auto Skill</h3><p>กดสกิลตามพิกัดและเวลา</p><small>COMING SOON</small></div>
+          <div class="future-card"><div class="icon">🧭</div><h3>Move Route</h3><p>เดินวนจุดฟาร์มที่กำหนด</p><small>COMING SOON</small></div>
+          <div class="future-card"><div class="icon">🎒</div><h3>Loot</h3><p>กดเก็บของหรือจัดการกระเป๋า</p><small>COMING SOON</small></div>
+        </div>
+      </div>
+<div id="future" class="screen panel">
+        <div class="section-head"><div><h2>🧩 Future Modules</h2><p>เมนูเตรียมไว้ขยายระบบในอนาคต</p></div></div>
+        <div class="future-grid">
+          <div class="future-card"><div class="icon">📱</div><h3>Live Device</h3><p>ดูจอแยกตามเครื่อง</p><small>READY</small></div>
+          <div class="future-card"><div class="icon">⚔️</div><h3>Farm Bot</h3><p>ฟาร์มมอนและกดสกิล</p><small>COMING SOON</small></div>
+          <div class="future-card"><div class="icon">🛒</div><h3>Sell / Buy</h3><p>ขายของและซื้อวัตถุดิบ</p><small>COMING SOON</small></div>
+          <div class="future-card"><div class="icon">📊</div><h3>Logs</h3><p>เก็บประวัติการทำงาน</p><small>COMING SOON</small></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>© 2026 9WING ULTRA PRO • COMPACT DASHBOARD</footer>
+</div>
+
+<script>
+const DEVICES_JSON_URL = "./devices.json";
+const $ = (id) => document.getElementById(id);
+
+let devicesMap = {};
+let devicesJsonLoaded = false;
+let currentLiveDeviceUrl = "";
+let currentLiveDeviceKey = "";
+
+function showScreen(id, btn){
+  document.querySelectorAll(".screen").forEach(x => x.classList.remove("active"));
+  $(id)?.classList.add("active");
+  document.querySelectorAll(".menu-item,.nav button").forEach(x => x.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+}
+
+function escapeHtml(value){
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function showLiveKeyMessage(type, message){
+  const result = $("liveKeyResult");
+  if(!result) return;
+  result.className = "live-key-result" + (type ? " " + type : "");
+  result.textContent = message;
+}
+
+function updateStats(){
+  const total = Object.keys(devicesMap).length;
+  const statTotal = $("statTotal");
+  const statRunning = $("statRunning");
+  const statStopped = $("statStopped");
+  const statRound = $("statRound");
+
+  if(statTotal) statTotal.textContent = total;
+  if(statRunning) statRunning.textContent = total;
+  if(statStopped) statStopped.textContent = devicesJsonLoaded ? 0 : "!";
+  if(statRound) statRound.textContent = "JSON";
+}
+
+function addDeviceToMap(map, key, url){
+  const cleanKey = String(key || "").trim();
+  const cleanUrl = String(url || "").trim();
+
+  if(!cleanKey || !cleanUrl) return;
+  if(!/^https?:\/\//i.test(cleanUrl)) return;
+
+  map[cleanKey] = cleanUrl;
+}
+
+function readUrlFromObject(obj){
+  if(!obj || typeof obj !== "object") return "";
+  return obj.url || obj.link || obj.liveUrl || obj.live_url || obj.screenUrl || obj.screen_url || obj.cloudUrl || obj.cloud_url || "";
+}
+
+function normalizeDevicesJson(data){
+  const map = {};
+
+  // รองรับรูปแบบ: [{"key":"APP...","url":"https://..."}]
+  if(Array.isArray(data)){
+    data.forEach(item => {
+      if(!item || typeof item !== "object") return;
+      const key = item.key || item.KEY || item.deviceId || item.device_id || item.id || item.name;
+      const url = readUrlFromObject(item);
+      addDeviceToMap(map, key, url);
+    });
+    return map;
+  }
+
+  if(!data || typeof data !== "object") return map;
+
+  // รองรับรูปแบบ: {"devices":[{"key":"APP...","url":"https://..."}]}
+  if(Array.isArray(data.devices)){
+    data.devices.forEach(item => {
+      if(!item || typeof item !== "object") return;
+      const key = item.key || item.KEY || item.deviceId || item.device_id || item.id || item.name;
+      const url = readUrlFromObject(item);
+      addDeviceToMap(map, key, url);
+    });
+  }
+
+  // รองรับรูปแบบ: {"liveMap":{"APP...":"https://..."}}
+  const nestedMap = data.liveMap || data.live_map || data.keys || data.map;
+  if(nestedMap && typeof nestedMap === "object" && !Array.isArray(nestedMap)){
+    Object.entries(nestedMap).forEach(([key, value]) => {
+      const url = typeof value === "string" ? value : readUrlFromObject(value);
+      addDeviceToMap(map, key, url);
+    });
+  }
+
+  // รองรับรูปแบบหลักที่ Device Manager สร้าง: {"APP...":"https://..."}
+  Object.entries(data).forEach(([key, value]) => {
+    if(["devices", "liveMap", "live_map", "keys", "map"].includes(key)) return;
+    const url = typeof value === "string" ? value : readUrlFromObject(value);
+    addDeviceToMap(map, key, url);
+  });
+
+  return map;
+}
+
+async function loadDevicesJson(showMessage = false){
+  devicesJsonLoaded = false;
+  devicesMap = {};
+  updateStats();
+
+  if(showMessage){
+    showLiveKeyMessage("", "กำลังโหลด devices.json ...");
+  }
+
+  try{
+    const res = await fetch(DEVICES_JSON_URL + "?v=" + Date.now(), {
+      cache: "no-store"
+    });
+
+    if(!res.ok){
+      throw new Error("HTTP " + res.status + " " + res.statusText);
+    }
+
+    const data = await res.json();
+    devicesMap = normalizeDevicesJson(data);
+    devicesJsonLoaded = true;
+    updateStats();
+
+    const total = Object.keys(devicesMap).length;
+    if(total){
+      showLiveKeyMessage("ok", "โหลด devices.json สำเร็จ พบ KEY ทั้งหมด " + total + " รายการ");
+    }else{
+      showLiveKeyMessage("err", "โหลด devices.json ได้แล้ว แต่ยังไม่มี KEY หรือรูปแบบ JSON ไม่ตรง");
+    }
+  }catch(e){
+    devicesJsonLoaded = false;
+    devicesMap = {};
+    updateStats();
+    closeLiveDevicePanel();
+    showLiveKeyMessage("err", "โหลด devices.json ไม่สำเร็จ: ต้องวาง devices.json ไว้โฟลเดอร์เดียวกับไฟล์หน้านี้ / " + e.message);
+  }
+}
+
+function getUrlByKey(rawKey){
+  const key = String(rawKey || "").trim();
+  const upperKey = key.toUpperCase();
+  let url = devicesMap[key];
+
+  if(!url && upperKey !== key){
+    url = devicesMap[upperKey];
+  }
+
+  if(!url){
+    const foundKey = Object.keys(devicesMap).find(k => k.toUpperCase() === upperKey);
+    if(foundKey) url = devicesMap[foundKey];
+  }
+
+  return { key, url };
+}
+
+async function unlockLiveByKey(){
+  const input = $("liveKeyInput");
+  const key = (input?.value || "").trim();
+
+  if(!key){
+    showLiveKeyMessage("err", "กรุณาใส่ KEY ก่อน");
+    return;
+  }
+
+  if(!devicesJsonLoaded){
+    await loadDevicesJson(true);
+  }
+
+  const { url } = getUrlByKey(key);
+
+  if(!url){
+    closeLiveDevicePanel();
+    currentLiveDeviceKey = "";
+    currentLiveDeviceUrl = "";
+
+    const frame = $("liveDeviceFrame");
+    if(frame) frame.src = "about:blank";
+
+    const box = $("liveDeviceCards");
+    if(box){
+      box.innerHTML = `
+        <div class="device">
+          <span class="pill stop-pill">KEY ERROR</span>
+          <h3>${escapeHtml(key)}</h3>
+          <p>ไม่พบ KEY นี้ใน devices.json กรุณาตรวจสอบ KEY หรืออัปโหลด devices.json ใหม่</p>
+        </div>
+      `;
+    }
+
+    showLiveKeyMessage("err", "ไม่พบ KEY นี้ใน devices.json: " + key);
+    return;
+  }
+
+  openLiveDevice(key, url);
+}
+
+function openLiveDevice(key, url){
+  currentLiveDeviceKey = key;
+  currentLiveDeviceUrl = url;
+
+  const box = $("liveDeviceCards");
+  if(box){
+    box.innerHTML = `
+      <div class="device">
+        <span class="pill run">LIVE READY</span>
+        <h3>${escapeHtml(key)}</h3>
+        <p>พบ KEY ใน devices.json แล้ว กำลังแสดง Live Screen</p>
+        <button class="btn dark" style="width:100%;margin-top:10px;min-height:42px" onclick="openLiveDeviceNewTab()">Open Tab</button>
+      </div>
+    `;
+  }
+
+  const panel = $("livePanelDevice");
+  const frame = $("liveDeviceFrame");
+
+  if(frame) frame.src = currentLiveDeviceUrl;
+  panel?.classList.add("show");
+  showLiveKeyMessage("ok", "KEY ถูกต้อง: แสดง Live Screen แล้ว");
+}
+
+function clearLiveKey(){
+  const input = $("liveKeyInput");
+  if(input) input.value = "";
+
+  currentLiveDeviceKey = "";
+  currentLiveDeviceUrl = "";
+
+  const frame = $("liveDeviceFrame");
+  if(frame) frame.src = "about:blank";
+
+  closeLiveDevicePanel();
+
+  const box = $("liveDeviceCards");
+  if(box) box.innerHTML = "";
+
+  showLiveKeyMessage("", "ระบบจะโหลด KEY จาก devices.json อัตโนมัติ แล้วใส่ KEY เพื่อเปิด Live Device");
+}
+
+function closeLiveDevicePanel(){
+  $("livePanelDevice")?.classList.remove("show");
+}
+
+function reloadLiveDevice(){
+  const frame = $("liveDeviceFrame");
+  if(frame && currentLiveDeviceUrl){
+    frame.src = currentLiveDeviceUrl + (currentLiveDeviceUrl.includes("?") ? "&" : "?") + "t=" + Date.now();
+  }
+}
+
+function openLiveDeviceNewTab(){
+  if(currentLiveDeviceUrl) window.open(currentLiveDeviceUrl, "_blank");
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadDevicesJson(false);
+
+  const keyInput = $("liveKeyInput");
+  if(keyInput){
+    keyInput.addEventListener("keydown", (event) => {
+      if(event.key === "Enter"){
+        event.preventDefault();
+        unlockLiveByKey();
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>
