@@ -1021,20 +1021,20 @@ footer{
     <div class="nav">
       <button class="active" onclick="showScreen('dashboard', this)">แพคเกจ</button>
       <button onclick="showScreen('future', this)">Future</button>
-      <button onclick="window.open('https://www.9wing.shop/DOWNLOAD','_blank')">Download</button>
+      <button onclick="window.open('https://www.9wing.shop/','_blank')">หน้าหลัก</button>
     </div>
   </header>
 
   <section class="hero">
     <div class="hero-card">
-      <div class="tag">9WING CYBER CONTROL SYSTEM</div>
-      <h1 class="title">9WING<span class="title-green">PACKAGE</span></h1>
+      <div class="tag">9WING CONTROL SYSTEM</div>
+      <h1 class="title">9WING.BOT</h1>
       <p class="sub">เลือกแพคเกจใช้งาน 9WING พร้อมระบบ Live Device สำหรับเปิดจอผ่าน KEY</p>
       <div class="badges">
         <span class="badge">🟢 <b>SYSTEM</b> ONLINE</span>
         <span class="badge">⚡ <b>PING</b> 12MS</span>
         <span class="badge">📱 <b>DEVICES</b> ACTIVE</span>
-        <span class="badge">🔥 <b>MODE</b> ULTRA PRO</span>
+
       </div>
     </div>
     <div class="quick-panel panel">
@@ -1112,7 +1112,7 @@ footer{
         </div>
 
         <div class="live-key-box">
-          <input id="liveKeyInput" class="input key-input" type="text" placeholder="ใส่ KEY เช่น APP0008E77BA24F">
+          <input id="liveKeyInput" class="input key-input" type="text" placeholder="ใส่ KEY เช่น 9WING-123">
           <button class="btn status" onclick="unlockLiveByKey()">🔑 KEY LOGIN</button>
         </div>
 
@@ -1424,7 +1424,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   const keyInput = $("liveKeyInput");
   if(keyInput){
-    keyInput.addEventListener("keydown", (event) => {
+    keyInput.addEventListener("key", (event) => {
       if(event.key === "Enter"){
         event.preventDefault();
         unlockLiveByKey();
