@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>9WING DEVICE MANAGER</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --yellow:#ffe600;
+  --orange:#ff9d00;
+  --green:#00ff9f;
+  --blue:#00d9ff;
+  --red:#ff3b3b;
+  --pink:#ff2f7a;
+  --dark:#030508;
+  --glass:rgba(0,0,0,.58);
+  --glass2:rgba(10,14,20,.72);
+  --line:rgba(255,230,0,.18);
+  --text:#f7fafc;
+  --muted:#b8c2cc;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100%;background:#030508;color:var(--text);font-family:'Kanit',sans-serif;overflow-x:hidden}
+body{
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.36),rgba(0,0,0,.92)),
+    radial-gradient(circle at 20% 18%,rgba(255,230,0,.16),transparent 28%),
+    radial-gradient(circle at 82% 70%,rgba(0,255,159,.12),transparent 32%),
+    url('https://s.imgz.io/2026/05/02/9winga08f61f8c67fbfd9.webp') center/cover fixed no-repeat;
+}
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px),
+    radial-gradient(circle at 18% 22%,rgba(0,255,200,.10),transparent 28%),
+    radial-gradient(circle at 80% 68%,rgba(255,230,0,.08),transparent 32%);
+  background-size:42px 42px,42px 42px,auto,auto;
+  z-index:0;
+}
+.app{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:16px}
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+  padding:12px 14px;border:1px solid rgba(255,230,0,.16);border-radius:20px;
+  background:rgba(0,0,0,.52);backdrop-filter:blur(16px);box-shadow:0 18px 45px rgba(0,0,0,.35);
+}
+.logo{display:flex;align-items:center;gap:10px;color:var(--yellow);font-family:'Orbitron',sans-serif;font-size:clamp(18px,4vw,26px);font-weight:900;letter-spacing:1.5px;text-shadow:0 0 22px rgba(255,230,0,.34)}
+.logo span{color:var(--green)}
+.status-pill{display:inline-flex;align-items:center;gap:8px;color:var(--green);font-family:'Orbitron',sans-serif;font-size:11px;padding:8px 12px;border-radius:999px;background:rgba(0,255,159,.10);border:1px solid rgba(0,255,159,.28)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 16px var(--green)}
+.hero{margin-top:12px;display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:12px}
+.panel{
+  border:1px solid rgba(255,255,255,.09);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.58));
+  backdrop-filter:blur(18px);box-shadow:0 24px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.hero-card{padding:22px 24px;position:relative;overflow:hidden}
+.tag{color:var(--green);font-family:'Orbitron',sans-serif;letter-spacing:2.5px;font-size:11px;margin-bottom:9px}
+h1{font-family:'Orbitron',sans-serif;color:var(--yellow);font-size:clamp(34px,7vw,68px);line-height:.96;text-shadow:0 0 18px rgba(255,230,0,.25),0 0 60px rgba(255,157,0,.20)}
+h1 span{display:block;color:var(--green);text-shadow:0 0 20px rgba(0,255,159,.35)}
+.sub{color:#e9f4f7;font-size:14px;line-height:1.65;margin-top:10px;max-width:780px}
+.stat-grid{padding:12px;display:grid;grid-template-columns:1fr 1fr;gap:8px;align-content:center}
+.stat{min-height:74px;border-radius:15px;background:rgba(0,0,0,.38);border:1px solid rgba(255,255,255,.10);padding:10px}
+.stat b{display:block;color:var(--yellow);font-family:'Orbitron',sans-serif;font-size:24px;line-height:1.1}.stat span{color:var(--muted);font-size:11px;font-weight:700}
+.grid{display:grid;grid-template-columns:360px 1fr;gap:12px;margin-top:12px}
+.box{padding:16px}.box h2{font-family:'Orbitron',sans-serif;color:var(--yellow);font-size:22px;margin-bottom:10px}.box p{color:var(--muted);font-size:13px;line-height:1.55}
+.form{display:grid;gap:10px;margin-top:12px}
+label{font-size:12px;color:var(--muted);font-weight:700}.input,.textarea{
+  width:100%;border:1px solid rgba(255,230,0,.22);background:rgba(0,0,0,.55);color:#fff;border-radius:14px;padding:12px;outline:none;
+  font-family:'Kanit',sans-serif;font-size:14px;box-shadow:inset 0 0 30px rgba(0,0,0,.25)
+}
+.input:focus,.textarea:focus{border-color:rgba(0,255,159,.45);box-shadow:0 0 0 3px rgba(0,255,159,.08),inset 0 0 30px rgba(0,0,0,.25)}
+.textarea{min-height:150px;font-family:Consolas,monospace;resize:vertical;font-size:13px}
+.actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}.actions.wide{grid-template-columns:repeat(3,1fr)}
+.btn{min-height:44px;border:0;border-radius:13px;cursor:pointer;font-weight:900;letter-spacing:.2px;transition:.2s;color:#06100c;font-family:'Kanit',sans-serif}.btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.start{background:linear-gradient(135deg,#00c853,#00ff9f)}.status{background:linear-gradient(135deg,#00d9ff,#00ffcc)}.warn{background:linear-gradient(135deg,var(--yellow),var(--orange))}.stop{background:linear-gradient(135deg,#ff1744,#ff6a88);color:#fff}.dark{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.13)}
+.notice{margin-top:12px;border-radius:15px;border:1px solid rgba(0,217,255,.22);background:rgba(0,217,255,.08);padding:12px;color:#dffaff;font-size:13px;line-height:1.55}
+.notice b{color:var(--yellow)}
+.toolbar{display:flex;gap:8px;flex-wrap:wrap;justify-content:space-between;align-items:center;margin-top:12px}.search{max-width:360px}
+.table-wrap{margin-top:12px;overflow:auto;border-radius:16px;border:1px solid rgba(255,255,255,.09);background:rgba(0,0,0,.38)}
+table{width:100%;border-collapse:collapse;min-width:720px}th,td{padding:11px 10px;border-bottom:1px solid rgba(255,255,255,.08);text-align:left;vertical-align:middle}th{color:var(--yellow);font-size:12px;background:rgba(0,0,0,.46);font-family:'Orbitron',sans-serif}td{font-size:13px;color:#eef2f6}.key{font-family:Consolas,monospace;color:var(--green);font-weight:800}.url{font-family:Consolas,monospace;color:#d7edf2;word-break:break-all}.row-actions{display:flex;gap:6px;flex-wrap:wrap}.mini{min-height:34px;padding:0 10px;border-radius:999px;font-size:12px}.empty{padding:28px;text-align:center;color:var(--muted)}
+.log{margin-top:12px;white-space:pre-wrap;color:#00ff9f;background:#020405;border:1px solid rgba(0,255,159,.16);border-radius:16px;padding:12px;font-family:Consolas,monospace;font-size:12px;max-height:210px;overflow:auto}
+.file-row{display:grid;gap:8px;margin-top:12px}.file{padding:12px;border-radius:14px;background:rgba(255,255,255,.06);border:1px dashed rgba(255,255,255,.18);color:#fff}
+footer{position:relative;z-index:1;max-width:1180px;margin:16px auto 0;padding:12px 16px 28px;color:var(--muted);text-align:center;font-size:12px}
+@media(max-width:920px){.hero,.grid{grid-template-columns:1fr}.actions.wide{grid-template-columns:1fr 1fr}.stat-grid{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:620px){.app{padding:10px}.hero-card,.box{padding:14px}h1{font-size:34px}.stat-grid{grid-template-columns:1fr 1fr}.actions,.actions.wide{grid-template-columns:1fr}.toolbar{display:grid}.search{max-width:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="logo"><span>✦</span>9WING DEVICE MANAGER</div>
+    <div class="status-pill"><span class="dot"></span><span id="saveState">READY</span></div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card panel">
+      <div class="tag">JSON DEVICE UPLOAD SYSTEM</div>
+      <h1>DEVICE<span>MANAGER</span></h1>
+      <p class="sub">เพิ่ม / แก้ไข / ลบ KEY และลิงก์จอ Cloud แล้วดาวน์โหลดออกมาเป็นไฟล์ <b>devices.json</b> สำหรับอัปโหลดทับไฟล์เดิมในโฟลเดอร์เดียวกับ <b>control-center.html</b></p>
+    </div>
+    <div class="stat-grid panel">
+      <div class="stat"><b id="totalCount">0</b><span>TOTAL KEY</span></div>
+      <div class="stat"><b id="validCount">0</b><span>VALID LINK</span></div>
+      <div class="stat"><b id="badCount">0</b><span>NEED FIX</span></div>
+      <div class="stat"><b id="lastSave">-</b><span>LAST EDIT</span></div>
+    </div>
+  </section>
+
+  <main class="grid">
+    <section class="box panel">
+      <h2>➕ ADD / EDIT KEY</h2>
+      <p>กรอก KEY และลิงก์จอ Cloud จาก VSPhone แล้วกดบันทึก ถ้า KEY ซ้ำ ระบบจะอัปเดตลิงก์เดิมให้ทันที</p>
+      <div class="form">
+        <div>
+          <label for="deviceKey">KEY</label>
+          <input id="deviceKey" class="input" placeholder="APP0008E77BA24F" autocomplete="off" />
+        </div>
+        <div>
+          <label for="screenUrl">Cloud Screen URL</label>
+          <input id="screenUrl" class="input" placeholder="https://cloud.vsphone.com/screen/share/xxxx" autocomplete="off" />
+        </div>
+        <div class="actions">
+          <button class="btn start" onclick="saveDevice()">SAVE KEY</button>
+          <button class="btn dark" onclick="resetForm()">CLEAR FORM</button>
+        </div>
+      </div>
+
+      <div class="notice">
+        <b>หมายเหตุ:</b> ถ้าเว็บเป็น static hosting ระบบนี้จะเขียนไฟล์บน server ให้เองไม่ได้ ให้กด <b>DOWNLOAD devices.json</b> แล้วนำไฟล์ไปอัปโหลดทับ <b>devices.json</b> เดิม
+      </div>
+
+      <div class="file-row">
+        <label>นำเข้าไฟล์ devices.json เดิม</label>
+        <input class="file" type="file" accept="application/json,.json" onchange="importFile(event)" />
+        <div class="actions">
+          <button class="btn status" onclick="loadFromServer()">LOAD devices.json</button>
+          <button class="btn warn" onclick="downloadDevices()">DOWNLOAD devices.json</button>
+        </div>
+      </div>
+
+      <h2 style="margin-top:18px">🧾 JSON PREVIEW</h2>
+      <textarea id="jsonPreview" class="textarea" spellcheck="false"></textarea>
+      <div class="actions">
+        <button class="btn status" onclick="applyJsonPreview()">APPLY JSON</button>
+        <button class="btn stop" onclick="clearAll()">DELETE ALL</button>
+      </div>
+      <pre id="log" class="log">ready...</pre>
+    </section>
+
+    <section class="box panel">
+      <h2>📱 DEVICE LIST</h2>
+      <p>รายการ KEY ทั้งหมดที่จะถูกบันทึกลงไฟล์ devices.json</p>
+      <div class="toolbar">
+        <input id="searchInput" class="input search" placeholder="ค้นหา KEY หรือ URL" oninput="renderTable()" />
+        <div class="actions wide" style="margin-top:0">
+          <button class="btn dark" onclick="copyJson()">COPY JSON</button>
+          <button class="btn status" onclick="testAllLinks()">CHECK LINKS</button>
+          <button class="btn warn" onclick="downloadDevices()">DOWNLOAD</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width:210px">KEY</th>
+              <th>Cloud Screen URL</th>
+              <th style="width:220px">ACTION</th>
+            </tr>
+          </thead>
+          <tbody id="deviceTable"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+<footer>© 2026 9WING • JSON DEVICE UPLOAD SYSTEM</footer>
+
+<script>
+const DEFAULT_DEVICES = {
+  "APP0008E77BA24F": "https://cloud.vsphone.com/screen/share/0008-E77B-A24F-4F45-8F55-551F-7C4C-EBB3"
+};
+
+let devices = {};
+let editModeKey = "";
+const STORAGE_KEY = "9wing_devices_json_manager";
+const $ = (id) => document.getElementById(id);
+
+function normalizeKey(key){
+  return String(key || "").trim().toUpperCase().replace(/[^A-Z0-9_-]/g, "");
+}
+function normalizeUrl(url){
+  return String(url || "").trim();
+}
+function isValidCloudUrl(url){
+  return /^https:\/\/cloud\.vsphone\.com\/screen\/share\/[A-Za-z0-9-]+(?:[?#].*)?$/.test(url);
+}
+function nowText(){
+  const d = new Date();
+  return d.toLocaleTimeString("th-TH", {hour:"2-digit", minute:"2-digit"});
+}
+function setLog(data){
+  $("log").textContent = typeof data === "string" ? data : JSON.stringify(data, null, 2);
+}
+function setSaveState(text){
+  $("saveState").textContent = text;
+}
+function saveLocal(){
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(devices));
+  $("lastSave").textContent = nowText();
+  setSaveState("SAVED");
+}
+function mapFromAnyJson(data){
+  if(!data || typeof data !== "object" || Array.isArray(data)) throw new Error("รูปแบบ JSON ต้องเป็น object");
+
+  // รองรับรูปแบบ { devices: [{ key, screenUrl }] }
+  if(Array.isArray(data.devices)){
+    const map = {};
+    data.devices.forEach(item => {
+      const key = normalizeKey(item.key || item.deviceKey || item.id);
+      const url = normalizeUrl(item.screenUrl || item.url || item.link || item.liveUrl);
+      if(key && url) map[key] = url;
+    });
+    return map;
+  }
+
+  // รองรับรูปแบบ { liveMap: { KEY: URL } }
+  if(data.liveMap && typeof data.liveMap === "object" && !Array.isArray(data.liveMap)){
+    const map = {};
+    Object.entries(data.liveMap).forEach(([key, url]) => {
+      const k = normalizeKey(key);
+      const u = normalizeUrl(url);
+      if(k && u) map[k] = u;
+    });
+    return map;
+  }
+
+  // รูปแบบหลักที่ระบบนี้ดาวน์โหลด: { "KEY": "URL" }
+  const map = {};
+  Object.entries(data).forEach(([key, url]) => {
+    if(typeof url === "string"){
+      const k = normalizeKey(key);
+      const u = normalizeUrl(url);
+      if(k && u) map[k] = u;
+    }
+  });
+  return map;
+}
+function sortDevices(map){
+  return Object.fromEntries(Object.entries(map).sort((a,b) => a[0].localeCompare(b[0])));
+}
+function refresh(){
+  devices = sortDevices(devices);
+  renderTable();
+  renderPreview();
+  renderStats();
+  saveLocal();
+}
+function renderStats(){
+  const entries = Object.entries(devices);
+  const valid = entries.filter(([_,url]) => isValidCloudUrl(url)).length;
+  $("totalCount").textContent = entries.length;
+  $("validCount").textContent = valid;
+  $("badCount").textContent = entries.length - valid;
+}
+function renderPreview(){
+  $("jsonPreview").value = JSON.stringify(devices, null, 2);
+}
+function renderTable(){
+  const q = String($("searchInput")?.value || "").trim().toLowerCase();
+  const entries = Object.entries(devices).filter(([key,url]) => {
+    return !q || key.toLowerCase().includes(q) || String(url).toLowerCase().includes(q);
+  });
+  const body = $("deviceTable");
+  if(!entries.length){
+    body.innerHTML = `<tr><td colspan="3" class="empty">ยังไม่มี KEY ในระบบ</td></tr>`;
+    return;
+  }
+  body.innerHTML = entries.map(([key,url]) => `
+    <tr>
+      <td class="key">${escapeHtml(key)}</td>
+      <td class="url">${escapeHtml(url)} ${isValidCloudUrl(url) ? "" : "<br><span style='color:var(--red);font-family:Kanit'>รูปแบบลิงก์อาจไม่ถูกต้อง</span>"}</td>
+      <td>
+        <div class="row-actions">
+          <button class="btn mini status" onclick="editDevice('${escapeAttr(key)}')">แก้ไข</button>
+          <button class="btn mini dark" onclick="openDevice('${escapeAttr(key)}')">เปิดจอ</button>
+          <button class="btn mini warn" onclick="copyUrl('${escapeAttr(key)}')">คัดลอก</button>
+          <button class="btn mini stop" onclick="deleteDevice('${escapeAttr(key)}')">ลบ</button>
+        </div>
+      </td>
+    </tr>`).join("");
+}
+function escapeHtml(str){
+  return String(str).replace(/[&<>"]/g, s => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;"}[s]));
+}
+function escapeAttr(str){
+  return String(str).replace(/'/g, "\\'");
+}
+function saveDevice(){
+  const key = normalizeKey($("deviceKey").value);
+  const url = normalizeUrl($("screenUrl").value);
+  if(!key){ setLog({ok:false,error:"กรุณาใส่ KEY"}); return; }
+  if(!url){ setLog({ok:false,error:"กรุณาใส่ลิงก์จอ Cloud"}); return; }
+  if(!isValidCloudUrl(url)){
+    const ok = confirm("ลิงก์นี้ไม่ได้ขึ้นต้นด้วย https://cloud.vsphone.com/screen/share/ ต้องการบันทึกต่อไหม?");
+    if(!ok) return;
+  }
+  if(editModeKey && editModeKey !== key){ delete devices[editModeKey]; }
+  const existed = Object.prototype.hasOwnProperty.call(devices, key);
+  devices[key] = url;
+  editModeKey = "";
+  resetForm(false);
+  refresh();
+  setLog({ok:true,message: existed ? "อัปเดต KEY แล้ว" : "เพิ่ม KEY แล้ว", key, url});
+}
+function editDevice(key){
+  if(!devices[key]) return;
+  editModeKey = key;
+  $("deviceKey").value = key;
+  $("screenUrl").value = devices[key];
+  $("deviceKey").focus();
+  setLog({ok:true,message:"กำลังแก้ไข KEY", key});
+}
+function deleteDevice(key){
+  if(!confirm(`ต้องการลบ KEY ${key} ใช่ไหม?`)) return;
+  delete devices[key];
+  if(editModeKey === key) resetForm(false);
+  refresh();
+  setLog({ok:true,message:"ลบ KEY แล้ว", key});
+}
+function resetForm(clearLog=true){
+  editModeKey = "";
+  $("deviceKey").value = "";
+  $("screenUrl").value = "";
+  if(clearLog) setLog({ok:true,message:"ล้างฟอร์มแล้ว"});
+}
+function openDevice(key){
+  const url = devices[key];
+  if(url) window.open(url, "_blank");
+}
+async function copyUrl(key){
+  const url = devices[key] || "";
+  try{
+    await navigator.clipboard.writeText(url);
+    setLog({ok:true,message:"คัดลอกลิงก์แล้ว", key, url});
+  }catch(e){
+    setLog({ok:false,error:"คัดลอกไม่ได้ ให้ copy จากตารางแทน", detail:e.message});
+  }
+}
+async function copyJson(){
+  const text = JSON.stringify(devices, null, 2);
+  try{
+    await navigator.clipboard.writeText(text);
+    setLog({ok:true,message:"คัดลอก JSON แล้ว"});
+  }catch(e){
+    setLog({ok:false,error:"คัดลอกไม่ได้ ให้ copy จากช่อง JSON PREVIEW แทน", detail:e.message});
+  }
+}
+function downloadDevices(){
+  const text = JSON.stringify(sortDevices(devices), null, 2);
+  const blob = new Blob([text], {type:"application/json;charset=utf-8"});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "devices.json";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+  setLog({ok:true,message:"ดาวน์โหลด devices.json แล้ว", total:Object.keys(devices).length});
+}
+function applyJsonPreview(){
+  try{
+    const parsed = JSON.parse($("jsonPreview").value);
+    devices = mapFromAnyJson(parsed);
+    refresh();
+    setLog({ok:true,message:"นำ JSON จาก preview มาใช้แล้ว", total:Object.keys(devices).length});
+  }catch(e){
+    setLog({ok:false,error:"JSON ไม่ถูกต้อง: " + e.message});
+  }
+}
+function importFile(event){
+  const file = event.target.files && event.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try{
+      const parsed = JSON.parse(reader.result);
+      devices = mapFromAnyJson(parsed);
+      refresh();
+      setLog({ok:true,message:"นำเข้าไฟล์สำเร็จ", file:file.name, total:Object.keys(devices).length});
+    }catch(e){
+      setLog({ok:false,error:"นำเข้าไฟล์ไม่ได้: " + e.message});
+    }
+  };
+  reader.readAsText(file, "utf-8");
+}
+async function loadFromServer(){
+  try{
+    const res = await fetch("./devices.json?t=" + Date.now(), {cache:"no-store"});
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    const parsed = await res.json();
+    devices = mapFromAnyJson(parsed);
+    refresh();
+    setLog({ok:true,message:"โหลด ./devices.json สำเร็จ", total:Object.keys(devices).length});
+  }catch(e){
+    setLog({ok:false,error:"โหลด ./devices.json ไม่ได้ อาจยังไม่มีไฟล์นี้ในโฟลเดอร์เดียวกัน", detail:e.message});
+  }
+}
+function clearAll(){
+  if(!confirm("ต้องการลบ KEY ทั้งหมดในหน้าจอนี้ใช่ไหม?")) return;
+  devices = {};
+  resetForm(false);
+  refresh();
+  setLog({ok:true,message:"ลบรายการทั้งหมดแล้ว"});
+}
+function testAllLinks(){
+  const report = Object.entries(devices).map(([key,url]) => ({key, url, validFormat:isValidCloudUrl(url)}));
+  setLog({ok:true,message:"ตรวจรูปแบบลิงก์แล้ว", report});
+}
+function init(){
+  try{
+    const saved = localStorage.getItem(STORAGE_KEY);
+    devices = saved ? mapFromAnyJson(JSON.parse(saved)) : DEFAULT_DEVICES;
+  }catch(e){
+    devices = DEFAULT_DEVICES;
+  }
+  devices = sortDevices(devices);
+  renderTable();
+  renderPreview();
+  renderStats();
+  $("lastSave").textContent = "-";
+  setSaveState("READY");
+  setLog({ok:true,message:"พร้อมใช้งาน", hint:"กด DOWNLOAD devices.json แล้วอัปโหลดทับไฟล์เดิม"});
+}
+document.addEventListener("DOMContentLoaded", init);
+</script>
+</body>
+</html>
