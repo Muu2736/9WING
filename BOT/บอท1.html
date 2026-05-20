@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>9WING BOT ULTRA PRO | Review Page</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    :root{
+      --yellow:#ffe600;
+      --orange:#ff9d00;
+      --green:#00ff9f;
+      --blue:#00d9ff;
+      --red:#ff3b3b;
+      --pink:#ff2f7a;
+      --dark:#030508;
+      --glass:rgba(0,0,0,.58);
+      --glass2:rgba(10,14,20,.72);
+      --line:rgba(255,230,0,.18);
+      --text:#f7fafc;
+      --muted:#b8c2cc;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+
+    html,body{
+      min-height:100%;
+      background:#030508;
+      color:var(--text);
+      font-family:'Kanit',sans-serif;
+      overflow-x:hidden;
+    }
+
+    body{
+      background:
+        linear-gradient(180deg,rgba(0,0,0,.42),rgba(0,0,0,.88)),
+        radial-gradient(circle at 15% 12%,rgba(255,230,0,.22),transparent 28%),
+        radial-gradient(circle at 85% 72%,rgba(0,255,159,.15),transparent 32%),
+        url('https://s.imgz.io/2026/05/02/9winga08f61f8c67fbfd9.webp') center/cover fixed no-repeat;
+    }
+
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+      background-size:42px 42px;
+      z-index:0;
+    }
+
+    body:after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(120deg,transparent 0 45%,rgba(255,230,0,.06) 46%,transparent 47% 100%);
+      animation:shine 8s linear infinite;
+      z-index:0;
+    }
+
+    @keyframes shine{from{transform:translateX(-90%)}to{transform:translateX(90%)}}
+    @keyframes pulse{0%,100%{box-shadow:0 0 14px rgba(0,255,159,.25)}50%{box-shadow:0 0 34px rgba(0,255,159,.55)}}
+    @keyframes up{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+
+    .app{
+      position:relative;
+      z-index:1;
+      min-height:100vh;
+      padding:18px;
+    }
+
+    .topbar{
+      max-width:1240px;
+      margin:0 auto 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding:14px 16px;
+      border:1px solid rgba(255,230,0,.16);
+      border-radius:22px;
+      background:rgba(0,0,0,.46);
+      backdrop-filter:blur(16px);
+      box-shadow:0 18px 45px rgba(0,0,0,.35);
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:var(--yellow);
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(20px,4vw,30px);
+      font-weight:900;
+      letter-spacing:2px;
+      text-shadow:0 0 22px rgba(255,230,0,.34);
+    }
+    .logo span{color:var(--green)}
+
+    .nav{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav button{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.055);
+      color:#fff;
+      padding:10px 13px;
+      border-radius:999px;
+      cursor:pointer;
+      font-weight:700;
+      transition:.2s;
+      font-family:'Kanit',sans-serif;
+    }
+
+    .nav button:hover,.nav button.active{
+      background:linear-gradient(135deg,var(--yellow),var(--orange));
+      color:#05070a;
+      border-color:rgba(255,230,0,.6);
+      transform:translateY(-1px);
+    }
+
+    .hero{
+      max-width:1240px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) minmax(320px,520px);
+      gap:16px;
+      align-items:stretch;
+    }
+
+    .hero-card,.panel,.video-card{
+      border:1px solid var(--line);
+      border-radius:26px;
+      background:linear-gradient(180deg,rgba(255,230,0,.075),rgba(0,0,0,.48));
+      backdrop-filter:blur(16px);
+      box-shadow:0 24px 70px rgba(0,0,0,.42), inset 0 1px 0 rgba(255,255,255,.08);
+    }
+
+    .hero-card{
+      padding:26px 30px;
+      min-height:290px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      animation:up .55s ease both;
+      overflow:hidden;
+      position:relative;
+    }
+
+    .hero-card:after{
+      content:"";
+      position:absolute;
+      top:-70px;
+      right:-70px;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      background:rgba(0,255,159,.11);
+      filter:blur(4px);
+    }
+
+    .tag{
+      color:var(--green);
+      font-family:'Orbitron',sans-serif;
+      letter-spacing:3px;
+      font-size:12px;
+      margin-bottom:14px;
+      position:relative;
+      z-index:1;
+    }
+
+    .title{
+      font-family:'Orbitron',sans-serif;
+      color:var(--yellow);
+      font-size:clamp(44px,8vw,86px);
+      line-height:.96;
+      letter-spacing:2px;
+      text-shadow:0 0 18px rgba(255,230,0,.25),0 0 60px rgba(255,157,0,.20);
+      position:relative;
+      z-index:1;
+    }
+
+    .sub{
+      max-width:760px;
+      color:#eef2f6;
+      font-size:15px;
+      margin-top:14px;
+      line-height:1.75;
+      position:relative;
+      z-index:1;
+    }
+
+    .badges{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:18px;
+      position:relative;
+      z-index:1;
+    }
+
+    .badge{
+      display:inline-flex;
+      gap:8px;
+      align-items:center;
+      padding:9px 13px;
+      border-radius:999px;
+      background:rgba(255,255,255,.07);
+      border:1px solid rgba(255,255,255,.12);
+    }
+    .badge b{color:var(--yellow)}
+
+    .video-card{
+      padding:14px;
+      animation:up .65s ease both;
+    }
+
+    .video-wrap{
+      width:100%;
+      aspect-ratio:16/9;
+      overflow:hidden;
+      border-radius:20px;
+      border:1px solid rgba(0,255,159,.18);
+      background:#000;
+    }
+
+    .video-wrap iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+    }
+
+    .video-note{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+      margin-top:11px;
+    }
+
+    .main{
+      max-width:1240px;
+      margin:16px auto 0;
+      display:grid;
+      grid-template-columns:240px 1fr;
+      gap:16px;
+    }
+
+    .sidebar{
+      padding:16px;
+      height:max-content;
+      position:sticky;
+      top:18px;
+    }
+
+    .side-title{
+      color:var(--yellow);
+      font-family:'Orbitron',sans-serif;
+      font-size:15px;
+      margin-bottom:12px;
+    }
+
+    .menu-list{display:grid;gap:10px}
+
+    .menu-item{
+      width:100%;
+      text-align:left;
+      border:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.30);
+      color:#fff;
+      border-radius:16px;
+      padding:13px;
+      cursor:pointer;
+      transition:.2s;
+      font-family:'Kanit',sans-serif;
+    }
+
+    .menu-item:hover,.menu-item.active{
+      border-color:rgba(255,230,0,.35);
+      background:rgba(255,230,0,.09);
+      transform:translateY(-1px);
+    }
+
+    .menu-item b{display:block;color:var(--yellow);font-size:15px}
+    .menu-item span{display:block;color:var(--muted);font-size:12px;margin-top:2px}
+
+    .content{display:grid;gap:18px}
+    .screen{display:none}
+    .screen.active{display:block}
+    .screen.panel{padding:22px}
+
+    .section-head{
+      display:flex;
+      gap:12px;
+      justify-content:space-between;
+      align-items:flex-start;
+      flex-wrap:wrap;
+      margin-bottom:16px;
+    }
+
+    .section-head h2{
+      color:var(--yellow);
+      font-family:'Orbitron',sans-serif;
+      font-size:clamp(24px,5vw,38px);
+    }
+
+    .section-head p{color:var(--muted);margin-top:4px}
+
+    .input{
+      width:100%;
+      min-height:120px;
+      border:1px solid rgba(255,230,0,.22);
+      background:rgba(0,0,0,.50);
+      color:#fff;
+      border-radius:18px;
+      padding:15px;
+      outline:none;
+      resize:vertical;
+      font-family:Consolas,monospace;
+      font-size:15px;
+      box-shadow:inset 0 0 30px rgba(0,0,0,.25);
+    }
+
+    .actions{
+      display:grid;
+      grid-template-columns:repeat(6,minmax(0,1fr));
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .btn{
+      min-height:54px;
+      border:0;
+      border-radius:16px;
+      cursor:pointer;
+      font-weight:900;
+      letter-spacing:.3px;
+      transition:.2s;
+      color:#06100c;
+      font-family:'Kanit',sans-serif;
+      padding:0 14px;
+    }
+
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+    .start{background:linear-gradient(135deg,#00c853,#00ff9f)}
+    .stop{background:linear-gradient(135deg,#ff1744,#ff6a88);color:#fff}
+    .status{background:linear-gradient(135deg,#00d9ff,#00ffcc)}
+    .warn{background:linear-gradient(135deg,var(--yellow),var(--orange)}
+    .dark{background:rgba(255,255,255,.09);color:#fff;border:1px solid rgba(255,255,255,.13)}
+
+    .device-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:14px;
+      margin-top:18px;
+    }
+
+    .device{
+      background:rgba(0,0,0,.36);
+      border:1px solid rgba(255,255,255,.11);
+      border-radius:20px;
+      padding:16px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .device:after{
+      content:"";
+      position:absolute;
+      top:-50px;
+      right:-50px;
+      width:130px;
+      height:130px;
+      border-radius:50%;
+      background:rgba(0,255,159,.10);
+      filter:blur(5px);
+    }
+
+    .device h3{position:relative;color:var(--yellow);font-size:16px;word-break:break-all;margin-bottom:8px}
+    .device p{position:relative;color:var(--muted);font-size:14px;margin:4px 0}
+
+    .pill{
+      position:relative;
+      display:inline-flex;
+      padding:7px 11px;
+      border-radius:999px;
+      font-family:'Orbitron',sans-serif;
+      font-size:11px;
+      margin-bottom:10px;
+    }
+    .run{background:linear-gradient(135deg,#00c853,#00ff9f);color:#001b10}
+    .stop-pill{background:linear-gradient(135deg,#ff1744,#ff6a88);color:#fff}
+
+    .future-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+      gap:14px;
+    }
+
+    .future-card{
+      min-height:170px;
+      background:rgba(0,0,0,.36);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius:22px;
+      padding:18px;
+      transition:.2s;
+    }
+
+    .future-card:hover{transform:translateY(-3px);border-color:rgba(255,230,0,.32);background:rgba(255,230,0,.07)}
+    .future-card .icon{font-size:34px;margin-bottom:9px}
+    .future-card h3{color:var(--yellow);font-family:'Orbitron',sans-serif;font-size:18px}
+    .future-card p{color:var(--muted);font-size:14px;margin-top:8px}
+    .future-card small{
+      display:inline-flex;
+      margin-top:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      color:var(--yellow);
+      border:1px solid rgba(255,230,0,.22);
+      background:rgba(255,230,0,.08);
+      font-family:'Orbitron',sans-serif;
+    }
+
+    footer{
+      position:relative;
+      z-index:1;
+      max-width:1240px;
+      margin:24px auto 0;
+      padding:18px 0 40px;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    .live-panel{
+      display:none;
+      margin-top:18px;
+      border:1px solid rgba(0,255,159,.22);
+      border-radius:22px;
+      background:rgba(0,0,0,.52);
+      overflow:hidden;
+      box-shadow:0 18px 50px rgba(0,0,0,.32);
+    }
+    .live-panel.show{display:block}
+
+    .live-head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding:12px 14px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background:rgba(0,0,0,.38);
+    }
+
+    .live-head b{
+      color:var(--yellow);
+      font-family:'Orbitron',sans-serif;
+    }
+
+    .live-tools{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+
+    .live-mini-btn{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      border-radius:999px;
+      padding:8px 12px;
+      cursor:pointer;
+      font-weight:800;
+      font-family:'Kanit',sans-serif;
+    }
+
+    .live-mini-btn:hover{background:rgba(255,230,0,.14)}
+
+    .live-frame-wrap{
+      position:relative;
+      width:100%;
+      height:min(78vh,720px);
+      background:#000;
+    }
+
+    .live-frame{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+      background:#000;
+    }
+
+    .live-note{
+      color:var(--muted);
+      font-size:13px;
+      padding:10px 14px 14px;
+    }
+
+    .live-key-box{
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 180px;
+      gap:10px;
+      align-items:stretch;
+    }
+
+    .key-input{
+      min-height:54px !important;
+      resize:none !important;
+    }
+
+    .live-key-result{
+      margin-top:12px;
+      padding:13px 15px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(0,0,0,.34);
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .live-key-result.ok{
+      color:var(--green);
+      border-color:rgba(0,255,159,.25);
+      background:rgba(0,255,159,.08);
+    }
+
+    .live-key-result.err{
+      color:#fff;
+      border-color:rgba(255,59,59,.30);
+      background:rgba(255,59,59,.10);
+    }
+
+    .price-grid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .price-card{
+      position:relative;
+      overflow:hidden;
+      min-height:230px;
+      padding:22px 18px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,.12);
+      background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(0,0,0,.52));
+      box-shadow:0 18px 50px rgba(0,0,0,.26);
+      text-align:center;
+      transition:.25s;
+    }
+
+    .price-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,230,0,.38);
+      box-shadow:0 0 28px rgba(255,230,0,.12),0 18px 50px rgba(0,0,0,.32);
+    }
+
+    .price-card.featured{
+      border-color:rgba(0,255,159,.42);
+      background:linear-gradient(180deg,rgba(0,255,159,.12),rgba(0,0,0,.55));
+    }
+
+    .price-ribbon{
+      position:absolute;
+      top:14px;
+      right:-38px;
+      width:140px;
+      padding:6px 0;
+      transform:rotate(35deg);
+      background:linear-gradient(135deg,#ffe600,#ff9d00);
+      color:#05070a;
+      font-family:'Orbitron',sans-serif;
+      font-size:10px;
+      font-weight:900;
+    }
+
+    .price-icon{font-size:36px;margin-bottom:8px}
+
+    .price-card h3{
+      color:var(--yellow);
+      font-family:'Orbitron',sans-serif;
+      font-size:24px;
+      margin-bottom:10px;
+    }
+
+    .price-value{
+      color:#fff;
+      font-family:'Orbitron',sans-serif;
+      font-size:36px;
+      font-weight:900;
+      text-shadow:0 0 18px rgba(255,230,0,.18);
+    }
+
+    .price-value span{
+      color:var(--muted);
+      font-family:'Kanit',sans-serif;
+      font-size:15px;
+      font-weight:700;
+    }
+
+    .price-card p{
+      color:var(--muted);
+      font-size:14px;
+      margin:10px 0 16px;
+    }
+
+    .price-btn{width:100%;min-height:44px!important}
+
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr}
+      .main{grid-template-columns:1fr}
+      .sidebar{position:static}
+      .actions{grid-template-columns:1fr 1fr}
+    }
+
+    @media(max-width:820px){
+      .price-grid{grid-template-columns:1fr}
+    }
+
+    @media(max-width:620px){
+      .app{padding:10px}
+      .topbar{border-radius:18px}
+      .nav{display:none}
+      .hero-card{padding:22px;min-height:240px}
+      .title{font-size:38px}
+      .badges{display:none}
+      .screen.panel{padding:16px}
+      .live-key-box{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="logo"><span>✦</span>9WING.SHOP</div>
+    <div class="nav">
+      <button class="active" onclick="showScreen('dashboard', this)">แพคเกจ</button>
+      <button onclick="showScreen('future', this)">Future</button>
+      <button onclick="window.open('https://www.9wing.shop/','_blank')">หน้าหลัก</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card">
+      <div class="tag">9WING CONTROL SYSTEM</div>
+      <h1 class="title">9WING.BOT</h1>
+      <p class="sub">เลือกแพคเกจใช้งาน 9WING พร้อมระบบ Live Device สำหรับเปิดจอผ่าน KEY</p>
+      <div class="badges">
+        <span class="badge">🟢 <b>SYSTEM</b> ONLINE</span>
+        <span class="badge">⚡ <b>PING</b> 12MS</span>
+        <span class="badge">📱 <b>DEVICES</b> ACTIVE</span>
+
+      </div>
+    </div>
+    <div id="video" class="video-card">
+        <div class="video-wrap">
+          <iframe src="https://www.youtube.com/embed/2iTMYSKeeWo" title="YouTube video review" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="">
+          </iframe>
+        </div>
+        <p class="video-note">
+          คลิปนี้ใช้เป็นตัวอย่างประกอบการรีวิว โดยเนื้อหาในหน้านี้จัดทำเพื่อรีวิวภาพรวมระบบเท่านั้น
+        </p>
+      </div>
+  </section>
+
+  <main class="main">
+    <aside class="sidebar panel">
+      <div class="side-title">BOT MENU</div>
+      <div class="menu-list">
+        <button class="menu-item active" onclick="showScreen('dashboard', this)">
+          <b>💰 แพคเกจและราคา</b><span>เลือกแพคเกจใช้งาน</span>
+        </button>
+        <button class="menu-item" onclick="showScreen('liveDevice', this)">
+          <b>📱 Live Device</b><span>ดูจอแยกตามเครื่อง</span>
+        </button>
+        <button class="menu-item" onclick="showScreen('farm', this)">
+          <b>⚔️ Farm Bot</b><span>เมนูเตรียมไว้ในอนาคต</span>
+        </button>
+      </div>
+    </aside>
+
+    <section class="content">
+      <div id="dashboard" class="screen panel active">
+        <div class="section-head">
+          <div>
+            <h2>💰 แพคเกจและราคา</h2>
+            <p>เลือกแพคเกจที่ต้องการใช้งาน แล้วกดชำระเงินได้เลย</p>
+          </div>
+          <button class="btn warn" onclick="window.open('https://www.9wing.shop/ชำระเงิน','_blank')">ชำระเงิน</button>
+        </div>
+
+        <div class="price-grid">
+          <div class="price-card">
+            <div class="price-icon">⚡</div>
+            <h3>1 วัน</h3>
+            <div class="price-value">250 <span>บาท</span></div>
+            <p>เหมาะสำหรับทดลองใช้งานระยะสั้น</p>
+            <button class="btn status price-btn" onclick="window.open('https://www.9wing.shop/ชำระเงิน','_blank')">เลือกแพคเกจ</button>
+          </div>
+
+          <div class="price-card featured">
+            <div class="price-ribbon">POPULAR</div>
+            <div class="price-icon">🔥</div>
+            <h3>2 วัน</h3>
+            <div class="price-value">400 <span>บาท</span></div>
+            <p>คุ้มกว่าสำหรับใช้งานต่อเนื่อง</p>
+            <button class="btn start price-btn" onclick="window.open('https://www.9wing.shop/ชำระเงิน','_blank')">เลือกแพคเกจ</button>
+          </div>
+
+          <div class="price-card">
+            <div class="price-icon">👑</div>
+            <h3>ถาวร</h3>
+            <div class="price-value">4,000 <span>บาท</span></div>
+            <p>ใช้งานยาว ไม่ต้องต่ออายุบ่อย</p>
+            <button class="btn warn price-btn" onclick="window.open('https://www.9wing.shop/ชำระเงิน','_blank')">เลือกแพคเกจ</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="liveDevice" class="screen panel">
+        <div class="section-head">
+          <div>
+            <h2>📱 Live Device</h2>
+            <p>กรอก KEY ที่ได้รับ</p>
+          </div>
+          <button class="btn dark" onclick="loadDevicesJson(true)">RELOAD JSON</button>
+        </div>
+
+        <div class="live-key-box">
+          <input id="liveKeyInput" class="input key-input" type="text" placeholder="ใส่ KEY เช่น 9WING-123">
+          <button class="btn status" onclick="unlockLiveByKey()">🔑 KEY LOGIN</button>
+        </div>
+
+        <div id="liveKeyResult" class="live-key-result">ระบบจะโหลด KEY จาก devices.json อัตโนมัติ แล้วใส่ KEY เพื่อเปิด Live Device</div>
+
+        <div id="liveDeviceCards" class="device-grid"></div>
+
+        <div id="livePanelDevice" class="live-panel">
+          <div class="live-head">
+            <b>📱 LIVE DEVICE SCREEN</b>
+            <div class="live-tools">
+              <button class="live-mini-btn" onclick="reloadLiveDevice()">Reload</button>
+              <button class="live-mini-btn" onclick="openLiveDeviceNewTab()">Open Tab</button>
+              <button class="live-mini-btn" onclick="closeLiveDevicePanel()">Close</button>
+            </div>
+          </div>
+          <div class="live-frame-wrap">
+            <iframe id="liveDeviceFrame" class="live-frame" src="about:blank" allow="fullscreen; autoplay; clipboard-read; clipboard-write"></iframe>
+          </div>
+          <div class="live-note">ถ้า iframe ไม่แสดง ให้กด Open Tab เพราะบางเว็บอาจบล็อก iframe</div>
+        </div>
+      </div>
+
+
+      <div id="farm" class="screen panel">
+        <div class="section-head"><div><h2>⚔️ Farm Bot</h2><p>เมนูฟาร์มอัตโนมัติ เตรียมไว้ต่อ API ภายหลัง</p></div></div>
+        <div class="future-grid">
+          <div class="future-card"><div class="icon">🎯</div><h3>Auto Skill</h3><p>กดสกิลตามพิกัดและเวลา</p><small>COMING SOON</small></div>
+          <div class="future-card"><div class="icon">🧭</div><h3>Move Route</h3><p>เดินวนจุดฟาร์มที่กำหนด</p><small>COMING SOON</small></div>
+          <div class="future-card"><div class="icon">🎒</div><h3>Loot</h3><p>กดเก็บของหรือจัดการกระเป๋า</p><small>COMING SOON</small></div>
+        </div>
+      </div>
+<div id="future" class="screen panel">
+        <div class="section-head"><div><h2>🧩 Future Modules</h2><p>เมนูเตรียมไว้ขยายระบบในอนาคต</p></div></div>
+        <div class="future-grid">
+          <div class="future-card"><div class="icon">📱</div><h3>Live Device</h3><p>ดูจอแยกตามเครื่อง</p><small>READY</small></div>
+          <div class="future-card"><div class="icon">⚔️</div><h3>Farm Bot</h3><p>ฟาร์มมอนและกดสกิล</p><small>COMING SOON</small></div>
+          <div class="future-card"><div class="icon">🛒</div><h3>Sell / Buy</h3><p>ขายของและซื้อวัตถุดิบ</p><small>COMING SOON</small></div>
+          <div class="future-card"><div class="icon">📊</div><h3>Logs</h3><p>เก็บประวัติการทำงาน</p><small>COMING SOON</small></div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>© 2026 9WING.SHOP All rights reserved.</footer>
+</div>
+
+<script>
+const DEVICES_JSON_URL = "./devices.json";
+const $ = (id) => document.getElementById(id);
+
+let devicesMap = {};
+let devicesJsonLoaded = false;
+let currentLiveDeviceUrl = "";
+let currentLiveDeviceKey = "";
+
+function showScreen(id, btn){
+  document.querySelectorAll(".screen").forEach(x => x.classList.remove("active"));
+  $(id)?.classList.add("active");
+  document.querySelectorAll(".menu-item,.nav button").forEach(x => x.classList.remove("active"));
+  if(btn) btn.classList.add("active");
+}
+
+function escapeHtml(value){
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function showLiveKeyMessage(type, message){
+  const result = $("liveKeyResult");
+  if(!result) return;
+  result.className = "live-key-result" + (type ? " " + type : "");
+  result.textContent = message;
+}
+
+function updateStats(){
+  const total = Object.keys(devicesMap).length;
+  const statTotal = $("statTotal");
+  const statRunning = $("statRunning");
+  const statStopped = $("statStopped");
+  const statRound = $("statRound");
+
+  if(statTotal) statTotal.textContent = total;
+  if(statRunning) statRunning.textContent = total;
+  if(statStopped) statStopped.textContent = devicesJsonLoaded ? 0 : "!";
+  if(statRound) statRound.textContent = "JSON";
+}
+
+function addDeviceToMap(map, key, url){
+  const cleanKey = String(key || "").trim();
+  const cleanUrl = String(url || "").trim();
+
+  if(!cleanKey || !cleanUrl) return;
+  if(!/^https?:\/\//i.test(cleanUrl)) return;
+
+  map[cleanKey] = cleanUrl;
+}
+
+function readUrlFromObject(obj){
+  if(!obj || typeof obj !== "object") return "";
+  return obj.url || obj.link || obj.liveUrl || obj.live_url || obj.screenUrl || obj.screen_url || obj.cloudUrl || obj.cloud_url || "";
+}
+
+function normalizeDevicesJson(data){
+  const map = {};
+
+  // รองรับรูปแบบ: [{"key":"APP...","url":"https://..."}]
+  if(Array.isArray(data)){
+    data.forEach(item => {
+      if(!item || typeof item !== "object") return;
+      const key = item.key || item.KEY || item.deviceId || item.device_id || item.id || item.name;
+      const url = readUrlFromObject(item);
+      addDeviceToMap(map, key, url);
+    });
+    return map;
+  }
+
+  if(!data || typeof data !== "object") return map;
+
+  // รองรับรูปแบบ: {"devices":[{"key":"APP...","url":"https://..."}]}
+  if(Array.isArray(data.devices)){
+    data.devices.forEach(item => {
+      if(!item || typeof item !== "object") return;
+      const key = item.key || item.KEY || item.deviceId || item.device_id || item.id || item.name;
+      const url = readUrlFromObject(item);
+      addDeviceToMap(map, key, url);
+    });
+  }
+
+  // รองรับรูปแบบ: {"liveMap":{"APP...":"https://..."}}
+  const nestedMap = data.liveMap || data.live_map || data.keys || data.map;
+  if(nestedMap && typeof nestedMap === "object" && !Array.isArray(nestedMap)){
+    Object.entries(nestedMap).forEach(([key, value]) => {
+      const url = typeof value === "string" ? value : readUrlFromObject(value);
+      addDeviceToMap(map, key, url);
+    });
+  }
+
+  // รองรับรูปแบบหลักที่ Device Manager สร้าง: {"APP...":"https://..."}
+  Object.entries(data).forEach(([key, value]) => {
+    if(["devices", "liveMap", "live_map", "keys", "map"].includes(key)) return;
+    const url = typeof value === "string" ? value : readUrlFromObject(value);
+    addDeviceToMap(map, key, url);
+  });
+
+  return map;
+}
+
+async function loadDevicesJson(showMessage = false){
+  devicesJsonLoaded = false;
+  devicesMap = {};
+  updateStats();
+
+  if(showMessage){
+    showLiveKeyMessage("", "กำลังโหลด devices.json ...");
+  }
+
+  try{
+    const res = await fetch(DEVICES_JSON_URL + "?v=" + Date.now(), {
+      cache: "no-store"
+    });
+
+    if(!res.ok){
+      throw new Error("HTTP " + res.status + " " + res.statusText);
+    }
+
+    const data = await res.json();
+    devicesMap = normalizeDevicesJson(data);
+    devicesJsonLoaded = true;
+    updateStats();
+
+    const total = Object.keys(devicesMap).length;
+    if(total){
+      showLiveKeyMessage("ok", "🟢 SYSTEM ONLINE KEY ทั้งหมด " + total + " รายการ");
+    }else{
+      showLiveKeyMessage("err", "โหลด devices.json ได้แล้ว แต่ยังไม่มี KEY หรือรูปแบบ JSON ไม่ตรง");
+    }
+  }catch(e){
+    devicesJsonLoaded = false;
+    devicesMap = {};
+    updateStats();
+    closeLiveDevicePanel();
+    showLiveKeyMessage("err", "โหลด devices.json ไม่สำเร็จ: ต้องวาง devices.json ไว้โฟลเดอร์เดียวกับไฟล์หน้านี้ / " + e.message);
+  }
+}
+
+function getUrlByKey(rawKey){
+  const key = String(rawKey || "").trim();
+  const upperKey = key.toUpperCase();
+  let url = devicesMap[key];
+
+  if(!url && upperKey !== key){
+    url = devicesMap[upperKey];
+  }
+
+  if(!url){
+    const foundKey = Object.keys(devicesMap).find(k => k.toUpperCase() === upperKey);
+    if(foundKey) url = devicesMap[foundKey];
+  }
+
+  return { key, url };
+}
+
+async function unlockLiveByKey(){
+  const input = $("liveKeyInput");
+  const key = (input?.value || "").trim();
+
+  if(!key){
+    showLiveKeyMessage("err", "กรุณาใส่ KEY ก่อน");
+    return;
+  }
+
+  if(!devicesJsonLoaded){
+    await loadDevicesJson(true);
+  }
+
+  const { url } = getUrlByKey(key);
+
+  if(!url){
+    closeLiveDevicePanel();
+    currentLiveDeviceKey = "";
+    currentLiveDeviceUrl = "";
+
+    const frame = $("liveDeviceFrame");
+    if(frame) frame.src = "about:blank";
+
+    const box = $("liveDeviceCards");
+    if(box){
+      box.innerHTML = `
+        <div class="device">
+          <span class="pill stop-pill">KEY ERROR</span>
+          <h3>${escapeHtml(key)}</h3>
+          <p>ไม่พบ KEY นี้ใน ระบบ กรุณาตรวจสอบ KEY ใหม่</p>
+        </div>
+      `;
+    }
+
+    showLiveKeyMessage("err", "ไม่พบ KEY นี้ใน ระบบ: " + key);
+    return;
+  }
+
+  openLiveDevice(key, url);
+}
+
+function openLiveDevice(key, url){
+  currentLiveDeviceKey = key;
+  currentLiveDeviceUrl = url;
+
+  const box = $("liveDeviceCards");
+  if(box){
+    box.innerHTML = `
+      <div class="device">
+        <span class="pill run">LIVE READY</span>
+        <h3>${escapeHtml(key)}</h3>
+        <p>พบ KEY ใน devices.json แล้ว กำลังแสดง Live Screen</p>
+        <button class="btn dark" style="width:100%;margin-top:10px;min-height:42px" onclick="openLiveDeviceNewTab()">Open Tab</button>
+      </div>
+    `;
+  }
+
+  const panel = $("livePanelDevice");
+  const frame = $("liveDeviceFrame");
+
+  if(frame) frame.src = currentLiveDeviceUrl;
+  panel?.classList.add("show");
+  showLiveKeyMessage("ok", "KEY ถูกต้อง: แสดง Live Screen แล้ว");
+}
+
+function clearLiveKey(){
+  const input = $("liveKeyInput");
+  if(input) input.value = "";
+
+  currentLiveDeviceKey = "";
+  currentLiveDeviceUrl = "";
+
+  const frame = $("liveDeviceFrame");
+  if(frame) frame.src = "about:blank";
+
+  closeLiveDevicePanel();
+
+  const box = $("liveDeviceCards");
+  if(box) box.innerHTML = "";
+
+  showLiveKeyMessage("", "ระบบจะโหลด KEY จาก devices.json อัตโนมัติ แล้วใส่ KEY เพื่อเปิด Live Device");
+}
+
+function closeLiveDevicePanel(){
+  $("livePanelDevice")?.classList.remove("show");
+}
+
+function reloadLiveDevice(){
+  const frame = $("liveDeviceFrame");
+  if(frame && currentLiveDeviceUrl){
+    frame.src = currentLiveDeviceUrl + (currentLiveDeviceUrl.includes("?") ? "&" : "?") + "t=" + Date.now();
+  }
+}
+
+function openLiveDeviceNewTab(){
+  if(currentLiveDeviceUrl) window.open(currentLiveDeviceUrl, "_blank");
+}
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadDevicesJson(false);
+
+  const keyInput = $("liveKeyInput");
+  if(keyInput){
+    keyInput.addEventListener("keydown", (event) => {
+      if(event.key === "Enter"){
+        event.preventDefault();
+        unlockLiveByKey();
+      }
+    });
+  }
+});
+</script>
+</body>
+</html>
