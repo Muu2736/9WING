@@ -1168,7 +1168,7 @@
       <div class="hero-card">
         <div class="hero-tag">9WING CONTROL SYSTEM</div>
         <div class="hero-title">9WING.BOT</div>
-        <div class="hero-sub">🔥 เจ้าแรกในไทย! บริการเช่าโปรตีบวกออโต้ ผ่านเว็บไซต์ สะดวก รวดเร็ว ไม่ต้องลงโปรแกรมให้ยุ่งยาก พร้อมทีมงานดูแลตลอด 24 ชม.</div>
+        <div class="hero-sub">🔥 เจ้าแรกในไทย! บริการเช่าโปรตีบวกออโต้ ผ่านเว็บไซต์ </div>
             <div class="premium-bonus-strip">
                 <span class="strip-label">FREE</span>
                 <span class="strip-main">แถมฟรีโปร สกิว Nodelay </span>
@@ -1199,7 +1199,7 @@
         </div>
 
         <div class="review-video-note">
-          🎬 ดูตัวอย่างรีวิวการใช้งาน โปรตีบวกออโต้ รองรับทุกอุปกร
+          🎬 อย่างรีวิวการใช้งาน โปรตีบวกออโต้
         </div>
       </div>
 
@@ -1207,7 +1207,7 @@
 
     <main class="main">
       <aside class="sidebar panel">
-        <div class="side-title">BOT MENU</div>
+        <div class="side-title">MENU</div>
         <div class="menu-list">
           <button class="menu-item active" onclick="showScreen('dashboard', this)">
             <b>💰 แพคเกจและราคา</b>
@@ -1450,7 +1450,7 @@
       updateStats();
 
       if(showMessage){
-        showLiveKeyMessage("", "กำลังโหลด devices.json ...");
+        showLiveKeyMessage("", "กำลังโหลด DEVICE...");
       }
 
       try{
@@ -1467,15 +1467,15 @@
 
         const total = Object.keys(devicesMap).length;
         if(total){
-          showLiveKeyMessage("ok", "🟢 SYSTEM ONLINE KEY ทั้งหมด " + total + " รายการ");
+          showLiveKeyMessage("ok", "🟢 DEVICE ONLINE ทั้งหมด " + total + " รายการ");
         }else{
-          showLiveKeyMessage("err", "โหลด devices.json ได้แล้ว แต่ยังไม่มี KEY หรือรูปแบบ JSON ไม่ตรง");
+          showLiveKeyMessage("err", "โหลด DEVICE ได้แล้ว แต่ยังไม่มี KEY หรือรูปแบบ  ไม่ตรง");
         }
       }catch(e){
         devicesJsonLoaded = false;
         devicesMap = {};
         updateStats();
-        showLiveKeyMessage("err", "โหลด devices.json ไม่สำเร็จ: ต้องวาง devices.json ไว้โฟลเดอร์เดียวกับไฟล์หน้านี้ / " + e.message);
+        showLiveKeyMessage("err", "โหลด devices ไม่สำเร็จ / " + e.message);
       }
     }
 
@@ -1556,7 +1556,7 @@
           <div class="device">
             <span class="pill run">LIVE READY</span>
             <h4>${escapeHtml(key)}</h4>
-            <p>พบ KEY ใน devices.json แล้ว กำลังแสดง Live Screen</p>
+            <p>KEY ถูกต้อง : กำลังแสดง CONTROL DEVICE ของคุณ</p>
           </div>
         `;
       }
@@ -1566,7 +1566,7 @@
       if(frame) frame.src = currentLiveDeviceUrl;
       if(panel) panel.classList.add("show");
 
-      showLiveKeyMessage("ok", "KEY ถูกต้อง: แสดง Live Screen แล้ว");
+      showLiveKeyMessage("ok", "KEY ถูกต้อง : กำลังแสดง CONTROL DEVICE ของคุณ");
     }
 
     function closeLiveDevicePanel(){
