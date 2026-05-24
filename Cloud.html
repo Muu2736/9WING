@@ -2,86 +2,194 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>หน้าเมนูสินค้า</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>9WING CLOUD PHONE</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&family=Orbitron:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
-  --primary-cyan:#00ffff;
-  --primary-purple:#8b5cf6;
-  --card-bg:rgba(10,10,15,0.9);
-  --glass-bg:rgba(255,255,255,0.03);
-  --border-glow:rgba(0,255,255,0.35);
-  --text-primary:#ffffff;
-  --ok:#6dff8b;
-  --danger:#ff6b6b;
+  --yellow:#ffe600;
+  --yellow2:#ffba00;
+  --green:#00ff9f;
+  --cyan:#12dfff;
+  --bg:#020408;
+  --text:#f8fbff;
+  --muted:#b7c0cc;
+  --danger:#ff5f7a;
+  --line:rgba(255,230,0,.18);
+  --glass:rgba(7,10,18,.74);
+  --glass2:rgba(0,0,0,.46);
 }
 
-*{box-sizing:border-box}
+*{box-sizing:border-box;margin:0;padding:0}
+
+html,body{
+  min-height:100%;
+  background:#000;
+  color:var(--text);
+  font-family:'Kanit',sans-serif;
+  overflow-x:hidden;
+}
 
 body{
-  margin:0;
   min-height:100vh;
-  padding:20px;
+  padding:18px;
   display:flex;
   justify-content:center;
   align-items:center;
-  font-family:'Prompt',sans-serif;
-  color:var(--text-primary);
   background:
-    radial-gradient(circle at top,#1c1f3a 0%,#0a0a0f 55%),
-    linear-gradient(180deg,#0b1020 0%,#07070b 100%);
+    linear-gradient(180deg, rgba(0,0,0,.38), rgba(0,0,0,.86)),
+    url('https://s.imgz.io/2026/05/02/9winga08f61f8c67fbfd9.webp') center/cover fixed no-repeat;
+}
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px),
+    radial-gradient(circle at 15% 15%, rgba(255,230,0,.12), transparent 24%),
+    radial-gradient(circle at 80% 25%, rgba(0,255,159,.10), transparent 24%);
+  background-size:42px 42px,42px 42px,auto,auto;
+  z-index:0;
 }
 
 .container{
+  position:relative;
+  z-index:1;
   width:100%;
-  max-width:560px;
-  padding:26px;
-  border-radius:18px;
-  background:var(--card-bg);
-  border:1px solid var(--border-glow);
-  backdrop-filter:blur(14px);
-  box-shadow:
-    0 0 25px rgba(0,255,255,.10),
-    inset 0 0 30px rgba(255,255,255,.02);
+  max-width:620px;
+  padding:18px;
+  border-radius:28px;
+  background:
+    linear-gradient(180deg, rgba(14,18,28,.88), rgba(2,4,8,.78));
+  border:1px solid rgba(255,230,0,.18);
+  backdrop-filter:blur(16px);
+  box-shadow:0 24px 70px rgba(0,0,0,.42);
+  overflow:hidden;
+}
+
+.container::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(circle at 20% 5%, rgba(255,230,0,.13), transparent 22%),
+    radial-gradient(circle at 82% 8%, rgba(0,255,159,.11), transparent 24%);
+  pointer-events:none;
+}
+
+.inner{
+  position:relative;
+  z-index:1;
+}
+
+.brand-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:10px;
+  margin-bottom:10px;
+}
+
+.brand-mark{
+  color:var(--green);
+  font-size:18px;
+  filter:drop-shadow(0 0 12px rgba(0,255,159,.38));
 }
 
 h1{
-  margin:0 0 8px;
+  margin:0;
   text-align:center;
-  font-size:1.6rem;
+  font-size:clamp(2rem,7vw,3.2rem);
+  line-height:.95;
   letter-spacing:1px;
   font-family:'Orbitron',sans-serif;
-  background:linear-gradient(90deg,var(--primary-cyan),var(--primary-purple));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+  font-weight:900;
+  color:var(--yellow);
+  text-shadow:0 0 18px rgba(255,230,0,.24);
+}
+
+.sub-title{
+  text-align:center;
+  margin:6px 0 12px;
+  color:#e9f2f4;
+  font-size:14px;
+  font-weight:700;
 }
 
 .status-bar{
-  display:inline-block;
-  margin:0 auto 18px;
-  padding:7px 14px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  margin:0 auto 16px;
+  padding:8px 14px;
   border-radius:999px;
-  font-size:.8rem;
+  font-size:.82rem;
   font-family:'Orbitron',sans-serif;
-  color:#9cffae;
-  background:rgba(0,255,100,.08);
-  border:1px solid rgba(0,255,100,.22);
+  font-weight:900;
+  color:var(--green);
+  background:rgba(0,255,159,.10);
+  border:1px solid rgba(0,255,159,.28);
+}
+
+.status-bar::before{
+  content:"";
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 14px var(--green);
 }
 
 .center{text-align:center}
 
 .warning-box{
   margin-bottom:18px;
-  padding:14px;
-  border-left:4px solid #ff7a7a;
-  border-radius:12px;
-  line-height:1.65;
-  background:linear-gradient(90deg,rgba(255,80,80,.14) 0%,rgba(255,80,80,.03) 100%);
+  padding:16px;
+  border-radius:20px;
+  line-height:1.72;
+  background:
+    linear-gradient(180deg, rgba(255,230,0,.10), rgba(0,0,0,.26));
+  border:1px solid rgba(255,230,0,.20);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+  color:#edf3f7;
+  font-size:14px;
+  font-weight:600;
+}
+
+.warning-box b{
+  color:var(--yellow);
+  font-size:15px;
+}
+
+.warning-box a{
+  color:#111 !important;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:30px;
+  padding:3px 12px;
+  border-radius:999px;
+  background:linear-gradient(135deg,var(--yellow),var(--yellow2));
+  font-weight:900 !important;
+  text-decoration:none !important;
+  margin-left:4px;
+  box-shadow:0 8px 18px rgba(255,186,0,.18);
+}
+
+.warning-note{
+  margin-top:12px;
+  padding:12px;
+  border-radius:16px;
+  border:1px solid rgba(255,95,122,.28);
+  background:rgba(255,95,122,.10);
+  color:#ffecef;
 }
 
 .category-title{
@@ -89,27 +197,29 @@ h1{
   align-items:center;
   gap:10px;
   margin:18px 0 10px;
-  font-size:.84rem;
-  font-weight:700;
+  font-size:.86rem;
+  font-weight:900;
   text-transform:uppercase;
-  color:#b892ff;
+  color:var(--yellow);
   letter-spacing:1px;
+  font-family:'Orbitron',sans-serif;
 }
 
 .category-title::after{
   content:"";
   flex:1;
   height:1px;
-  background:linear-gradient(90deg,#8b5cf6,transparent);
+  background:linear-gradient(90deg,rgba(255,230,0,.55),transparent);
 }
 
 .file-card{
   position:relative;
-  margin-bottom:18px;
+  margin-bottom:16px;
   padding:8px;
-  border-radius:14px;
-  background:var(--glass-bg);
-  border:1px solid rgba(255,255,255,.06);
+  border-radius:22px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.045), rgba(0,0,0,.28));
+  border:1px solid rgba(255,255,255,.10);
   overflow:hidden;
 }
 
@@ -117,9 +227,9 @@ h1{
   content:"";
   position:absolute;
   inset:-1px;
-  border-radius:14px;
+  border-radius:22px;
   padding:1px;
-  background:linear-gradient(135deg,rgba(0,255,255,.45),rgba(139,92,246,.35),transparent 70%);
+  background:linear-gradient(135deg,rgba(255,230,0,.42),rgba(0,255,159,.28),transparent 70%);
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
@@ -130,9 +240,8 @@ h1{
 
 .file-card.glow{
   box-shadow:
-    0 0 0 1px rgba(0,255,255,.05),
-    0 0 18px rgba(0,255,255,.10),
-    0 0 40px rgba(139,92,246,.08);
+    0 0 24px rgba(255,230,0,.08),
+    0 0 46px rgba(0,255,159,.05);
 }
 
 .file-info-row{
@@ -141,66 +250,88 @@ h1{
   align-items:center;
   gap:12px;
   margin:4px 0;
-  padding:12px 14px;
-  border-radius:10px;
-  font-size:.94rem;
-  transition:.25s ease;
-  background:rgba(255,255,255,.01);
-  border:1px solid transparent;
+  padding:13px 14px;
+  border-radius:16px;
+  font-size:.96rem;
+  transition:.22s ease;
+  background:rgba(0,0,0,.22);
+  border:1px solid rgba(255,255,255,.05);
 }
 
 .file-info-row:hover{
   transform:translateX(4px);
-  background:rgba(255,255,255,.04);
-  border-color:rgba(0,255,255,.16);
-  box-shadow:0 0 16px rgba(0,255,255,.10);
+  background:rgba(255,255,255,.055);
+  border-color:rgba(255,230,0,.18);
+  box-shadow:0 0 16px rgba(255,230,0,.08);
 }
 
 .label{
   flex:1;
-  color:#ebebeb;
-  line-height:1.4;
+  color:#f4f6f8;
+  line-height:1.45;
+  font-weight:700;
 }
 
 .value{
   white-space:nowrap;
-  font-weight:800;
-  color:var(--ok);
+  font-weight:900;
+  color:var(--yellow);
   font-family:'Orbitron',sans-serif;
-  text-shadow:0 0 10px rgba(109,255,139,.25);
+  text-shadow:0 0 12px rgba(255,230,0,.24);
 }
 
-.tag-ok{color:var(--ok)}
-.tag-no{color:var(--danger)}
+.price-highlight{
+  font-size:1.1rem;
+}
+
+.tag-ok{
+  color:var(--green);
+  filter:drop-shadow(0 0 8px rgba(0,255,159,.28));
+}
+
+.tag-no{
+  color:var(--danger);
+}
 
 .cyber-button{
-  display:block;
+  display:flex;
   width:100%;
-  margin-top:14px;
+  min-height:56px;
+  margin-top:12px;
   padding:15px 16px;
   border:none;
-  border-radius:12px;
+  border-radius:18px;
   text-decoration:none;
   text-align:center;
+  align-items:center;
+  justify-content:center;
+  font-family:'Kanit',sans-serif;
+  font-size:16px;
   font-weight:900;
-  color:#041014;
-  background:linear-gradient(45deg,var(--primary-cyan),var(--primary-purple));
-  box-shadow:0 8px 24px rgba(0,255,255,.18);
-  transition:.25s ease;
+  color:#07140d;
+  background:linear-gradient(135deg,var(--yellow),var(--yellow2));
+  box-shadow:0 10px 25px rgba(255,186,0,.18);
+  transition:.22s ease;
   cursor:pointer;
+}
+
+.cyber-button.secondary{
+  background:linear-gradient(135deg,#00dfaa,#26f15e);
+  color:#06130d;
 }
 
 .cyber-button:hover{
   transform:translateY(-2px);
-  filter:brightness(1.08);
-  box-shadow:0 12px 28px rgba(0,255,255,.24);
+  filter:brightness(1.06);
+  box-shadow:0 14px 30px rgba(255,230,0,.18);
 }
 
 footer{
-  margin-top:18px;
+  margin-top:16px;
   text-align:center;
   font-size:.84rem;
-  color:rgba(255,255,255,.62);
+  font-weight:700;
+  color:rgba(255,255,255,.68);
 }
 
 /* popup */
@@ -211,6 +342,7 @@ footer{
   align-items:center;
   justify-content:center;
   z-index:9999;
+  padding:18px;
 }
 
 .video-modal.active{
@@ -220,8 +352,8 @@ footer{
 .video-overlay{
   position:absolute;
   inset:0;
-  background:rgba(0,0,0,.78);
-  backdrop-filter:blur(6px);
+  background:rgba(0,0,0,.82);
+  backdrop-filter:blur(8px);
 }
 
 .video-content{
@@ -241,10 +373,13 @@ footer{
   width:100%;
   padding-top:56.25%;
   overflow:hidden;
-  border-radius:16px;
+  border-radius:24px;
   background:#000;
-  border:1px solid rgba(0,255,255,.3);
-  box-shadow:0 0 36px rgba(0,255,255,.16);
+  border:2px solid rgba(255,230,0,.28);
+  box-shadow:
+    0 0 28px rgba(255,230,0,.12),
+    0 0 46px rgba(0,255,159,.08),
+    0 22px 70px rgba(0,0,0,.55);
 }
 
 .video-frame iframe{
@@ -252,90 +387,99 @@ footer{
   inset:0;
   width:100%;
   height:100%;
+  border:0;
 }
 
 .close-btn{
   position:absolute;
-  top:-12px;
-  right:-12px;
-  width:42px;
-  height:42px;
+  top:-14px;
+  right:-14px;
+  width:44px;
+  height:44px;
   border:none;
   border-radius:50%;
   cursor:pointer;
-  font-size:26px;
-  font-weight:700;
-  background:linear-gradient(45deg,var(--primary-cyan),var(--primary-purple));
-  color:#041014;
+  font-size:28px;
+  font-weight:800;
+  background:linear-gradient(135deg,var(--yellow),var(--yellow2));
+  color:#111;
   z-index:3;
-  box-shadow:0 0 20px rgba(0,255,255,.22);
+  box-shadow:0 0 20px rgba(255,230,0,.22);
 }
 
-@media (max-width:420px){
-  .container{padding:20px}
+@media (max-width:520px){
+  body{padding:10px; align-items:flex-start}
+  .container{padding:14px; border-radius:22px}
   .file-info-row{flex-direction:column; align-items:flex-start}
   .value{align-self:flex-end}
+  .warning-box{font-size:13px}
 }
 </style>
 </head>
 <body>
 
 <div class="container">
-  <div class="center">
-    <h1>CLOUD PHONE</h1>
-    <div class="status-bar">UPDATE 16/03/2026</div>
+  <div class="inner">
+    <div class="center">
+      <div class="brand-row">
+        <span class="brand-mark">✦</span>
+        <h1>CLOUD PHONE</h1>
+      </div>
+      <div class="sub-title">9WING CONTROL SYSTEM • CLOUD SERVICE</div>
+      <div class="status-bar">UPDATE 22/05/2026</div>
+    </div>
+
+    <div class="warning-box">
+      <b>⚠️ ข้อกำหนดระบบ</b><br>
+      • รองรับเฉพาะ Cloud Phone เท่านั้น<br>
+      • ลูกค้าที่มี Cloud Phone อยู่แล้ว มีบริการติดตั้งและสอนใช้งานฟรี<br>
+      • หรือเช่า Cloud Phone ของเรา 👉
+      <a href="https://www.9wing.shop/OSLink.html" target="_blank" rel="noopener noreferrer">เช่าเลย</a>
+
+      <div class="warning-note">
+        <b>⚠️ ข้อควรระวังเรื่องวันใช้งาน</b><br>
+        ลูกค้าต้องตรวจสอบวันใช้งานของ “จอเช่าตัวเอง” อย่าปล่อยให้หมดอายุ หากหมดอายุแล้วต้องการใช้โปรอีกครั้ง ต้องซื้อใหม่ แต่สามารถนำยูสเดิมมาแลกส่วนลดได้ 40%
+      </div>
+    </div>
+
+    <div class="category-title">Main Package</div>
+    <div class="file-card glow">
+      <div class="file-info-row">
+        <span class="label">⭐ โปรหลักสายฟาร์ม</span>
+        <span class="value price-highlight">30 DAY / 500 ฿</span>
+      </div>
+    </div>
+
+    <div class="category-title">All Functions</div>
+    <div class="file-card glow">
+      <div class="file-info-row">
+        <span class="label"><span class="tag-ok">✔️</span> BYPASS กันแบนอัตโนมัติ 100%</span>
+      </div>
+      <div class="file-info-row">
+        <span class="label"><span class="tag-ok">✔️</span> โจมตีเร็ว สกิลไม่ดีเลย์</span>
+      </div>
+      <div class="file-info-row">
+        <span class="label"><span class="tag-ok">✔️</span> เพิ่มความเร็วการเคลื่อนที่ (วิ่งไว)</span>
+      </div>
+      <div class="file-info-row">
+        <span class="label"><span class="tag-ok">✔️</span> + EXP เพิ่ม 1.0 - 1.5 เท่า</span>
+      </div>
+      <div class="file-info-row">
+        <span class="label"><span class="tag-ok">✔️</span> ปรับมุมมองกว้างขึ้น</span>
+      </div>
+      <div class="file-info-row">
+        <span class="label"><span class="tag-ok">✔️</span> ปิดเอฟเฟค Boot FPS</span>
+      </div>
+      <div class="file-info-row">
+        <span class="label"><span class="tag-no">❌</span> เปลี่ยนดวงรายวัน</span>
+      </div>
+    </div>
+
+    <button class="cyber-button" id="openVideoBtn">🎬 รีวิวการใช้งาน</button>
+    <a href="#" class="cyber-button secondary">💬 ติดต่อฝ่ายบริการลูกค้า</a>
+
+    <footer>© 2026 9WING.SHOP All rights reserved.</footer>
   </div>
-
-  <div class="warning-box">
-    ⚠️ ข้อกำหนดระบบ<br>
-    • รองรับเฉพาะ Cloud Phone เท่านั้น<br>
-    •  ลูกค้าที่มี Cloud Phone อยู่แล้วมีบริการติดตั้งและสอนใช้งาน ฟรี<br>
-	•  หรือเช่า Cloud Phone ของเรา 👉
-        <a href="https://www.9wing.shop/OSLink.html" target="_blank" rel="noopener noreferrer" style="color:#FF7B42;font-weight:bold;text-decoration:none;">เช่าเลย</a>
-      </p>
-    ⚠️ ข้อควรระวังเรื่องวันใช้งาน<br>
-ลูกค้าต้องตรวจสอบวันใช้งานของ
-"จอเช่าตัวเอง" อย่าปล่อยให้หมดอายุ
-หากหมดอายุแล้วต้องการใช้โปรอีกครั้ง
-ต้องซื้อใหม่ราคา 500 บาท
-แต่สามารถนำยูสเดิมมาแลกส่วนลดได้ 40%
-  </div>
-
-  <div class="category-title">โปรหลัก</div>
-  <div class="file-card glow">
-    <div class="file-info-row">
-      <span class="label">⭐ โปรหลักสายฟาร์ม</span>
-      <span class="value">500 ฿</span>
-    </div>
-  </div>
-
-  <div class="category-title">ฟังก์ชันทั้งหมด</div>
-  <div class="file-card glow">
-    <div class="file-info-row">
-      <span class="label"><span class="tag-ok">✔️</span> BYPASS กันแบนอัตโนมัติ 100%</span>
-    </div>
-    <div class="file-info-row">
-      <span class="label"><span class="tag-ok">✔️</span> โจมตีเร็ว สกิลไม่ดีเลย์</span>
-    </div>
-    <div class="file-info-row">
-      <span class="label"><span class="tag-ok">✔️</span> เพิ่มความเร็วการเคลื่อนที่ (วิ่งไว)</span>
-    </div>
-	 <div class="file-info-row">
-      <span class="label"><span class="tag-ok">✔️</span> + EXP เพิ่ม 1.0 - 1.5 เท่า</span>
-    </div> <div class="file-info-row">
-      <span class="label"><span class="tag-ok">✔️</span> ปรับมุมมองกว้างขึ้น</span>
-	</div> <div class="file-info-row">
-      <span class="label"><span class="tag-ok">✔️</span> ปิดเอฟเฟค Boot FPS</span>
-    </div>
-    <div class="file-info-row">
-      <span class="label"><span class="tag-no">❌</span>  เปลี่ยนดวงรายวัน</span>
-    </div>
-  </div>
-
-  <button class="cyber-button" id="openVideoBtn">รีวิวการใช้งาน</button>
-  <a href="#" class="cyber-button">ติดต่อฝ่ายบริการลูกค้า</a>
-
-  <footer>© 2026 9WING.SHOP All rights reserved.</footer>
 </div>
 
 <div class="video-modal" id="videoModal">
@@ -348,7 +492,6 @@ footer{
         src=""
         data-src="https://www.youtube.com/embed/rskRaGncEF4?si=6EarFA5al5cn8oV-"
         title="รีวิวการใช้งาน"
-        frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen>
       </iframe>
