@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>9WING BOT | ซื้อ KEY</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="logo"><span class="mark">✦</span> 9WING.SHOP</div>
+      <div class="nav">
+        <button class="active" data-screen="dashboard">แพคเกจ</button>
+        <button data-screen="liveDevice">KEY DEVICE</button>
+        <button onclick="window.open('https://www.9wing.shop/','_blank')">หน้าหลัก</button>
+      </div>
+    </header>
+
+    <section class="hero">
+      <div class="hero-card">
+        <div class="hero-tag">9WING CONTROL SYSTEM</div>
+        <div class="hero-title">9WING.BOT</div>
+        <div class="hero-sub">🔥 ซื้อ KEY อัตโนมัติ เลือกแพคเกจ อัปโหลดสลิป แล้วรับ KEY หลังตรวจสอบผ่าน</div>
+        <div class="premium-bonus-strip">
+          <span class="strip-label">AUTO</span>
+          <span class="strip-main">Slip Verify + KEY Delivery</span>
+          <span class="strip-dot"></span>
+          <span class="strip-sub">ไม่ต้องกรอกชื่อ / ไม่ต้องกรอกเวลา</span>
+        </div>
+        <div class="hero-badges">
+          <span class="hero-badge">🟢 <b>SERVER</b> ONLINE</span>
+          <span class="hero-badge">🔑 <b>KEY</b> READY</span>
+          <span class="hero-badge">🧾 <b>SLIP</b> CHECK</span>
+        </div>
+      </div>
+
+      <div class="quick-card">
+        <div class="live-pill"><span class="dot"></span> KEY STOCK</div>
+        <div class="stats">
+          <div class="stat"><b id="keyStock">0</b><span>KEY พร้อมขาย</span></div>
+          <div class="stat"><b id="selectedPrice">-</b><span>แพคเกจที่เลือก</span></div>
+          <div class="stat"><b>24H</b><span>ระบบพร้อมใช้งาน</span></div>
+          <div class="stat"><b>1:1</b><span>สลิปใช้ได้ครั้งเดียว</span></div>
+        </div>
+        <div class="mini-note">ระบบหน้าเว็บเก่า + ฟอร์มใหม่แบบสั้น ลูกค้าเลือกแค่รายการซื้อและอัปโหลดสลิปเท่านั้น</div>
+      </div>
+    </section>
+
+    <main class="main">
+      <aside class="sidebar panel">
+        <div class="side-title">MENU</div>
+        <div class="menu-list">
+          <button class="menu-item active" data-screen="dashboard">
+            <b>💰 เช่าโปรตีบวกออโต้</b>
+            <span>เลือกแพคเกจและอัปโหลดสลิป</span>
+          </button>
+          <button class="menu-item" data-screen="liveDevice">
+            <b>📱 KEY DEVICE</b>
+            <span>กรอก KEY เพื่อใช้งาน</span>
+          </button>
+          <button class="menu-item" data-screen="setupScreen">
+            <b>⚙️ ตั้งค่าทดสอบ</b>
+            <span>เพิ่ม KEY สำหรับเดโม</span>
+          </button>
+        </div>
+      </aside>
+
+      <section class="content">
+        <div id="dashboard" class="screen active">
+          <div class="dashboard panel">
+            <div class="dashboard-shell">
+              <div class="section-head">
+                <div>
+                  <h2>💰 แพคเกจและราคา</h2>
+                  <p>เลือกแพคเกจที่ต้องการซื้อ แล้วอัปโหลดสลิปโอนเงิน</p>
+                  <div class="premium-bonus-strip small-strip">
+                    <span class="strip-label">SAFE FLOW</span>
+                    <span class="strip-main">ลูกค้าไม่ต้องกรอกชื่อหรือเวลาเอง</span>
+                    <span class="strip-dot"></span>
+                    <span class="strip-sub">ข้อมูลสลิปอ่านจาก API หลังบ้าน</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="package-grid" id="packageGrid"></div>
+
+              <div class="payment-wrap">
+                <div class="payment-box">
+                  <h3>📌 ข้อมูลบัญชีรับเงิน</h3>
+                  <p><b>ชื่อบัญชี:</b> <span id="receiverNameText"></span></p>
+                  <p><b>ช่องทางรับเงิน:</b> <span id="bankText"></span></p>
+                  <p><b>เลขบัญชี / เบอร์:</b> <span id="accountText"></span></p>
+                  <div class="qr-box">
+                    <img id="qrImage" alt="QR Payment" />
+                    <span>วางไฟล์ QR ชื่อ <b>assets/payment-qr.png</b> เพื่อแสดง QR จริง</span>
+                  </div>
+                </div>
+
+                <form id="slipForm" class="upload-box">
+                  <h3>🧾 อัปโหลดสลิป</h3>
+                  <input type="hidden" id="selectedPackage" required />
+                  <input type="hidden" id="selectedAmount" required />
+
+                  <label>รายการที่เลือก</label>
+                  <input id="selectedPackageText" class="input" type="text" readonly placeholder="กรุณาเลือกแพคเกจก่อน" />
+
+                  <label>รูปสลิปโอนเงิน</label>
+                  <label class="file-drop" for="slipFile">
+                    <input id="slipFile" type="file" accept="image/*" required />
+                    <span class="file-icon">＋</span>
+                    <b>กดเพื่ออัปโหลดสลิป</b>
+                    <small>รองรับ JPG / PNG / รูปจากมือถือ</small>
+                  </label>
+                  <img id="preview" class="preview" alt="ตัวอย่างสลิป" />
+
+                  <button class="cta-btn btn-yellow" type="submit">✅ ตรวจสลิปและรับ KEY</button>
+                  <div class="form-note">ระบบจะส่งสลิปไปตรวจหลังบ้าน แล้วเช็กชื่อบัญชี ยอดเงิน เวลาโอนห้ามซ้ำ และเลขอ้างอิงห้ามซ้ำอัตโนมัติ</div>
+                </form>
+              </div>
+
+              <div id="resultBox" class="result-box"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="liveDevice" class="screen">
+          <div class="panel">
+            <h3>📱 KEY DEVICE</h3>
+            <p>กรอก KEY ที่ได้รับ เพื่อใช้งาน</p>
+            <div class="live-key-box">
+              <input id="checkKeyInput" class="input" type="text" placeholder="ใส่ KEY เช่น 9WING-123" />
+              <button id="checkKeyBtn" class="small-btn" type="button">🔑 KEY LOGIN</button>
+            </div>
+            <div id="checkResult" class="live-key-result">กรอก KEY แล้วกดตรวจสอบ</div>
+          </div>
+        </div>
+
+        <div id="setupScreen" class="screen">
+          <div class="panel">
+            <h3>⚙️ ตั้งค่า KEY สำหรับทดสอบ</h3>
+            <p>หน้านี้ไว้เทสบน GitHub Pages เท่านั้น ถ้าขายจริงต้องเก็บ KEY ไว้หลังบ้าน ห้ามเก็บในไฟล์เว็บ</p>
+            <textarea id="adminKeys" class="textarea" rows="8" placeholder="9WING-KEY-001&#10;9WING-KEY-002"></textarea>
+            <div class="admin-actions">
+              <button id="saveKeysBtn" class="small-btn" type="button">บันทึก KEY ทดสอบ</button>
+              <button id="clearHistoryBtn" class="danger-btn" type="button">ล้างประวัติ</button>
+            </div>
+            <div id="adminResult" class="live-key-result"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>© 9WING KEY SYSTEM | GitHub Pages Frontend</footer>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
