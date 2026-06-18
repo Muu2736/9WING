@@ -10,7 +10,7 @@ window.KEY_SYSTEM_CONFIG = {
 
   // ใส่ URL Web App ของ Google Apps Script หลัง Deploy
   // ตัวอย่าง: https://script.google.com/macros/s/AKfycbxxxx/exec
-  googleAppsScriptApiUrl: 'https://script.google.com/macros/s/AKfycbwUF9xJVWk9lCC4b5puULGRrlqXX2QoH0b7gT-BcLyvcpgbmc0xlZYodqXeRH13PjDcLQ/exec',
+  googleAppsScriptApiUrl: 'https://script.google.com/macros/s/AKfycbypFpNI0adpSd3GJTGwc_PJi9TZOLw5HYP4XmE3JuB-1BD9H9l8nD91BRzo-KlHq1aq2w/exec',
 
   packages: [
     { id: '1day', name: '1 วัน', amount: 250, desc: 'เหมาะสำหรับทดลองใช้งานระยะสั้น', icon:'⚡', style:'' },
