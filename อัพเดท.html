@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>9WING.SHOP | Download Center</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Arial",sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:
+    radial-gradient(circle at top,#6b5200,#050505 65%);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+.container{
+
+    width:90%;
+    max-width:600px;
+
+    text-align:center;
+
+    padding:40px 25px;
+
+    background:rgba(0,0,0,0.65);
+
+    border:2px solid #ffd700;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 0 40px #ffd700;
+
+    backdrop-filter:blur(10px);
+
+}
+
+
+
+.logo{
+
+    font-size:42px;
+
+    font-weight:900;
+
+    color:#ffd700;
+
+    text-shadow:
+    0 0 15px #ffd700;
+
+}
+
+
+
+.sub{
+
+    margin-top:10px;
+
+    color:#ddd;
+
+    margin-bottom:35px;
+
+}
+
+
+
+.download-box{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+
+
+.btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+
+    padding:18px;
+
+
+    border-radius:15px;
+
+
+    text-decoration:none;
+
+
+    color:#000;
+
+
+    font-size:20px;
+
+
+    font-weight:bold;
+
+
+    background:
+
+    linear-gradient(135deg,#fff200,#ff9900);
+
+
+
+    box-shadow:
+
+    0 0 20px #ffd700;
+
+
+
+    transition:.3s;
+
+
+    cursor:pointer;
+
+    border:none;
+
+}
+
+
+
+.btn:hover{
+
+    transform:scale(1.05);
+
+
+    box-shadow:
+
+    0 0 35px #ffd700;
+
+}
+
+
+
+.auto{
+
+    background:
+
+    linear-gradient(135deg,#ffd700,#ff8c00);
+
+}
+
+
+
+#keyBox{
+
+    display:none;
+
+    margin-top:20px;
+
+}
+
+
+
+#keyInput{
+
+
+    width:90%;
+
+
+    padding:15px;
+
+
+    border-radius:10px;
+
+
+    border:none;
+
+
+    text-align:center;
+
+
+    font-size:18px;
+
+
+}
+
+
+
+.check{
+
+
+    margin-top:15px;
+
+
+    padding:12px 30px;
+
+
+    border:none;
+
+
+    border-radius:10px;
+
+
+    background:#ffd700;
+
+
+    color:#000;
+
+
+    font-weight:bold;
+
+
+    cursor:pointer;
+
+
+}
+
+
+
+.version{
+
+    margin-top:20px;
+
+
+    color:#ffd700;
+
+
+    text-shadow:
+
+    0 0 10px #ffd700;
+
+}
+
+
+
+.footer{
+
+    margin-top:35px;
+
+
+    color:#aaa;
+
+
+    font-size:14px;
+
+}
+
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<div class="logo">
+
+9WING.SHOP
+
+</div>
+
+
+<div class="sub">
+
+DOWNLOAD CENTER<br>
+
+เลือกไฟล์ที่ต้องการดาวน์โหลด
+
+</div>
+
+
+
+<div class="download-box">
+
+
+
+<a class="btn" href="https://www.mediafire.com/file/6bdp02s0o4hxsoq/9WING.SHOP_V_11.apk/file">
+
+🎮 ตัวเกม V.11
+
+</a>
+
+
+
+<a class="btn" href="https://www.mediafire.com/file/6bdp02s0o4hxsoq/9WING.SHOP_V_11.apk/file">
+
+⚡ GG BY 9WING
+
+</a>
+
+
+
+<button class="btn auto" onclick="openKey()">
+
+🤖 9WING AUTO V 9.7
+
+</button>
+
+
+
+</div>
+
+
+
+<div id="keyBox">
+
+
+<input 
+id="keyInput"
+placeholder="กรอก Key ของคุณ">
+
+
+<br>
+
+
+<button class="check" onclick="checkKey()">
+
+ยืนยัน Key
+
+</button>
+
+
+</div>
+
+
+
+<div class="version">
+
+9WING.SHOP SYSTEM
+
+</div>
+
+
+
+<div class="footer">
+
+© 2026 9WING.SHOP
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+
+const keys = [
+
+
+"TIKE-1.0",
+"ถาวร2",
+"หนมน้า3",
+"ถาวร4",
+"ถาวร5",
+"ถาวร6",
+"ถาวร7",
+"ถาวร8",
+"ถาวร9",
+"ถาวร1",
+
+"WY",
+"1122",
+"789",
+
+"ถาวร10",
+"ถาวร11",
+"ถาวร12",
+"WY2",
+
+"ถาวร13",
+"ถาวร14",
+"ถาวร15",
+"ถาวร16",
+
+"9WING30D",
+
+"ถาวร17",
+"ถาวร18",
+"ถาวร19",
+
+"ถาวร20",
+"ถาวร21",
+"ถาวร22"
+
+
+];
+
+
+
+function openKey(){
+
+document.getElementById("keyBox").style.display="block";
+
+}
+
+
+
+
+function checkKey(){
+
+
+let input =
+
+document.getElementById("keyInput").value;
+
+
+
+if(keys.includes(input)){
+
+
+window.location.href =
+
+"https://www.mediafire.com/file/6f3qsq118nmcpku/9WING_V9.7_sign.apk/file";
+
+
+
+}
+
+else{
+
+
+alert("Key ไม่ถูกต้อง");
+
+
+}
+
+
+}
+
+
+
+// ========================
+// ระบบป้องกัน
+// ========================
+
+
+// ปิดคลิกขวา
+
+document.addEventListener("contextmenu",function(e){
+
+e.preventDefault();
+
+});
+
+
+
+// ป้องกัน F11 / F12
+
+document.addEventListener("keydown",function(e){
+
+
+
+if(e.key==="F11" || e.key==="F12"){
+
+
+e.preventDefault();
+
+return false;
+
+
+}
+
+
+
+// ป้องกัน Inspect
+
+if(
+
+(e.ctrlKey && e.shiftKey && e.key==="I") ||
+
+(e.ctrlKey && e.shiftKey && e.key==="J") ||
+
+(e.ctrlKey && e.shiftKey && e.key==="C") ||
+
+(e.ctrlKey && e.key==="U")
+
+){
+
+
+e.preventDefault();
+
+return false;
+
+
+}
+
+
+
+});
+
+
+
+
+// ป้องกัน Copy
+
+document.addEventListener("copy",function(e){
+
+e.preventDefault();
+
+});
+
+
+
+// ป้องกันเลือกข้อความ
+
+document.addEventListener("selectstart",function(e){
+
+e.preventDefault();
+
+});
+
+
+</script>
+
+
+</body>
+</html>
