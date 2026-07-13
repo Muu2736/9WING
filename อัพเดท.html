@@ -1,556 +1,949 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>9WING.SHOP | Download Center</title>
-
-<style>
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:"Arial",sans-serif;
-}
-
-body{
-    min-height:100vh;
-    background:
-    radial-gradient(circle at top,#6b5200,#050505 65%);
-    color:white;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-
-.container{
-
-    width:90%;
-    max-width:600px;
-
-    text-align:center;
-
-    padding:40px 25px;
-
-    background:rgba(0,0,0,0.65);
-
-    border:2px solid #ffd700;
-
-    border-radius:20px;
-
-    box-shadow:
-    0 0 40px #ffd700;
-
-    backdrop-filter:blur(10px);
-
-}
-
-
-
-.logo{
-
-    font-size:42px;
-
-    font-weight:900;
-
-    color:#ffd700;
-
-    text-shadow:
-    0 0 15px #ffd700;
-
-}
-
-
-
-.sub{
-
-    margin-top:10px;
-
-    color:#ddd;
-
-    margin-bottom:35px;
-
-}
-
-
-
-.download-box{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:20px;
-
-}
-
-
-
-.btn{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:10px;
-
-
-    padding:18px;
-
-
-    border-radius:15px;
-
-
-    text-decoration:none;
-
-
-    color:#000;
-
-
-    font-size:20px;
-
-
-    font-weight:bold;
-
-
-    background:
-
-    linear-gradient(135deg,#fff200,#ff9900);
-
-
-
-    box-shadow:
-
-    0 0 20px #ffd700;
-
-
-
-    transition:.3s;
-
-
-    cursor:pointer;
-
-    border:none;
-
-}
-
-
-
-.btn:hover{
-
-    transform:scale(1.05);
-
-
-    box-shadow:
-
-    0 0 35px #ffd700;
-
-}
-
-
-
-.auto{
-
-    background:
-
-    linear-gradient(135deg,#ffd700,#ff8c00);
-
-}
-
-
-
-#keyBox{
-
-    display:none;
-
-    margin-top:20px;
-
-}
-
-
-
-#keyInput{
-
-
-    width:90%;
-
-
-    padding:15px;
-
-
-    border-radius:10px;
-
-
-    border:none;
-
-
-    text-align:center;
-
-
-    font-size:18px;
-
-
-}
-
-
-
-.check{
-
-
-    margin-top:15px;
-
-
-    padding:12px 30px;
-
-
-    border:none;
-
-
-    border-radius:10px;
-
-
-    background:#ffd700;
-
-
-    color:#000;
-
-
-    font-weight:bold;
-
-
-    cursor:pointer;
-
-
-}
-
-
-
-.version{
-
-    margin-top:20px;
-
-
-    color:#ffd700;
-
-
-    text-shadow:
-
-    0 0 10px #ffd700;
-
-}
-
-
-
-.footer{
-
-    margin-top:35px;
-
-
-    color:#aaa;
-
-
-    font-size:14px;
-
-}
-
-
-</style>
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070707" />
+
+  <title>9WING.SHOP | Download Center</title>
+
+  <style>
+    :root {
+      --gold: #ffd700;
+      --gold-light: #fff7a6;
+      --orange: #ff8a00;
+      --black: #050505;
+      --panel: rgba(10, 10, 10, 0.72);
+      --text: #ffffff;
+      --muted: #bcbcbc;
+      --success: #36f18b;
+      --danger: #ff5252;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Arial", "Tahoma", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 215, 0, 0.20), transparent 32%),
+        radial-gradient(circle at 85% 80%, rgba(255, 138, 0, 0.16), transparent 30%),
+        linear-gradient(135deg, #020202, #111000 55%, #050505);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 28px 16px;
+      position: relative;
+    }
+
+    /* แสงพื้นหลังเคลื่อนไหว */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(95px);
+      opacity: 0.32;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatLight 9s ease-in-out infinite alternate;
+    }
+
+    body::before {
+      top: -140px;
+      left: -120px;
+      background: var(--gold);
+    }
+
+    body::after {
+      right: -140px;
+      bottom: -160px;
+      background: var(--orange);
+      animation-delay: -4s;
+    }
+
+    @keyframes floatLight {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.95);
+      }
+      100% {
+        transform: translate3d(65px, 35px, 0) scale(1.12);
+      }
+    }
+
+    /* จุดแสงลอย */
+    .particles {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      bottom: -20px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 12px var(--gold);
+      opacity: 0;
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(0.6);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-115vh) scale(1.25);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      width: min(92vw, 640px);
+      text-align: center;
+      padding: 42px 28px 30px;
+      border: 1px solid rgba(255, 215, 0, 0.75);
+      border-radius: 28px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01)),
+        var(--panel);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+        0 0 35px rgba(255, 215, 0, 0.22),
+        0 25px 70px rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      animation: showPanel 0.8s cubic-bezier(.2, .8, .2, 1) both;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 900px;
+      top: -320px;
+      left: -280px;
+      transform: rotate(28deg);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.11),
+        transparent
+      );
+      animation: glassSweep 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes showPanel {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes glassSweep {
+      0%, 48% {
+        left: -280px;
+      }
+      70%, 100% {
+        left: 760px;
+      }
+    }
+
+    .top-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #d9ffe9;
+      background: rgba(54, 241, 139, 0.10);
+      border: 1px solid rgba(54, 241, 139, 0.28);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 12px var(--success);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(0.9);
+        opacity: 0.65;
+      }
+      50% {
+        transform: scale(1.25);
+        opacity: 1;
+      }
+    }
+
+    .secure-badge {
+      color: #d8d8d8;
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    .logo-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .logo {
+      font-size: clamp(36px, 8vw, 54px);
+      line-height: 1;
+      font-weight: 1000;
+      letter-spacing: 1px;
+      color: transparent;
+      background: linear-gradient(180deg, #fffbd3 0%, #ffd700 48%, #ff9800 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.65));
+    }
+
+    .logo-wrap::after {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      bottom: -12px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      box-shadow: 0 0 14px var(--gold);
+    }
+
+    .sub {
+      margin-top: 22px;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .sub strong {
+      color: #fff;
+      font-size: 17px;
+      letter-spacing: 1.7px;
+    }
+
+    .download-box {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .btn {
+      width: 100%;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: 17px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      text-decoration: none;
+      color: #0b0b0b;
+      font-size: 18px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #fff7a6 0%, #ffd700 50%, #ff9700 100%);
+      box-shadow:
+        0 10px 25px rgba(255, 153, 0, 0.20),
+        0 0 24px rgba(255, 215, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.55);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      top: -80%;
+      left: -45%;
+      width: 35%;
+      height: 260%;
+      transform: rotate(24deg);
+      background: rgba(255, 255, 255, 0.62);
+      filter: blur(4px);
+      transition: left 0.65s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      left: 125%;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.015);
+      box-shadow:
+        0 14px 34px rgba(255, 153, 0, 0.30),
+        0 0 38px rgba(255, 215, 0, 0.42),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+      filter: brightness(1.05);
+    }
+
+    .btn:active {
+      transform: scale(0.985);
+    }
+
+    .btn-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+    }
+
+    .btn-icon {
+      width: 45px;
+      height: 45px;
+      flex: 0 0 45px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      font-size: 22px;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.72);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-title {
+      display: block;
+      line-height: 1.25;
+    }
+
+    .btn-desc {
+      display: block;
+      margin-top: 4px;
+      color: rgba(0, 0, 0, 0.68);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .arrow {
+      font-size: 23px;
+      transition: transform 0.25s ease;
+    }
+
+    .btn:hover .arrow {
+      transform: translateX(5px);
+    }
+
+    .auto {
+      background: linear-gradient(135deg, #ffe55c 0%, #ffb000 48%, #ff7800 100%);
+    }
+
+    .auto::after {
+      content: "VIP";
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      color: #fff;
+      background: #111;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.45);
+    }
+
+    .version {
+      margin-top: 26px;
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 12px rgba(255, 215, 0, 0.65);
+    }
+
+    .footer {
+      margin-top: 18px;
+      color: #868686;
+      font-size: 12px;
+    }
+
+    /* Modal กรอกคีย์ */
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(0, 0, 0, 0.78);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .modal.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      width: min(92vw, 430px);
+      padding: 28px 22px 22px;
+      border-radius: 22px;
+      border: 1px solid rgba(255, 215, 0, 0.7);
+      background:
+        radial-gradient(circle at top, rgba(255, 215, 0, 0.10), transparent 45%),
+        rgba(10, 10, 10, 0.96);
+      box-shadow: 0 0 45px rgba(255, 215, 0, 0.27);
+      transform: translateY(18px) scale(0.95);
+      transition: transform 0.28s cubic-bezier(.2, .8, .2, 1);
+      position: relative;
+    }
+
+    .modal.show .modal-card {
+      transform: translateY(0) scale(1);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+      font-size: 20px;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 82, 82, 0.22);
+      transform: rotate(90deg);
+    }
+
+    .key-icon {
+      width: 62px;
+      height: 62px;
+      margin: 0 auto 14px;
+      display: grid;
+      place-items: center;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--gold-light), var(--orange));
+      color: #111;
+      font-size: 30px;
+      box-shadow: 0 0 26px rgba(255, 215, 0, 0.35);
+    }
+
+    .modal-title {
+      font-size: 24px;
+      color: #fff;
+    }
+
+    .modal-desc {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .input-wrap {
+      position: relative;
+      margin-top: 20px;
+    }
+
+    #keyInput {
+      width: 100%;
+      height: 54px;
+      padding: 0 48px 0 16px;
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      border-radius: 13px;
+      outline: none;
+      text-align: center;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.07);
+      font-size: 17px;
+      letter-spacing: 0.6px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    #keyInput:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.10), 0 0 16px rgba(255, 215, 0, 0.12);
+    }
+
+    #keyInput::placeholder {
+      color: #777;
+      letter-spacing: 0;
+    }
+
+    .toggle-key {
+      position: absolute;
+      top: 50%;
+      right: 10px;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 9px;
+      color: #ddd;
+      background: transparent;
+      cursor: pointer;
+      font-size: 17px;
+    }
+
+    .check {
+      width: 100%;
+      height: 52px;
+      margin-top: 14px;
+      border: none;
+      border-radius: 13px;
+      color: #111;
+      background: linear-gradient(135deg, #fff7a6, #ffd700 55%, #ff9500);
+      font-size: 16px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(255, 153, 0, 0.20);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .check:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(255, 153, 0, 0.30), 0 0 20px rgba(255, 215, 0, 0.25);
+    }
+
+    .check:disabled {
+      cursor: not-allowed;
+      opacity: 0.65;
+      transform: none;
+    }
+
+    .key-note {
+      margin-top: 12px;
+      color: #777;
+      font-size: 11px;
+    }
+
+    /* Toast แจ้งเตือน */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 26px;
+      z-index: 50;
+      min-width: 250px;
+      max-width: calc(100vw - 32px);
+      padding: 14px 18px;
+      border-radius: 13px;
+      color: #fff;
+      background: rgba(12, 12, 12, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: 0 12px 38px rgba(0, 0, 0, 0.55);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(-50%, 18px);
+      transition: 0.25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+
+    .toast.success {
+      border-color: rgba(54, 241, 139, 0.35);
+      box-shadow: 0 0 25px rgba(54, 241, 139, 0.14), 0 12px 38px rgba(0, 0, 0, 0.55);
+    }
+
+    .toast.error {
+      border-color: rgba(255, 82, 82, 0.38);
+      box-shadow: 0 0 25px rgba(255, 82, 82, 0.13), 0 12px 38px rgba(0, 0, 0, 0.55);
+    }
+
+    @media (max-width: 540px) {
+      body {
+        align-items: flex-start;
+        padding-top: 18px;
+      }
+
+      .container {
+        width: 100%;
+        padding: 26px 16px 23px;
+        border-radius: 22px;
+      }
+
+      .top-line {
+        margin-bottom: 21px;
+      }
+
+      .secure-badge {
+        display: none;
+      }
+
+      .btn {
+        min-height: 68px;
+        padding: 12px 13px;
+        font-size: 16px;
+      }
+
+      .btn-icon {
+        width: 42px;
+        height: 42px;
+        flex-basis: 42px;
+      }
+
+      .arrow {
+        font-size: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
 </head>
 
-
 <body>
-
-
-<div class="container">
-
-
-<div class="logo">
-
-9WING.SHOP
-
-</div>
-
-
-<div class="sub">
-
-DOWNLOAD CENTER<br>
-
-เลือกไฟล์ที่ต้องการดาวน์โหลด
-
-</div>
-
-
-
-<div class="download-box">
-
-
-
-<a class="btn" href="https://www.mediafire.com/file/6bdp02s0o4hxsoq/9WING.SHOP_V_11.apk/file">
-
-🎮 ตัวเกม V.11
-
-</a>
-
-
-
-<a class="btn" href="https://www.mediafire.com/file/6bdp02s0o4hxsoq/9WING.SHOP_V_11.apk/file">
-
-⚡ GG BY 9WING
-
-</a>
-
-
-
-<button class="btn auto" onclick="openKey()">
-
-🤖 9WING AUTO + AI V 9.7
-
-</button>
-
-
-
-</div>
-
-
-
-<div id="keyBox">
-
-
-<input 
-id="keyInput"
-placeholder="กรอก Key ของคุณ">
-
-
-<br>
-
-
-<button class="check" onclick="checkKey()">
-
-ยืนยัน Key
-
-</button>
-
-
-</div>
-
-
-
-<div class="version">
-
-9WING.SHOP SYSTEM
-
-</div>
-
-
-
-<div class="footer">
-
-© 2026 9WING.SHOP
-
-</div>
-
-
-</div>
-
-
-
-
-<script>
-
-
-const keys = [
-
-
-  "TIKE-1.0",
-  "ถาวร2",
-  "TIKE-2.0",
-  "หนมน้า3",
-  "ถาวร4",
-  "ถาวร5",
-  "ถาวร6",
-  "ถาวร7",
-  "ถาวร8",
-  "ถาวร9",
-  "ถาวร1",
-  "9WING5D",
-  "หนมน้า",
-  "WY",
-  "1123",
-  "789",
-  "987",
-
-  "ถาวร10",
-  "ถาวร11",
-  "ถาวร12",
-  "WY2",
-  "ถาวร13",
-  "ถาวร14",
-  "ถาวร15",
-  "ถาวร16",
-  "9WING30D",
-  "9WING1ZX",
-
-  "ถาวร17",
-  "ถาวร18",
-  "ถาวร19",
-  "ถาวร19.1",
-
-  "ถาวร20",
-  "ถาวร21",
-  "ถาวร22",
-  "9WING1QW",
-  "9WING1WQ",
-  "9WING1WA",
-  "ถาวร23",
-  "ถาวร24",
-  "สมาย",
-  "ถาวร25",
-  "9WING1WR",
-  "9WING1WT",
-
-  "ถาวร26",
-  "ถาวร27",
-  "ถาวร28",
-  "ถาวร29",
-  "ถาวร30",
-  "ถาวร31"
-
-
-];
-
-
-
-function openKey(){
-
-document.getElementById("keyBox").style.display="block";
-
-}
-
-
-
-
-function checkKey(){
-
-
-let input =
-
-document.getElementById("keyInput").value;
-
-
-
-if(keys.includes(input)){
-
-
-window.location.href =
-
-"https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/%E0%B8%AD%E0%B8%B1%E0%B8%9F%E0%B9%80%E0%B8%94%E0%B8%95/9.7%20AI_sign.apk";
-
-
-
-}
-
-else{
-
-
-alert("Key ไม่ถูกต้อง");
-
-
-}
-
-
-}
-
-
-
-// ========================
-// ระบบป้องกัน
-// ========================
-
-
-// ปิดคลิกขวา
-
-document.addEventListener("contextmenu",function(e){
-
-e.preventDefault();
-
-});
-
-
-
-// ป้องกัน F11 / F12
-
-document.addEventListener("keydown",function(e){
-
-
-
-if(e.key==="F11" || e.key==="F12"){
-
-
-e.preventDefault();
-
-return false;
-
-
-}
-
-
-
-// ป้องกัน Inspect
-
-if(
-
-(e.ctrlKey && e.shiftKey && e.key==="I") ||
-
-(e.ctrlKey && e.shiftKey && e.key==="J") ||
-
-(e.ctrlKey && e.shiftKey && e.key==="C") ||
-
-(e.ctrlKey && e.key==="U")
-
-){
-
-
-e.preventDefault();
-
-return false;
-
-
-}
-
-
-
-});
-
-
-
-
-// ป้องกัน Copy
-
-document.addEventListener("copy",function(e){
-
-e.preventDefault();
-
-});
-
-
-
-// ป้องกันเลือกข้อความ
-
-document.addEventListener("selectstart",function(e){
-
-e.preventDefault();
-
-});
-
-
-</script>
-
-
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <main class="container">
+    <div class="top-line">
+      <div class="status">
+        <span class="status-dot"></span>
+        SYSTEM ONLINE
+      </div>
+      <div class="secure-badge">🔒 SECURE DOWNLOAD</div>
+    </div>
+
+    <div class="logo-wrap">
+      <div class="logo">9WING.SHOP</div>
+    </div>
+
+    <div class="sub">
+      <strong>DOWNLOAD CENTER</strong><br />
+      เลือกไฟล์ที่ต้องการดาวน์โหลด
+    </div>
+
+    <div class="download-box">
+      <a
+        class="btn"
+        href="https://www.mediafire.com/file/6bdp02s0o4hxsoq/9WING.SHOP_V_11.apk/file"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="btn-left">
+          <span class="btn-icon">🎮</span>
+          <span>
+            <span class="btn-title">ตัวเกม V.11</span>
+            <span class="btn-desc">ดาวน์โหลดตัวเกมเวอร์ชันล่าสุด</span>
+          </span>
+        </span>
+        <span class="arrow">➜</span>
+      </a>
+
+      <a
+        class="btn"
+        href="https://www.mediafire.com/file/6bdp02s0o4hxsoq/9WING.SHOP_V_11.apk/file"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <span class="btn-left">
+          <span class="btn-icon">⚡</span>
+          <span>
+            <span class="btn-title">GG BY 9WING</span>
+            <span class="btn-desc">เครื่องมือเสริมสำหรับผู้ใช้งาน</span>
+          </span>
+        </span>
+        <span class="arrow">➜</span>
+      </a>
+
+      <button class="btn auto" type="button" onclick="openKey()">
+        <span class="btn-left">
+          <span class="btn-icon">🤖</span>
+          <span>
+            <span class="btn-title">9WING AUTO AI V 9.7</span>
+            <span class="btn-desc">ต้องยืนยัน Key ก่อนดาวน์โหลด</span>
+          </span>
+        </span>
+        <span class="arrow">🔑</span>
+      </button>
+    </div>
+
+    <div class="version">9WING.SHOP SYSTEM</div>
+    <div class="footer">© 2026 9WING.SHOP • ALL RIGHTS RESERVED</div>
+  </main>
+
+  <div class="modal" id="keyModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <button class="close-btn" type="button" onclick="closeKey()" aria-label="ปิด">×</button>
+
+      <div class="key-icon">🔑</div>
+      <h2 class="modal-title" id="modalTitle">ยืนยัน Key</h2>
+      <p class="modal-desc">
+        กรุณากรอก Key สำหรับดาวน์โหลด<br />9WING AUTO AI V 9.7
+      </p>
+
+      <div class="input-wrap">
+        <input
+          id="keyInput"
+          type="password"
+          placeholder="กรอก Key ของคุณ"
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <button class="toggle-key" type="button" onclick="toggleKey()" aria-label="แสดงหรือซ่อน Key">
+          👁
+        </button>
+      </div>
+
+      <button class="check" id="checkBtn" type="button" onclick="checkKey()">
+        ยืนยัน Key และดาวน์โหลด
+      </button>
+
+      <div class="key-note">Key ของคุณจะถูกตรวจสอบก่อนเข้าสู่หน้าดาวน์โหลด</div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    const keys = [
+      "TIKE-1.0",
+      "ถาวร2",
+      "TIKE-2.0",
+      "หนมน้า3",
+      "ถาวร4",
+      "ถาวร5",
+      "ถาวร6",
+      "ถาวร7",
+      "ถาวร8",
+      "ถาวร9",
+      "ถาวร1",
+      "9WING5D",
+      "หนมน้า",
+      "WY",
+      "1123",
+      "789",
+      "987",
+      "ถาวร10",
+      "ถาวร11",
+      "ถาวร12",
+      "WY2",
+      "ถาวร13",
+      "ถาวร14",
+      "ถาวร15",
+      "ถาวร16",
+      "9WING30D",
+      "9WING1ZX",
+      "ถาวร17",
+      "ถาวร18",
+      "ถาวร19",
+      "ถาวร19.1",
+      "ถาวร20",
+      "ถาวร21",
+      "ถาวร22",
+      "9WING1QW",
+      "9WING1WQ",
+      "9WING1WA",
+      "ถาวร23",
+      "ถาวร24",
+      "สมาย",
+      "ถาวร25",
+      "9WING1WR",
+      "9WING1WT",
+      "ถาวร26",
+      "ถาวร27",
+      "ถาวร28",
+      "ถาวร29",
+      "ถาวร30",
+      "ถาวร31"
+    ];
+
+    const downloadUrl =
+      "https://raw.githubusercontent.com/muu0826295958-ai/9WING/refs/heads/main/%E0%B8%AD%E0%B8%B1%E0%B8%9F%E0%B9%80%E0%B8%94%E0%B8%95/9WING_9.7_AI_AUTO.apk";
+
+    const keyModal = document.getElementById("keyModal");
+    const keyInput = document.getElementById("keyInput");
+    const checkBtn = document.getElementById("checkBtn");
+    const toast = document.getElementById("toast");
+
+    function openKey() {
+      keyModal.classList.add("show");
+      document.body.style.overflow = "hidden";
+
+      setTimeout(() => {
+        keyInput.focus();
+      }, 180);
+    }
+
+    function closeKey() {
+      keyModal.classList.remove("show");
+      document.body.style.overflow = "";
+      keyInput.value = "";
+      keyInput.type = "password";
+    }
+
+    function toggleKey() {
+      keyInput.type = keyInput.type === "password" ? "text" : "password";
+      keyInput.focus();
+    }
+
+    function showToast(message, type = "") {
+      toast.textContent = message;
+      toast.className = `toast ${type} show`;
+
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 2600);
+    }
+
+    function checkKey() {
+      const input = keyInput.value.trim();
+
+      if (!input) {
+        showToast("กรุณากรอก Key ก่อนยืนยัน", "error");
+        keyInput.focus();
+        return;
+      }
+
+      if (keys.includes(input)) {
+        checkBtn.disabled = true;
+        checkBtn.textContent = "กำลังเปิดหน้าดาวน์โหลด...";
+        showToast("Key ถูกต้อง กำลังดาวน์โหลด", "success");
+
+        setTimeout(() => {
+          window.location.href = downloadUrl;
+        }, 650);
+      } else {
+        showToast("Key ไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง", "error");
+        keyInput.select();
+      }
+    }
+
+    keyInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        checkKey();
+      }
+    });
+
+    keyModal.addEventListener("click", (event) => {
+      if (event.target === keyModal) {
+        closeKey();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && keyModal.classList.contains("show")) {
+        closeKey();
+      }
+    });
+
+    /* สร้างจุดแสงพื้นหลัง */
+    function createParticles() {
+      const particleBox = document.getElementById("particles");
+      const amount = window.innerWidth < 600 ? 18 : 30;
+
+      for (let i = 0; i < amount; i++) {
+        const particle = document.createElement("span");
+        particle.className = "particle";
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.animationDuration = `${6 + Math.random() * 8}s`;
+        particle.style.animationDelay = `${Math.random() * 8}s`;
+        particle.style.opacity = Math.random().toFixed(2);
+        particleBox.appendChild(particle);
+      }
+    }
+
+    createParticles();
+
+    // ========================
+    // ระบบป้องกันเบื้องต้น
+    // ========================
+
+    document.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const blocked =
+        event.key === "F11" ||
+        event.key === "F12" ||
+        (event.ctrlKey && event.shiftKey && ["I", "J", "C"].includes(event.key.toUpperCase())) ||
+        (event.ctrlKey && ["U", "S"].includes(event.key.toUpperCase()));
+
+      if (blocked) {
+        event.preventDefault();
+        return false;
+      }
+    });
+
+    document.addEventListener("copy", (event) => {
+      event.preventDefault();
+    });
+
+    document.addEventListener("selectstart", (event) => {
+      const allowedTags = ["INPUT", "TEXTAREA"];
+      if (!allowedTags.includes(event.target.tagName)) {
+        event.preventDefault();
+      }
+    });
+  </script>
 </body>
 </html>
