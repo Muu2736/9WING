@@ -8,6 +8,8 @@
   <title>9WING.SHOP | Download Center</title>
 
   <style>
+    @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap");
+
     :root {
       --gold: #ffd700;
       --gold-light: #fff7a6;
@@ -233,10 +235,12 @@
     }
 
     .logo {
+      font-family: "Orbitron", "Arial Black", sans-serif;
       font-size: clamp(36px, 8vw, 54px);
       line-height: 1;
-      font-weight: 1000;
+      font-weight: 900;
       letter-spacing: 1px;
+      -webkit-text-stroke: 0.8px rgba(255, 215, 0, 0.95);
       color: transparent;
       background: linear-gradient(180deg, #fffbd3 0%, #ffd700 48%, #ff9800 100%);
       -webkit-background-clip: text;
@@ -721,7 +725,7 @@
             <span class="btn-desc">ต้องยืนยัน Key ก่อนดาวน์โหลด</span>
           </span>
         </span>
-        <span class="arrow">🔑</span>
+        <span class="arrow">🔒</span>
       </button>
     </div>
 
@@ -733,7 +737,7 @@
     <div class="modal-card">
       <button class="close-btn" type="button" onclick="closeKey()" aria-label="ปิด">×</button>
 
-      <div class="key-icon">🔑</div>
+      <div class="key-icon">🔒</div>
       <h2 class="modal-title" id="modalTitle">ยืนยัน Key</h2>
       <p class="modal-desc">
         กรุณากรอก Key สำหรับดาวน์โหลด<br />9WING AUTO AI V 9.7
