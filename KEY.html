@@ -526,6 +526,39 @@
       word-break: break-word;
     }
 
+    .change-key-card {
+      margin: 14px 0;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 215, 0, 0.22);
+      background:
+        radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 42%),
+        rgba(255, 255, 255, 0.03);
+    }
+
+    .change-key-title {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .change-key-desc {
+      margin: 6px 0 14px;
+      color: #9a9a9a;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .change-key-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .change-key-card .submit-btn {
+      margin-top: 14px;
+    }
+
     .reset-card {
       margin-top: 4px;
       padding: 18px;
@@ -652,6 +685,10 @@
       }
 
       .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .change-key-grid {
         grid-template-columns: 1fr;
       }
 
@@ -787,9 +824,9 @@
             <input
               id="registerPassword"
               type="password"
-              minlength="4"
+              minlength="8"
               maxlength="64"
-              placeholder="กำหนด Password อย่างน้อย 4 ตัว"
+              placeholder="กำหนด Password อย่างน้อย 8 ตัว"
               autocomplete="new-password"
               required
             />
@@ -806,7 +843,7 @@
             <input
               id="registerConfirmPassword"
               type="password"
-              minlength="4"
+              minlength="8"
               maxlength="64"
               placeholder="กรอก Password ซ้ำอีกครั้ง"
               autocomplete="new-password"
@@ -862,6 +899,57 @@
         </div>
       </div>
 
+      <div class="change-key-card">
+        <div class="change-key-title">เปลี่ยน License Key</div>
+        <div class="change-key-desc">
+          กรอก KEY ใหม่ที่ซื้อไว้และ Password ของบัญชี ระบบจะย้ายบัญชีไปยัง KEY ใหม่
+          พร้อมตัดสิทธิ์เครื่องที่กำลังใช้ KEY เดิม
+        </div>
+
+        <form id="changeKeyForm" onsubmit="changeLicenseKey(event)">
+          <div class="change-key-grid">
+            <div class="field">
+              <label for="newLicenseKey">LICENSE KEY ใหม่</label>
+              <input
+                id="newLicenseKey"
+                type="text"
+                placeholder="กรอก License Key ใหม่"
+                autocomplete="off"
+                spellcheck="false"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="changeKeyPassword">PASSWORD ยืนยัน</label>
+              <input
+                id="changeKeyPassword"
+                type="password"
+                minlength="8"
+                maxlength="64"
+                placeholder="กรอก Password ของบัญชี"
+                autocomplete="current-password"
+                required
+              />
+              <button
+                class="toggle-password"
+                type="button"
+                onclick="togglePassword('changeKeyPassword', this)"
+                aria-label="แสดงหรือซ่อนรหัสผ่าน"
+              >👁</button>
+            </div>
+          </div>
+
+          <button class="submit-btn" id="changeKeyBtn" type="submit">
+            บันทึก License Key ใหม่
+          </button>
+        </form>
+
+        <div class="hint">
+          KEY ใหม่ต้องมีอยู่ในระบบ เป็นสถานะ ACTIVE และยังไม่ผูกกับบัญชีอื่น
+        </div>
+      </div>
+
       <div class="reset-card">
         <div class="reset-title">ย้ายเครื่องด้วยตัวเอง</div>
         <div class="reset-desc">
@@ -896,9 +984,37 @@
      */
     const LICENSE_API_URL = "https://script.google.com/macros/s/AKfycbwOUwZi3whJI_iALoKv-fMdlkn_N63Cwc6LGuFb6aI49uTgDHZ85AuoheazCXd7ZVmnMQ/exec";
 
+    // แยก Session ตาม API เวอร์ชันใหม่ และลบ Session เก่าจากหน้าเว็บเวอร์ชันก่อน
+    const SESSION_STORAGE_VERSION = "v3_new_api";
+    const SESSION_TOKEN_KEY = `9wing_session_token_${SESSION_STORAGE_VERSION}`;
+    const ACCOUNT_ID_KEY = `9wing_account_id_${SESSION_STORAGE_VERSION}`;
+    const SESSION_API_KEY = "9wing_session_api_url";
+
+    function clearLegacySessionData() {
+      const previousApiUrl = sessionStorage.getItem(SESSION_API_KEY) || "";
+
+      // ถ้าเปลี่ยน Google Apps Script URL ให้ตัด Session ของ API เดิมทันที
+      if (previousApiUrl && previousApiUrl !== LICENSE_API_URL) {
+        sessionStorage.removeItem(SESSION_TOKEN_KEY);
+        sessionStorage.removeItem(ACCOUNT_ID_KEY);
+      }
+
+      // ลบชื่อ Session แบบเก่าที่หน้าเว็บเวอร์ชันก่อนเคยใช้
+      [
+        "9wing_session_token",
+        "9wing_account_id",
+        "9wing_session_token_v2",
+        "9wing_account_id_v2"
+      ].forEach((key) => sessionStorage.removeItem(key));
+
+      sessionStorage.setItem(SESSION_API_KEY, LICENSE_API_URL);
+    }
+
+    clearLegacySessionData();
+
     const state = {
-      sessionToken: sessionStorage.getItem("9wing_session_token") || "",
-      accountId: sessionStorage.getItem("9wing_account_id") || "",
+      sessionToken: sessionStorage.getItem(SESSION_TOKEN_KEY) || "",
+      accountId: sessionStorage.getItem(ACCOUNT_ID_KEY) || "",
       loginData: null
     };
 
@@ -921,7 +1037,7 @@
       const isPassword = input.type === "password";
 
       input.type = isPassword ? "text" : "password";
-      button.textContent = isPassword ? "🙈" : "👁";
+      button.textContent = isPassword ? "🙈" : "🙈";
       input.focus();
     }
 
@@ -1032,8 +1148,8 @@
         if (result.session_token) {
           state.sessionToken = result.session_token;
           state.accountId = result.username || accountId;
-          sessionStorage.setItem("9wing_session_token", state.sessionToken);
-          sessionStorage.setItem("9wing_account_id", state.accountId);
+          sessionStorage.setItem(SESSION_TOKEN_KEY, state.sessionToken);
+          sessionStorage.setItem(ACCOUNT_ID_KEY, state.accountId);
 
           const statusResult = await apiRequest({
             action: "account_status",
@@ -1084,8 +1200,8 @@
         state.accountId = accountId;
         state.loginData = result;
 
-        sessionStorage.setItem("9wing_session_token", state.sessionToken);
-        sessionStorage.setItem("9wing_account_id", state.accountId);
+        sessionStorage.setItem(SESSION_TOKEN_KEY, state.sessionToken);
+        sessionStorage.setItem(ACCOUNT_ID_KEY, state.accountId);
 
         showDashboard(result);
         showToast("เข้าสู่ระบบสำเร็จ", "success");
@@ -1135,6 +1251,85 @@
       }
 
       clearNotice();
+    }
+
+    async function changeLicenseKey(event) {
+      event.preventDefault();
+      clearNotice();
+
+      if (!state.sessionToken) {
+        await logoutAccount();
+        showNotice("Session หมดอายุ กรุณาเข้าสู่ระบบใหม่", "warning");
+        return;
+      }
+
+      const newKey = document.getElementById("newLicenseKey").value.trim();
+      const password = document.getElementById("changeKeyPassword").value;
+      const button = document.getElementById("changeKeyBtn");
+
+      if (!newKey) {
+        showNotice("กรุณากรอก License Key ใหม่", "error");
+        return;
+      }
+
+      if (password.length < 8) {
+        showNotice("กรุณากรอก Password ของบัญชีให้ถูกต้อง", "error");
+        return;
+      }
+
+      const confirmed = window.confirm(
+        "ยืนยันเปลี่ยน License Key ใช่หรือไม่?\n\n" +
+        "เครื่องที่ใช้ KEY เดิมจะถูกตัดสิทธิ์ และบัญชีนี้จะย้ายไปผูกกับ KEY ใหม่"
+      );
+
+      if (!confirmed) return;
+
+      setButtonLoading(button, true, "กำลังเปลี่ยน KEY...", "บันทึก License Key ใหม่");
+
+      try {
+        const result = await apiRequest({
+          action: "change_license_key",
+          session_token: state.sessionToken,
+          new_license_key: newKey,
+          password
+        });
+
+        if (!result.ok) {
+          if (
+            result.code === "SESSION_EXPIRED" ||
+            result.code === "INVALID_SESSION" ||
+            result.code === "EMPTY_SESSION"
+          ) {
+            clearLocalSession();
+            document.getElementById("dashboard").classList.remove("show");
+            document.getElementById("authSection").style.display = "";
+            switchTab("login");
+            showNotice(result.message || "Session หมดอายุ กรุณาเข้าสู่ระบบใหม่", "warning");
+            return;
+          }
+
+          showNotice(result.message || "ไม่สามารถเปลี่ยน License Key ได้", "error");
+          return;
+        }
+
+        if (result.session_token) {
+          state.sessionToken = result.session_token;
+          sessionStorage.setItem(SESSION_TOKEN_KEY, state.sessionToken);
+        }
+
+        state.loginData = result;
+        document.getElementById("changeKeyForm").reset();
+        showDashboard(result);
+        showNotice(
+          result.message || "เปลี่ยน License Key สำเร็จ เครื่องที่ใช้ KEY เดิมจะถูกตัดสิทธิ์",
+          "success"
+        );
+        showToast("เปลี่ยน License Key สำเร็จ", "success");
+      } catch (error) {
+        showNotice(error.message || "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error");
+      } finally {
+        setButtonLoading(button, false, "กำลังเปลี่ยน KEY...", "บันทึก License Key ใหม่");
+      }
     }
 
     async function resetDevice() {
@@ -1198,13 +1393,31 @@
       }
     }
 
-    function logoutAccount() {
+    function clearLocalSession() {
       state.sessionToken = "";
       state.accountId = "";
       state.loginData = null;
 
-      sessionStorage.removeItem("9wing_session_token");
-      sessionStorage.removeItem("9wing_account_id");
+      sessionStorage.removeItem(SESSION_TOKEN_KEY);
+      sessionStorage.removeItem(ACCOUNT_ID_KEY);
+    }
+
+    async function logoutAccount() {
+      const oldToken = state.sessionToken;
+
+      // ตัด Session ที่ฝั่งเซิร์ฟเวอร์ด้วย ไม่ใช่แค่ลบออกจากเบราว์เซอร์
+      if (oldToken) {
+        try {
+          await apiRequest({
+            action: "logout",
+            session_token: oldToken
+          });
+        } catch (error) {
+          console.warn("Server logout failed:", error);
+        }
+      }
+
+      clearLocalSession();
 
       document.getElementById("dashboard").classList.remove("show");
       document.getElementById("authSection").style.display = "";
@@ -1212,7 +1425,7 @@
       clearNotice();
       switchTab("login");
 
-      showToast("ออกจากระบบแล้ว", "success");
+      showToast("ออกจากระบบและตัด Session เก่าแล้ว", "success");
     }
 
     async function restoreSession() {
@@ -1225,16 +1438,13 @@
         });
 
         if (!result.ok) {
-          state.sessionToken = "";
-          state.accountId = "";
-          sessionStorage.removeItem("9wing_session_token");
-          sessionStorage.removeItem("9wing_account_id");
+          clearLocalSession();
           return;
         }
 
         state.loginData = result;
         state.accountId = result.username || state.accountId;
-        sessionStorage.setItem("9wing_account_id", state.accountId);
+        sessionStorage.setItem(ACCOUNT_ID_KEY, state.accountId);
         showDashboard(result);
       } catch (error) {
         console.warn("Restore session failed:", error);
