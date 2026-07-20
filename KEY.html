@@ -1012,9 +1012,9 @@
 
       try {
         const result = await apiRequest({
-          action: "register",
+          action: "register_account",
           license_key: key,
-          account_id: accountId,
+          username: accountId,
           password,
           confirm_password: confirmPassword
         });
@@ -1027,9 +1027,30 @@
         document.getElementById("registerForm").reset();
         document.getElementById("loginUsername").value = accountId;
 
+        // เซิร์ฟเวอร์เวอร์ชันใหม่ส่ง Session กลับมาหลังสมัครสำเร็จ
+        // จึงพาเข้าหน้าจัดการเครื่องได้ทันที โดยไม่ต้องล็อกอินซ้ำ
+        if (result.session_token) {
+          state.sessionToken = result.session_token;
+          state.accountId = result.username || accountId;
+          sessionStorage.setItem("9wing_session_token", state.sessionToken);
+          sessionStorage.setItem("9wing_account_id", state.accountId);
+
+          const statusResult = await apiRequest({
+            action: "account_status",
+            session_token: state.sessionToken
+          });
+
+          if (statusResult.ok) {
+            state.loginData = statusResult;
+            showDashboard(statusResult);
+            showToast("สร้างบัญชีและเข้าสู่ระบบสำเร็จ", "success");
+            return;
+          }
+        }
+
         showToast("สร้างบัญชีสำเร็จ กรุณาเข้าสู่ระบบ", "success");
-        showNotice("สร้างบัญชีเรียบร้อยแล้ว ใช้ Username และ Password ที่กำหนดเพื่อเข้าสู่ระบบ", "success");
         switchTab("login");
+        showNotice("สร้างบัญชีเรียบร้อยแล้ว ใช้ Username และ Password ที่กำหนดเพื่อเข้าสู่ระบบ", "success");
       } catch (error) {
         showNotice(error.message || "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error");
       } finally {
@@ -1050,7 +1071,7 @@
       try {
         const result = await apiRequest({
           action: "login",
-          account_id: accountId,
+          username: accountId,
           password
         });
 
@@ -1098,7 +1119,7 @@
         Number(data.reset_remaining_today ?? 0);
 
       document.getElementById("resetMaximum").textContent =
-        Number(data.max_resets_per_day ?? 2);
+        Number(data.reset_limit_per_day ?? data.max_resets_per_day ?? 2);
 
       const resetButton = document.getElementById("resetDeviceBtn");
       const remaining = Number(data.reset_remaining_today ?? 0);
@@ -1194,6 +1215,32 @@
       showToast("ออกจากระบบแล้ว", "success");
     }
 
+    async function restoreSession() {
+      if (!state.sessionToken) return;
+
+      try {
+        const result = await apiRequest({
+          action: "account_status",
+          session_token: state.sessionToken
+        });
+
+        if (!result.ok) {
+          state.sessionToken = "";
+          state.accountId = "";
+          sessionStorage.removeItem("9wing_session_token");
+          sessionStorage.removeItem("9wing_account_id");
+          return;
+        }
+
+        state.loginData = result;
+        state.accountId = result.username || state.accountId;
+        sessionStorage.setItem("9wing_account_id", state.accountId);
+        showDashboard(result);
+      } catch (error) {
+        console.warn("Restore session failed:", error);
+      }
+    }
+
     function createParticles() {
       const particleBox = document.getElementById("particles");
       const amount = window.innerWidth < 600 ? 18 : 30;
@@ -1210,6 +1257,7 @@
     }
 
     createParticles();
+    restoreSession();
 
     /*
      * ป้องกันเบื้องต้นเท่านั้น ไม่ใช่มาตรการรักษาความปลอดภัยหลัก
