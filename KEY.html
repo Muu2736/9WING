@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070707" />
+  <title>9WING.SHOP | Customer Portal</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap");
+
+    :root {
+      --gold: #ffd700;
+      --gold-light: #fff7a6;
+      --orange: #ff8a00;
+      --black: #050505;
+      --panel: rgba(10, 10, 10, 0.78);
+      --panel-strong: rgba(9, 9, 9, 0.96);
+      --text: #ffffff;
+      --muted: #bcbcbc;
+      --success: #36f18b;
+      --danger: #ff5252;
+      --warning: #ffb020;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Arial", "Tahoma", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 215, 0, 0.20), transparent 32%),
+        radial-gradient(circle at 85% 80%, rgba(255, 138, 0, 0.16), transparent 30%),
+        linear-gradient(135deg, #020202, #111000 55%, #050505);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 28px 16px;
+      position: relative;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(95px);
+      opacity: 0.32;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatLight 9s ease-in-out infinite alternate;
+    }
+
+    body::before {
+      top: -140px;
+      left: -120px;
+      background: var(--gold);
+    }
+
+    body::after {
+      right: -140px;
+      bottom: -160px;
+      background: var(--orange);
+      animation-delay: -4s;
+    }
+
+    @keyframes floatLight {
+      0% {
+        transform: translate3d(0, 0, 0) scale(0.95);
+      }
+      100% {
+        transform: translate3d(65px, 35px, 0) scale(1.12);
+      }
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      bottom: -20px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 12px var(--gold);
+      opacity: 0;
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      0% {
+        transform: translateY(0) scale(0.6);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.9;
+      }
+      100% {
+        transform: translateY(-115vh) scale(1.25);
+        opacity: 0;
+      }
+    }
+
+    .container {
+      width: min(94vw, 700px);
+      padding: 34px 28px 28px;
+      border: 1px solid rgba(255, 215, 0, 0.75);
+      border-radius: 28px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01)),
+        var(--panel);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+        0 0 35px rgba(255, 215, 0, 0.22),
+        0 25px 70px rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      animation: showPanel 0.8s cubic-bezier(.2, .8, .2, 1) both;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 900px;
+      top: -320px;
+      left: -280px;
+      transform: rotate(28deg);
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.11),
+        transparent
+      );
+      animation: glassSweep 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes showPanel {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes glassSweep {
+      0%, 48% {
+        left: -280px;
+      }
+      70%, 100% {
+        left: 850px;
+      }
+    }
+
+    .top-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #d9ffe9;
+      background: rgba(54, 241, 139, 0.10);
+      border: 1px solid rgba(54, 241, 139, 0.28);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 12px var(--success);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(0.9);
+        opacity: 0.65;
+      }
+      50% {
+        transform: scale(1.25);
+        opacity: 1;
+      }
+    }
+
+    .secure-badge {
+      color: #d8d8d8;
+      font-size: 12px;
+      opacity: 0.85;
+    }
+
+    .logo-wrap {
+      position: relative;
+      width: fit-content;
+      margin: 0 auto 12px;
+      text-align: center;
+    }
+
+    .logo {
+      font-family: "Orbitron", "Arial Black", sans-serif;
+      font-size: clamp(34px, 8vw, 52px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 1px;
+      -webkit-text-stroke: 0.8px rgba(255, 215, 0, 0.95);
+      color: transparent;
+      background: linear-gradient(180deg, #fffbd3 0%, #ffd700 48%, #ff9800 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.65));
+    }
+
+    .logo-wrap::after {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      bottom: -12px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      box-shadow: 0 0 14px var(--gold);
+    }
+
+    .sub {
+      margin-top: 23px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    .sub strong {
+      color: #fff;
+      font-family: "Orbitron", sans-serif;
+      font-size: 16px;
+      letter-spacing: 1.3px;
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      padding: 6px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-bottom: 20px;
+    }
+
+    .tab-btn {
+      min-height: 46px;
+      border: 0;
+      border-radius: 12px;
+      color: #a8a8a8;
+      background: transparent;
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: 0.22s ease;
+    }
+
+    .tab-btn.active {
+      color: #111;
+      background: linear-gradient(135deg, #fff7a6, #ffd700 55%, #ff9500);
+      box-shadow: 0 7px 18px rgba(255, 153, 0, 0.22);
+    }
+
+    .panel {
+      display: none;
+      animation: fadePanel 0.3s ease both;
+    }
+
+    .panel.active {
+      display: block;
+    }
+
+    @keyframes fadePanel {
+      from {
+        opacity: 0;
+        transform: translateY(7px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .form-title {
+      margin-bottom: 6px;
+      color: #fff;
+      font-size: 22px;
+      text-align: center;
+    }
+
+    .form-desc {
+      margin-bottom: 18px;
+      color: #949494;
+      font-size: 13px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field {
+      position: relative;
+    }
+
+    .field label {
+      display: block;
+      margin: 0 0 7px 3px;
+      color: #dcdcdc;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .field input {
+      width: 100%;
+      height: 54px;
+      padding: 0 48px 0 15px;
+      border: 1px solid rgba(255, 215, 0, 0.28);
+      border-radius: 13px;
+      outline: none;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.065);
+      font-size: 15px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .field input:focus {
+      border-color: var(--gold);
+      background: rgba(255, 255, 255, 0.085);
+      box-shadow:
+        0 0 0 4px rgba(255, 215, 0, 0.10),
+        0 0 16px rgba(255, 215, 0, 0.11);
+    }
+
+    .field input::placeholder {
+      color: #707070;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 9px;
+      bottom: 9px;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      border-radius: 9px;
+      color: #ddd;
+      background: transparent;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .submit-btn,
+    .danger-btn,
+    .secondary-btn {
+      width: 100%;
+      min-height: 52px;
+      margin-top: 4px;
+      border: none;
+      border-radius: 13px;
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    }
+
+    .submit-btn {
+      color: #111;
+      background: linear-gradient(135deg, #fff7a6, #ffd700 55%, #ff9500);
+      box-shadow: 0 8px 22px rgba(255, 153, 0, 0.20);
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow:
+        0 12px 28px rgba(255, 153, 0, 0.30),
+        0 0 20px rgba(255, 215, 0, 0.25);
+    }
+
+    .secondary-btn {
+      color: #e5e5e5;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .danger-btn {
+      color: #fff;
+      border: 1px solid rgba(255, 82, 82, 0.36);
+      background: linear-gradient(135deg, rgba(255, 82, 82, 0.82), rgba(170, 14, 14, 0.92));
+      box-shadow: 0 10px 24px rgba(255, 82, 82, 0.14);
+    }
+
+    .secondary-btn:hover,
+    .danger-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+      transform: none !important;
+    }
+
+    .hint {
+      margin-top: 12px;
+      color: #747474;
+      font-size: 11px;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    .dashboard {
+      display: none;
+      animation: fadePanel 0.35s ease both;
+    }
+
+    .dashboard.show {
+      display: block;
+    }
+
+    .account-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .account-name {
+      color: #fff;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .account-note {
+      margin-top: 4px;
+      color: #909090;
+      font-size: 12px;
+    }
+
+    .pill {
+      flex: 0 0 auto;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #d9ffe9;
+      background: rgba(54, 241, 139, 0.10);
+      border: 1px solid rgba(54, 241, 139, 0.28);
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .info-card {
+      min-height: 92px;
+      padding: 14px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.018)),
+        rgba(0, 0, 0, 0.28);
+    }
+
+    .info-label {
+      color: #8d8d8d;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+    }
+
+    .info-value {
+      margin-top: 8px;
+      color: #fff;
+      font-size: 15px;
+      font-weight: 900;
+      word-break: break-word;
+    }
+
+    .reset-card {
+      margin-top: 4px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 215, 0, 0.28);
+      background:
+        radial-gradient(circle at top right, rgba(255, 215, 0, 0.10), transparent 42%),
+        rgba(255, 255, 255, 0.035);
+    }
+
+    .reset-title {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .reset-desc {
+      margin-top: 6px;
+      color: #9a9a9a;
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .reset-count {
+      margin: 14px 0 12px;
+      color: var(--gold);
+      font-size: 28px;
+      font-weight: 900;
+      text-align: center;
+      text-shadow: 0 0 16px rgba(255, 215, 0, 0.42);
+    }
+
+    .notice {
+      display: none;
+      margin-bottom: 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.55;
+    }
+
+    .notice.show {
+      display: block;
+    }
+
+    .notice.success {
+      color: #d9ffe9;
+      background: rgba(54, 241, 139, 0.09);
+      border: 1px solid rgba(54, 241, 139, 0.28);
+    }
+
+    .notice.error {
+      color: #ffe2e2;
+      background: rgba(255, 82, 82, 0.09);
+      border: 1px solid rgba(255, 82, 82, 0.31);
+    }
+
+    .notice.warning {
+      color: #fff0cc;
+      background: rgba(255, 176, 32, 0.09);
+      border: 1px solid rgba(255, 176, 32, 0.3);
+    }
+
+    .footer {
+      margin-top: 20px;
+      color: #777;
+      font-size: 11px;
+      text-align: center;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 26px;
+      z-index: 50;
+      min-width: 250px;
+      max-width: calc(100vw - 32px);
+      padding: 14px 18px;
+      border-radius: 13px;
+      color: #fff;
+      background: rgba(12, 12, 12, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      box-shadow: 0 12px 38px rgba(0, 0, 0, 0.55);
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      opacity: 0;
+      visibility: hidden;
+      transform: translate(-50%, 18px);
+      transition: 0.25s ease;
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translate(-50%, 0);
+    }
+
+    .toast.success {
+      border-color: rgba(54, 241, 139, 0.35);
+      box-shadow: 0 0 25px rgba(54, 241, 139, 0.14), 0 12px 38px rgba(0, 0, 0, 0.55);
+    }
+
+    .toast.error {
+      border-color: rgba(255, 82, 82, 0.38);
+      box-shadow: 0 0 25px rgba(255, 82, 82, 0.13), 0 12px 38px rgba(0, 0, 0, 0.55);
+    }
+
+    @media (max-width: 600px) {
+      body {
+        align-items: flex-start;
+        padding-top: 16px;
+      }
+
+      .container {
+        width: 100%;
+        padding: 25px 16px 22px;
+        border-radius: 22px;
+      }
+
+      .secure-badge {
+        display: none;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .account-head {
+        flex-direction: column;
+      }
+
+      .pill {
+        align-self: flex-start;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <main class="container">
+    <div class="top-line">
+      <div class="status">
+        <span class="status-dot"></span>
+        SYSTEM ONLINE
+      </div>
+      <div class="secure-badge">🔒 SECURE CUSTOMER PORTAL</div>
+    </div>
+
+    <div class="logo-wrap">
+      <div class="logo">9WING.SHOP</div>
+    </div>
+
+    <div class="sub">
+      <strong>DEVICE MANAGEMENT</strong><br />
+      สมัครบัญชี เข้าสู่ระบบ และย้ายเครื่องด้วยตัวเอง
+    </div>
+
+    <div id="notice" class="notice" role="alert"></div>
+
+    <section id="authSection">
+      <div class="tabs">
+        <button class="tab-btn active" id="loginTab" type="button" onclick="switchTab('login')">
+          เข้าสู่ระบบ
+        </button>
+        <button class="tab-btn" id="registerTab" type="button" onclick="switchTab('register')">
+          สร้างบัญชี
+        </button>
+      </div>
+
+      <div id="loginPanel" class="panel active">
+        <h2 class="form-title">เข้าสู่ระบบ</h2>
+        <p class="form-desc">ใช้ Username และ Password ที่ผูกกับ License Key</p>
+
+        <form class="form-grid" id="loginForm" onsubmit="loginAccount(event)">
+          <div class="field">
+            <label for="loginUsername">USERNAME</label>
+            <input
+              id="loginUsername"
+              type="text"
+              maxlength="24"
+              placeholder="กรอก Username"
+              autocomplete="username"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="loginPassword">PASSWORD</label>
+            <input
+              id="loginPassword"
+              type="password"
+              maxlength="64"
+              placeholder="กรอก Password"
+              autocomplete="current-password"
+              required
+            />
+            <button
+              class="toggle-password"
+              type="button"
+              onclick="togglePassword('loginPassword', this)"
+              aria-label="แสดงหรือซ่อนรหัสผ่าน"
+            >👁</button>
+          </div>
+
+          <button class="submit-btn" id="loginBtn" type="submit">
+            เข้าสู่ระบบ
+          </button>
+        </form>
+
+        <div class="hint">บัญชีหนึ่งบัญชีใช้จัดการ KEY ที่ผูกไว้ได้หนึ่งรายการ</div>
+      </div>
+
+      <div id="registerPanel" class="panel">
+        <h2 class="form-title">สร้างบัญชีใหม่</h2>
+        <p class="form-desc">กรอก License Key แล้วกำหนด Username และ Password ด้วยตัวเอง</p>
+
+        <form class="form-grid" id="registerForm" onsubmit="registerAccount(event)">
+          <div class="field">
+            <label for="registerKey">LICENSE KEY</label>
+            <input
+              id="registerKey"
+              type="text"
+              placeholder="กรอก License Key"
+              autocomplete="off"
+              spellcheck="false"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="registerUsername">USERNAME</label>
+            <input
+              id="registerUsername"
+              type="text"
+              minlength="4"
+              maxlength="24"
+              placeholder="อังกฤษ ตัวเลข จุด ขีดกลาง หรือขีดล่าง"
+              autocomplete="username"
+              required
+            />
+          </div>
+
+          <div class="field">
+            <label for="registerPassword">PASSWORD</label>
+            <input
+              id="registerPassword"
+              type="password"
+              minlength="8"
+              maxlength="64"
+              placeholder="กำหนด Password อย่างน้อย 8 ตัว"
+              autocomplete="new-password"
+              required
+            />
+            <button
+              class="toggle-password"
+              type="button"
+              onclick="togglePassword('registerPassword', this)"
+              aria-label="แสดงหรือซ่อนรหัสผ่าน"
+            >👁</button>
+          </div>
+
+          <div class="field">
+            <label for="registerConfirmPassword">CONFIRM PASSWORD</label>
+            <input
+              id="registerConfirmPassword"
+              type="password"
+              minlength="8"
+              maxlength="64"
+              placeholder="กรอก Password ซ้ำอีกครั้ง"
+              autocomplete="new-password"
+              required
+            />
+            <button
+              class="toggle-password"
+              type="button"
+              onclick="togglePassword('registerConfirmPassword', this)"
+              aria-label="แสดงหรือซ่อนรหัสผ่าน"
+            >👁</button>
+          </div>
+
+          <button class="submit-btn" id="registerBtn" type="submit">
+            สร้างบัญชีและผูก KEY
+          </button>
+        </form>
+
+        <div class="hint">
+          License Key หนึ่งรายการสร้างบัญชีได้เพียงครั้งเดียว และการสมัครยังไม่รีเซ็ตวันหมดอายุของ KEY
+        </div>
+      </div>
+    </section>
+
+    <section id="dashboard" class="dashboard">
+      <div class="account-head">
+        <div>
+          <div class="account-name" id="dashboardUsername">USERNAME</div>
+          <div class="account-note">บัญชีจัดการเครื่องของคุณ</div>
+        </div>
+        <div class="pill">ACCOUNT ACTIVE</div>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-card">
+          <div class="info-label">LICENSE KEY</div>
+          <div class="info-value" id="licenseMasked">-</div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-label">วันหมดอายุ</div>
+          <div class="info-value" id="expiresAt">-</div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-label">เครื่องที่ผูกอยู่</div>
+          <div class="info-value" id="deviceName">ยังไม่ผูกเครื่อง</div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-label">สถานะเครื่อง</div>
+          <div class="info-value" id="deviceStatus">พร้อมใช้งาน</div>
+        </div>
+      </div>
+
+      <div class="reset-card">
+        <div class="reset-title">ย้ายเครื่องด้วยตัวเอง</div>
+        <div class="reset-desc">
+          เมื่อกดย้ายเครื่อง ระบบจะปลดเครื่องเดิมออก หลังจากนั้นให้นำ KEY ไปเปิดใช้งานในเครื่องใหม่
+          วันหมดอายุเดิมจะไม่เปลี่ยนแปลง
+        </div>
+
+        <div class="reset-count">
+          เหลือ <span id="resetRemaining">2</span> / <span id="resetMaximum">2</span> ครั้งวันนี้
+        </div>
+
+        <button class="danger-btn" id="resetDeviceBtn" type="button" onclick="resetDevice()">
+          ยืนยันย้ายเครื่อง
+        </button>
+
+        <button class="secondary-btn" type="button" onclick="logoutAccount()">
+          ออกจากระบบ
+        </button>
+      </div>
+    </section>
+
+    <div class="footer">© 2026 9WING.SHOP • ALL RIGHTS RESERVED</div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /*
+     * ใส่ Google Apps Script Web App URL ของระบบ License ที่นี่
+     * ตัวอย่าง:
+     * const LICENSE_API_URL = "https://script.google.com/macros/s/XXXXXXXX/exec";
+     */
+    const LICENSE_API_URL = "https://script.google.com/macros/s/AKfycbySn_tfUzFQJIMIzIdS9Qk4kzU4ETkPEwPtxjsQL7TZ5O7aHCQl5dv2W8RhogDqm94Y/exec";
+
+    const state = {
+      sessionToken: sessionStorage.getItem("9wing_session_token") || "",
+      accountId: sessionStorage.getItem("9wing_account_id") || "",
+      loginData: null
+    };
+
+    const toast = document.getElementById("toast");
+    const notice = document.getElementById("notice");
+
+    function switchTab(tab) {
+      const loginActive = tab === "login";
+
+      document.getElementById("loginTab").classList.toggle("active", loginActive);
+      document.getElementById("registerTab").classList.toggle("active", !loginActive);
+      document.getElementById("loginPanel").classList.toggle("active", loginActive);
+      document.getElementById("registerPanel").classList.toggle("active", !loginActive);
+
+      clearNotice();
+    }
+
+    function togglePassword(inputId, button) {
+      const input = document.getElementById(inputId);
+      const isPassword = input.type === "password";
+
+      input.type = isPassword ? "text" : "password";
+      button.textContent = isPassword ? "🙈" : "👁";
+      input.focus();
+    }
+
+    function showToast(message, type = "") {
+      toast.textContent = message;
+      toast.className = `toast ${type} show`;
+
+      clearTimeout(window.toastTimer);
+      window.toastTimer = setTimeout(() => {
+        toast.classList.remove("show");
+      }, 3000);
+    }
+
+    function showNotice(message, type = "error") {
+      notice.textContent = message;
+      notice.className = `notice ${type} show`;
+    }
+
+    function clearNotice() {
+      notice.textContent = "";
+      notice.className = "notice";
+    }
+
+    function validateApiUrl() {
+      if (
+        !LICENSE_API_URL ||
+        LICENSE_API_URL === "YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL"
+      ) {
+        showNotice("กรุณาใส่ Google Apps Script Web App URL ในตัวแปร LICENSE_API_URL ก่อนใช้งาน", "warning");
+        return false;
+      }
+
+      return true;
+    }
+
+    async function apiRequest(payload) {
+      if (!validateApiUrl()) {
+        throw new Error("ยังไม่ได้ตั้งค่า LICENSE_API_URL");
+      }
+
+      const response = await fetch(LICENSE_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "text/plain;charset=utf-8"
+        },
+        body: JSON.stringify(payload),
+        redirect: "follow"
+      });
+
+      if (!response.ok) {
+        throw new Error(`เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ (${response.status})`);
+      }
+
+      return response.json();
+    }
+
+    function setButtonLoading(button, loading, loadingText, normalText) {
+      button.disabled = loading;
+      button.textContent = loading ? loadingText : normalText;
+    }
+
+    async function registerAccount(event) {
+      event.preventDefault();
+      clearNotice();
+
+      const key = document.getElementById("registerKey").value.trim();
+      const accountId = document.getElementById("registerUsername").value.trim().toLowerCase();
+      const password = document.getElementById("registerPassword").value;
+      const confirmPassword = document.getElementById("registerConfirmPassword").value;
+      const button = document.getElementById("registerBtn");
+
+      if (!/^[a-z0-9._-]{4,24}$/.test(accountId)) {
+        showNotice("Username ต้องมี 4–24 ตัว และใช้เฉพาะอังกฤษ ตัวเลข จุด ขีดกลาง หรือขีดล่าง", "error");
+        return;
+      }
+
+      if (password.length < 8) {
+        showNotice("Password ต้องมีอย่างน้อย 8 ตัวอักษร", "error");
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        showNotice("Password และ Confirm Password ไม่ตรงกัน", "error");
+        return;
+      }
+
+      setButtonLoading(button, true, "กำลังสร้างบัญชี...", "สร้างบัญชีและผูก KEY");
+
+      try {
+        const result = await apiRequest({
+          action: "register",
+          license_key: key,
+          account_id: accountId,
+          password,
+          confirm_password: confirmPassword
+        });
+
+        if (!result.ok) {
+          showNotice(result.message || "ไม่สามารถสร้างบัญชีได้", "error");
+          return;
+        }
+
+        document.getElementById("registerForm").reset();
+        document.getElementById("loginUsername").value = accountId;
+
+        showToast("สร้างบัญชีสำเร็จ กรุณาเข้าสู่ระบบ", "success");
+        showNotice("สร้างบัญชีเรียบร้อยแล้ว ใช้ Username และ Password ที่กำหนดเพื่อเข้าสู่ระบบ", "success");
+        switchTab("login");
+      } catch (error) {
+        showNotice(error.message || "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error");
+      } finally {
+        setButtonLoading(button, false, "กำลังสร้างบัญชี...", "สร้างบัญชีและผูก KEY");
+      }
+    }
+
+    async function loginAccount(event) {
+      event.preventDefault();
+      clearNotice();
+
+      const accountId = document.getElementById("loginUsername").value.trim().toLowerCase();
+      const password = document.getElementById("loginPassword").value;
+      const button = document.getElementById("loginBtn");
+
+      setButtonLoading(button, true, "กำลังเข้าสู่ระบบ...", "เข้าสู่ระบบ");
+
+      try {
+        const result = await apiRequest({
+          action: "login",
+          account_id: accountId,
+          password
+        });
+
+        if (!result.ok) {
+          showNotice(result.message || "เข้าสู่ระบบไม่สำเร็จ", "error");
+          return;
+        }
+
+        state.sessionToken = result.session_token;
+        state.accountId = accountId;
+        state.loginData = result;
+
+        sessionStorage.setItem("9wing_session_token", state.sessionToken);
+        sessionStorage.setItem("9wing_account_id", state.accountId);
+
+        showDashboard(result);
+        showToast("เข้าสู่ระบบสำเร็จ", "success");
+      } catch (error) {
+        showNotice(error.message || "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error");
+      } finally {
+        setButtonLoading(button, false, "กำลังเข้าสู่ระบบ...", "เข้าสู่ระบบ");
+      }
+    }
+
+    function showDashboard(data) {
+      document.getElementById("authSection").style.display = "none";
+      document.getElementById("dashboard").classList.add("show");
+
+      document.getElementById("dashboardUsername").textContent =
+        state.accountId || "ACCOUNT";
+
+      document.getElementById("licenseMasked").textContent =
+        data.license_key_masked || "-";
+
+      document.getElementById("expiresAt").textContent =
+        data.expires_at || "ยังไม่เริ่มใช้งาน";
+
+      document.getElementById("deviceName").textContent =
+        data.device_name || "ยังไม่ผูกเครื่อง";
+
+      document.getElementById("deviceStatus").textContent =
+        data.device_bound ? "ผูกเครื่องอยู่" : "พร้อมผูกเครื่องใหม่";
+
+      document.getElementById("resetRemaining").textContent =
+        Number(data.reset_remaining_today ?? 0);
+
+      document.getElementById("resetMaximum").textContent =
+        Number(data.max_resets_per_day ?? 2);
+
+      const resetButton = document.getElementById("resetDeviceBtn");
+      const remaining = Number(data.reset_remaining_today ?? 0);
+
+      resetButton.disabled = remaining <= 0 || !data.device_bound;
+
+      if (!data.device_bound) {
+        resetButton.textContent = "KEY พร้อมผูกกับเครื่องใหม่แล้ว";
+      } else if (remaining <= 0) {
+        resetButton.textContent = "วันนี้ย้ายเครื่องครบจำนวนแล้ว";
+      } else {
+        resetButton.textContent = "ยืนยันย้ายเครื่อง";
+      }
+
+      clearNotice();
+    }
+
+    async function resetDevice() {
+      if (!state.sessionToken) {
+        logoutAccount();
+        showNotice("Session หมดอายุ กรุณาเข้าสู่ระบบใหม่", "warning");
+        return;
+      }
+
+      const confirmed = window.confirm(
+        "ยืนยันย้ายเครื่องใช่หรือไม่?\n\nเครื่องเดิมจะถูกปลดออก และนับโควตาการย้ายเครื่อง 1 ครั้ง"
+      );
+
+      if (!confirmed) {
+        return;
+      }
+
+      const button = document.getElementById("resetDeviceBtn");
+      setButtonLoading(button, true, "กำลังย้ายเครื่อง...", "ยืนยันย้ายเครื่อง");
+
+      try {
+        const result = await apiRequest({
+          action: "reset_device",
+          session_token: state.sessionToken
+        });
+
+        if (!result.ok) {
+          if (
+            result.code === "SESSION_EXPIRED" ||
+            result.code === "BAD_SESSION" ||
+            result.code === "BAD_SESSION_SIGNATURE"
+          ) {
+            logoutAccount();
+            showNotice(result.message || "Session หมดอายุ กรุณาเข้าสู่ระบบใหม่", "warning");
+            return;
+          }
+
+          showNotice(result.message || "ไม่สามารถย้ายเครื่องได้", "error");
+          return;
+        }
+
+        document.getElementById("deviceName").textContent = "ยังไม่ผูกเครื่อง";
+        document.getElementById("deviceStatus").textContent = "พร้อมผูกเครื่องใหม่";
+        document.getElementById("resetRemaining").textContent =
+          Number(result.reset_remaining_today ?? 0);
+
+        button.disabled = true;
+        button.textContent = "KEY พร้อมผูกกับเครื่องใหม่แล้ว";
+
+        showNotice(
+          result.message || "ย้ายเครื่องสำเร็จ สามารถนำ KEY ไปใช้กับเครื่องใหม่ได้แล้ว",
+          "success"
+        );
+        showToast("ย้ายเครื่องสำเร็จ", "success");
+      } catch (error) {
+        showNotice(error.message || "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error");
+      } finally {
+        if (!button.disabled) {
+          setButtonLoading(button, false, "กำลังย้ายเครื่อง...", "ยืนยันย้ายเครื่อง");
+        }
+      }
+    }
+
+    function logoutAccount() {
+      state.sessionToken = "";
+      state.accountId = "";
+      state.loginData = null;
+
+      sessionStorage.removeItem("9wing_session_token");
+      sessionStorage.removeItem("9wing_account_id");
+
+      document.getElementById("dashboard").classList.remove("show");
+      document.getElementById("authSection").style.display = "";
+      document.getElementById("loginForm").reset();
+      clearNotice();
+      switchTab("login");
+
+      showToast("ออกจากระบบแล้ว", "success");
+    }
+
+    function createParticles() {
+      const particleBox = document.getElementById("particles");
+      const amount = window.innerWidth < 600 ? 18 : 30;
+
+      for (let i = 0; i < amount; i++) {
+        const particle = document.createElement("span");
+        particle.className = "particle";
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.animationDuration = `${6 + Math.random() * 8}s`;
+        particle.style.animationDelay = `${Math.random() * 8}s`;
+        particle.style.opacity = Math.random().toFixed(2);
+        particleBox.appendChild(particle);
+      }
+    }
+
+    createParticles();
+
+    /*
+     * ป้องกันเบื้องต้นเท่านั้น ไม่ใช่มาตรการรักษาความปลอดภัยหลัก
+     * ความปลอดภัยจริงต้องตรวจสอบทุกอย่างที่ฝั่ง Google Apps Script
+     */
+    document.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      const blocked =
+        event.key === "F12" ||
+        (event.ctrlKey && event.shiftKey && ["I", "J", "C"].includes(event.key.toUpperCase())) ||
+        (event.ctrlKey && ["U", "S"].includes(event.key.toUpperCase()));
+
+      if (blocked) {
+        event.preventDefault();
+      }
+    });
+
+    document.addEventListener("selectstart", (event) => {
+      const allowedTags = ["INPUT", "TEXTAREA"];
+      if (!allowedTags.includes(event.target.tagName)) {
+        event.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
