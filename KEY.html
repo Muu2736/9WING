@@ -824,9 +824,9 @@
             <input
               id="registerPassword"
               type="password"
-              minlength="8"
+              minlength="4"
               maxlength="64"
-              placeholder="กำหนด Password อย่างน้อย 8 ตัว"
+              placeholder="กำหนด Password อย่างน้อย 4 ตัว"
               autocomplete="new-password"
               required
             />
@@ -843,7 +843,7 @@
             <input
               id="registerConfirmPassword"
               type="password"
-              minlength="8"
+              minlength="4"
               maxlength="64"
               placeholder="กรอก Password ซ้ำอีกครั้ง"
               autocomplete="new-password"
@@ -925,7 +925,7 @@
               <input
                 id="changeKeyPassword"
                 type="password"
-                minlength="8"
+                minlength="4"
                 maxlength="64"
                 placeholder="กรอก Password ของบัญชี"
                 autocomplete="current-password"
@@ -953,8 +953,8 @@
       <div class="reset-card">
         <div class="reset-title">ย้ายเครื่องด้วยตัวเอง</div>
         <div class="reset-desc">
-          เมื่อกดย้ายเครื่อง ระบบจะปลดเครื่องเดิมออก หลังจากนั้นให้นำ KEY ไปเปิดใช้งานในเครื่องใหม่
-          วันหมดอายุเดิมจะไม่เปลี่ยนแปลง
+          เมื่อกดย้ายเครื่อง ระบบจะตัดสิทธิ์และส่งคำสั่งปิด Floating, บอท, Proxy และแอปเครื่องเดิมทันที
+          จากนั้นให้นำ KEY ไปเปิดใช้งานในเครื่องใหม่ โดยวันหมดอายุเดิมจะไม่เปลี่ยนแปลง
         </div>
 
         <div class="reset-count">
@@ -1037,7 +1037,7 @@
       const isPassword = input.type === "password";
 
       input.type = isPassword ? "text" : "password";
-      button.textContent = isPassword ? "🙈" : "🙈";
+      button.textContent = isPassword ? "🙈" : "👁";
       input.focus();
     }
 
@@ -1114,8 +1114,8 @@
         return;
       }
 
-      if (password.length < 8) {
-        showNotice("Password ต้องมีอย่างน้อย 8 ตัวอักษร", "error");
+      if (password.length < 4) {
+        showNotice("Password ต้องมีอย่างน้อย 4 ตัวอักษร", "error");
         return;
       }
 
@@ -1272,7 +1272,7 @@
         return;
       }
 
-      if (password.length < 8) {
+      if (password.length < 4) {
         showNotice("กรุณากรอก Password ของบัญชีให้ถูกต้อง", "error");
         return;
       }
@@ -1320,11 +1320,28 @@
         state.loginData = result;
         document.getElementById("changeKeyForm").reset();
         showDashboard(result);
-        showNotice(
-          result.message || "เปลี่ยน License Key สำเร็จ เครื่องที่ใช้ KEY เดิมจะถูกตัดสิทธิ์",
-          "success"
-        );
-        showToast("เปลี่ยน License Key สำเร็จ", "success");
+
+        const oldDeviceCommandSent = result.old_device_command_sent !== false;
+        if (oldDeviceCommandSent) {
+          showNotice(
+            result.message || "เปลี่ยน License Key สำเร็จ และส่งคำสั่งปิดเครื่องที่ใช้ KEY เดิมแล้ว",
+            "success"
+          );
+          showToast("เปลี่ยน KEY และส่งคำสั่งแล้ว", "success");
+        } else {
+          button.disabled = false;
+          button.dataset.retryPush = "1";
+          button.textContent = "ส่งคำสั่งปิดเครื่องเดิมอีกครั้ง";
+
+          const pushError = result.old_device_command_error
+            ? `\nรายละเอียด: ${result.old_device_command_error}`
+            : "";
+          showNotice(
+            "เปลี่ยน License Key สำเร็จและตัดสิทธิ์ KEY เดิมแล้ว แต่ส่งคำสั่งปิดทันทีไม่สำเร็จ" + pushError,
+            "warning"
+          );
+          showToast("เปลี่ยน KEY แล้ว แต่ Push ไม่สำเร็จ", "error");
+        }
       } catch (error) {
         showNotice(error.message || "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error");
       } finally {
@@ -1340,7 +1357,7 @@
       }
 
       const confirmed = window.confirm(
-        "ยืนยันย้ายเครื่องใช่หรือไม่?\n\nเครื่องเดิมจะถูกปลดออก และนับโควตาการย้ายเครื่อง 1 ครั้ง"
+        "ยืนยันย้ายเครื่องใช่หรือไม่?\n\nระบบจะตัดสิทธิ์และยิงคำสั่งปิด Floating, บอท, Proxy และแอปเครื่องเดิมทันที พร้อมนับโควตาการย้ายเครื่อง 1 ครั้ง"
       );
 
       if (!confirmed) {
@@ -1359,6 +1376,8 @@
         if (!result.ok) {
           if (
             result.code === "SESSION_EXPIRED" ||
+            result.code === "INVALID_SESSION" ||
+            result.code === "EMPTY_SESSION" ||
             result.code === "BAD_SESSION" ||
             result.code === "BAD_SESSION_SIGNATURE"
           ) {
@@ -1371,24 +1390,44 @@
           return;
         }
 
+        const commandSent = result.old_device_command_sent !== false;
+
         document.getElementById("deviceName").textContent = "ยังไม่ผูกเครื่อง";
-        document.getElementById("deviceStatus").textContent = "พร้อมผูกเครื่องใหม่";
+        document.getElementById("deviceStatus").textContent = commandSent
+          ? "ส่งคำสั่งปิดเครื่องเดิมแล้ว"
+          : "ตัดสิทธิ์แล้ว แต่ Push ไม่สำเร็จ";
         document.getElementById("resetRemaining").textContent =
           Number(result.reset_remaining_today ?? 0);
 
         button.disabled = true;
         button.textContent = "KEY พร้อมผูกกับเครื่องใหม่แล้ว";
 
-        showNotice(
-          result.message || "ย้ายเครื่องสำเร็จ สามารถนำ KEY ไปใช้กับเครื่องใหม่ได้แล้ว",
-          "success"
-        );
-        showToast("ย้ายเครื่องสำเร็จ", "success");
+        if (commandSent) {
+          delete button.dataset.retryPush;
+          showNotice(
+            result.message || "ย้ายเครื่องสำเร็จ ส่งคำสั่งปิด Floating และแอปเครื่องเดิมแล้ว",
+            "success"
+          );
+          showToast("ย้ายเครื่องสำเร็จและส่งคำสั่งแล้ว", "success");
+        } else {
+          const pushError = result.old_device_command_error
+            ? `\nรายละเอียด: ${result.old_device_command_error}`
+            : "";
+
+          showNotice(
+            (result.message || "ย้ายเครื่องสำเร็จและตัดสิทธิ์เครื่องเดิมแล้ว แต่ส่งคำสั่งปิดทันทีไม่สำเร็จ") + pushError,
+            "warning"
+          );
+          showToast("ตัดสิทธิ์แล้ว แต่ส่งคำสั่งไม่สำเร็จ", "error");
+        }
       } catch (error) {
         showNotice(error.message || "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error");
       } finally {
         if (!button.disabled) {
-          setButtonLoading(button, false, "กำลังย้ายเครื่อง...", "ยืนยันย้ายเครื่อง");
+          const normalText = button.dataset.retryPush === "1"
+            ? "ส่งคำสั่งปิดเครื่องเดิมอีกครั้ง"
+            : "ยืนยันย้ายเครื่อง";
+          setButtonLoading(button, false, "กำลังย้ายเครื่อง...", normalText);
         }
       }
     }
