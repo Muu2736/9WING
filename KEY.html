@@ -525,41 +525,7 @@
       font-weight: 900;
       word-break: break-word;
     }
-
-    .change-key-card {
-      margin: 14px 0;
-      padding: 18px;
-      border-radius: 18px;
-      border: 1px solid rgba(255, 215, 0, 0.22);
-      background:
-        radial-gradient(circle at top left, rgba(255, 215, 0, 0.08), transparent 42%),
-        rgba(255, 255, 255, 0.03);
-    }
-
-    .change-key-title {
-      color: #fff;
-      font-size: 18px;
-      font-weight: 900;
-    }
-
-    .change-key-desc {
-      margin: 6px 0 14px;
-      color: #9a9a9a;
-      font-size: 12px;
-      line-height: 1.65;
-    }
-
-    .change-key-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .change-key-card .submit-btn {
-      margin-top: 14px;
-    }
-
-    .reset-card {
+.reset-card {
       margin-top: 4px;
       padding: 18px;
       border-radius: 18px;
@@ -589,6 +555,84 @@
       font-weight: 900;
       text-align: center;
       text-shadow: 0 0 16px rgba(255, 215, 0, 0.42);
+    }
+
+
+
+    .security-warning {
+      margin: 0 0 20px;
+      padding: 17px 18px;
+      border: 2px solid #ff3232;
+      border-radius: 16px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(120, 0, 0, 0.96), rgba(48, 0, 0, 0.98));
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+        0 0 24px rgba(255, 35, 35, 0.34),
+        0 12px 30px rgba(0, 0, 0, 0.40);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: warningBlink 2.6s ease-in-out infinite;
+    }
+
+    .security-warning::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(110deg, transparent 25%, rgba(255,255,255,.10) 48%, transparent 70%);
+      transform: translateX(-120%);
+      animation: warningSweep 3.5s ease-in-out infinite;
+    }
+
+    .security-warning-title {
+      position: relative;
+      z-index: 1;
+      margin-bottom: 8px;
+      color: #fff4f4;
+      font-size: 18px;
+      font-weight: 1000;
+      letter-spacing: .4px;
+      text-shadow: 0 0 12px rgba(255, 40, 40, .75);
+    }
+
+    .security-warning-text {
+      position: relative;
+      z-index: 1;
+      color: #ffe3e3;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.75;
+    }
+
+    .security-warning-text strong {
+      color: #ffffff;
+      font-weight: 1000;
+      text-decoration: none;
+      
+      
+    }
+
+    @keyframes warningBlink {
+      0%, 100% {
+        opacity: 1;
+        filter: brightness(1);
+        border-color: #ff3232;
+        box-shadow: 0 0 0 1px rgba(255,255,255,.05) inset, 0 0 18px rgba(255,35,35,.30), 0 12px 30px rgba(0,0,0,.40);
+      }
+      50% {
+        opacity: .82;
+        filter: brightness(1.18);
+        border-color: #ffaaaa;
+        box-shadow: 0 0 0 2px rgba(255,255,255,.12) inset, 0 0 42px rgba(255,35,35,.85), 0 12px 30px rgba(0,0,0,.40);
+      }
+    }
+
+    @keyframes warningSweep {
+      0%, 55% { transform: translateX(-120%); }
+      85%, 100% { transform: translateX(120%); }
     }
 
     .notice {
@@ -687,12 +731,7 @@
       .info-grid {
         grid-template-columns: 1fr;
       }
-
-      .change-key-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .account-head {
+.account-head {
         flex-direction: column;
       }
 
@@ -720,7 +759,7 @@
     <div class="top-line">
       <div class="status">
         <span class="status-dot"></span>
-        SYSTEM ONLINE
+        SERVERS ONLINE
       </div>
       <div class="secure-badge">🔒 SECURE CUSTOMER PORTAL</div>
     </div>
@@ -742,14 +781,11 @@
           เข้าสู่ระบบ
         </button>
         <button class="tab-btn" id="registerTab" type="button" onclick="switchTab('register')">
-          สร้างบัญชี
+          ผูกบัญชี
         </button>
       </div>
 
       <div id="loginPanel" class="panel active">
-        <h2 class="form-title">เข้าสู่ระบบ</h2>
-        <p class="form-desc">ใช้ Username และ Password ที่ผูกกับ License Key</p>
-
         <form class="form-grid" id="loginForm" onsubmit="loginAccount(event)">
           <div class="field">
             <label for="loginUsername">USERNAME</label>
@@ -778,7 +814,7 @@
               type="button"
               onclick="togglePassword('loginPassword', this)"
               aria-label="แสดงหรือซ่อนรหัสผ่าน"
-            >👁</button>
+            >🙈</button>
           </div>
 
           <button class="submit-btn" id="loginBtn" type="submit">
@@ -790,8 +826,13 @@
       </div>
 
       <div id="registerPanel" class="panel">
-        <h2 class="form-title">สร้างบัญชีใหม่</h2>
-        <p class="form-desc">กรอก License Key แล้วกำหนด Username และ Password ด้วยตัวเอง</p>
+
+        <aside class="security-warning" role="alert" aria-label="คำเตือนการผูก License Key">
+          <div class="security-warning-title">⚠️ WARNING ⚠️</div>
+          <div class="security-warning-text">
+            กรุณาใช้ <strong>KEY ของท่านเท่านั้น</strong> หากตรวจพบผูก KEY ของผู้อื่น ขอระงับสิทธิ์การใช้งานถาวร และสงวนสิทธิ์ไม่คืนเงินทุกกรณี
+          </div>
+        </aside>
 
         <form class="form-grid" id="registerForm" onsubmit="registerAccount(event)">
           <div class="field">
@@ -813,7 +854,7 @@
               type="text"
               minlength="4"
               maxlength="24"
-              placeholder="อังกฤษ ตัวเลข จุด ขีดกลาง หรือขีดล่าง"
+              placeholder="กำหนด Username"
               autocomplete="username"
               required
             />
@@ -826,7 +867,7 @@
               type="password"
               minlength="4"
               maxlength="64"
-              placeholder="กำหนด Password อย่างน้อย 4 ตัว"
+              placeholder="กำหนด Password อย่างน้อย 8 ตัว"
               autocomplete="new-password"
               required
             />
@@ -835,7 +876,7 @@
               type="button"
               onclick="togglePassword('registerPassword', this)"
               aria-label="แสดงหรือซ่อนรหัสผ่าน"
-            >👁</button>
+            >🙈</button>
           </div>
 
           <div class="field">
@@ -854,7 +895,7 @@
               type="button"
               onclick="togglePassword('registerConfirmPassword', this)"
               aria-label="แสดงหรือซ่อนรหัสผ่าน"
-            >👁</button>
+            >🙈</button>
           </div>
 
           <button class="submit-btn" id="registerBtn" type="submit">
@@ -896,57 +937,6 @@
         <div class="info-card">
           <div class="info-label">สถานะเครื่อง</div>
           <div class="info-value" id="deviceStatus">พร้อมใช้งาน</div>
-        </div>
-      </div>
-
-      <div class="change-key-card">
-        <div class="change-key-title">เปลี่ยน License Key</div>
-        <div class="change-key-desc">
-          กรอก KEY ใหม่ที่ซื้อไว้และ Password ของบัญชี ระบบจะย้ายบัญชีไปยัง KEY ใหม่
-          พร้อมตัดสิทธิ์เครื่องที่กำลังใช้ KEY เดิม
-        </div>
-
-        <form id="changeKeyForm" onsubmit="changeLicenseKey(event)">
-          <div class="change-key-grid">
-            <div class="field">
-              <label for="newLicenseKey">LICENSE KEY ใหม่</label>
-              <input
-                id="newLicenseKey"
-                type="text"
-                placeholder="กรอก License Key ใหม่"
-                autocomplete="off"
-                spellcheck="false"
-                required
-              />
-            </div>
-
-            <div class="field">
-              <label for="changeKeyPassword">PASSWORD ยืนยัน</label>
-              <input
-                id="changeKeyPassword"
-                type="password"
-                minlength="4"
-                maxlength="64"
-                placeholder="กรอก Password ของบัญชี"
-                autocomplete="current-password"
-                required
-              />
-              <button
-                class="toggle-password"
-                type="button"
-                onclick="togglePassword('changeKeyPassword', this)"
-                aria-label="แสดงหรือซ่อนรหัสผ่าน"
-              >👁</button>
-            </div>
-          </div>
-
-          <button class="submit-btn" id="changeKeyBtn" type="submit">
-            บันทึก License Key ใหม่
-          </button>
-        </form>
-
-        <div class="hint">
-          KEY ใหม่ต้องมีอยู่ในระบบ เป็นสถานะ ACTIVE และยังไม่ผูกกับบัญชีอื่น
         </div>
       </div>
 
@@ -1021,6 +1011,102 @@
     const toast = document.getElementById("toast");
     const notice = document.getElementById("notice");
 
+    // จำกัดการย้ายเครื่องที่หน้าเว็บ: บัญชีละ 2 ครั้งต่อวัน
+    // บันทึกใน localStorage และรีเซ็ตเมื่อถึงเที่ยงคืนตามเวลาไทย
+    const LOCAL_RESET_LIMIT_PER_DAY = 2;
+    const LOCAL_RESET_STORAGE_PREFIX = "9wing_reset_limit_th_v1_";
+    const BANGKOK_OFFSET_MS = 7 * 60 * 60 * 1000;
+
+    function bangkokDayKey(date = new Date()) {
+      return new Date(date.getTime() + BANGKOK_OFFSET_MS)
+        .toISOString()
+        .slice(0, 10);
+    }
+
+    function localResetStorageKey() {
+      const account = String(state.accountId || "guest").trim().toLowerCase();
+      return LOCAL_RESET_STORAGE_PREFIX + encodeURIComponent(account);
+    }
+
+    function getLocalResetUsage() {
+      const today = bangkokDayKey();
+      let stored = null;
+
+      try {
+        stored = JSON.parse(localStorage.getItem(localResetStorageKey()) || "null");
+      } catch (_) {
+        stored = null;
+      }
+
+      let count = Number(stored && stored.date === today ? stored.count : 0);
+      if (!Number.isFinite(count) || count < 0) count = 0;
+      count = Math.min(LOCAL_RESET_LIMIT_PER_DAY, Math.floor(count));
+
+      const usage = { date: today, count };
+      localStorage.setItem(localResetStorageKey(), JSON.stringify(usage));
+      return usage;
+    }
+
+    function initializeLocalResetUsage(data) {
+      const key = localResetStorageKey();
+      if (localStorage.getItem(key) !== null) return;
+
+      // ถ้าเพิ่งกดย้ายเครื่องก่อนเปลี่ยนมาใช้ไฟล์นี้ ให้เริ่มนับครั้งปัจจุบันเป็น 1
+      const inferredCount = data && data.device_transfer_pending === true ? 1 : 0;
+      localStorage.setItem(key, JSON.stringify({
+        date: bangkokDayKey(),
+        count: inferredCount
+      }));
+    }
+
+    function incrementLocalResetUsage() {
+      const usage = getLocalResetUsage();
+      usage.count = Math.min(LOCAL_RESET_LIMIT_PER_DAY, usage.count + 1);
+      localStorage.setItem(localResetStorageKey(), JSON.stringify(usage));
+      return usage;
+    }
+
+    function getLocalResetRemaining() {
+      return Math.max(0, LOCAL_RESET_LIMIT_PER_DAY - getLocalResetUsage().count);
+    }
+
+    function updateLocalResetUI(deviceBound) {
+      const remaining = getLocalResetRemaining();
+      const resetButton = document.getElementById("resetDeviceBtn");
+
+      document.getElementById("resetRemaining").textContent = remaining;
+      document.getElementById("resetMaximum").textContent = LOCAL_RESET_LIMIT_PER_DAY;
+
+      resetButton.disabled = remaining <= 0 || !deviceBound;
+
+      if (remaining <= 0) {
+        resetButton.textContent = "วันนี้ย้ายเครื่องครบ 2 ครั้งแล้ว";
+      } else if (!deviceBound) {
+        resetButton.textContent = "KEY พร้อมผูกกับเครื่องใหม่แล้ว";
+      } else {
+        resetButton.textContent = "ยืนยันย้ายเครื่อง";
+      }
+    }
+
+    function millisecondsUntilBangkokMidnight() {
+      const nowMs = Date.now();
+      const bangkokNow = new Date(nowMs + BANGKOK_OFFSET_MS);
+      const nextMidnightUtc = Date.UTC(
+        bangkokNow.getUTCFullYear(),
+        bangkokNow.getUTCMonth(),
+        bangkokNow.getUTCDate() + 1
+      ) - BANGKOK_OFFSET_MS;
+
+      return Math.max(1000, nextMidnightUtc - nowMs);
+    }
+
+    function scheduleBangkokMidnightRefresh() {
+      clearTimeout(window.bangkokMidnightTimer);
+      window.bangkokMidnightTimer = setTimeout(() => {
+        window.location.reload();
+      }, millisecondsUntilBangkokMidnight() + 1000);
+    }
+
     function switchTab(tab) {
       const loginActive = tab === "login";
 
@@ -1037,7 +1123,7 @@
       const isPassword = input.type === "password";
 
       input.type = isPassword ? "text" : "password";
-      button.textContent = isPassword ? "🙈" : "👁";
+      button.textContent = isPassword ? "🙈" : "🙈";
       input.focus();
     }
 
@@ -1231,122 +1317,11 @@
       document.getElementById("deviceStatus").textContent =
         data.device_bound ? "ผูกเครื่องอยู่" : "พร้อมผูกเครื่องใหม่";
 
-      document.getElementById("resetRemaining").textContent =
-        Number(data.reset_remaining_today ?? 0);
-
-      document.getElementById("resetMaximum").textContent =
-        Number(data.reset_limit_per_day ?? data.max_resets_per_day ?? 2);
-
-      const resetButton = document.getElementById("resetDeviceBtn");
-      const remaining = Number(data.reset_remaining_today ?? 0);
-
-      resetButton.disabled = remaining <= 0 || !data.device_bound;
-
-      if (!data.device_bound) {
-        resetButton.textContent = "KEY พร้อมผูกกับเครื่องใหม่แล้ว";
-      } else if (remaining <= 0) {
-        resetButton.textContent = "วันนี้ย้ายเครื่องครบจำนวนแล้ว";
-      } else {
-        resetButton.textContent = "ยืนยันย้ายเครื่อง";
-      }
+      // ใช้จำนวนครั้งจากหน้าเว็บแทนค่าที่ Apps Script ส่งกลับมา
+      initializeLocalResetUsage(data);
+      updateLocalResetUI(Boolean(data.device_bound));
 
       clearNotice();
-    }
-
-    async function changeLicenseKey(event) {
-      event.preventDefault();
-      clearNotice();
-
-      if (!state.sessionToken) {
-        await logoutAccount();
-        showNotice("Session หมดอายุ กรุณาเข้าสู่ระบบใหม่", "warning");
-        return;
-      }
-
-      const newKey = document.getElementById("newLicenseKey").value.trim();
-      const password = document.getElementById("changeKeyPassword").value;
-      const button = document.getElementById("changeKeyBtn");
-
-      if (!newKey) {
-        showNotice("กรุณากรอก License Key ใหม่", "error");
-        return;
-      }
-
-      if (password.length < 4) {
-        showNotice("กรุณากรอก Password ของบัญชีให้ถูกต้อง", "error");
-        return;
-      }
-
-      const confirmed = window.confirm(
-        "ยืนยันเปลี่ยน License Key ใช่หรือไม่?\n\n" +
-        "เครื่องที่ใช้ KEY เดิมจะถูกตัดสิทธิ์ และบัญชีนี้จะย้ายไปผูกกับ KEY ใหม่"
-      );
-
-      if (!confirmed) return;
-
-      setButtonLoading(button, true, "กำลังเปลี่ยน KEY...", "บันทึก License Key ใหม่");
-
-      try {
-        const result = await apiRequest({
-          action: "change_license_key",
-          session_token: state.sessionToken,
-          new_license_key: newKey,
-          password
-        });
-
-        if (!result.ok) {
-          if (
-            result.code === "SESSION_EXPIRED" ||
-            result.code === "INVALID_SESSION" ||
-            result.code === "EMPTY_SESSION"
-          ) {
-            clearLocalSession();
-            document.getElementById("dashboard").classList.remove("show");
-            document.getElementById("authSection").style.display = "";
-            switchTab("login");
-            showNotice(result.message || "Session หมดอายุ กรุณาเข้าสู่ระบบใหม่", "warning");
-            return;
-          }
-
-          showNotice(result.message || "ไม่สามารถเปลี่ยน License Key ได้", "error");
-          return;
-        }
-
-        if (result.session_token) {
-          state.sessionToken = result.session_token;
-          sessionStorage.setItem(SESSION_TOKEN_KEY, state.sessionToken);
-        }
-
-        state.loginData = result;
-        document.getElementById("changeKeyForm").reset();
-        showDashboard(result);
-
-        const oldDeviceCommandSent = result.old_device_command_sent !== false;
-        if (oldDeviceCommandSent) {
-          showNotice(
-            result.message || "เปลี่ยน License Key สำเร็จ และส่งคำสั่งปิดเครื่องที่ใช้ KEY เดิมแล้ว",
-            "success"
-          );
-          showToast("เปลี่ยน KEY และส่งคำสั่งแล้ว", "success");
-        } else {
-          button.disabled = false;
-          button.dataset.retryPush = "1";
-          button.textContent = "ส่งคำสั่งปิดเครื่องเดิมอีกครั้ง";
-
-          const pushError = result.old_device_command_error
-            ? `\nรายละเอียด: ${result.old_device_command_error}`
-            : "";
-          showNotice(
-            "เปลี่ยน License Key สำเร็จและตัดสิทธิ์ KEY เดิมแล้ว แต่ส่งคำสั่งปิดทันทีไม่สำเร็จ" + pushError,
-            "warning"
-          );
-          showToast("เปลี่ยน KEY แล้ว แต่ Push ไม่สำเร็จ", "error");
-        }
-      } catch (error) {
-        showNotice(error.message || "เกิดข้อผิดพลาดในการเชื่อมต่อ", "error");
-      } finally {
-        setButtonLoading(button, false, "กำลังเปลี่ยน KEY...", "บันทึก License Key ใหม่");
-      }
     }
 
     async function resetDevice() {
@@ -1356,8 +1331,15 @@
         return;
       }
 
+      const localRemaining = getLocalResetRemaining();
+      if (localRemaining <= 0) {
+        updateLocalResetUI(Boolean(state.loginData && state.loginData.device_bound));
+        showNotice("วันนี้ย้ายเครื่องครบ 2 ครั้งแล้ว กรุณารอระบบรีเซ็ตหลังเที่ยงคืน", "warning");
+        return;
+      }
+
       const confirmed = window.confirm(
-        "ยืนยันย้ายเครื่องใช่หรือไม่?\n\nระบบจะตัดสิทธิ์และยิงคำสั่งปิด Floating, บอท, Proxy และแอปเครื่องเดิมทันที พร้อมนับโควตาการย้ายเครื่อง 1 ครั้ง"
+        `ยืนยันย้ายเครื่องใช่หรือไม่?\n\nวันนี้ยังเหลือ ${localRemaining} ครั้ง`
       );
 
       if (!confirmed) {
@@ -1396,16 +1378,18 @@
         document.getElementById("deviceStatus").textContent = commandSent
           ? "ส่งคำสั่งปิดเครื่องเดิมแล้ว"
           : "ตัดสิทธิ์แล้ว แต่ Push ไม่สำเร็จ";
-        document.getElementById("resetRemaining").textContent =
-          Number(result.reset_remaining_today ?? 0);
+        // นับเฉพาะการย้ายเครื่องใหม่ที่สำเร็จ ไม่หักซ้ำกรณีส่ง Push ซ้ำ
+        if (result.code === "DEVICE_RESET_SUCCESS") {
+          incrementLocalResetUsage();
+        }
 
-        button.disabled = true;
-        button.textContent = "KEY พร้อมผูกกับเครื่องใหม่แล้ว";
+        state.loginData = { ...(state.loginData || {}), device_bound: false };
+        updateLocalResetUI(false);
 
         if (commandSent) {
           delete button.dataset.retryPush;
           showNotice(
-            result.message || "ย้ายเครื่องสำเร็จ ส่งคำสั่งปิด Floating และแอปเครื่องเดิมแล้ว",
+            result.message || "ย้ายเครื่องสำเร็จ",
             "success"
           );
           showToast("ย้ายเครื่องสำเร็จและส่งคำสั่งแล้ว", "success");
@@ -1506,6 +1490,7 @@
     }
 
     createParticles();
+    scheduleBangkokMidnightRefresh();
     restoreSession();
 
     /*
