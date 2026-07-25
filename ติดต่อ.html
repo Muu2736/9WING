@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#070707" />
+  <meta name="description" content="คู่มือและวิดีโอสอนการใช้งาน GG Power โดย 9WING.SHOP" />
+  <title>9WING.SHOP | สอนการใช้งาน</title>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap");
+
+    :root {
+      --gold: #ffd700;
+      --gold-light: #fff7a6;
+      --orange: #ff8a00;
+      --black: #050505;
+      --panel: rgba(10, 10, 10, 0.76);
+      --text: #ffffff;
+      --muted: #bcbcbc;
+      --success: #36f18b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Arial", "Tahoma", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 215, 0, 0.20), transparent 32%),
+        radial-gradient(circle at 85% 80%, rgba(255, 138, 0, 0.16), transparent 30%),
+        linear-gradient(135deg, #020202, #111000 55%, #050505);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 28px 16px;
+      position: relative;
+    }
+
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(95px);
+      opacity: 0.32;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatLight 9s ease-in-out infinite alternate;
+    }
+
+    body::before {
+      top: -140px;
+      left: -120px;
+      background: var(--gold);
+    }
+
+    body::after {
+      right: -140px;
+      bottom: -160px;
+      background: var(--orange);
+      animation-delay: -4s;
+    }
+
+    @keyframes floatLight {
+      from { transform: translate3d(0, 0, 0) scale(0.95); }
+      to { transform: translate3d(65px, 35px, 0) scale(1.12); }
+    }
+
+    .particles {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .particle {
+      position: absolute;
+      bottom: -20px;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 12px var(--gold);
+      opacity: 0;
+      animation: rise linear infinite;
+    }
+
+    @keyframes rise {
+      0% { transform: translateY(0) scale(0.6); opacity: 0; }
+      15% { opacity: 0.9; }
+      100% { transform: translateY(-115vh) scale(1.25); opacity: 0; }
+    }
+
+    .container {
+      width: min(94vw, 850px);
+      text-align: center;
+      padding: 36px 28px 30px;
+      border: 1px solid rgba(255, 215, 0, 0.75);
+      border-radius: 28px;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01)),
+        var(--panel);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+        0 0 35px rgba(255, 215, 0, 0.22),
+        0 25px 70px rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      position: relative;
+      z-index: 2;
+      overflow: hidden;
+      animation: showPanel 0.8s cubic-bezier(.2, .8, .2, 1) both;
+    }
+
+    .container::before {
+      content: "";
+      position: absolute;
+      width: 170px;
+      height: 1000px;
+      top: -350px;
+      left: -280px;
+      transform: rotate(28deg);
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.11), transparent);
+      animation: glassSweep 6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes showPanel {
+      from { opacity: 0; transform: translateY(24px) scale(0.96); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    @keyframes glassSweep {
+      0%, 48% { left: -280px; }
+      70%, 100% { left: 980px; }
+    }
+
+    .top-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      color: #d9ffe9;
+      background: rgba(54, 241, 139, 0.10);
+      border: 1px solid rgba(54, 241, 139, 0.28);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 12px var(--success);
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(0.9); opacity: 0.65; }
+      50% { transform: scale(1.25); opacity: 1; }
+    }
+
+    .youtube-badge {
+      color: #eee;
+      font-size: 12px;
+      opacity: 0.88;
+    }
+
+    .logo-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .logo {
+      font-family: "Orbitron", "Arial Black", sans-serif;
+      font-size: clamp(36px, 8vw, 56px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 1px;
+      -webkit-text-stroke: 0.8px rgba(255, 215, 0, 0.95);
+      color: transparent;
+      background: linear-gradient(180deg, #fffbd3 0%, #ffd700 48%, #ff9800 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      filter: drop-shadow(0 0 12px rgba(255, 215, 0, 0.65));
+    }
+
+    .logo-wrap::after {
+      content: "";
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      bottom: -12px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      box-shadow: 0 0 14px var(--gold);
+    }
+
+    .sub {
+      margin-top: 23px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .sub strong {
+      color: #fff;
+      font-size: clamp(20px, 4vw, 26px);
+      letter-spacing: 1.5px;
+    }
+
+    .menu-note {
+      margin-bottom: 18px;
+      padding: 13px 15px;
+      border-radius: 15px;
+      border: 1px solid rgba(255, 215, 0, 0.22);
+      background: rgba(255, 255, 255, 0.045);
+      color: #d5d5d5;
+      text-align: left;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .menu-note b { color: var(--gold); }
+
+    .tutorial-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .tutorial-item {
+      border-radius: 22px;
+      border: 1px solid rgba(255, 215, 0, 0.30);
+      background: rgba(0, 0, 0, 0.46);
+      box-shadow: inset 0 0 25px rgba(255, 215, 0, 0.04), 0 16px 40px rgba(0, 0, 0, 0.35);
+      text-align: left;
+      overflow: hidden;
+      transition: border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+    }
+
+    .tutorial-item[open] {
+      border-color: rgba(255, 215, 0, 0.52);
+      box-shadow: inset 0 0 28px rgba(255, 215, 0, 0.05), 0 18px 44px rgba(0, 0, 0, 0.45), 0 0 20px rgba(255, 215, 0, 0.08);
+    }
+
+    .tutorial-summary {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .tutorial-summary::-webkit-details-marker { display: none; }
+
+    .tutorial-summary:hover {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .tutorial-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      flex: 1;
+    }
+
+    .tutorial-icon {
+      width: 48px;
+      height: 48px;
+      flex: 0 0 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: #111;
+      font-size: 24px;
+      background: linear-gradient(135deg, #fff7a6, #ffd700 55%, #ff9500);
+      box-shadow: 0 0 22px rgba(255, 215, 0, 0.24);
+    }
+
+    .tutorial-title {
+      font-size: clamp(18px, 3vw, 23px);
+      line-height: 1.25;
+      color: #fff;
+    }
+
+    .tutorial-desc {
+      margin-top: 4px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .summary-right {
+      flex: 0 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .latest-label {
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #111;
+      background: var(--gold);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: .6px;
+    }
+
+    .summary-arrow {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      color: var(--gold);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.08);
+      font-size: 18px;
+      transition: transform .25s ease, background .25s ease;
+    }
+
+    .tutorial-item[open] .summary-arrow {
+      transform: rotate(180deg);
+      background: rgba(255,215,0,.10);
+    }
+
+    .tutorial-content {
+      padding: 0 16px 16px;
+      animation: revealContent .2s ease;
+    }
+
+    @keyframes revealContent {
+      from { opacity: 0; transform: translateY(-4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border-radius: 16px;
+      background: #000;
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 14px 38px rgba(0, 0, 0, .50);
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .action-btn {
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 14px;
+      border-radius: 13px;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      text-decoration: none;
+      color: #111;
+      background: linear-gradient(135deg, #fff7a6, #ffd700 55%, #ff9500);
+      font-size: 14px;
+      font-weight: 900;
+      cursor: pointer;
+      transition: transform .2s ease, filter .2s ease, box-shadow .2s ease;
+    }
+
+    .action-btn.secondary {
+      color: #fff;
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,215,0,.35);
+    }
+
+    .action-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.06);
+      box-shadow: 0 10px 25px rgba(255, 215, 0, .13);
+    }
+
+    .guide-note {
+      margin-top: 16px;
+      padding: 13px 15px;
+      border-radius: 14px;
+      color: #d6d6d6;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(255,255,255,.08);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .guide-note b { color: var(--gold); }
+
+    .binding-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .binding-steps {
+      list-style: none;
+      display: grid;
+      gap: 11px;
+      counter-reset: bind-step;
+    }
+
+    .binding-step {
+      counter-increment: bind-step;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 13px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(255, 255, 255, .045);
+    }
+
+    .binding-step::before {
+      content: counter(bind-step);
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      color: #111;
+      background: linear-gradient(135deg, #fff7a6, #ffd700 55%, #ff9500);
+      font-size: 16px;
+      font-weight: 900;
+      box-shadow: 0 0 16px rgba(255, 215, 0, .16);
+    }
+
+    .binding-step h3 {
+      margin-top: 1px;
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .binding-step p {
+      margin-top: 4px;
+      color: #aaa;
+      font-size: 12.5px;
+      line-height: 1.65;
+    }
+
+    .account-preview {
+      height: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 215, 0, .28);
+      background:
+        radial-gradient(circle at top right, rgba(255, 215, 0, .10), transparent 44%),
+        rgba(0, 0, 0, .42);
+    }
+
+    .preview-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 13px;
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .preview-field {
+      margin-top: 10px;
+      padding: 11px 12px;
+      border-radius: 11px;
+      border: 1px solid rgba(255, 255, 255, .10);
+      background: rgba(255, 255, 255, .055);
+    }
+
+    .preview-field span {
+      display: block;
+      margin-bottom: 4px;
+      color: #888;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .7px;
+    }
+
+    .preview-field strong {
+      display: block;
+      overflow: hidden;
+      color: #e8e8e8;
+      font-size: 13px;
+      font-weight: 700;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .preview-submit {
+      width: 100%;
+      min-height: 44px;
+      margin-top: 13px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      color: #111;
+      background: linear-gradient(135deg, #fff7a6, #ffd700 55%, #ff9500);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .security-note {
+      margin-top: 13px;
+      padding: 11px 12px;
+      border-radius: 12px;
+      color: #cfcfcf;
+      background: rgba(54, 241, 139, .055);
+      border: 1px solid rgba(54, 241, 139, .18);
+      font-size: 11.5px;
+      line-height: 1.65;
+    }
+
+    .security-note b { color: #75f5a9; }
+
+    .ld-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(270px, .95fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .ld-settings {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+    }
+
+    .ld-setting {
+      min-height: 108px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(255, 255, 255, .045);
+    }
+
+    .ld-setting-top {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 8px;
+    }
+
+    .ld-setting-icon {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      color: #111;
+      background: linear-gradient(135deg, #fff7a6, #ffd700 55%, #ff9500);
+      font-size: 17px;
+      box-shadow: 0 0 14px rgba(255, 215, 0, .14);
+    }
+
+    .ld-setting h3 {
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .ld-setting strong {
+      display: block;
+      margin-top: 3px;
+      color: var(--gold);
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .ld-setting p {
+      margin-top: 6px;
+      color: #999;
+      font-size: 11.5px;
+      line-height: 1.55;
+    }
+
+    .ld-steps-box {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 215, 0, .28);
+      background:
+        radial-gradient(circle at top right, rgba(255, 215, 0, .10), transparent 44%),
+        rgba(0, 0, 0, .42);
+    }
+
+    .ld-steps-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 13px;
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .ld-steps {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      counter-reset: ld-step;
+    }
+
+    .ld-step {
+      counter-increment: ld-step;
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .ld-step::before {
+      content: counter(ld-step);
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: #111;
+      background: var(--gold);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .ld-step h3 {
+      color: #eee;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .ld-step p {
+      margin-top: 3px;
+      color: #999;
+      font-size: 11.5px;
+      line-height: 1.55;
+    }
+
+    .ld-warning {
+      margin-top: 13px;
+      padding: 11px 12px;
+      border-radius: 12px;
+      color: #cfcfcf;
+      background: rgba(255, 138, 0, .07);
+      border: 1px solid rgba(255, 138, 0, .22);
+      font-size: 11.5px;
+      line-height: 1.65;
+    }
+
+    .ld-warning b { color: #ffbd57; }
+
+    .rf-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(270px, .95fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .rf-settings {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 11px;
+    }
+
+    .rf-setting {
+      min-height: 112px;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      background: rgba(255, 255, 255, .045);
+    }
+
+    .rf-setting-top {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 8px;
+    }
+
+    .rf-setting-icon {
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff4d4d, #c50000 62%, #710000);
+      font-size: 17px;
+      box-shadow: 0 0 16px rgba(255, 50, 50, .18);
+    }
+
+    .rf-setting h3 {
+      color: #fff;
+      font-size: 14px;
+      line-height: 1.3;
+    }
+
+    .rf-setting strong {
+      display: block;
+      margin-top: 3px;
+      color: #ff7777;
+      font-size: 15px;
+      line-height: 1.35;
+    }
+
+    .rf-setting p {
+      margin-top: 6px;
+      color: #999;
+      font-size: 11.5px;
+      line-height: 1.55;
+    }
+
+    .rf-steps-box {
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 80, 80, .28);
+      background:
+        radial-gradient(circle at top right, rgba(255, 50, 50, .11), transparent 44%),
+        rgba(0, 0, 0, .42);
+    }
+
+    .rf-steps-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 13px;
+      color: #ff7777;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .rf-steps {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      counter-reset: rf-step;
+    }
+
+    .rf-step {
+      counter-increment: rf-step;
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .rf-step::before {
+      content: counter(rf-step);
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: #fff;
+      background: linear-gradient(135deg, #ff4d4d, #a60000);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .rf-step h3 {
+      color: #eee;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .rf-step p {
+      margin-top: 3px;
+      color: #999;
+      font-size: 11.5px;
+      line-height: 1.55;
+    }
+
+    .rf-warning {
+      margin-top: 13px;
+      padding: 11px 12px;
+      border-radius: 12px;
+      color: #cfcfcf;
+      background: rgba(255, 65, 65, .07);
+      border: 1px solid rgba(255, 65, 65, .22);
+      font-size: 11.5px;
+      line-height: 1.65;
+    }
+
+    .rf-warning b { color: #ff8b8b; }
+
+    .version {
+      margin-top: 24px;
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-shadow: 0 0 12px rgba(255, 215, 0, 0.65);
+    }
+
+    .footer {
+      margin-top: 14px;
+      color: #868686;
+      font-size: 12px;
+    }
+
+    @media (max-width: 620px) {
+      body { align-items: flex-start; padding-top: 18px; }
+      .container { width: 100%; padding: 26px 15px 23px; border-radius: 22px; }
+      .youtube-badge { display: none; }
+      .tutorial-summary { padding: 13px; align-items: flex-start; }
+      .summary-right { flex-direction: column; align-items: flex-end; gap: 8px; }
+      .tutorial-content { padding: 0 13px 13px; }
+      .action-row { grid-template-columns: 1fr; }
+      .binding-layout { grid-template-columns: 1fr; }
+      .ld-layout { grid-template-columns: 1fr; }
+      .rf-layout { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 430px) {
+      .tutorial-title-wrap { align-items: flex-start; }
+      .tutorial-icon { width: 43px; height: 43px; flex-basis: 43px; font-size: 21px; }
+      .summary-arrow { width: 32px; height: 32px; font-size: 16px; }
+      .binding-step { grid-template-columns: 36px 1fr; gap: 10px; padding: 11px; }
+      .binding-step::before { width: 34px; height: 34px; border-radius: 10px; }
+      .ld-settings { grid-template-columns: 1fr; }
+      .rf-settings { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="particles" id="particles" aria-hidden="true"></div>
+
+  <main class="container">
+    <div class="top-line">
+      <div class="status">
+        <span class="status-dot"></span>
+        GUIDE ONLINE
+      </div>
+      <div class="youtube-badge">▶ UPDATED FROM YOUTUBE</div>
+    </div>
+
+    <div class="logo-wrap">
+      <div class="logo">9WING.SHOP</div>
+    </div>
+
+    <div class="sub">
+      <strong>สอนการใช้งาน</strong><br />
+      รวมคลิปแนะนำและวิธีใช้งานโปรแกรมจาก YouTube
+    </div>
+
+    <div class="menu-note">
+      <b>เมนูคู่มือ:</b> กดที่หัวข้อที่ต้องการ แล้วรายละเอียดจะค่อยแสดงด้านล่างทันที ช่วยให้หน้าเว็บดูเรียบร้อยและใช้งานง่ายขึ้นทั้งบนมือถือและคอมพิวเตอร์
+    </div>
+
+    <div class="tutorial-list">
+      <details class="tutorial-item" id="menu-ggpower">
+        <summary class="tutorial-summary">
+          <div class="tutorial-title-wrap">
+            <div class="tutorial-icon">⚡</div>
+            <div>
+              <h1 class="tutorial-title">วิธีการใช้งาน GG Power</h1>
+              <p class="tutorial-desc">ดูขั้นตอนการตั้งค่าและใช้งานผ่านวิดีโอด้านล่าง</p>
+            </div>
+          </div>
+          <div class="summary-right">
+            <span class="latest-label">YOUTUBE</span>
+            <span class="summary-arrow">⌄</span>
+          </div>
+        </summary>
+        <div class="tutorial-content">
+          <div class="video-frame">
+            <iframe
+              id="tutorialVideo"
+              title="วิธีการใช้งาน GG Power"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen>
+            </iframe>
+          </div>
+
+          <div class="action-row">
+            <a class="action-btn" id="youtubeButton" href="#" target="_blank" rel="noopener noreferrer">
+              ▶ เปิดดูบน YouTube
+            </a>
+            <button class="action-btn secondary" type="button" onclick="scrollToVideo()">
+              ⛶ กลับไปที่วิดีโอ
+            </button>
+          </div>
+
+          <div class="guide-note">
+            <b>หมายเหตุ:</b> วิดีโอถูกดึงจาก YouTube โดยตรง เมื่อต้องการเปลี่ยนคลิปในอนาคต สามารถเปลี่ยนได้โดยแก้เพียงรหัสวิดีโอในส่วน <b>YOUTUBE_VIDEO_ID</b>
+          </div>
+        </div>
+      </details>
+
+      <details class="tutorial-item" id="menu-bind">
+        <summary class="tutorial-summary">
+          <div class="tutorial-title-wrap">
+            <div class="tutorial-icon">🔑</div>
+            <div>
+              <h2 class="tutorial-title">วิธีผูกคีย์กับ Username และ Password</h2>
+              <p class="tutorial-desc">ทำครั้งแรกเพื่อสร้างข้อมูลเข้าสู่ระบบและเชื่อมคีย์เข้ากับบัญชีของคุณ</p>
+            </div>
+          </div>
+          <div class="summary-right">
+            <span class="latest-label">ACCOUNT</span>
+            <span class="summary-arrow">⌄</span>
+          </div>
+        </summary>
+        <div class="tutorial-content">
+          <div class="binding-layout">
+            <ol class="binding-steps">
+              <li class="binding-step">
+                <div>
+                  <h3>เปิดหน้าล็อกอิน</h3>
+                  <p>เปิดโปรแกรม 9WING แล้วกดปุ่ม <b>“ผูกคีย์กับไอดี”</b> ที่อยู่ด้านล่างแบบฟอร์มเข้าสู่ระบบ</p>
+                </div>
+              </li>
+              <li class="binding-step">
+                <div>
+                  <h3>กรอกคีย์ที่ได้รับ</h3>
+                  <p>กรอก Key ให้ครบถ้วนตามที่ได้รับจากผู้ดูแล ระวังตัวพิมพ์เล็ก–ใหญ่และช่องว่างส่วนเกิน</p>
+                </div>
+              </li>
+              <li class="binding-step">
+                <div>
+                  <h3>ตั้ง Username และ Password</h3>
+                  <p>ตั้งชื่อผู้ใช้และรหัสผ่านของตัวเอง จากนั้นกรอกรหัสผ่านยืนยันอีกครั้งให้ตรงกัน</p>
+                </div>
+              </li>
+              <li class="binding-step">
+                <div>
+                  <h3>กดยืนยันการผูกคีย์</h3>
+                  <p>ตรวจสอบข้อมูลทั้งหมดแล้วกดปุ่มยืนยัน รอจนระบบแจ้งว่า <b>ผูกคีย์สำเร็จ</b></p>
+                </div>
+              </li>
+              <li class="binding-step">
+                <div>
+                  <h3>กลับมาเข้าสู่ระบบ</h3>
+                  <p>ใช้ Username และ Password ที่สร้างไว้เข้าสู่ระบบได้ทันที โดยไม่ต้องนำ Key มากรอกซ้ำทุกครั้ง</p>
+                </div>
+              </li>
+            </ol>
+
+            <aside class="account-preview" aria-label="ตัวอย่างข้อมูลสำหรับผูกคีย์">
+              <div class="preview-title">🧾 ตัวอย่างข้อมูลที่ต้องกรอก</div>
+              <div class="preview-field">
+                <span>LICENSE KEY</span>
+                <strong>กรอกคีย์ที่ได้รับ</strong>
+              </div>
+              <div class="preview-field">
+                <span>USERNAME</span>
+                <strong>ตั้งชื่อผู้ใช้งาน</strong>
+              </div>
+              <div class="preview-field">
+                <span>PASSWORD</span>
+                <strong>••••••••••••</strong>
+              </div>
+              <div class="preview-field">
+                <span>CONFIRM PASSWORD</span>
+                <strong>••••••••••••</strong>
+              </div>
+              <div class="preview-submit">ผูกคีย์กับไอดี</div>
+
+              <div class="security-note">
+                <b>สำคัญ:</b> ห้ามส่งต่อ Key, Username หรือ Password ให้บุคคลอื่น และควรบันทึกข้อมูลไว้ในที่ปลอดภัย หากคีย์ถูกผูกแล้ว ให้ใช้บัญชีเดิมเข้าสู่ระบบแทนการผูกซ้ำ
+              </div>
+            </aside>
+          </div>
+        </div>
+      </details>
+
+      <details class="tutorial-item" id="menu-ldplayer">
+        <summary class="tutorial-summary">
+          <div class="tutorial-title-wrap">
+            <div class="tutorial-icon">🖥️</div>
+            <div>
+              <h2 class="tutorial-title">การตั้งค่า LDPlayer</h2>
+              <p class="tutorial-desc">ตั้งค่าเครื่องจำลองให้ลื่นและเหมาะกับการใช้งาน GG Power และ 9WING</p>
+            </div>
+          </div>
+          <div class="summary-right">
+            <span class="latest-label">EMULATOR</span>
+            <span class="summary-arrow">⌄</span>
+          </div>
+        </summary>
+        <div class="tutorial-content">
+          <div class="ld-layout">
+            <div class="ld-settings">
+              <article class="ld-setting">
+                <div class="ld-setting-top">
+                  <span class="ld-setting-icon">⚙️</span>
+                  <h3>CPU</h3>
+                </div>
+                <strong>4 Cores</strong>
+                <p>หากเครื่องสเปกต่ำให้เริ่มที่ 2 Cores และอย่าเลือกเกินจำนวนคอร์ที่เครื่องรองรับ</p>
+              </article>
+
+              <article class="ld-setting">
+                <div class="ld-setting-top">
+                  <span class="ld-setting-icon">💾</span>
+                  <h3>RAM</h3>
+                </div>
+                <strong>4096 MB</strong>
+                <p>เครื่องที่มี RAM 16 GB ขึ้นไปสามารถปรับเป็น 6144 MB เพื่อเพิ่มความลื่นได้</p>
+              </article>
+
+              <article class="ld-setting">
+                <div class="ld-setting-top">
+                  <span class="ld-setting-icon">▣</span>
+                  <h3>ความละเอียด</h3>
+                </div>
+                <strong>1280 × 720</strong>
+                <p>เลือกโหมดแท็บเล็ตหรือกำหนดเอง พร้อมตั้ง DPI ที่ 240 เพื่อให้ปุ่มและหน้าจอพอดี</p>
+              </article>
+
+              <article class="ld-setting">
+                <div class="ld-setting-top">
+                  <span class="ld-setting-icon">🎞️</span>
+                  <h3>เฟรมเรต</h3>
+                </div>
+                <strong>60 FPS</strong>
+                <p>เปิดโหมดเฟรมเรตสูงเฉพาะเมื่อคอมพิวเตอร์ทำงานได้เสถียรและไม่เกิดอาการกระตุก</p>
+              </article>
+
+              <article class="ld-setting">
+                <div class="ld-setting-top">
+                  <span class="ld-setting-icon">🎮</span>
+                  <h3>โหมดกราฟิก</h3>
+                </div>
+                <strong>OpenGL</strong>
+                <p>หากภาพดำ ภาพแตก หรือเปิดเกมไม่ได้ ให้สลับเป็น DirectX แล้วเปิด LDPlayer ใหม่</p>
+              </article>
+
+              <article class="ld-setting">
+                <div class="ld-setting-top">
+                  <span class="ld-setting-icon">🧹</span>
+                  <h3>ลดภาระเครื่อง</h3>
+                </div>
+                <strong>ปิดเสียงและแอปพื้นหลัง</strong>
+                <p>ปิดโปรแกรมที่ไม่จำเป็น และหลีกเลี่ยงการเปิด LDPlayer หลายหน้าจอเกินกำลังเครื่อง</p>
+              </article>
+            </div>
+
+            <aside class="ld-steps-box" aria-label="ขั้นตอนตั้งค่า LDPlayer">
+              <div class="ld-steps-title">🔧 ขั้นตอนการตั้งค่า</div>
+              <ol class="ld-steps">
+                <li class="ld-step">
+                  <div>
+                    <h3>เปิดเมนูตั้งค่า</h3>
+                    <p>เปิด LDPlayer แล้วกดรูปเฟืองด้านขวาบนของหน้าต่าง</p>
+                  </div>
+                </li>
+                <li class="ld-step">
+                  <div>
+                    <h3>เข้าเมนูขั้นสูง</h3>
+                    <p>ตั้งค่าความละเอียด CPU และ RAM ตามค่าที่แนะนำด้านซ้าย</p>
+                  </div>
+                </li>
+                <li class="ld-step">
+                  <div>
+                    <h3>ตั้งค่าการแสดงผล</h3>
+                    <p>เลือก 60 FPS และเริ่มด้วย OpenGL หากมีปัญหาค่อยเปลี่ยนเป็น DirectX</p>
+                  </div>
+                </li>
+                <li class="ld-step">
+                  <div>
+                    <h3>บันทึกและรีสตาร์ต</h3>
+                    <p>กดบันทึก จากนั้นปิดและเปิด LDPlayer ใหม่หนึ่งครั้งก่อนเริ่มใช้งาน</p>
+                  </div>
+                </li>
+                <li class="ld-step">
+                  <div>
+                    <h3>ทดสอบก่อนเปิดระบบ</h3>
+                    <p>เข้าเกมให้เรียบร้อย ตรวจสอบว่าภาพไม่ค้างและการควบคุมตอบสนองปกติ</p>
+                  </div>
+                </li>
+              </ol>
+
+              <div class="ld-warning">
+                <b>หมายเหตุ:</b> ค่าที่แนะนำเป็นค่าเริ่มต้นสำหรับเครื่องทั่วไป หากเครื่องกระตุกหรือร้อนมาก ให้ลด CPU, RAM หรือ FPS ลงทีละระดับ และควรเปิด VT ใน BIOS เพื่อประสิทธิภาพที่ดีขึ้น
+              </div>
+            </aside>
+          </div>
+        </div>
+      </details>
+
+      <details class="tutorial-item" id="menu-redfinger">
+        <summary class="tutorial-summary">
+          <div class="tutorial-title-wrap">
+            <div class="tutorial-icon">☁️</div>
+            <div>
+              <h2 class="tutorial-title">การตั้งค่าบน Redfinger</h2>
+              <p class="tutorial-desc">เตรียม Cloud Phone ให้พร้อมก่อนติดตั้งเกม GG Power และระบบ 9WING</p>
+            </div>
+          </div>
+          <div class="summary-right">
+            <span class="latest-label">CLOUD PHONE</span>
+            <span class="summary-arrow">⌄</span>
+          </div>
+        </summary>
+        <div class="tutorial-content">
+          <div class="rf-layout">
+            <div class="rf-settings">
+              <article class="rf-setting">
+                <div class="rf-setting-top">
+                  <span class="rf-setting-icon">📱</span>
+                  <h3>รุ่น Cloud Phone</h3>
+                </div>
+                <strong>Android 10 ขึ้นไป</strong>
+                <p>เลือกรุ่นที่มี RAM อย่างน้อย 4 GB เพื่อให้เกมและเครื่องมือทำงานพร้อมกันได้เสถียร</p>
+              </article>
+
+              <article class="rf-setting">
+                <div class="rf-setting-top">
+                  <span class="rf-setting-icon">▣</span>
+                  <h3>หน้าจอ</h3>
+                </div>
+                <strong>แนวนอน 1280 × 720</strong>
+                <p>หากรุ่นที่ใช้งานมีเมนูความละเอียด ให้เลือก 720p และหมุนหน้าจอเป็นแนวนอนก่อนเข้าเกม</p>
+              </article>
+
+              <article class="rf-setting">
+                <div class="rf-setting-top">
+                  <span class="rf-setting-icon">🌐</span>
+                  <h3>เครือข่าย</h3>
+                </div>
+                <strong>เลือกเซิร์ฟเวอร์ใกล้ไทย</strong>
+                <p>เลือกโซนที่มีค่า Ping ต่ำและใช้อินเทอร์เน็ตที่เสถียร เพื่อลดอาการหน่วงหรือหลุด</p>
+              </article>
+
+              <article class="rf-setting">
+                <div class="rf-setting-top">
+                  <span class="rf-setting-icon">🔐</span>
+                  <h3>สิทธิ์แอป</h3>
+                </div>
+                <strong>อนุญาตสิทธิ์ที่จำเป็น</strong>
+                <p>เปิดสิทธิ์แสดงทับแอปอื่น การเข้าถึงไฟล์ การแจ้งเตือน และ Accessibility เมื่อโปรแกรมร้องขอ</p>
+              </article>
+
+              <article class="rf-setting">
+                <div class="rf-setting-top">
+                  <span class="rf-setting-icon">🔋</span>
+                  <h3>การทำงานเบื้องหลัง</h3>
+                </div>
+                <strong>ไม่จำกัดแบตเตอรี่</strong>
+                <p>หากมีเมนูประหยัดพลังงาน ให้ตั้งเกมและโปรแกรม 9WING เป็นไม่จำกัด เพื่อป้องกันระบบหยุดเอง</p>
+              </article>
+
+              <article class="rf-setting">
+                <div class="rf-setting-top">
+                  <span class="rf-setting-icon">🧹</span>
+                  <h3>ลดภาระ Cloud Phone</h3>
+                </div>
+                <strong>ปิดแอปที่ไม่ใช้</strong>
+                <p>เปิดเฉพาะเกม GG Power และ 9WING หลีกเลี่ยงการติดตั้งแอปจำนวนมากหรือเปิดหลายงานพร้อมกัน</p>
+              </article>
+            </div>
+
+            <aside class="rf-steps-box" aria-label="ขั้นตอนตั้งค่าบน Redfinger">
+              <div class="rf-steps-title">☁️ ขั้นตอนเริ่มใช้งาน</div>
+              <ol class="rf-steps">
+                <li class="rf-step">
+                  <div>
+                    <h3>เข้าสู่ระบบ Redfinger</h3>
+                    <p>เปิดแอปหรือเว็บไซต์ Redfinger แล้วเลือก Cloud Phone ที่ต้องการใช้งาน</p>
+                  </div>
+                </li>
+                <li class="rf-step">
+                  <div>
+                    <h3>ตั้งภาษาและเวลา</h3>
+                    <p>ตั้งภาษาไทยและเขตเวลา GMT+7 หรือ Bangkok เพื่อให้เวลาในระบบตรงกับประเทศไทย</p>
+                  </div>
+                </li>
+                <li class="rf-step">
+                  <div>
+                    <h3>ติดตั้งไฟล์ที่จำเป็น</h3>
+                    <p>ติดตั้งตัวเกม GG Power และแอป 9WING จากแหล่งดาวน์โหลดที่ผู้ดูแลกำหนด</p>
+                  </div>
+                </li>
+                <li class="rf-step">
+                  <div>
+                    <h3>เปิดสิทธิ์ให้ครบ</h3>
+                    <p>อนุญาตสิทธิ์ตามที่แอปร้องขอ โดยเฉพาะการแสดงทับแอปอื่นและ Accessibility</p>
+                  </div>
+                </li>
+                <li class="rf-step">
+                  <div>
+                    <h3>เข้าเกมก่อนเปิดระบบ</h3>
+                    <p>ล็อกอินเกม เลือกตัวละคร และรอให้เข้าแผนที่เรียบร้อย จากนั้นจึงเปิด GG Power หรือ 9WING</p>
+                  </div>
+                </li>
+                <li class="rf-step">
+                  <div>
+                    <h3>ทดสอบการทำงาน</h3>
+                    <p>ตรวจสอบว่าปุ่มลอยแสดงครบ เกมไม่ค้าง และระบบยังทำงานต่อเมื่อปิดหน้าจอควบคุม Redfinger</p>
+                  </div>
+                </li>
+              </ol>
+
+              <div class="rf-warning">
+                <b>ข้อควรระวัง:</b> ระหว่างระบบกำลังทำงาน ห้ามกดปิดเครื่อง รีสตาร์ต หรือล้างข้อมูล Cloud Phone และไม่ควรย้ายบัญชีไปมาหลายเครื่องในวันเดียวกัน เพราะอาจกระทบสิทธิ์การใช้งาน
+              </div>
+            </aside>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="version">9WING.SHOP USER GUIDE</div>
+    <div class="footer">© 2026 9WING.SHOP • ALL RIGHTS RESERVED</div>
+  </main>
+
+  <script>
+    const YOUTUBE_VIDEO_ID = "rskRaGncEF4";
+
+    const video = document.getElementById("tutorialVideo");
+    const youtubeButton = document.getElementById("youtubeButton");
+
+    video.src = `https://www.youtube-nocookie.com/embed/${YOUTUBE_VIDEO_ID}?rel=0&modestbranding=1`;
+    youtubeButton.href = `https://www.youtube.com/watch?v=${YOUTUBE_VIDEO_ID}`;
+
+    function scrollToVideo() {
+      const videoMenu = document.getElementById("menu-ggpower");
+      if (!videoMenu.open) videoMenu.open = true;
+      document.querySelector(".video-frame").scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+
+    function createParticles() {
+      const particleBox = document.getElementById("particles");
+      const amount = window.innerWidth < 600 ? 18 : 30;
+
+      for (let i = 0; i < amount; i++) {
+        const particle = document.createElement("span");
+        particle.className = "particle";
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.animationDuration = `${6 + Math.random() * 8}s`;
+        particle.style.animationDelay = `${Math.random() * 8}s`;
+        particle.style.opacity = Math.random().toFixed(2);
+        particleBox.appendChild(particle);
+      }
+    }
+
+    createParticles();
+
+    document.addEventListener("contextmenu", (event) => event.preventDefault());
+
+    document.addEventListener("keydown", (event) => {
+      const blocked =
+        event.key === "F11" ||
+        event.key === "F12" ||
+        (event.ctrlKey && event.shiftKey && ["I", "J", "C"].includes(event.key.toUpperCase())) ||
+        (event.ctrlKey && ["U", "S"].includes(event.key.toUpperCase()));
+
+      if (blocked) {
+        event.preventDefault();
+        return false;
+      }
+    });
+  </script>
+</body>
+</html>
