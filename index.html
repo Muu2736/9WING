@@ -14,10 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700;800&family=Orbitron:wght@700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/styles.css">
-
-
-  <style>
+<style>
     :root {
       --bg: #030508;
       --card: rgba(13, 16, 22, .94);
@@ -398,6 +395,257 @@
         scroll-behavior: auto !important;
       }
     }
+  
+    /* ===== Mobile-first fixes ===== */
+    html {
+      width: 100%;
+      min-width: 0;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+
+    body {
+      width: 100%;
+      min-width: 0;
+      min-height: 100dvh;
+      padding:
+        env(safe-area-inset-top)
+        env(safe-area-inset-right)
+        env(safe-area-inset-bottom)
+        env(safe-area-inset-left);
+    }
+
+    img, svg {
+      max-width: 100%;
+    }
+
+    .page,
+    .notice-card,
+    .topbar,
+    .content,
+    .hero,
+    .status-strip,
+    .actions {
+      min-width: 0;
+    }
+
+    .lead,
+    .status-strip,
+    .footnote,
+    .btn {
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
+
+    @media (max-width: 760px) {
+      body {
+        background:
+          radial-gradient(circle at 50% 0%, rgba(255, 180, 45, .14), transparent 24rem),
+          linear-gradient(180deg, #020306 0%, #080b11 55%, #030508 100%);
+      }
+
+      .page {
+        width: 100%;
+        min-height: 100dvh;
+        padding: 8px;
+        display: block;
+      }
+
+      .notice-card {
+        width: 100%;
+        min-height: calc(100dvh - 16px);
+        border-radius: 18px;
+      }
+
+      .topbar {
+        padding: 13px 14px;
+        gap: 10px;
+      }
+
+      .brand {
+        flex: 0 1 auto;
+        min-width: 0;
+        font-size: clamp(14px, 4.2vw, 18px);
+      }
+
+      .source-pill {
+        flex: 0 0 auto;
+        max-width: 48%;
+        padding: 6px 9px;
+        font-size: 10px;
+        overflow: hidden;
+      }
+
+      .source-pill span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .content {
+        padding: 24px 15px 20px;
+      }
+
+      .fb-mark {
+        width: 62px;
+        height: 62px;
+        margin-bottom: 15px;
+        border-radius: 19px;
+        font-size: 44px;
+      }
+
+      .alert-badge {
+        margin-bottom: 10px;
+        padding: 6px 11px;
+        font-size: 12px;
+      }
+
+      h1 {
+        font-size: clamp(25px, 7.3vw, 36px);
+        line-height: 1.2;
+      }
+
+      h1 em {
+        margin-top: 5px;
+      }
+
+      .lead {
+        margin-top: 15px;
+        font-size: clamp(14px, 4vw, 17px);
+        line-height: 1.7;
+      }
+
+      .date {
+        margin-top: 11px;
+        font-size: 12px;
+      }
+
+      .status-strip {
+        width: 100%;
+        margin: 21px 0 0;
+        padding: 12px 13px;
+        align-items: flex-start;
+        border-radius: 13px;
+        font-size: 13px;
+        line-height: 1.55;
+        text-align: left;
+      }
+
+      .status-strip svg {
+        width: 18px;
+        height: 18px;
+        margin-top: 2px;
+      }
+
+      .actions {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        margin-top: 17px;
+      }
+
+      .btn {
+        width: 100%;
+        min-height: 50px;
+        padding: 12px 14px;
+        border-radius: 13px;
+        font-size: 14px;
+        text-align: center;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      .footnote {
+        margin-top: 16px;
+        padding: 0 3px;
+        font-size: 11px;
+        line-height: 1.65;
+      }
+
+      footer {
+        padding: 14px 12px;
+        font-size: 11px;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .page {
+        padding: 0;
+      }
+
+      .notice-card {
+        min-height: 100dvh;
+        border-left: 0;
+        border-right: 0;
+        border-radius: 0;
+      }
+
+      .topbar {
+        padding-top: max(13px, env(safe-area-inset-top));
+      }
+
+      .source-pill span {
+        display: none;
+      }
+
+      .source-pill {
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 50%;
+      }
+
+      .content {
+        padding: 22px 14px 18px;
+      }
+
+      h1 {
+        font-size: clamp(24px, 7.5vw, 31px);
+      }
+
+      .lead {
+        font-size: 14px;
+      }
+
+      .status-strip {
+        font-size: 12.5px;
+      }
+    }
+
+    @media (max-width: 350px) {
+      .content {
+        padding-left: 11px;
+        padding-right: 11px;
+      }
+
+      h1 {
+        font-size: 23px;
+      }
+
+      .btn {
+        font-size: 13px;
+      }
+    }
+
+    @media (orientation: landscape) and (max-height: 520px) {
+      .page {
+        display: block;
+      }
+
+      .notice-card {
+        min-height: auto;
+      }
+
+      .content {
+        padding-top: 18px;
+      }
+
+      .fb-mark {
+        width: 52px;
+        height: 52px;
+        font-size: 37px;
+        margin-bottom: 11px;
+      }
+    }
+
   </style>
 </head>
 
