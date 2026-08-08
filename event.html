@@ -1377,8 +1377,8 @@
           <div class="event-period-icon">📅</div>
           <div>
             <div class="event-period-label">EVENT PERIOD • ระยะเวลากิจกรรม</div>
-            <div class="event-period-value" id="eventPeriodHero">29 ก.ค. 2569 – 10 ส.ค. 2569</div>
-            <div class="event-period-time" id="eventPeriodTime">เริ่ม 29 ก.ค. 2569 เวลา 00:00 น. • สิ้นสุด 10 ส.ค. 2569 เวลา 23:59 น.</div>
+            <div class="event-period-value" id="eventPeriodHero">29 ก.ค. 2569 – 15 ส.ค. 2569</div>
+            <div class="event-period-time" id="eventPeriodTime">เริ่ม 29 ก.ค. 2569 เวลา 00:00 น. • สิ้นสุด 15 ส.ค. 2569 เวลา 23:59 น.</div>
           </div>
         </div>
 
@@ -1524,29 +1524,24 @@
        จุดแก้ไขหลัก: ปรับข้อมูลกิจกรรม ลิงก์ และรายชื่อผู้เล่นตรงนี้
        ========================================================== */
     const EVENT_CONFIG = {
+      // ค่า fallback เท่านั้น ข้อมูลจริงจะถูก sync จาก Apps Script leaderboard payload
       eventStart: "2026-07-29T00:00:00+07:00",
-      eventEnd: "2026-08-10T23:59:59+07:00",
-      scoreLabel: "จำนวนตีบวกสำเร็จ",
-      contactUrl: "https://www.9wing.shop", // เปลี่ยนเป็น LINE/Facebook ของร้านได้
+      eventEnd: "2026-08-15T23:59:59+07:00",
+      scoreLabel: "จำนวนตีบวก +6 สำเร็จ",
+      contactUrl: "https://www.9wing.shop",
       joinUrl: "#rules",
       apkDownloadUrl: "https://drive.usercontent.google.com/download?id=1pMtlEfILH_GcD3qS7BoRI68nUbkDyg5o&export=download&confirm=t",
-      apiUrl: "https://script.google.com/macros/s/AKfycbySn_tfUzFQJIMIzIdS9Qk4kzU4ETkPEwPtxjsQL7TZ5O7aHCQl5dv2W8RhogDqm94Y/exec?action=leaderboard" // API อันดับจริงจาก Apps Script
+
+      // Fallback สำหรับกรณีเปิดไฟล์นี้นอก Apps Script / ใน WebView ที่ไม่มี google.script.run
+      apiUrl: "https://script.google.com/macros/s/AKfycbwOUwZi3whJI_iALoKv-fMdlkn_N63Cwc6LGuFb6aI49uTgDHZ85AuoheazCXd7ZVmnMQ/exec?action=leaderboard",
+
+      refreshEveryMs: 15000
     };
 
-    const SAMPLE_PLAYERS = [
-      { name: "ผู้เล่น A", playerId: "9W-1024", score: 126, updatedAt: "วันนี้ 03:45" },
-      { name: "ผู้เล่น B", playerId: "9W-0931", score: 114, updatedAt: "วันนี้ 03:41" },
-      { name: "ผู้เล่น C", playerId: "9W-0888", score: 97,  updatedAt: "วันนี้ 03:38" },
-      { name: "ผู้เล่น D", playerId: "9W-1150", score: 83,  updatedAt: "วันนี้ 03:28" },
-      { name: "ผู้เล่น E", playerId: "9W-0712", score: 76,  updatedAt: "วันนี้ 03:20" },
-      { name: "ผู้เล่น F", playerId: "9W-0666", score: 64,  updatedAt: "วันนี้ 03:12" },
-      { name: "ผู้เล่น G", playerId: "9W-1201", score: 59,  updatedAt: "วันนี้ 03:03" },
-      { name: "ผู้เล่น H", playerId: "9W-0475", score: 51,  updatedAt: "วันนี้ 02:56" },
-      { name: "ผู้เล่น I", playerId: "9W-1307", score: 42,  updatedAt: "วันนี้ 02:48" },
-      { name: "ผู้เล่น J", playerId: "9W-0319", score: 35,  updatedAt: "วันนี้ 02:31" }
-    ];
 
     let players = [];
+    let leaderboardLoading = false;
+    let leaderboardRefreshTimer = null;
 
     const rowsEl = document.getElementById("leaderboardRows");
     const searchInput = document.getElementById("searchInput");
@@ -1630,12 +1625,20 @@
         if (data.scoreLabel) EVENT_CONFIG.scoreLabel = data.scoreLabel;
       }
 
-      lastUpdateEl.textContent = new Intl.DateTimeFormat("th-TH", {
-        dateStyle: "medium",
-        timeStyle: "short",
-        timeZone: "Asia/Bangkok"
-      }).format(new Date());
-      renderLeaderboard();
+      document.getElementById("scoreLabelHero").textContent = `${EVENT_CONFIG.scoreLabel}สูงสุด`;
+      document.getElementById("scoreHead").textContent = EVENT_CONFIG.scoreLabel;
+      refreshEventMeta();
+
+      // ใช้เวลา Server ถ้ามี เพื่อให้หน้าเว็บ/มือถือแสดงเวลาอ้างอิงเดียวกัน
+      lastUpdateEl.textContent = (data && !Array.isArray(data) && data.serverTime)
+        ? `${data.serverTime} น.`
+        : new Intl.DateTimeFormat("th-TH", {
+            dateStyle: "medium",
+            timeStyle: "short",
+            timeZone: "Asia/Bangkok"
+          }).format(new Date());
+
+      renderLeaderboard(searchInput.value || "");
     }
 
     window.setLeaderboardPayload = function(payloadText) {
@@ -1650,31 +1653,93 @@
       }
     };
 
-    async function loadLeaderboard() {
-      if (window.AndroidRanking && typeof window.AndroidRanking.requestRefresh === "function") {
+    async function loadLeaderboard(options = {}) {
+      if (leaderboardLoading) return;
+      leaderboardLoading = true;
+
+      const showLoading = options.showLoading === true;
+      if (showLoading) {
         rowsEl.innerHTML = '<div class="empty-state">กำลังโหลดข้อมูลอันดับจริง...</div>';
-        window.AndroidRanking.requestRefresh();
-        return;
       }
 
-      if (EVENT_CONFIG.apiUrl) {
-        try {
-          const response = await fetch(`${EVENT_CONFIG.apiUrl}&t=${Date.now()}`, { cache: "no-store" });
+      try {
+        // 1) ถ้าเปิดใน APK/WebView ใช้ Android bridge เดิมก่อน
+        if (window.AndroidRanking && typeof window.AndroidRanking.requestRefresh === "function") {
+          window.AndroidRanking.requestRefresh();
+          return;
+        }
+
+        // 2) ถ้าเปิดจาก Apps Script HtmlService ใช้ google.script.run โดยตรง
+        if (
+          window.google &&
+          google.script &&
+          google.script.run
+        ) {
+          await new Promise((resolve, reject) => {
+            google.script.run
+              .withSuccessHandler(payload => {
+                try {
+                  if (payload && payload.ok === false) {
+                    reject(new Error(payload.message || "โหลดอันดับไม่สำเร็จ"));
+                    return;
+                  }
+                  applyLeaderboardPayload(payload);
+                  resolve();
+                } catch (error) {
+                  reject(error);
+                }
+              })
+              .withFailureHandler(error => {
+                reject(new Error(error?.message || "Apps Script ranking error"));
+              })
+              .getPublicLeaderboard();
+          });
+          return;
+        }
+
+        // 3) Fallback สำหรับเปิดเป็นเว็บ standalone
+        if (EVENT_CONFIG.apiUrl) {
+          const separator = EVENT_CONFIG.apiUrl.includes("?") ? "&" : "?";
+          const response = await fetch(
+            `${EVENT_CONFIG.apiUrl}${separator}t=${Date.now()}`,
+            { cache: "no-store" }
+          );
           if (!response.ok) throw new Error(`HTTP ${response.status}`);
           const data = await response.json();
           if (data && data.ok === false) throw new Error(data.message || "API error");
           applyLeaderboardPayload(data);
           return;
-        } catch (error) {
-          console.warn("โหลดข้อมูล API ไม่สำเร็จ", error);
-          players = [];
-          rowsEl.innerHTML = '<div class="empty-state">ยังโหลดข้อมูลจริงไม่ได้ กรุณาตรวจสอบการ Deploy Apps Script</div>';
-          return;
         }
+
+        throw new Error("ยังไม่ได้กำหนดช่องทางโหลดอันดับ");
+      } catch (error) {
+        console.warn("โหลดข้อมูลอันดับไม่สำเร็จ", error);
+        if (!players.length) {
+          rowsEl.innerHTML =
+            `<div class="empty-state">${escapeHtml(error.message || "โหลดอันดับไม่สำเร็จ")}</div>`;
+        }
+      } finally {
+        leaderboardLoading = false;
+      }
+    }
+
+    function startLeaderboardAutoRefresh() {
+      if (leaderboardRefreshTimer) {
+        clearInterval(leaderboardRefreshTimer);
       }
 
-      players = [];
-      renderLeaderboard();
+      const interval = Math.max(5000, Number(EVENT_CONFIG.refreshEveryMs) || 15000);
+      leaderboardRefreshTimer = setInterval(() => {
+        if (document.visibilityState === "visible") {
+          loadLeaderboard({ showLoading: false });
+        }
+      }, interval);
+
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+          loadLeaderboard({ showLoading: false });
+        }
+      });
     }
 
     function formatThaiDate(date) {
@@ -1695,43 +1760,56 @@
       }).format(date).replace("24:", "00:");
     }
 
-    function setupEventDates() {
+    function getEventDates() {
       const start = EVENT_CONFIG.eventStart ? new Date(EVENT_CONFIG.eventStart) : null;
       const end = EVENT_CONFIG.eventEnd ? new Date(EVENT_CONFIG.eventEnd) : null;
+      return {
+        start: start && !isNaN(start) ? start : null,
+        end: end && !isNaN(end) ? end : null
+      };
+    }
 
-      if (start && end && !isNaN(start) && !isNaN(end)) {
+    function refreshEventMeta() {
+      const { start, end } = getEventDates();
+
+      if (start && end) {
         eventPeriodEl.textContent = `${formatThaiDate(start)} – ${formatThaiDate(end)}`;
         eventPeriodHeroEl.textContent = `${formatThaiDate(start)} – ${formatThaiDate(end)}`;
-        eventPeriodTimeEl.textContent = `เริ่ม ${formatThaiDateTime(start)} น. • สิ้นสุด ${formatThaiDateTime(end)} น.`;
+        eventPeriodTimeEl.textContent =
+          `เริ่ม ${formatThaiDateTime(start)} น. • สิ้นสุด ${formatThaiDateTime(end)} น.`;
+      }
+    }
+
+    function tickEventCountdown() {
+      const { start, end } = getEventDates();
+
+      if (!start || !end) {
+        countdownEl.textContent = "รอประกาศ";
+        eventStatusEl.textContent = "EVENT OPEN";
+        return;
       }
 
-      function tick() {
-        if (!start || !end || isNaN(start) || isNaN(end)) {
-          countdownEl.textContent = "รอประกาศ";
-          eventStatusEl.textContent = "EVENT OPEN";
-          return;
-        }
-
-        const now = new Date();
-        if (now < start) {
-          const distance = start - now;
-          eventStatusEl.textContent = "COMING SOON";
-          countdownEl.textContent = durationText(distance, "เริ่มใน");
-          return;
-        }
-
-        if (now > end) {
-          eventStatusEl.textContent = "EVENT ENDED";
-          countdownEl.textContent = "สิ้นสุดแล้ว";
-          return;
-        }
-
-        eventStatusEl.textContent = "EVENT LIVE";
-        countdownEl.textContent = durationText(end - now, "เหลือ");
+      const now = new Date();
+      if (now < start) {
+        eventStatusEl.textContent = "COMING SOON";
+        countdownEl.textContent = durationText(start - now, "เริ่มใน");
+        return;
       }
 
-      tick();
-      setInterval(tick, 1000);
+      if (now > end) {
+        eventStatusEl.textContent = "EVENT ENDED";
+        countdownEl.textContent = "สิ้นสุดแล้ว";
+        return;
+      }
+
+      eventStatusEl.textContent = "EVENT LIVE";
+      countdownEl.textContent = durationText(end - now, "เหลือ");
+    }
+
+    function setupEventDates() {
+      refreshEventMeta();
+      tickEventCountdown();
+      setInterval(tickEventCountdown, 1000);
     }
 
     function durationText(milliseconds, prefix) {
@@ -1774,7 +1852,8 @@
     setupDownloadButtons();
     createParticles();
     setupEventDates();
-    loadLeaderboard();
+    loadLeaderboard({ showLoading: true });
+    startLeaderboardAutoRefresh();
   </script>
 </body>
 </html>
