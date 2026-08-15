@@ -553,6 +553,41 @@
       line-height: 1.6;
     }
 
+    .prize-winner-name {
+      position: relative;
+      z-index: 1;
+      margin: 10px auto 4px;
+      min-height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 999px;
+      color: #fff9df;
+      background: rgba(255,255,255,.045);
+      font-family: "Kanit", "IBM Plex Sans Thai", sans-serif;
+      font-size: clamp(13px, 2vw, 16px);
+      font-weight: 800;
+      line-height: 1.3;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+
+    .prize-card.first .prize-winner-name {
+      border-color: rgba(255,215,0,.28);
+      color: #fff3a8;
+      background: rgba(255,215,0,.075);
+      text-shadow: 0 0 12px rgba(255,215,0,.16);
+    }
+
+    .prize-winner-name.is-waiting {
+      color: #9f998c;
+      border-color: rgba(255,255,255,.07);
+      background: rgba(0,0,0,.22);
+      text-shadow: none;
+    }
+
     .leaderboard-wrap {
       overflow: hidden;
       border-radius: 19px;
@@ -685,6 +720,57 @@
 
     .last-active { color: #aaa; font-size: 11px; }
     .empty-state { padding: 28px 18px; color: #888; text-align: center; font-size: 13px; }
+
+    .result-waiting-state {
+      display: grid;
+      place-items: center;
+      min-height: 280px;
+      padding: 34px 20px;
+      text-align: center;
+      background:
+        radial-gradient(circle at 50% 15%, rgba(255,215,0,.12), transparent 42%),
+        rgba(0,0,0,.28);
+    }
+
+    .result-waiting-card {
+      width: min(560px, 100%);
+      padding: 28px 22px;
+      border: 1px solid rgba(255,215,0,.30);
+      border-radius: 22px;
+      background: linear-gradient(145deg, rgba(255,215,0,.08), rgba(255,255,255,.025)), rgba(4,4,4,.72);
+      box-shadow: 0 18px 48px rgba(0,0,0,.38), inset 0 1px 0 rgba(255,255,255,.06);
+    }
+
+    .result-waiting-icon {
+      font-size: 42px;
+      line-height: 1;
+      filter: drop-shadow(0 0 18px rgba(255,215,0,.28));
+    }
+
+    .result-waiting-title {
+      margin-top: 14px;
+      color: #fff7cf;
+      font-family: "Kanit", "IBM Plex Sans Thai", sans-serif;
+      font-size: clamp(22px, 4vw, 34px);
+      font-weight: 900;
+    }
+
+    .result-waiting-desc {
+      margin-top: 8px;
+      color: #bdb6a5;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .result-waiting-countdown {
+      margin-top: 18px;
+      color: var(--gold);
+      font-family: "Orbitron", "Kanit", sans-serif;
+      font-size: clamp(16px, 3vw, 25px);
+      font-weight: 900;
+      letter-spacing: .4px;
+      text-shadow: 0 0 18px rgba(255,215,0,.22);
+    }
 
     .rules-grid {
       display: grid;
@@ -1426,6 +1512,7 @@
             <div class="crown">🥈</div>
             <div class="rank-number">2</div>
             <h3>อันดับที่ 2</h3>
+            <div class="prize-winner-name" id="prizeWinner2">รอข้อมูลอันดับ</div>
             <div class="prize-value">1,000 บาท</div>
             <p class="prize-caption">เงินรางวัลสำหรับรองแชมป์<br>ผู้ทำยอดตีบวกสูงสุดอันดับสอง</p>
           </article>
@@ -1434,6 +1521,7 @@
             <div class="crown">👑</div>
             <div class="rank-number">1</div>
             <h3>อันดับที่ 1</h3>
+            <div class="prize-winner-name" id="prizeWinner1">รอข้อมูลอันดับ</div>
             <div class="prize-value">2,000 บาท</div>
             <p class="prize-caption">แชมป์นักตีบวกประจำกิจกรรม<br>ผู้ทำจำนวนตีบวกสำเร็จสูงที่สุด</p>
           </article>
@@ -1442,6 +1530,7 @@
             <div class="crown">🥉</div>
             <div class="rank-number">3</div>
             <h3>อันดับที่ 3</h3>
+            <div class="prize-winner-name" id="prizeWinner3">รอข้อมูลอันดับ</div>
             <div class="prize-value">ใช้ฟรี 1 เดือน</div>
             <p class="prize-caption">รับสิทธิ์ใช้งานโปรฟรีเต็มระยะเวลา 1 เดือน ตามเงื่อนไขกิจกรรม</p>
           </article>
@@ -1454,7 +1543,7 @@
             <div class="section-kicker">LIVE LEADERBOARD</div>
             <h2 class="section-title">ตารางอันดับนักตีบวก</h2>
           </div>
-          <p class="section-note">ข้อมูลจริงจากบัญชีในแอป คะแนนจะอัปเดตเมื่อระบบตรวจพบของที่ตีติด +6</p>
+          <p class="section-note">ข้อมูลจริงจากบัญชีในแอป • ตารางอันดับจะถูกซ่อน 10 ชั่วโมงก่อนประกาศผลอย่างเป็นทางการ</p>
         </div>
 
         <div class="leaderboard-wrap">
@@ -1527,6 +1616,12 @@
       // ค่า fallback เท่านั้น ข้อมูลจริงจะถูก sync จาก Apps Script leaderboard payload
       eventStart: "2026-07-29T00:00:00+07:00",
       eventEnd: "2026-08-15T23:59:59+07:00",
+
+      // ประกาศผลอย่างเป็นทางการ: 16 ส.ค. 2569 เวลา 00:00 น. (Asia/Bangkok)
+      // ซ่อนตารางอันดับล่วงหน้า 10 ชั่วโมง = 15 ส.ค. 2569 เวลา 14:00 น.
+      resultAnnouncementAt: "2026-08-16T00:00:00+07:00",
+      hideLeaderboardBeforeResultHours: 10,
+
       scoreLabel: "จำนวนตีบวก +6 สำเร็จ",
       contactUrl: "https://www.9wing.shop",
       joinUrl: "#rules",
@@ -1551,6 +1646,11 @@
     const eventPeriodHeroEl = document.getElementById("eventPeriodHero");
     const eventPeriodTimeEl = document.getElementById("eventPeriodTime");
     const lastUpdateEl = document.getElementById("lastUpdate");
+    const prizeWinnerEls = {
+      1: document.getElementById("prizeWinner1"),
+      2: document.getElementById("prizeWinner2"),
+      3: document.getElementById("prizeWinner3")
+    };
 
     function setupDownloadButtons() {
       const downloadButtons = [
@@ -1582,9 +1682,97 @@
       return (String(name || "?").trim().charAt(0) || "?").toUpperCase();
     }
 
+    function getResultSchedule() {
+      const announceAt = EVENT_CONFIG.resultAnnouncementAt
+        ? new Date(EVENT_CONFIG.resultAnnouncementAt)
+        : null;
+
+      if (!announceAt || isNaN(announceAt)) {
+        return { announceAt: null, hideAt: null };
+      }
+
+      const hideHours = Math.max(0, Number(EVENT_CONFIG.hideLeaderboardBeforeResultHours) || 0);
+      const hideAt = new Date(announceAt.getTime() - (hideHours * 60 * 60 * 1000));
+      return { announceAt, hideAt };
+    }
+
+    function isLeaderboardWaitingForResult(now = new Date()) {
+      const { announceAt, hideAt } = getResultSchedule();
+      return Boolean(announceAt && hideAt && now >= hideAt && now < announceAt);
+    }
+
+    function setPrizeWinner(rank, text, waiting = false) {
+      const el = prizeWinnerEls[rank];
+      if (!el) return;
+      el.textContent = text;
+      el.classList.toggle("is-waiting", waiting);
+    }
+
+    function concealPrizeWinners() {
+      setPrizeWinner(1, "🔒 รอประกาศผล", true);
+      setPrizeWinner(2, "🔒 รอประกาศผล", true);
+      setPrizeWinner(3, "🔒 รอประกาศผล", true);
+    }
+
+    function renderPrizeWinners() {
+      const now = new Date();
+      if (isLeaderboardWaitingForResult(now)) {
+        concealPrizeWinners();
+        return;
+      }
+
+      const sorted = [...players].sort((a, b) => Number(b.score) - Number(a.score));
+      [1, 2, 3].forEach(rank => {
+        const player = sorted[rank - 1];
+        setPrizeWinner(
+          rank,
+          player && player.name ? player.name : "รอข้อมูลอันดับ",
+          !player
+        );
+      });
+    }
+
+    function renderResultWaitingState(now = new Date()) {
+      const { announceAt } = getResultSchedule();
+      if (!announceAt) return;
+
+      concealPrizeWinners();
+
+      const remaining = announceAt - now;
+      rowsEl.innerHTML = `
+        <div class="result-waiting-state">
+          <div class="result-waiting-card">
+            <div class="result-waiting-icon">🏆</div>
+            <div class="result-waiting-title">ปิดตารางอันดับชั่วคราว</div>
+            <div class="result-waiting-desc">
+              ระบบซ่อนอันดับในช่วง 10 ชั่วโมงสุดท้ายเพื่อรอการตรวจสอบผลอย่างเป็นทางการ<br>
+              ประกาศผลวันที่ <strong style="color:#fff2a8">16 ส.ค. 2569 เวลา 00:00 น.</strong>
+            </div>
+            <div class="result-waiting-countdown">${durationText(remaining, "ประกาศผลใน")}</div>
+          </div>
+        </div>`;
+
+      if (searchInput) {
+        searchInput.value = "";
+        searchInput.disabled = true;
+        searchInput.placeholder = "ปิดการค้นหาชั่วคราว — รอประกาศผล";
+      }
+    }
+
     function renderLeaderboard(keyword = "") {
+      const now = new Date();
+      if (isLeaderboardWaitingForResult(now)) {
+        renderResultWaitingState(now);
+        return;
+      }
+
+      if (searchInput) {
+        searchInput.disabled = false;
+        searchInput.placeholder = "ค้นหาชื่อตัวละครหรือไอดี...";
+      }
       const cleanKeyword = keyword.trim().toLowerCase();
       const sorted = [...players].sort((a, b) => Number(b.score) - Number(a.score));
+      renderPrizeWinners();
       const filtered = sorted.filter(player => {
         const haystack = `${player.name} ${player.playerId}`.toLowerCase();
         return haystack.includes(cleanKeyword);
@@ -1649,11 +1837,18 @@
       } catch (error) {
         console.warn("โหลดข้อมูลอันดับไม่สำเร็จ", error);
         players = [];
+        renderPrizeWinners();
         rowsEl.innerHTML = `<div class="empty-state">${escapeHtml(error.message || "โหลดอันดับไม่สำเร็จ")}</div>`;
       }
     };
 
     async function loadLeaderboard(options = {}) {
+      // ช่วง 10 ชั่วโมงก่อนประกาศผล ไม่โหลด/ไม่เปิดเผยข้อมูลอันดับบนหน้าเว็บ
+      if (isLeaderboardWaitingForResult()) {
+        renderResultWaitingState();
+        return;
+      }
+
       if (leaderboardLoading) return;
       leaderboardLoading = true;
 
@@ -1782,6 +1977,7 @@
 
     function tickEventCountdown() {
       const { start, end } = getEventDates();
+      const { announceAt, hideAt } = getResultSchedule();
 
       if (!start || !end) {
         countdownEl.textContent = "รอประกาศ";
@@ -1790,15 +1986,40 @@
       }
 
       const now = new Date();
+
       if (now < start) {
         eventStatusEl.textContent = "COMING SOON";
         countdownEl.textContent = durationText(start - now, "เริ่มใน");
         return;
       }
 
+      // 10 ชั่วโมงก่อนเวลาประกาศผล: ซ่อนตารางและนับถอยหลังถึงเวลา 00:00 น.
+      if (announceAt && hideAt && now >= hideAt && now < announceAt) {
+        eventStatusEl.textContent = "WAITING RESULT";
+        countdownEl.textContent = durationText(announceAt - now, "ประกาศผลใน");
+        renderResultWaitingState(now);
+        return;
+      }
+
+      // ถึงเวลาประกาศผลแล้ว: เปิดตารางอันดับกลับมาและระบุว่าเป็นผลประกาศ
+      if (announceAt && now >= announceAt) {
+        eventStatusEl.textContent = "RESULT ANNOUNCED";
+        countdownEl.textContent = "ประกาศผลแล้ว";
+        renderPrizeWinners();
+
+        if (searchInput && searchInput.disabled) {
+          searchInput.disabled = false;
+          searchInput.placeholder = "ค้นหาชื่อตัวละครหรือไอดี...";
+          loadLeaderboard({ showLoading: true });
+        }
+        return;
+      }
+
       if (now > end) {
         eventStatusEl.textContent = "EVENT ENDED";
-        countdownEl.textContent = "สิ้นสุดแล้ว";
+        countdownEl.textContent = announceAt
+          ? durationText(announceAt - now, "รอประกาศผล")
+          : "สิ้นสุดแล้ว";
         return;
       }
 
